@@ -10,15 +10,6 @@ DB_CA_Temp_CheckPlayer((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000)
 KBSECTION
 //REGION DEBUG
 
-IF
-CharacterItemEvent((CHARACTERGUID)_Player, (ITEMGUID)_Item, "CA_Story_AddPlayer")
-AND
-NOT DB_IsPlayer(_Player)
-THEN
-DB_IsPlayer(_Player);
-CharacterMakePlayer(_Player);
-CharacterStatusText(_Player, "[DEBUG] Added to player database.");
-
 /*
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
