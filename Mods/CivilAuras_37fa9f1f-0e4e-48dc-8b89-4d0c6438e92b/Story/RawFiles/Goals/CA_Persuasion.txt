@@ -1,0 +1,68 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_CA_PersuasionBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+KBSECTION
+//REGION PERSUASION
+QRY
+CA_GetAbsValue((INTEGER)_Val, (INTEGER)_OutVal)
+AND
+_Val < 0
+AND
+IntegerProduct(_Val, -1, _OutVal)
+THEN
+DB_NOOP(1);
+
+IF
+CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
+AND
+HasActiveStatus(_Target, "CA_MOTIVATED", 0)
+AND
+CharacterGetBaseAbility(_Caster, "Persuasion", (INTEGER)_CasterVal)
+AND
+CharacterGetAbility(_Caster, "Persuasion", (INTEGER)_TargetVal)
+AND
+_CasterVal > _TargetVal
+AND
+IntegerSubtract(_CasterVal, _TargetVal, _Bonus)
+THEN
+ApplyStatus(_Target, "CA_MOTIVATED", 30.0);
+CharacterAddAbility(_Target, "Persuasion", _Bonus);
+DB_CA_PersuasionBonus(_Target, _Bonus);
+
+IF
+DialogEnded((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+AND
+DB_CA_PersuasionBonus(_Player, _Bonus)
+THEN
+RemoveStatus(_Player, "CA_MOTIVATED");
+
+IF
+CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED", (GUIDSTRING)_Causee)
+AND
+DB_CA_PersuasionBonus(_Player, _Bonus)
+AND
+_Bonus > 0
+THEN
+CharacterRemoveAbility(_Player, "Persuasion", _Bonus);
+DB_CA_PersuasionBonus(_Player, 0);
+NOT DB_CA_PersuasionBonus(_Player);
+
+IF
+CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED", (GUIDSTRING)_Causee)
+AND
+CharacterGetAbility(_Player, "Persuasion", (INTEGER)_Val)
+AND
+_Val < 0
+AND
+IntegerProduct(_Val, -1, _CancelVal)
+THEN
+CharacterAddAbility(_Player, "Persuasion", _CancelVal);
+
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "_CivilAuras"
