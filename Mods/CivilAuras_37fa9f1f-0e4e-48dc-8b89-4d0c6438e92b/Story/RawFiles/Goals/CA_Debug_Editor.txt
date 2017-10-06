@@ -1,26 +1,33 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_GenericOrigins((CHARACTERGUID)S_Player_GenericOrigin_7b6c1f26-fe4e-40bd-a5d0-e6ff58cef4fe);
-DB_GenericOrigins((CHARACTERGUID)S_Player_GenericOrigin2_c451954c-73bf-46ce-a1d1-caa9bbdc3cfd);
-DB_GenericOrigins((CHARACTERGUID)S_Player_GenericOrigin3_41a06985-7851-4c29-8a78-398ccb313f39);
-DB_GenericOrigins((CHARACTERGUID)S_Player_GenericOrigin4_41a594ed-b768-4289-9f17-59f701cc6910);
-
+DB_TestDummy((CHARACTERGUID)S_Player_TestGareth_964a4f30-5dea-47ae-a172-31eea75db21e);
+DB_TestDummy((CHARACTERGUID)S_Player_TestBeast_ce867158-69fa-44cb-895e-5349848169af);
+DB_TestDummy((CHARACTERGUID)ab423237-5f34-48b9-be48-11fc9e32a9c6);
 KBSECTION
 IF
-DB_GenericOrigins(_Orig)
+DB_TestDummy(_Dummy)
 THEN
-SetTag(_Orig,"GENERIC");
+DB_NOOP(1);
+CharacterMakePlayer(_Dummy);
+DB_IsPlayer(_Dummy);
+//ProcSetupGenericOrigin(_Dummy);
+ProcAssignDummyToUser(_Dummy,"LaughingLeader");
+
+//DB_CurrentGameMode(_Mode)
+//AND
+//_Mode != "Campaign"
 
 IF
 CharacterItemEvent((CHARACTERGUID)_Player, (ITEMGUID)_Item, "CA_Story_AddPlayer")
 AND
 NOT DB_IsPlayer(_Player)
 THEN
-DB_IsPlayer(_Player);
+//DB_IsPlayer(_Player);
 CharacterMakePlayer(_Player);
 //CharacterAssignToUser(_User,_Dummy);
 MakePlayerActive(_Player);
+SetTag(_Player,"GENERIC");
 CharacterStatusText(_Player, "[DEBUG] Added to player database.");
 EXITSECTION
 
