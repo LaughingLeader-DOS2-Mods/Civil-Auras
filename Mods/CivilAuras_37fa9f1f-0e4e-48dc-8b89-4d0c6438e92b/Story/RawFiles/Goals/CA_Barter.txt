@@ -68,3 +68,4 @@ NOT DB_CA_BarterBonus(_Target);
 EXITSECTION
 
 ENDEXITSECTION
+ParentTargetEdge "_CivilAuras"

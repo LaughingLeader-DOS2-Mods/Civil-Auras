@@ -1,0 +1,28 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION ITEM_USE
+
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", (ITEMGUID)_Item)
+AND
+CharacterHasTalent(_Player, "Animal_Empathy", 1)
+THEN
+CharacterStatusText(_Player, "I already know how to speak with animals.");
+
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", (ITEMGUID)_Item)
+AND
+CharacterHasTalent(_Player, "Animal_Empathy", 0)
+THEN
+CharacterAddTalent(_Player, "Animal_Empathy");
+ItemDestroy(_Item);
+CharacterStatusText(_Player, "Animal Empathy +1");
+
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "_CivilAuras"

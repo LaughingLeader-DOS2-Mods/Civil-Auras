@@ -8,17 +8,6 @@ GameEventSet("GAMEEVENT_GameStarted")
 THEN
 InitStory();
 GoalCompleted;
-
-//REGION BONUS_POINTS
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player, "CON_Potion_MaxSource_c747accc-bc67-4aa4-af24-5fd4e163aa87", (ITEMGUID)_Item)
-AND
-CharacterGetMaxSourcePoints(_Player, (INTEGER)_CurrentSP)
-AND
-IntegerSum(_CurrentSP, 1, (INTEGER)_MaxSP)
-THEN
-CharacterOverrideMaxSourcePoints(_Player, _MaxSP);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

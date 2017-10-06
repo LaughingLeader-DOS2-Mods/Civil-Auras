@@ -9,6 +9,16 @@ DB_CA_LuckAuraActive((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0
 DB_CA_Temp_CheckPlayer((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000);
 KBSECTION
 //REGION DEBUG
+
+IF
+CharacterItemEvent((CHARACTERGUID)_Player, (ITEMGUID)_Item, "CA_Story_AddPlayer")
+AND
+NOT DB_IsPlayer(_Player)
+THEN
+DB_IsPlayer(_Player);
+CharacterMakePlayer(_Player);
+CharacterStatusText(_Player, "[DEBUG] Added to player database.");
+
 /*
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
@@ -69,14 +79,31 @@ DebugText(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, _FinalMessage);
 //CharacterAddAbility(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, "Luck", _Bonus);
 
 IF
+CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
+AND
+DB_IsPlayer(_Player)
+THEN
+CharacterStatusText(_Player, "Player");
+
+IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
 AND
 NOT DB_IsPlayer(_Player)
 THEN
-DisplayText(_Player, "Not Player");
+CharacterStatusText(_Player, "Not Player");
 
 //END_REGION
 
+//REGION BONUS_POINTS
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "CON_Potion_MaxSource_c747accc-bc67-4aa4-af24-5fd4e163aa87", (ITEMGUID)_Item)
+AND
+CharacterGetMaxSourcePoints(_Player, (INTEGER)_CurrentSP)
+AND
+IntegerSum(_CurrentSP, 1, (INTEGER)_MaxSP)
+THEN
+CharacterOverrideMaxSourcePoints(_Player, _MaxSP);
+//END_REGION
 
 //REGION LUCK
 PROC
@@ -127,16 +154,18 @@ CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
 AND
 HasAppliedStatus(_Player, "CA_LUCKY_AURA", 1)
 THEN
-DB_CA_LuckAuraActive(_Player, 1);
-CharacterStatusText(_Player, "Aura turned on.");
+RemoveStatus(_Player, "CA_LUCKY_AURA");
+DB_CA_LuckAuraActive(_Player, 0);
+CharacterStatusText(_Player, "Aura turned off.");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
 AND
 HasAppliedStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
-DB_CA_LuckAuraActive(_Player, 0);
-CharacterStatusText(_Player, "Aura turned off.");
+ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
+DB_CA_LuckAuraActive(_Player, 1);
+CharacterStatusText(_Player, "Aura turned on.");
 
 /*
 IF
@@ -204,3 +233,4 @@ ApplyStatus(_Player, "CA_LUCKYAURA", -1.0);
 EXITSECTION
 
 ENDEXITSECTION
+ParentTargetEdge "_CivilAuras"

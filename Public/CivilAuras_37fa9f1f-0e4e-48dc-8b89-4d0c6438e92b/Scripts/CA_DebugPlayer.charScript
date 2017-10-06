@@ -1,0 +1,11 @@
+INIT
+	CHARACTER:__Me
+	
+EVENTS
+EVENT AddToPlayerDatabase
+ON
+	OnInit()
+	OnActivate()
+ACTIONS
+	//CharacterItemEvent(__Me, null, "CA_Story_AddPlayer")
+	DisplayCombatInfoText(__Me, "Attempting to add self to player table...", 2)
