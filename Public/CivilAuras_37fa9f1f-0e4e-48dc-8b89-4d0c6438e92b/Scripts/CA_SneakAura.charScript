@@ -1,0 +1,248 @@
+#INCLUDE CA_AuraConfig
+
+INIT
+	CHARACTER:__Me
+	INT:%SneakAuronOn = 0
+	FIXEDSTRING:%SneakTimerName = "Sneak_DelayTimer"
+	SKILL:%SneakShoutName = "Shout_CA_SneakToggle"
+
+	STRING:%Event_Sneak_SetHost = "Event_CA_Sneak_SetHost"
+	STRING:%Event_Sneak_GetHost = "Event_CA_Sneak_GetHost"
+	STRING:%Event_Sneak_ClearHost = "Event_CA_Sneak_ClearHost"
+	STRING:%Event_Sneak_OnGetHost = "Event_CA_Sneak_OnGetHostSet"
+	STRING:%Event_Sneak_CheckBaseHost = "Event_CA_Sneak_CheckBaseHost"
+	STRING:%Event_Sneak_SetStatBonus = "Event_CA_Sneak_SetStatBonus"
+	STRING:%Event_Sneak_GetStatBonus = "Event_CA_Sneak_GetStatBonus"
+	STRING:%Event_Sneak_ApplyStatBonus = "Event_CA_Sneak_Local_ApplyStatBonus"
+	STRING:%Event_Sneak_ClearBonus = "Event_CA_Sneak_Local_ClearBonus"
+	
+	INT:%SneakStatBase = 0
+	INT:%SneakStatBonus = 0
+	STRING:%SneakAuraName = "Sneak"
+	STRING:%SneakStatName = "Sneaking"
+	
+	CHARACTER:%Debug_SneakAuraHost
+	
+USING CA_AuraConfig
+
+EVENTS
+
+EVENT SetupSneakVars
+ON
+	OnInit()
+ACTIONS
+	//Set(%SneakStatBase, 0)
+	//Set(%SneakStatBonus, 0)
+	Set(%SneakAuraName, "Sneak")
+	Set(%SneakStatName, "Sneaking")
+	Set(%SneakTimerName, "Sneak_DelayTimer")
+	Set(%SneakShoutName, "Shout_CA_SneakToggle")
+IF "!c1"
+	CharacterHasStatus(__Me, CA_STEALTHY)
+THEN
+	CharacterRemoveStatus(__Me, CA_STEALTHY)
+ENDIF
+
+EVENT ToggleSneakAura
+ON
+	OnSkillCast(__Me, %SneakShoutName)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(__Me, SNEAKING)
+THEN
+	IF "c1"
+		IsEqual(%SneakAuronOn, 0)
+	THEN
+		CharacterApplyStatus(__Me, CA_SNEAK_AURA, -1)
+		Set(%SneakAuronOn, 1)
+		CharacterItemEvent(__Me, null, %Event_Sneak_SetHost)
+		//CharacterItemEvent(__Me, null, %Event_Sneak_CheckBaseHost)
+		//CharacterItemEvent(__Me, null, %Event_Sneak_GetHost)
+		//CharacterPlayEffect(__Me, "RS3_FX_Skills_Voodoo_Cast_SmokeCover_SFX_01", "Dummy_Root")
+		//CharacterPlayEffect(__Me, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Root_01", "Dummy_Root")
+		//CharacterPlayEffect(__Me, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Hand_01", "Dummy_L_Hand")
+		CharacterPlayEffect(__Me, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Root_01_Texkey", "Dummy_Root:cast")
+	ELSE
+		CharacterRemoveStatus(__Me, CA_SNEAK_AURA)
+		CharacterItemEvent(__Me, null, %Event_Sneak_ClearHost)
+		Set(%SneakAuronOn, 0)
+	ENDIF
+ELSE
+	StatusText(__Me, "Sneak Aura is only usable while sneaking.")
+ENDIF
+	
+EVENT AutoSneakAuraOff
+ON
+	OnCharacterStatusRemoved(__Me, SNEAKING)
+ACTIONS
+IF "c1"
+	IsEqual(%SneakAuronOn, 1)
+THEN
+	CharacterRemoveStatus(__Me, CA_SNEAK_AURA)
+	CharacterItemEvent(__Me, null, %Event_Sneak_ClearHost)
+	//Set(%SneakAuronOn, 0)
+ELIF "c1"
+	CharacterHasStatus(__Me, CA_STEALTHY)
+THEN
+	CharacterEvent(__Me, %Event_Sneak_ClearBonus)
+ENDIF
+	
+EVENT AutoSneakAuraOn
+ON
+	OnCharacterStatusApplied(__Me, SNEAKING)
+ACTIONS
+IF "c1"
+	IsEqual(%SneakAuronOn, 1)
+THEN
+	StatusText(__Me, "Sneak Aura auto-enabled.")
+	CharacterApplyStatus(__Me, CA_SNEAK_AURA, -1)
+	CharacterItemEvent(__Me, null, %Event_Sneak_SetHost)
+	CharacterPlayEffect(__Me, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Root_01_Texkey", "Dummy_Root:cast")
+ELSE
+	IF "c1"
+		CharacterHasStatus(__Me, CA_STEALTHY)
+	THEN
+		CharacterItemEvent(__Me, null, %Event_Sneak_SetStatBonus)
+	ENDIF
+ENDIF
+	
+EVENT OnStealthyApplied
+ON
+	OnCharacterStatusApplied(__Me, CA_STEALTHY)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(__Me, SNEAKING)
+THEN
+	CharacterItemEvent(__Me, null, %Event_Sneak_SetStatBonus)
+ENDIF
+
+EVENT OnStealthyRemoved
+ON
+	OnCharacterStatusRemoved(__Me, CA_STEALTHY)
+	OnCharacterEvent(__Me, %Event_Sneak_ClearBonus)
+ACTIONS
+	CharacterRemoveStatus(__Me, CA_SNEAK01)
+	CharacterRemoveStatus(__Me, CA_SNEAK02)
+	CharacterRemoveStatus(__Me, CA_SNEAK03)
+	CharacterRemoveStatus(__Me, CA_SNEAK04)
+	CharacterRemoveStatus(__Me, CA_SNEAK05)
+	CharacterRemoveStatus(__Me, CA_SNEAK06)
+	CharacterRemoveStatus(__Me, CA_SNEAK07)
+	CharacterRemoveStatus(__Me, CA_SNEAK08)
+	CharacterRemoveStatus(__Me, CA_SNEAK09)
+	CharacterRemoveStatus(__Me, CA_SNEAK10)
+
+EVENT OnGetSneakBonus
+VARS
+	STRING:_MessageIn
+	FIXEDSTRING:_MessageOut
+ON	
+	OnCharacterItemEvent(__Me, _, %Event_Sneak_GetStatBonus)
+ACTIONS
+	//Print(_MessageIn, "Sneak Bonus: [1]", %SneakStatBonus)
+	//Cast(_MessageOut, _MessageIn)
+	//DisplayCombatInfoText(__Me, _MessageOut, 2)
+	
+	//Using a timer here for safety. 
+	//(Crashes can occur when overlapping statuses overwrite each other multiple times in a single frame).
+	StartTimer(%SneakTimerName, 0.15, 1)
+
+EVENT SneakTimerFire
+ON
+	OnTimer(%SneakTimerName)
+ACTIONS
+	CharacterEvent(__Me, %Event_Sneak_ApplyStatBonus)
+	StopTimer(%SneakTimerName)
+
+EVENT SetSneakStatus
+VARS
+	INT:_FinalBonus
+	STRING:_MessageIn
+	FIXEDSTRING:_MessageOut
+ON
+	OnCharacterEvent(__Me, %Event_Sneak_ApplyStatBonus)
+ACTIONS
+IF "!c1"
+	CharacterHasStatus(__Me, CA_SNEAK_AURA)
+THEN
+	Set(_FinalBonus, %SneakStatBonus)
+	Subtract(_FinalBonus, %SneakStatBase)
+	IF "c1"
+		IsGreaterThen(_FinalBonus, 0)
+	THEN
+		IF "c1"
+			IsEqual(_FinalBonus, 1)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK01, -1, 1)
+		ELIF "c1"
+			IsEqual(_FinalBonus, 2)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK02, -1, 1)
+		ELIF "c1"
+			IsEqual(_FinalBonus, 3)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK03, -1, 1)
+		ELIF "c1"
+			IsEqual(_FinalBonus, 4)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK04, -1, 1)
+		ELIF "c1"
+			IsEqual(_FinalBonus, 5)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK05, -1, 1)
+		ELIF "c1"
+			IsEqual(_FinalBonus, 6)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK06, -1, 1)
+		ELIF "c1"
+			IsEqual(_FinalBonus, 7)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK07, -1, 1)	
+		ELIF "c1"
+			IsEqual(_FinalBonus, 8)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK08, -1, 1)	
+		ELIF "c1"
+			IsEqual(_FinalBonus, 9)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK09, -1, 1)	
+		ELIF "c1"
+			IsEqual(_FinalBonus, 10)
+		THEN
+			CharacterApplyStatus(__Me, CA_SNEAK10, -1, 1)
+		ENDIF
+		
+		//Print(_MessageIn, "Sneak(Base: [1] Bonus: [2] Final: [3])", %SneakStatBase, %SneakStatBonus, _FinalBonus)
+		//Cast(_MessageOut, _MessageIn)
+		//DisplayCombatInfoText(__Me, _MessageOut)
+	ELSE
+		Print(_MessageIn, "Aura host's Sneak is too low ([1])", _FinalBonus)
+		//Print(_MessageIn, "Aura host's sneak is too low (Base: [1] Bonus: [2] Final: [3]) host: [4]", %SneakStatBase, %SneakStatBonus, _FinalBonus, %Debug_SneakAuraHost)
+		Cast(_MessageOut, _MessageIn)
+		StatusText(__Me, _MessageOut)
+	ENDIF
+ENDIF
+
+
+	
+EVENT CheckSneakHost
+VARS
+	STRING:_MessageIn
+	FIXEDSTRING:_MessageOut
+ON
+	OnCharacterItemEvent(__Me, _, %Event_Sneak_OnGetHost)
+ACTIONS
+	Print(_MessageIn, "Stealthy Aura Host: [1]", %Debug_SneakAuraHost)
+	Cast(_MessageOut, _MessageIn)
+	DisplayCombatInfoText(__Me, _MessageOut, 2)
+
+EVENT CheckSneakBonusHost
+VARS
+	STRING:_MessageIn
+	FIXEDSTRING:_MessageOut
+ON
+	OnCharacterItemEvent(__Me, _, "Event_CA_SetSneakBonusHost")
+ACTIONS
+	Print(_MessageIn, "Host Sneak: [1]", %SneakStatBase)
+	Cast(_MessageOut, _MessageIn)
+	DisplayCombatInfoText(__Me, _MessageOut, 2)

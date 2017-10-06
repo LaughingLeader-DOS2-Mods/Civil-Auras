@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="e2a8d59b-0e34-4a7c-bf5f-db7a2bb34cde">
+  <stat_objects>
+    <stat_object index="0" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCKY_AURA" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Lucky Aura" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is raising the party's luck." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Lucky" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="8" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_LuckyAura" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_LuckyAura" />
+        <field name="AuraRadius" type="IntegerStatObjectFieldDefinition" value="50" />
+        <field name="AuraAllies" type="StringStatObjectFieldDefinition" value="CA_LUCKY" />
+      </fields>
+    </stat_object>
+    <stat_object index="1" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCKY" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Lucky" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is lucky in the presence of an ally." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Lucky" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="8" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Lucky" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Lucky" />
+      </fields>
+    </stat_object>
+    <stat_object index="2" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Lucky Bonus" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character has a bonus to luck." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Lucky" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="8" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck01" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stats_CA_LuckyBonus" />
+      </fields>
+    </stat_object>
+    <stat_object index="3" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK02" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck02" />
+      </fields>
+    </stat_object>
+    <stat_object index="4" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK03" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck03" />
+      </fields>
+    </stat_object>
+    <stat_object index="5" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK04" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck04" />
+      </fields>
+    </stat_object>
+    <stat_object index="6" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK05" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck05" />
+      </fields>
+    </stat_object>
+    <stat_object index="7" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK06" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck06" />
+      </fields>
+    </stat_object>
+    <stat_object index="8" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK07" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck07" />
+      </fields>
+    </stat_object>
+    <stat_object index="9" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK08" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck08" />
+      </fields>
+    </stat_object>
+    <stat_object index="10" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK09" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck09" />
+      </fields>
+    </stat_object>
+    <stat_object index="11" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCK10" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_LUCK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Luck10" />
+      </fields>
+    </stat_object>
+    <stat_object index="12" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK_AURA" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Sneak Aura" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is raising the party's stealth capabilities." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_EtherealSoles" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="29" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_SneakAura" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_SneakAura" />
+        <field name="AuraRadius" type="IntegerStatObjectFieldDefinition" value="8" />
+        <field name="AuraAllies" type="StringStatObjectFieldDefinition" value="CA_STEALTHY" />
+      </fields>
+    </stat_object>
+    <stat_object index="13" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_STEALTHY" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Stealthy" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is stealthy in the presence of an ally." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_EtherealSoles" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="29" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Stealthy" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Stealthy" />
+      </fields>
+    </stat_object>
+    <stat_object index="14" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Stealth Bonus" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character has a bonus to sneak." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_EtherealSoles" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="29" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak01" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stats_CA_SneakBonus" />
+      </fields>
+    </stat_object>
+    <stat_object index="15" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK02" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak02" />
+      </fields>
+    </stat_object>
+    <stat_object index="16" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK03" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak03" />
+      </fields>
+    </stat_object>
+    <stat_object index="17" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK04" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak04" />
+      </fields>
+    </stat_object>
+    <stat_object index="18" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK05" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak05" />
+      </fields>
+    </stat_object>
+    <stat_object index="19" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK06" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak06" />
+      </fields>
+    </stat_object>
+    <stat_object index="20" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK07" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak07" />
+      </fields>
+    </stat_object>
+    <stat_object index="21" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK08" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak08" />
+      </fields>
+    </stat_object>
+    <stat_object index="22" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK09" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak09" />
+      </fields>
+    </stat_object>
+    <stat_object index="23" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAK10" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="CA_SNEAK01" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Sneak10" />
+      </fields>
+    </stat_object>
+    <stat_object index="24" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_MOTIVATED" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Motivated" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is ready to persuade someone.&lt;br&gt;Wears off after dialog ends." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Reputation" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="15" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Motivated" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Motivated" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>

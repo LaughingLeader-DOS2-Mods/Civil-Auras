@@ -1,0 +1,8 @@
+#INCLUDE CA_LuckyAura
+#INCLUDE CA_SneakAura
+
+INIT
+	//CHARACTER:__Me
+
+USING CA_LuckyAura
+USING CA_SneakAura

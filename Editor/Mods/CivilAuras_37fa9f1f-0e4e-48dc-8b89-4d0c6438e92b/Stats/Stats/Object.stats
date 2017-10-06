@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="e078e210-b9ba-48e5-afe3-c5eb91ba8545">
+  <stat_objects>
+    <stat_object index="0" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_LuckyAura" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
+        <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="3413ffc6-ca7a-4e52-917b-b22910db8198" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="50" />
+        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Luck 2" />
+        <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+    <stat_object index="1" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_SneakAura" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
+        <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="a1cc5702-b8e9-4b5e-9eeb-68776bd359ff" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="101" />
+        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Sneaking 2" />
+        <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+    <stat_object index="2" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_PepTalk" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
+        <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="3a57d09c-fbc1-477d-b5df-7be5301487be" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="150" />
+        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Persuasion 5" />
+        <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>

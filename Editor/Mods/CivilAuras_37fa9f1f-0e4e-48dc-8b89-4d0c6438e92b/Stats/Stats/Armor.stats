@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="239de60a-29b5-4010-bf7d-f6169d4ddd8a">
+  <stat_objects>
+    <stat_object index="0" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="S_CA_AuraLogic" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Rings" />
+        <field name="ItemGroup" type="StringStatObjectFieldDefinition" value="EMPTY" />
+        <field name="Slot" type="EnumerationStatObjectFieldDefinition" value="13" enumeration_type_name="Itemslot" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Flags" type="StringStatObjectFieldDefinition" value="Unstorable;Unbreakable" />
+        <field name="InventoryTab" type="EnumerationStatObjectFieldDefinition" value="7" enumeration_type_name="InventoryTabs" />
+        <field name="ArmorType" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="ArmorType" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>
