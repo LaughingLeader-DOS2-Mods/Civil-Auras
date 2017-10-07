@@ -6,9 +6,48 @@ KBSECTION
 QRY
 CA_GetHighestBarter((CHARACTERGUID)_Target, (INTEGER)_TargetVal)
 AND
+_TargetVal <= 0
+AND
 DB_IsPlayer(_Player)
 AND
 _Player!=_Target 
+AND
+CharacterGetAbility(_Player, "Barter", _BarterVal)
+AND
+_BarterVal > 0
+AND
+NOT DB_CA_BarterBonus(_Target)
+THEN
+DB_CA_BarterBonus(_Target, _BarterVal);
+
+QRY
+CA_GetHighestBarter((CHARACTERGUID)_Target, (INTEGER)_TargetVal)
+AND
+_TargetVal <= 0
+AND
+DB_IsPlayer(_Player)
+AND
+_Player!=_Target 
+AND
+CharacterGetAbility(_Player, "Barter", _BarterVal)
+AND
+_BarterVal > 0
+AND
+DB_CA_BarterBonus(_Target, _Bonus)
+AND
+_BarterVal > _Bonus
+THEN
+NOT DB_CA_BarterBonus(_Target);
+DB_CA_BarterBonus(_Target, _BarterVal);
+
+QRY
+CA_GetHighestBarter((CHARACTERGUID)_Target, (INTEGER)_TargetVal)
+AND
+_TargetVal > 0
+AND
+DB_IsPlayer(_Player)
+AND
+_Player!=_Target
 AND
 CharacterGetAbility(_Player, "Barter", _BarterVal)
 AND
@@ -57,6 +96,18 @@ THEN
 CharacterAddAbility(_Target, "Barter", _BarterBonus);
 DisplayText(_Trader, "Your party's reputation proceeds you. Discounts for all.");
 
+
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+DB_IsPlayer(_Player)
+THEN
+CharacterStatusText(_Trader, "Player recognized");
+
 IF
 TradeEnds((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
 AND
@@ -68,4 +119,4 @@ NOT DB_CA_BarterBonus(_Target);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZ_CivilAuras"

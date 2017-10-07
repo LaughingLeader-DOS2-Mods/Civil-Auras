@@ -25,4 +25,4 @@ CharacterStatusText(_Player, "Animal Empathy +1");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZ_CivilAuras"

@@ -224,4 +224,4 @@ ApplyStatus(_Player, "CA_LUCKYAURA", -1.0);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZ_CivilAuras"

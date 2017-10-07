@@ -65,4 +65,4 @@ CharacterAddAbility(_Player, "Persuasion", _CancelVal);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZ_CivilAuras"
