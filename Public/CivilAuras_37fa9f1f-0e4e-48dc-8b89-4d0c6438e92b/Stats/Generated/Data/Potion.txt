@@ -4,111 +4,11 @@ type "Potion"
 new entry "Stats_CA_Lucky"
 type "Potion"
 
-new entry "Stats_CA_Luck01"
-type "Potion"
-data "Luck" "1"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck02"
-type "Potion"
-data "Luck" "2"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck03"
-type "Potion"
-data "Luck" "3"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck04"
-type "Potion"
-data "Luck" "4"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck05"
-type "Potion"
-data "Luck" "5"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck06"
-type "Potion"
-data "Luck" "6"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck07"
-type "Potion"
-data "Luck" "7"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck08"
-type "Potion"
-data "Luck" "8"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck09"
-type "Potion"
-data "Luck" "9"
-data "Act strength" "20"
-
-new entry "Stats_CA_Luck10"
-type "Potion"
-data "Luck" "10"
-data "Act strength" "20"
-
 new entry "Stats_CA_SneakAura"
 type "Potion"
 
 new entry "Stats_CA_Stealthy"
 type "Potion"
-
-new entry "Stats_CA_Sneak01"
-type "Potion"
-data "Act strength" "20"
-data "Sneaking" "1"
-
-new entry "Stats_CA_Sneak02"
-type "Potion"
-data "Sneaking" "2"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak03"
-type "Potion"
-data "Sneaking" "3"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak04"
-type "Potion"
-data "Sneaking" "4"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak05"
-type "Potion"
-data "Sneaking" "5"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak06"
-type "Potion"
-data "Sneaking" "6"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak07"
-type "Potion"
-data "Sneaking" "7"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak08"
-type "Potion"
-data "Sneaking" "8"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak09"
-type "Potion"
-data "Sneaking" "9"
-data "Act strength" "20"
-
-new entry "Stats_CA_Sneak10"
-type "Potion"
-data "Sneaking" "10"
-data "Act strength" "20"
 
 new entry "Stats_CA_Motivated"
 type "Potion"

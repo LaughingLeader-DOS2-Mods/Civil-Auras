@@ -33,7 +33,7 @@
     </stat_object>
     <stat_object index="1" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SneakToggle" />
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_StealthToggle" />
         <field name="SkillType" type="StringStatObjectFieldDefinition" value="Shout" />
         <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
         <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="3" enumeration_type_name="SkillAbility" />
@@ -48,7 +48,7 @@
         <field name="Icon" type="StringStatObjectFieldDefinition" value="Talent_Guerrilla" />
         <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Toggle Sneak Aura" />
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Grant your Sneak ability to allies within [1]m range.&lt;br&gt; Only useable while sneaking." />
-        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="StatusData:CA_SNEAK_AURA:AuraRadius" />
+        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="StatusData:CA_STEALTH_AURA:AuraRadius" />
         <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
         <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="noprepare" />
         <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="noprepare" />

@@ -13,155 +13,15 @@
     </stat_object>
     <stat_object index="2" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck01" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="1" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
+        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_SneakAura" />
       </fields>
     </stat_object>
     <stat_object index="3" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck02" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="2" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="4" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck03" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="3" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="5" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck04" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="4" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="6" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck05" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="5" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="7" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck06" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="6" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="8" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck07" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="7" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="9" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck08" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="8" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="10" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck09" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="9" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="11" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Luck10" />
-        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="10" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="12" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_SneakAura" />
-      </fields>
-    </stat_object>
-    <stat_object index="13" is_substat="false">
-      <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Stealthy" />
       </fields>
     </stat_object>
-    <stat_object index="14" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak01" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="1" />
-      </fields>
-    </stat_object>
-    <stat_object index="15" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak02" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="2" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="16" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak03" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="3" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="17" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak04" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="4" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="18" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak05" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="5" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="19" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak06" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="6" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="20" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak07" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="7" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="21" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak08" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="8" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="22" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak09" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="9" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="23" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Sneak10" />
-        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="10" />
-        <field name="Act strength" type="StringStatObjectFieldDefinition" value="20" />
-      </fields>
-    </stat_object>
-    <stat_object index="24" is_substat="false">
+    <stat_object index="4" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Motivated" />
       </fields>

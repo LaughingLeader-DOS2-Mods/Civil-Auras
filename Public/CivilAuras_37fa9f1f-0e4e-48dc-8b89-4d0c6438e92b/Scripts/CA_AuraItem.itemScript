@@ -16,7 +16,7 @@ ACTIONS
 EVENT OnAuraToggled
 ON
 	OnSkillCast(%Player, "Shout_CA_LuckyToggle")
-	OnSkillCast(%Player, "Shout_CA_SneakToggle")
+	OnSkillCast(%Player, "Shout_CA_StealthToggle")
 	OnSkillCast(%Player, "Target_CA_PepTalk")
 ACTIONS
 	DisplayCombatInfoText(%Player, "CivilAuras ready.")

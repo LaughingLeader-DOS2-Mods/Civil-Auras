@@ -17,10 +17,17 @@ IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
 AND
 HasActiveStatus(_Target, "CA_MOTIVATED", 0)
+THEN
+DisplayText(_Caster, "Be motivated!");
+
+IF
+CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
+AND
+HasActiveStatus(_Target, "CA_MOTIVATED", 0)
 AND
 CharacterGetBaseAbility(_Caster, "Persuasion", (INTEGER)_CasterVal)
 AND
-CharacterGetAbility(_Caster, "Persuasion", (INTEGER)_TargetVal)
+CharacterGetAbility(_Target, "Persuasion", (INTEGER)_TargetVal)
 AND
 _CasterVal > _TargetVal
 AND

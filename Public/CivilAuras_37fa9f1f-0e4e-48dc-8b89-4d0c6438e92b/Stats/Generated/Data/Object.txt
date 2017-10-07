@@ -10,7 +10,7 @@ data "MaxAmount" "1"
 data "Priority" "1"
 data "MinLevel" "1"
 
-new entry "SKILLBOOK_CA_SneakAura"
+new entry "SKILLBOOK_CA_StealthAura"
 type "Object"
 using "_Skillbooks"
 data "RootTemplate" "a1cc5702-b8e9-4b5e-9eeb-68776bd359ff"

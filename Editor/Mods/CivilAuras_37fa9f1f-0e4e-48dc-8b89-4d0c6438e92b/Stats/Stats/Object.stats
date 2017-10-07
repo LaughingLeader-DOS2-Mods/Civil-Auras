@@ -17,7 +17,7 @@
     </stat_object>
     <stat_object index="1" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_SneakAura" />
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_StealthAura" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
         <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="a1cc5702-b8e9-4b5e-9eeb-68776bd359ff" />
         <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
