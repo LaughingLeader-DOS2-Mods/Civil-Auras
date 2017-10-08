@@ -1,10 +1,13 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_CA_LuckBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
-DB_CA_LuckAuraActive((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+//DB_CA_LuckBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+//DB_CA_LuckAuraActive((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+//DB_CA_Temp_CheckPlayer((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000);
 
-DB_CA_Temp_CheckPlayer((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000);
+//Proc Cheat Sheet
+//CA_ClearLuckActive
+//CA_ClearLuckBonus
 KBSECTION
 //REGION DEBUG
 
@@ -91,26 +94,33 @@ THEN
 DB_NOOP(1);
 //DisplayText(_Player, _Message);
 
-PROC
-CA_ClearLuckTable()
-AND
-DB_CA_LuckBonus(_Player)
-THEN
-NOT DB_CA_LuckAuraActive(_Player);
-
 //END_REGION
 
-//REGION LUCK
+//REGION PROCS
+PROC
+CA_ClearLuckActive((CHARACTERGUID)_Player)
+AND
+DB_CA_LuckAuraActive(_Player, _Val)
+THEN
+NOT DB_CA_LuckAuraActive(_Player, _Val);
+
+PROC
+CA_ClearLuckBonus((CHARACTERGUID)_Player)
+AND
+DB_CA_LuckBonus(_Player, _Val)
+THEN
+NOT DB_CA_LuckBonus(_Player, _Val);
+
+//END_REGION
 
 //REGION SKILL_USE
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
 AND
 HasAppliedStatus(_Player, "CA_LUCKY_AURA", 0)
-AND
-NOT DB_CA_LuckAuraActive(_Player)
 THEN
 ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
+CA_ClearLuckActive(_Player);
 DB_CA_LuckAuraActive(_Player, 1);
 CharacterStatusText(_Player, "Aura turned on.");
 
@@ -120,7 +130,7 @@ AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_LUCKY_AURA");
-NOT DB_CA_LuckAuraActive(_Player);
+CA_ClearLuckActive(_Player);
 CharacterStatusText(_Player, "Aura turned off.");
 
 //END_REGION
@@ -131,6 +141,7 @@ ObjectEnteredCombat((CHARACTERGUID)_Player, _)
 AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
 THEN
+CA_ClearLuckActive(_Player);
 DB_CA_LuckAuraActive(_Player, 1);
 RemoveStatus(_Player, "CA_LUCKY_AURA");
 
@@ -141,7 +152,6 @@ DB_CA_LuckAuraActive(_Player, 1)
 AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
-DB_CA_LuckAuraActive(_Player, 1);
 ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
 
 IF
@@ -160,8 +170,6 @@ CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraH
 AND
 DB_IsPlayer(_Player)
 AND
-NOT DB_CA_LuckBonus(_Player)
-AND
 CharacterGetAbility(_Player, "Luck", _PlayerLuck)
 AND
 CharacterGetBaseAbility(_AuraHost, "Luck", _TargetLuck)
@@ -170,6 +178,7 @@ _PlayerLuck < _TargetLuck
 AND
 IntegerSubtract(_TargetLuck, _PlayerLuck, _Bonus)
 THEN
+CA_ClearLuckBonus(_Player);
 DB_CA_LuckBonus(_Player, _Bonus);
 CharacterAddAbility(_Player, "Luck", _Bonus);
 
@@ -181,12 +190,9 @@ AND
 _Bonus > 0
 THEN
 CharacterRemoveAbility(_Player, "Luck", _Bonus);
-NOT DB_CA_LuckBonus(_Player);
-//END_REGION
-
-
+CA_ClearLuckBonus(_Player);
 //END_REGION
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZ_CivilAuras"
+ParentTargetEdge "_CivilAuras"

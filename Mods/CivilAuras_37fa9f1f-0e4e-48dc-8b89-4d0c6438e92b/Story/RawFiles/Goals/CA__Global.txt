@@ -1,0 +1,79 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_CA_Book_PetPal_Message(0, "Animal Empathy +1");
+DB_CA_Book_PetPal_Message(1, "I already know how to speak with animals.");
+
+//Settings
+DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+KBSECTION
+//REGION BONUS_POINT_POTIONS
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "CON_Potion_MaxSource_c747accc-bc67-4aa4-af24-5fd4e163aa87", (ITEMGUID)_Item)
+AND
+CharacterGetMaxSourcePoints(_Player, (INTEGER)_CurrentSP)
+AND
+IntegerSum(_CurrentSP, 1, (INTEGER)_MaxSP)
+THEN
+CharacterOverrideMaxSourcePoints(_Player, _MaxSP);
+//END_REGION
+
+//REGION TALENT_BOOKS
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", (ITEMGUID)_Item)
+AND
+CharacterHasTalent(_Player, "Animal_Empathy", _Val)
+AND
+DB_CA_Book_PetPal_Message(_Val, _Message)
+THEN
+CharacterStatusText(_Player, _Message);
+
+//END_REGION
+
+
+//REGION SETTINGS
+PROC
+CA_ClearSettings_AutoSneak((CHARACTERGUID)_Player)
+AND
+DB_CA_Settings_AutoSneakParty(_Player, _Val)
+THEN
+NOT DB_CA_Settings_AutoSneakParty(_Player, _Val);
+
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_Book_CivilAuraSettings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
+AND
+//ObjectGetDialogFlag(_Player, "CA_Settings_Open", 0)
+CharacterIsInCombat(_Player,0)
+THEN
+//Proc_StartDialog((INTEGER)_Automated,(STRING)_Dialog,(GUIDSTRING)_Speaker1,(GUIDSTRING)_Speaker2)
+Proc_StartDialog(0, "CA_Dialog_Config", _Player);
+//PROC_GLOBAL_DialogStartRequested(_Player, _Item);
+//ObjectSetDialogFlag(_Player, "CA_Settings_Open", 1);
+
+IF
+ObjectFlagSet("CA_AUTOSNEAK_ON", (CHARACTERGUID)_Player, _Instance)
+//ObjectWasTagged((ITEMGUID)_Item, "CA_CONFIG_AUTOSNEAK")
+//AND
+//ItemGetOwner(_Item, _Player)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_ClearSettings_AutoSneak(_Player);
+DB_CA_Settings_AutoSneakParty(_Player, 1);
+ObjectClearFlag(_Player, "CA_AUTOSNEAK_OFF");
+CharacterStatusText(_Player, "Auto-Party Sneak On");
+
+IF
+ObjectFlagSet("CA_AUTOSNEAK_OFF", (CHARACTERGUID)_Player, _Instance)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_ClearSettings_AutoSneak(_Player);
+ObjectClearFlag(_Player, "CA_AUTOSNEAK_ON");
+CharacterStatusText(_Player, "Auto-Party Sneak Off");
+
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "_CivilAuras"

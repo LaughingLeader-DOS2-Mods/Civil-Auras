@@ -1,8 +1,12 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_CA_BarterBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+//DB_CA_BarterBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 DB_CA_HighestBarter(0);
+
+DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
+DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
+DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
 KBSECTION
 //REGION QUERIES_PROCS
 
@@ -19,7 +23,7 @@ DB_CA_HighestBarter(_HighestBarter)
 AND
 _BarterVal > _HighestBarter
 THEN
-NOT DB_CA_HighestBarter(_HighestBarter);
+CA_ResetHighestBarter();
 DB_CA_HighestBarter(_BarterVal);
 
 QRY
@@ -34,8 +38,18 @@ THEN
 DB_CA_BarterBonus(_Target, _FinalVal);
 
 PROC
-CA_ResetHighestBarter()
+CA_ClearBonuses((CHARACTERGUID)_Target)
+AND
+DB_CA_BarterBonus(_Target, _Val)
 THEN
+NOT DB_CA_BarterBonus(_Target, _Val);
+
+PROC
+CA_ResetHighestBarter()
+AND
+DB_CA_HighestBarter(_Val)
+THEN
+NOT DB_CA_HighestBarter(_Val);
 DB_CA_HighestBarter(0);
 //END_REGION
 
@@ -45,7 +59,9 @@ RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
 AND
 DB_IsPlayer(_Target)
 AND
-DB_GlobalFlag("GLO_MultiPlayer")
+DB_UserCounter(_Users)
+AND
+_Users > 0
 AND
 CA_GetHighestBarter(_Target)
 AND
@@ -56,18 +72,18 @@ AND
 DB_CA_BarterBonus(_Target, _BarterBonus)
 THEN
 CharacterAddAbility(_Target, "Barter", _BarterBonus);
-DisplayText(_Trader, "Your party's reputation proceeds you. Discounts for all.");
 
 IF
 TradeEnds((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
 AND
-DB_GlobalFlag("GLO_MultiPlayer")
+DB_UserCounter(_Users)
+AND
+_Users > 0
 AND
 DB_CA_BarterBonus(_Target, _BarterBonus)
 THEN
 CharacterRemoveAbility(_Target, "Barter", _BarterBonus);
-NOT DB_CA_BarterBonus(_Target);
-CA_ResetHighestBarter();
+CA_ClearBonuses(_Target);
 
 //END_REGION
 
@@ -75,7 +91,9 @@ CA_ResetHighestBarter();
 IF
 RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
 AND
-NOT DB_GlobalFlag("GLO_MultiPlayer")
+DB_UserCounter(_Users)
+AND
+_Users <= 0
 AND
 CA_GetHighestBarter()
 AND
@@ -92,13 +110,34 @@ CharacterAddAbility(_Player, "Barter", _BarterBonus);
 IF
 TradeEnds((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
 AND
-NOT DB_GlobalFlag("GLO_MultiPlayer")
+DB_UserCounter(_Users)
+AND
+_Users <= 0
 AND
 DB_CA_BarterBonus(_Player, _BarterBonus)
 THEN
 CharacterRemoveAbility(_Player, "Barter", _BarterBonus);
-NOT DB_CA_BarterBonus(_Player);
-CA_ResetHighestBarter();
+NOT DB_CA_BarterBonus(_Player, _BarterBonus);
+//END_REGION
+
+//REGION BARTER_BONUS_TRADER_MESSAGES
+IF
+RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
+AND
+DB_IsPlayer(_Target)
+AND
+DB_CA_BarterBonus(_Target, _BarterBonus)
+AND
+_BarterBonus > 0
+AND
+Random(2, _Ran)
+AND
+IntegerMin(_Ran, 2, _MessageNum)
+AND
+DB_CA_BarterParty_Message(_MessageNum, _Message)
+THEN
+DisplayText(_Trader, _Message);
+
 //END_REGION
 
 //REGION DEBUG
@@ -111,24 +150,17 @@ DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
 DB_IsPlayer(_Player)
 AND
-DB_GlobalFlag("GLO_MultiPlayer")
+DB_UserCounter(_Users)
+AND
+IntegertoString(_Users, _StrUsers)
+AND
+StringConcatenate("You're playing with ", _StrUsers, _Msg1)
+AND
+StringConcatenate(_Msg1, " users", _Msg2)
 THEN
-CharacterStatusText(_Trader, "You're playing multiplayer.");
-
-IF
-DialogStarted((STRING)_Dialog, (INTEGER)_ID)
-AND
-DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
-AND
-DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
-AND
-DB_IsPlayer(_Player)
-AND
-NOT DB_GlobalFlag("GLO_MultiPlayer")
-THEN
-CharacterStatusText(_Trader, "You're offline.");
+CharacterStatusText(_Trader, _Msg2);
 //END_REGION
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZ_CivilAuras"
+ParentTargetEdge "_CivilAuras"

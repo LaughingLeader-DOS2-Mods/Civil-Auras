@@ -1,0 +1,13 @@
+_CivilAuras 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+GameEventSet("GAMEEVENT_GameStarted")
+THEN
+InitStory();
+GoalCompleted;
+EXITSECTION
+
+ENDEXITSECTION
