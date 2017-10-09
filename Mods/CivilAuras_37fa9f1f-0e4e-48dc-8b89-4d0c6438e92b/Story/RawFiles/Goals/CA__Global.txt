@@ -1,8 +1,11 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_CA_Book_PetPal_Message(0, "Animal Empathy +1");
-DB_CA_Book_PetPal_Message(1, "I already know how to speak with animals.");
+DB_CA_Book_PetPal_Message(0, "PetPal Learned");
+DB_CA_Book_PetPal_Message(1, "PetPal Already Learned");
+
+DB_CA_Book_Talent_Sound(0, "Items_Inventory_Book_Skillbook_Use");
+DB_CA_Book_Talent_Sound(1, "Items_Objects_Destroy");
 
 //Settings
 DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
@@ -19,14 +22,33 @@ CharacterOverrideMaxSourcePoints(_Player, _MaxSP);
 //END_REGION
 
 //REGION TALENT_BOOKS
+PROC
+CA_TALENT_Unlock((CHARACTERGUID)_Player, (STRING)_Talent)
+AND
+CharacterHasTalent(_Player, _Talent, 0)
+THEN
+CharacterAddTalent(_Player, _Talent);
+
+PROC
+CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item, (INTEGER)_Val)
+AND
+CharacterHasTalent(_Player, _Talent, 0)
+THEN
+CharacterAddTalent(_Player, _Talent);
+ItemDestroy(_Item);
+
 IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", (ITEMGUID)_Item)
 AND
-CharacterHasTalent(_Player, "Animal_Empathy", _Val)
+CharacterHasTalent(_Player, "AnimalEmpathy", _Val)
 AND
 DB_CA_Book_PetPal_Message(_Val, _Message)
+AND
+DB_CA_Book_Talent_Sound(_Val, _Sound)
 THEN
 CharacterStatusText(_Player, _Message);
+CA_TALENTBOOK_Unlock(_Player, "AnimalEmpathy", _Item, _Val);
+CharacterPlayHUDSound(_Player, _Sound);
 
 //END_REGION
 

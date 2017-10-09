@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
-    <header version="2" time="1507263680" />
-    <version major="3" minor="1" revision="3" build="1" />
+    <header version="2" time="1507524851" />
+    <version major="3" minor="1" revision="3" build="5" />
     <region id="Config">
         <node id="root">
             <children>
@@ -12,14 +12,14 @@
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="Divinity: Original Sin 2" type="22" />
                             <attribute id="UUID" value="1301db3d-1f54-4e98-9be5-5094030916e4" type="22" />
-                            <attribute id="Version" value="301989888" type="4" />
+                            <attribute id="Version" value="318767104" type="4" />
                         </node>
                     </children>
                 </node>
                 <node id="ModuleInfo">
                     <attribute id="Author" value="LaughingLeader" type="30" />
-                    <attribute id="CharacterCreationLevelName" value="SYS_Character_Creation_A" type="22" />
-                    <attribute id="Description" value="Adds several abilities to share civil abilities with party members." type="30" />
+                    <attribute id="CharacterCreationLevelName" value="" type="22" />
+                    <attribute id="Description" value="Adds several abilities to share civil abilities with party members. You can find the skill books at the Blacksmith in Fort Joy, and at Summoning Trainers after that." type="30" />
                     <attribute id="Folder" value="CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b" type="30" />
                     <attribute id="GMTemplate" value="" type="22" />
                     <attribute id="LobbyLevelName" value="" type="22" />
@@ -28,7 +28,7 @@
                     <attribute id="Name" value="Civil Auras" type="22" />
                     <attribute id="NumPlayers" value="2" type="1" />
                     <attribute id="PhotoBooth" value="" type="22" />
-                    <attribute id="StartupLevelName" value="SYS_Character_Creation_A" type="22" />
+                    <attribute id="StartupLevelName" value="" type="22" />
                     <attribute id="Tags" value="" type="30" />
                     <attribute id="Type" value="Add-on" type="22" />
                     <attribute id="UUID" value="37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b" type="22" />

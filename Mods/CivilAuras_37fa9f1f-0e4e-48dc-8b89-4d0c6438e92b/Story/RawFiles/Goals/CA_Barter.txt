@@ -140,6 +140,7 @@ DisplayText(_Trader, _Message);
 
 //END_REGION
 
+/*
 //REGION DEBUG
 IF
 DialogStarted((STRING)_Dialog, (INTEGER)_ID)
@@ -159,7 +160,9 @@ AND
 StringConcatenate(_Msg1, " users", _Msg2)
 THEN
 CharacterStatusText(_Trader, _Msg2);
+
 //END_REGION
+*/
 EXITSECTION
 
 ENDEXITSECTION

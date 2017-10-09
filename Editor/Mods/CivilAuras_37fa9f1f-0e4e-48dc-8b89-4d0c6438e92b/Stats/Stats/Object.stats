@@ -49,7 +49,7 @@
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
         <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="d64f8314-0700-4d43-b854-9b2f73073945" />
         <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
-        <field name="Value" type="IntegerStatObjectFieldDefinition" value="75" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="25" />
         <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />

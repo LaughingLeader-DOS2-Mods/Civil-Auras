@@ -10,37 +10,7 @@ INITSECTION
 //CA_ClearLuckBonus
 KBSECTION
 //REGION DEBUG
-
 /*
-IF
-CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
-AND
-NOT DB_IsPlayer(_Player)
-THEN
-DisplayText(_Player, "Not Player");
-
-IF
-CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
-AND
-DB_IsPlayer(_Player)
-THEN
-DisplayText(_Player, "Player");
-
-IF
-CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
-AND
-NOT DB_IsPlayer(_Player)
-THEN
-DisplayText(_Player, "Not Player");
-
-IF
-CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
-AND
-DB_IsPlayer(_Player)
-THEN
-DisplayText(_Player, "Player");
-*/
-
 IF
 CharacterStatusApplied(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
 AND
@@ -69,7 +39,9 @@ THEN
 DisplayText(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, _FinalMessage);
 DebugText(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, _FinalMessage);
 //CharacterAddAbility(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, "Luck", _Bonus);
+*/
 
+/*
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
 AND
@@ -93,7 +65,7 @@ StringConcatenate("Player: ", _Name, _Message)
 THEN
 DB_NOOP(1);
 //DisplayText(_Player, _Message);
-
+*/
 //END_REGION
 
 //REGION PROCS
@@ -111,6 +83,26 @@ DB_CA_LuckBonus(_Player, _Val)
 THEN
 NOT DB_CA_LuckBonus(_Player, _Val);
 
+PROC
+CA_LuckyAuraEffect((CHARACTERGUID)_Player)
+AND
+GetPosition(_Player, _X, _PY, _Z)
+AND
+RealSum(_PY, 1.0, _Y)
+THEN
+PlayEffectAtPosition("CA_FX_LuckyAura_Impact_01", _X, _Y, _Z);
+PlaySound(_Player, "Skill_Summon_Cast_AoE_Divine_Aurora");
+
+PROC
+CA_LuckyEffect((CHARACTERGUID)_Player)
+AND
+GetPosition(_Player, _X, _PY, _Z)
+AND
+RealSum(_PY, 1.0, _Y)
+THEN
+PlayEffectAtPosition("CA_FX_Lucky_Impact_01", _X, _Y, _Z);
+PlaySound(_Player, "Proj_Arrow_Charming_Projectile");
+
 //END_REGION
 
 //REGION SKILL_USE
@@ -123,6 +115,7 @@ ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
 CA_ClearLuckActive(_Player);
 DB_CA_LuckAuraActive(_Player, 1);
 CharacterStatusText(_Player, "Aura turned on.");
+CA_LuckyAuraEffect(_Player);
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
@@ -153,6 +146,7 @@ AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
 ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
+CA_LuckyAuraEffect(_Player);
 
 IF
 SavegameLoaded(_,_,_,_)
@@ -162,6 +156,7 @@ AND
 DB_CA_LuckAuraActive(_Player, 1)
 THEN
 ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
+CA_LuckyAuraEffect(_Player);
 //END_REGION
 
 //REGION PARTY_BONUSES
@@ -181,6 +176,7 @@ THEN
 CA_ClearLuckBonus(_Player);
 DB_CA_LuckBonus(_Player, _Bonus);
 CharacterAddAbility(_Player, "Luck", _Bonus);
+CA_LuckyEffect(_Player);
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)

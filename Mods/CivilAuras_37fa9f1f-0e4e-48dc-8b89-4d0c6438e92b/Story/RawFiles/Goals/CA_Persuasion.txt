@@ -1,24 +1,26 @@
-_CivilAuras 1
+Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_CA_PersuasionBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+//DB_CA_PersuasionBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 KBSECTION
 //REGION PERSUASION
-QRY
-CA_GetAbsValue((INTEGER)_Val, (INTEGER)_OutVal)
+PROC
+CA_ClearPersuasionBonus((CHARACTERGUID)_Player)
 AND
-_Val < 0
-AND
-IntegerProduct(_Val, -1, _OutVal)
+DB_CA_PersuasionBonus(_Player, _Val)
 THEN
-DB_NOOP(1);
+NOT DB_CA_PersuasionBonus(_Player, _Val);
 
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
 AND
 HasActiveStatus(_Target, "CA_MOTIVATED", 0)
+AND
+CharacterGetDisplayName(_Target, _Handle, _Ref)
+AND
+StringConcatenate(_Ref, ", I believe in you!", _Message)
 THEN
-DisplayText(_Caster, "Be motivated!");
+DisplayText(_Caster, _Message);
 
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
@@ -35,6 +37,7 @@ IntegerSubtract(_CasterVal, _TargetVal, _Bonus)
 THEN
 ApplyStatus(_Target, "CA_MOTIVATED", 30.0);
 CharacterAddAbility(_Target, "Persuasion", _Bonus);
+CA_ClearPersuasionBonus(_Target);
 DB_CA_PersuasionBonus(_Target, _Bonus);
 
 IF
@@ -50,12 +53,9 @@ IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED", (GUIDSTRING)_Causee)
 AND
 DB_CA_PersuasionBonus(_Player, _Bonus)
-AND
-_Bonus > 0
 THEN
 CharacterRemoveAbility(_Player, "Persuasion", _Bonus);
-DB_CA_PersuasionBonus(_Player, 0);
-NOT DB_CA_PersuasionBonus(_Player);
+CA_ClearPersuasionBonus(_Player);
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED", (GUIDSTRING)_Causee)

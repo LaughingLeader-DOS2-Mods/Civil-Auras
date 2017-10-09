@@ -22,13 +22,11 @@
         <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
         <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="noprepare" />
         <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_target_soul_01_cast" />
-        <field name="CastTextEvent" type="StringStatObjectFieldDefinition" value="cast" />
-        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_GP_ScriptedEvent_Lucky_01:Dummy_Root" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="noprepare" />
         <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Luck 2" />
-        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]&lt;br&gt;Grants [2] points max." />
+        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
       </fields>
     </stat_object>
     <stat_object index="1" is_substat="false">
@@ -52,14 +50,12 @@
         <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
         <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="noprepare" />
         <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_ground_air_01_cast" />
-        <field name="CastTextEvent" type="StringStatObjectFieldDefinition" value="cast" />
-        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_Skills_Voodoo_Cast_SmokeCover_SFX_01:Dummy_Root;" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="noprepare" />
         <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Sneaking 2" />
         <field name="Stealth" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]&lt;br&gt;Grants [2] points max." />
+        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
       </fields>
     </stat_object>
   </stat_objects>

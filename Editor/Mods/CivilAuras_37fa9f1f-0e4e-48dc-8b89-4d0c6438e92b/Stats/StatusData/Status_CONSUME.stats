@@ -43,7 +43,7 @@
         <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="29" enumeration_type_name="FormatStringColor" />
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_SneakAura" />
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_SneakAura" />
-        <field name="AuraRadius" type="IntegerStatObjectFieldDefinition" value="8" />
+        <field name="AuraRadius" type="IntegerStatObjectFieldDefinition" value="5" />
         <field name="AuraAllies" type="StringStatObjectFieldDefinition" value="CA_STEALTHY" />
       </fields>
     </stat_object>

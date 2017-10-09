@@ -23,6 +23,18 @@ DB_CA_SneakBonus(_Player, _Val)
 THEN
 NOT DB_CA_SneakBonus(_Player, _Val);
 
+PROC
+CA_StealthAuraEffect((CHARACTERGUID)_Player)
+THEN
+PlayEffect(_Player, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Root_01_Texkey");
+PlaySound(_Player, "Skill_Air_SmokeCover_Impact");
+
+PROC
+CA_StealthyEffect((CHARACTERGUID)_Player)
+THEN
+PlayEffect(_Player, "RS3_FX_Skills_Fire_Flamebreath_SubEmit_Smoke_01");
+PlaySound(_Player, "Proj_Gren_Smoke_Projectile");
+
 //END_REGION
 
 //REGION SKILL_USE
@@ -34,11 +46,13 @@ HasActiveStatus(_Player, "SNEAKING", 0)
 AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
-ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
+/*ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
 ApplyStatus(_Player, "SNEAKING", -1.0);
 CA_ClearSneakActive(_Player);
 DB_CA_SneakAuraActive(_Player, 1);
 CharacterStatusText(_Player, "Stealth aura enabled.");
+CA_StealthAuraEffect(_Player);*/
+CharacterStatusText(_Player, "Stealth Aura can only be used while Sneaking");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_StealthToggle", _)
@@ -50,8 +64,8 @@ THEN
 ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
 CA_ClearSneakActive(_Player);
 DB_CA_SneakAuraActive(_Player, 1);
-CharacterStatusText(_Player, "Stealth aura enabled.");
-PlayEffect(_Player, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Root_01_Texkey");
+//CharacterStatusText(_Player, "Stealth Aura Enabled");
+CA_StealthAuraEffect(_Player);
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_StealthToggle", _)
@@ -60,7 +74,7 @@ HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_STEALTH_AURA");
 CA_ClearSneakActive(_Player);
-CharacterStatusText(_Player, "Stealth aura disabled.");
+CharacterStatusText(_Player, "Stealth Aura Disabled");
 
 //END_REGION
 
@@ -74,6 +88,8 @@ AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
 ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
+CA_StealthAuraEffect(_Player);
+CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
 
 IF
 SavegameLoaded(_,_,_,_)
@@ -87,6 +103,8 @@ AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
 ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
+CA_StealthAuraEffect(_Player);
+CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
 //END_REGION
 
 //REGION SNEAK_ALLY_BONUSES
@@ -106,6 +124,7 @@ THEN
 CharacterAddAbility(_Player, "Sneaking", _Bonus);
 CA_ClearSneakBonus(_Player);
 DB_CA_SneakBonus(_Player, _Bonus);
+CA_StealthyEffect(_Player);
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
@@ -136,10 +155,11 @@ AND
 CharacterGetReservedUserID(_Player,_ID)
 THEN
 ApplyStatus(_Player, "SNEAKING", -1.0);
-CharacterStatusText(_Player, "Auto-sneaking.");
+CharacterStatusText(_Player, "Auto-Sneaking");
 //END_REGION
 
 //REGION DEBUG
+/*
 IF
 GameEventSet("GAMEEVENT_GameStarted")
 AND
@@ -156,6 +176,7 @@ AND
 HasActiveStatus(_OtherPlayer, "CA_STEALTH_AURA", 0)
 THEN
 RemoveStatus(_Player, "CA_STEALTHY");
+*/
 //END_REGION
 EXITSECTION
 

@@ -41,7 +41,7 @@ data "Icon" "statIcons_EtherealSoles"
 data "FormatColor" "Rogue"
 data "StatsId" "Stats_CA_SneakAura"
 data "StackId" "Stack_CA_SneakAura"
-data "AuraRadius" "8"
+data "AuraRadius" "5"
 data "AuraAllies" "CA_STEALTHY"
 
 new entry "CA_STEALTHY"
