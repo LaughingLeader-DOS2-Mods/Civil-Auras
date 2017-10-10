@@ -1,0 +1,42 @@
+INIT
+
+	CHARACTER:%TempTrader
+	ITEM:%TempItem
+	
+	
+EVENTS
+
+EVENT AddTreasure
+VARS
+	CHARACTER:_Trader
+	ITEM:_Item
+	FIXEDSTRING:_Treasure
+ON
+	OnCharacterItemEvent(_Trader, _Item, "Event_CA_AddTreasure")
+ACTIONS
+	StatusText(_Trader, "Event_CA_AddTreasure recognized")
+IF	"c1"
+	GetVar(_Treasure, _Item, "Treasure")
+THEN
+	CharacterAddTreasureTable(_Trader, _Treasure)
+	
+	//ItemDestroy(_Item)
+	Set(%TempTrader, _Trader)
+	Set(%TempItem, _Item)
+	StatusText(_Trader, _Treasure)
+	CharacterItemEvent(_Trader, _Item, "Event_CA_GenerateTreasure")
+	StartTimer("CA_TreasureGen", 1, 1)
+ELSE
+	StatusText(_Trader, "Treasure value not found on TreasureHelper")
+ENDIF
+
+EVENT GenerateTreasure
+ON
+	OnTimer("CA_TreasureGen")
+ACTIONS
+	StatusText(%TempTrader, "Timer Done")
+	//StatusText(%TempTrader, "Sending treasure generation event")
+	//CharacterItemEvent(%TempTrader, %TempItem, "Event_CA_GenerateTreasure")
+	StopTimer("CA_TreasureGen")
+	//Set(%TempTrader, null)
+	//Set(%TempItem, null)

@@ -1,4 +1,4 @@
-_CivilAuras 1
+Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 

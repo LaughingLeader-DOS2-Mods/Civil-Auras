@@ -1,0 +1,309 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_CA_Trader_TempInt(0);
+DB_CA_Trader_TempString("");
+
+//DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401); //Editor
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c); // Fort Joy Blacksmith
+DB_CA_ModTraders(CHARACTERGUID_S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620); // Tarquin
+
+DB_CA_AdditionalTradeTreasure("FJ_FortJoy_Main", (CHARACTERGUID)CHARACTERGUID_S_FTJ_SkepticSoldier_9dc4da24-9cd5-43cc-a01c-6923b59bd066, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1); // Lizard Soldier
+
+
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle");
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle");
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk");
+
+DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy");
+KBSECTION
+IF
+GameStarted(_Level, 1)
+THEN
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401);
+
+
+//REGION HELPER_METHODS
+PROC
+CA_PrintIntegerAtTarget((STRING)_MessagePrefix, (STRING)_MessageSuffix, (INTEGER)_Val, (CHARACTERGUID)_Target)
+AND
+IntegertoString(_Val, _StrVal)
+AND
+StringConcatenate(_MessagePrefix, _StrVal, _Msg1)
+AND
+StringConcatenate(_Msg1, _MessageSuffix, _Output)
+THEN
+//DB_CA_Trader_TempString(_Output);
+CharacterStatusText(_Target, _Output);
+
+QRY
+CA_QRY_ResetTraderTempInt()
+AND
+DB_CA_Trader_TempInt(_Val)
+THEN
+NOT DB_CA_Trader_TempInt(_Val);
+DB_CA_Trader_TempInt(0);
+
+PROC
+CA_ClearTraderTempInt()
+AND
+DB_CA_Trader_TempInt(_Val)
+THEN
+NOT DB_CA_Trader_TempInt(_Val);
+
+PROC
+CA_PROC_ResetTraderTempInt((INTEGER)_ToVal)
+THEN
+CA_ClearTraderTempInt();
+DB_CA_Trader_TempInt(_ToVal);
+
+QRY
+CA_GetTotalTalentsLearned((STRING)_Talent)
+AND
+CA_QRY_ResetTraderTempInt()
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterHasTalent(_Player, _Talent, 0)
+AND
+DB_CA_Trader_TempInt(_Val)
+AND
+IntegerSum(_Val, 1, _NewVal)
+THEN
+NOT DB_CA_Trader_TempInt(_Val);
+DB_CA_Trader_TempInt(_NewVal);
+
+QRY
+CA_GetTotalSkillsLearned((STRING)_Skill)
+AND
+CA_QRY_ResetTraderTempInt()
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterHasSkill(_Player, _Skill, 0)
+AND
+DB_CA_Trader_TempInt(_Val)
+AND
+IntegerSum(_Val, 1, _NewVal)
+THEN
+NOT DB_CA_Trader_TempInt(_Val);
+DB_CA_Trader_TempInt(_NewVal);
+
+//END_REGION
+
+//REGION TALENTBOOK_METHODS
+PROC
+CA_Trader_GenerateTalentBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Talent)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+AND
+CA_GetTotalTalentsLearned(_Talent)
+AND
+DB_CA_Trader_TempInt(_Val)
+AND
+_Val > 0
+AND
+_Amount < _Val
+AND
+IntegerSubtract(_Val, _Amount, _TotalAmount)
+AND
+_TotalAmount > 0
+THEN
+/*
+CA_PrintIntegerAtTarget(_Talent, " book(s) generated.", _TotalAmount, _Trader);
+CA_PrintIntegerAtTarget(_Talent, " book(s) needed.", _Val, _Trader);
+CA_PrintIntegerAtTarget(_Talent, " book(s) in inventory.", _Amount, _Trader);
+*/
+ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
+CA_PROC_ResetTraderTempInt(0);
+
+PROC
+CA_Trader_GenerateTalentBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Talent, (INTEGER)_MaxAmount)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+AND
+CA_GetTotalTalentsLearned(_Talent)
+AND
+DB_CA_Trader_TempInt(_Val)
+AND
+_Val > 0
+AND
+_Amount < _Val
+AND
+IntegerSubtract(_Val, _Amount, _TotalNeeded)
+AND
+IntegerMax(_MaxAmount, _TotalNeeded, _TotalAmount)
+AND
+_TotalAmount > 0
+THEN
+//CA_PrintIntegerAtTarget(_Talent, " book(s) generated.", _TotalAmount, _Trader);
+ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
+CA_PROC_ResetTraderTempInt(0);
+//END_REGION
+
+//REGION SKILLBOOK_METHODS
+PROC
+CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+AND
+CA_QRY_ResetTraderTempInt()
+AND
+CA_GetTotalSkillsLearned(_Skill)
+AND
+DB_CA_Trader_TempInt(_Val)
+AND
+_Val > 0
+AND
+_Amount < _Val
+AND
+IntegerSubtract(_Val, _Amount, _TotalAmount)
+AND
+_TotalAmount > 0
+THEN
+/*
+CA_PrintIntegerAtTarget(_Skill, " book(s) generated.", _TotalAmount, _Trader);
+CA_PrintIntegerAtTarget(_Skill, " book(s) needed.", _Val, _Trader);
+CA_PrintIntegerAtTarget(_Skill, " book(s) in inventory.", _Amount, _Trader);
+*/
+ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
+CA_PROC_ResetTraderTempInt(0);
+
+PROC
+CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill, (INTEGER)_MaxAmount)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+AND
+CA_QRY_ResetTraderTempInt()
+AND
+CA_GetTotalSkillsLearned(_Skill)
+AND
+DB_CA_Trader_TempInt(_Val)
+AND
+_Val > 0
+AND
+_Amount < _Val
+AND
+IntegerSubtract(_Val, _Amount, _TotalNeeded)
+AND
+IntegerMax(_MaxAmount, _TotalNeeded, _TotalAmount)
+AND
+_TotalAmount > 0
+THEN
+//CA_PrintIntegerAtTarget(_Skill, " book(s) generated.", _TotalAmount, _Trader);
+ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
+CA_PROC_ResetTraderTempInt(0);
+
+//END_REGION
+
+//REGION PETPAL_TALENTBOOKS
+IF
+DialogStarted(_Dialog, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_ModTraders(_Trader)
+AND
+DB_CA_Trader_TalentBooks(_Book, _Talent)
+THEN
+CA_Trader_GenerateTalentBooks(_Trader, _Book, _Talent);
+//END_REGION
+
+//REGION SKILLBOOKS
+IF
+DialogStarted(_Dialog, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_ModTraders(_Trader)
+AND
+DB_CA_Trader_SkillBooks(_Book, _Skill)
+THEN
+CA_Trader_GenerateSkillBooks(_Trader, _Book, _Skill);
+
+//END_REGION
+
+//REGION ADDITIONAL_TREASURE
+IF
+TradeGenerationEnded(_Trader)
+AND
+DB_CA_AdditionalTradeTreasure(_Region, _Trader, _ItemTemplate, _Amount)
+AND
+GetRegion(_Trader, _Region)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, 0)
+THEN
+ItemTemplateAddTo(_ItemTemplate, _Trader, _Amount);
+
+/*
+IF
+TradeGenerationEnded(_Trader)
+AND
+GetRegion(_Trader, _Region)
+AND
+DB_IsPlayer(_Player)
+THEN
+//OpenMessageBox(_Player, _Region);
+DebugText(_Player, _Region);
+*/
+
+//END_REGION
+
+//REGION DEBUG
+
+/*
+IF
+DialogStarted(_Dialog, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_ModTraders(_Trader)
+AND
+DB_CA_Trader_TempInt(_Val)
+THEN
+CA_PrintIntegerAtTarget("TempInt[","]",_Val,_Trader);
+*/
+
+/*
+IF
+DialogStarted(_Dialog, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_ModTraders(_Trader)
+AND
+DB_CA_Trader_SkillBooks(_ItemTemplate, _Skill)
+AND
+CA_GetTotalSkillsLearned(_Skill)
+AND
+DB_CA_Trader_TempInt(_Val)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+AND
+StringConcatenate(_Skill, "| ", _Prefix)
+THEN
+CA_PrintIntegerAtTarget(_Prefix," books in inventory",_Amount,_Trader);
+CA_PrintIntegerAtTarget(_Prefix," books needed",_Val,_Trader);
+CA_PROC_ResetTraderTempInt(0);
+
+IF
+DialogStarted(_Dialog, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_ModTraders(_Trader)
+AND
+DB_CA_Trader_TalentBooks(_ItemTemplate, _Ignore)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+AND
+StringConcatenate(_Ignore, "| ", _Prefix)
+THEN
+//CA_PrintIntegerAtTarget(_Prefix," books in inventory",_Amount,_Trader);
+DB_Noop();
+*/
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "_CivilAuras"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
-    <header version="2" time="1507524851" />
+    <header version="2" time="1507594721" />
     <version major="3" minor="1" revision="3" build="5" />
     <region id="Config">
         <node id="root">
@@ -34,7 +34,24 @@
                     <attribute id="UUID" value="37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b" type="22" />
                     <attribute id="Version" value="268435456" type="4" />
                     <children>
-                        <node id="Scripts" />
+                        <node id="Scripts">
+                            <children>
+                                <node id="Script">
+                                    <attribute id="UUID" value="f3b7b905-b9dd-417c-9838-324fa06abbc0" type="22" />
+                                    <children>
+                                        <node id="Parameters">
+                                            <children>
+                                                <node id="Parameter">
+                                                    <attribute id="MapKey" value="HardcoreOnly" type="22" />
+                                                    <attribute id="Type" value="1" type="4" />
+                                                    <attribute id="Value" value="0" type="23" />
+                                                </node>
+                                            </children>
+                                        </node>
+                                    </children>
+                                </node>
+                            </children>
+                        </node>
                         <node id="TargetModes">
                             <children>
                                 <node id="Target">

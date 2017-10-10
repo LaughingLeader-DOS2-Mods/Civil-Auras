@@ -95,6 +95,59 @@ ObjectClearFlag(_Player, "CA_AUTOSNEAK_ON");
 CharacterStatusText(_Player, "Auto-Party Sneak Off");
 
 //END_REGION
+
+QRY
+CA_AddTreasure_Start((CHARACTERGUID)_Trader)
+THEN
+ItemTemplateAddTo("ITEMGUID_CODE_CA_TreasureHelper_87036f39-952d-4557-a4e7-2a6455ed8abb", _Trader, 1);
+
+/*
+IF
+DialogStarted(_Dialog, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_Traders(_Trader)
+AND
+CA_AddTreasure_Start(_Trader)
+AND
+GetItemForItemTemplateInInventory(_Trader, "ITEMGUID_CODE_CA_TreasureHelper_87036f39-952d-4557-a4e7-2a6455ed8abb", _Item)
+THEN
+SetVarFixedString(_Item, "Treasure", "ST_Trader_MageArmor");
+CharacterStatusText(_Trader, "Adding treasure");
+CharacterItemSetEvent(_Trader, _Item, "Event_CA_AddTreasure");
+*/
+
+/*
+IF
+CharacterItemEvent((CHARACTERGUID)_Trader, (ITEMGUID)_Item, "Event_CA_GenerateTreasure")
+AND
+NOT DB_IsPlayer(_Trader)
+AND
+GetClosestAlivePlayer(_Trader, _Player, _Dist)
+THEN
+//CharacterClearTradeGeneratedItems(_Trader);
+DB_CA_TraderTemp(_Trader, _Player, _Item);
+CharacterStatusText(_Trader, "Clearing inventory.");
+GlobalClearFlag("Event_CA_GenerateTreasure_Finish");
+InventoryLaunchIterator(_Trader, "Event_CA_ClearItem", "Event_CA_GenerateTreasure_Finish");
+
+IF
+StoryEvent((ITEMGUID)_Item, "Event_CA_ClearItem")
+THEN
+ItemDestroy(_Item);
+
+IF
+GlobalFlagSet("Event_CA_GenerateTreasure_Finish")
+AND
+DB_CA_TraderTemp(_Trader, _Player, _Item)
+THEN
+ItemDestroy(_Item);
+GenerateItems(_Player, _Trader);
+GenTradeItems(_Player, _Trader);
+CharacterStatusText(_Trader, "Treasure generated.");
+NOT DB_CA_TraderTemp(_Trader, _Player, _Item);
+*/
 EXITSECTION
 
 ENDEXITSECTION
