@@ -28,6 +28,20 @@ GoalCompleted;
 
 */
 
+/*
+IF
+SavegameLoaded(_,_,_,_)
+AND
+DB_IsPlayer(_Player)
+THEN
+ItemTemplateAddTo("MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", _Player, 1);
+ItemTemplateAddTo("MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", _Player, 1);
+ItemTemplateAddTo("CON_CA_Potion_Talent_06ebb17f-babe-429c-91f3-11d537dad6ca", _Player, 2);
+ItemTemplateAddTo("CON_CA_Potion_Ability_a3a2b79b-286a-4dda-8e6b-68c81b95ea63", _Player, 5);
+ItemTemplateAddTo("CON_CA_Potion_Attribute_ca660d0e-05b6-4e43-a612-7f22e9fd2205", _Player, 5);
+GoalCompleted;
+*/
+
 IF
 GameEventSet("GAMEEVENT_GameStarted")
 THEN

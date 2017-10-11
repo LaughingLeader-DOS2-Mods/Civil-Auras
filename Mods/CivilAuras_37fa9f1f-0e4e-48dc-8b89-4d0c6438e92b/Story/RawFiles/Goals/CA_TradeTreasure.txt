@@ -8,8 +8,10 @@ DB_CA_Trader_TempString("");
 DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c); // Fort Joy Blacksmith
 DB_CA_ModTraders(CHARACTERGUID_S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620); // Tarquin
 
-DB_CA_AdditionalTradeTreasure("FJ_FortJoy_Main", (CHARACTERGUID)CHARACTERGUID_S_FTJ_SkepticSoldier_9dc4da24-9cd5-43cc-a01c-6923b59bd066, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1); // Lizard Soldier
-
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); // FJ Blacksmith
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c, "MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", 1); // FJ Blacksmith
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_FTJ_SkepticSoldier_9dc4da24-9cd5-43cc-a01c-6923b59bd066, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1); // FJ Lizard Soldier
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); // Tarquin
 
 DB_CA_Trader_SkillBooks("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle");
 DB_CA_Trader_SkillBooks("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle");
@@ -201,6 +203,15 @@ AND
 DB_CA_Trader_TalentBooks(_Book, _Talent)
 THEN
 CA_Trader_GenerateTalentBooks(_Trader, _Book, _Talent);
+
+IF
+TradeGenerationEnded(_Trader)
+AND
+DB_CA_ModTraders(_Trader)
+AND
+DB_CA_Trader_TalentBooks(_Book, _Talent)
+THEN
+CA_Trader_GenerateTalentBooks(_Trader, _Book, _Talent);
 //END_REGION
 
 //REGION SKILLBOOKS
@@ -215,15 +226,34 @@ DB_CA_Trader_SkillBooks(_Book, _Skill)
 THEN
 CA_Trader_GenerateSkillBooks(_Trader, _Book, _Skill);
 
-//END_REGION
-
-//REGION ADDITIONAL_TREASURE
 IF
 TradeGenerationEnded(_Trader)
 AND
-DB_CA_AdditionalTradeTreasure(_Region, _Trader, _ItemTemplate, _Amount)
+DB_CA_ModTraders(_Trader)
 AND
-GetRegion(_Trader, _Region)
+DB_CA_Trader_SkillBooks(_Book, _Skill)
+THEN
+CA_Trader_GenerateSkillBooks(_Trader, _Book, _Skill);
+
+//END_REGION
+
+//REGION ADDITIONAL_TREASURE
+
+IF
+DialogStarted(_Dialog, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_AdditionalTradeTreasure(_Trader, _ItemTemplate, _Amount)
+AND
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, 0)
+THEN
+ItemTemplateAddTo(_ItemTemplate, _Trader, _Amount);
+
+IF
+TradeGenerationEnded(_Trader)
+AND
+DB_CA_AdditionalTradeTreasure(_Trader, _ItemTemplate, _Amount)
 AND
 CharacterGetItemTemplateCount(_Trader, _ItemTemplate, 0)
 THEN

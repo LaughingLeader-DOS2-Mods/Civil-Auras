@@ -34,49 +34,6 @@ CharacterStatusText(_Target, _Str2);
 
 //END_REGION
 
-//REGION BONUS_POINT_POTIONS
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player, "CON_Potion_MaxSource_c747accc-bc67-4aa4-af24-5fd4e163aa87", (ITEMGUID)_Item)
-AND
-CharacterGetMaxSourcePoints(_Player, (INTEGER)_CurrentSP)
-AND
-IntegerSum(_CurrentSP, 1, (INTEGER)_MaxSP)
-THEN
-CharacterOverrideMaxSourcePoints(_Player, _MaxSP);
-//END_REGION
-
-//REGION TALENT_BOOKS
-PROC
-CA_TALENT_Unlock((CHARACTERGUID)_Player, (STRING)_Talent)
-AND
-CharacterHasTalent(_Player, _Talent, 0)
-THEN
-CharacterAddTalent(_Player, _Talent);
-
-PROC
-CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item)
-AND
-CharacterHasTalent(_Player, _Talent, 0)
-THEN
-CharacterAddTalent(_Player, _Talent);
-ItemDestroy(_Item);
-
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", (ITEMGUID)_Item)
-AND
-CharacterHasTalent(_Player, "AnimalEmpathy", _Val)
-AND
-DB_CA_Book_PetPal_Message(_Val, _Message)
-AND
-DB_CA_Book_Talent_Sound(_Val, _Sound)
-THEN
-CharacterStatusText(_Player, _Message);
-CA_TALENTBOOK_Unlock(_Player, "AnimalEmpathy", _Item);
-CharacterPlayHUDSound(_Player, _Sound);
-
-//END_REGION
-
-
 //REGION SETTINGS
 PROC
 CA_ClearSettings_AutoSneak((CHARACTERGUID)_Player)
@@ -118,6 +75,35 @@ CA_ClearSettings_AutoSneak(_Player);
 ObjectClearFlag(_Player, "CA_AUTOSNEAK_ON");
 CharacterStatusText(_Player, "Auto-Party Sneak Off");
 
+//END_REGION
+
+//REGION BONUS_POINTS
+IF
+StoryEvent((CHARACTERGUID)_Player, "Event_CA_AddTalentPoint")
+THEN
+CharacterAddTalentPoint(_Player,1);
+
+IF
+StoryEvent((CHARACTERGUID)_Player, "Event_CA_AddAbilityPoint")
+THEN
+CharacterAddAbilityPoint(_Player, 1);
+
+/*
+IF
+StoryEvent((CHARACTERGUID)_Player, "Event_CA_AddCivilPoint")
+THEN
+CharacterAddCivilAbilityPoint(_Player, 1);
+*/
+
+IF
+StoryEvent((CHARACTERGUID)_Player, "Event_CA_AddAttributePoint")
+THEN
+CharacterAddAttributePoint(_Player, 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Player, "Event_CA_AddSourcePoint")
+THEN
+CharacterAddSourcePoints(_Player, 1);
 //END_REGION
 EXITSECTION
 
