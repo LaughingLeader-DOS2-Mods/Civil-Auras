@@ -55,23 +55,30 @@ DB_CA_HighestBarter(0);
 
 //REGION MULTIPLAYER
 IF
-RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
-AND
-DB_IsPlayer(_Target)
+RequestTrade((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
 AND
 DB_UserCounter(_Users)
 AND
 _Users > 0
 AND
-CA_GetHighestBarter(_Target)
+CharacterGetReservedUserID(_Player,_ID)
 AND
-CharacterGetAbility(_Target, "Barter", (INTEGER)_TargetVal)
+DB_IsPlayer(_UserCharacter)
 AND
-CA_GetBarterBonus(_Target, _TargetVal)
+CharacterGetReservedUserID(_UserCharacter, _UID)
 AND
-DB_CA_BarterBonus(_Target, _BarterBonus)
+_UID == _ID
+AND
+CA_GetHighestBarter()
+AND
+CharacterGetAbility(_UserCharacter, "Barter", _PlayerVal)
+AND
+CA_GetBarterBonus(_UserCharacter, _PlayerVal)
+AND
+DB_CA_BarterBonus(_UserCharacter, _BarterBonus)
 THEN
-CharacterAddAbility(_Target, "Barter", _BarterBonus);
+CharacterAddAbility(_UserCharacter, "Barter", _BarterBonus);
+//CA_PrintInt(_UserCharacter, "Bonus[", _BarterBonus, "]");
 
 IF
 TradeEnds((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
@@ -80,10 +87,18 @@ DB_UserCounter(_Users)
 AND
 _Users > 0
 AND
-DB_CA_BarterBonus(_Target, _BarterBonus)
+CharacterGetReservedUserID(_Target, _ID)
+AND
+DB_IsPlayer(_UserCharacter)
+AND
+CharacterGetReservedUserID(_UserCharacter, _UID)
+AND
+_UID == _ID
+AND
+DB_CA_BarterBonus(_UserCharacter, _BarterBonus)
 THEN
-CharacterRemoveAbility(_Target, "Barter", _BarterBonus);
-CA_ClearBonuses(_Target);
+CharacterRemoveAbility(_UserCharacter, "Barter", _BarterBonus);
+CA_ClearBonuses(_UserCharacter);
 
 //END_REGION
 
@@ -122,26 +137,159 @@ NOT DB_CA_BarterBonus(_Player, _BarterBonus);
 
 //REGION BARTER_BONUS_TRADER_MESSAGES
 IF
-RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
+//RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DB_CA_Settings_BarterMessages(1, _Chance)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+CharacterCanTrade(_Trader, 1)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Target)
 AND
 DB_IsPlayer(_Target)
 AND
-DB_CA_BarterBonus(_Target, _BarterBonus)
+CA_GetHighestBarter()
 AND
-_BarterBonus > 0
+DB_CA_HighestBarter(_Barter)
 AND
-Random(2, _Ran)
+_Barter > 0
 AND
-IntegerMin(_Ran, 2, _MessageNum)
+Random(_Chance, _Ran)
 AND
-DB_CA_BarterParty_Message(_MessageNum, _Message)
+DB_CA_BarterParty_Message(_Ran, _Message)
 THEN
 DisplayText(_Trader, _Message);
 
 //END_REGION
 
-/*
+
 //REGION DEBUG
+
+//Bonus Prints
+/*
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Target)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_HighestBarter(_HighestBarter)
+AND
+DB_CA_BarterBonus(_Player, _BarterBonus)
+AND
+IntegertoString(_HighestBarter, _HighBarStr)
+AND
+IntegertoString(_BarterBonus, _BonStr)
+AND
+StringConcatenate("Highest[",_HighBarStr,_Mgs1)
+AND
+StringConcatenate("] Bonus[",_BonStr,_Mgs2)
+AND
+StringConcatenate(_Mgs1,_Mgs2,_Message)
+THEN
+CharacterStatusText(_Trader, _Message);
+*/
+
+//Random
+/*
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+Random(3, _Ran)
+AND
+IntegerMax(_Ran, 2, _MessageNum)
+THEN
+CA_PrintInt(_Trader, "random(2): ", _Ran, "");
+*/
+
+/*
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+AND
+NOT DB_CA_BarterBonus(_Player, _BarterBonus)
+THEN
+CharacterStatusText(_Trader, "No Barter bonuses.");
+*/
+
+//Users
+/*
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+DB_UserCounter(_Users)
+AND
+IntegertoString(_Users, _UStr)
+AND
+StringConcatenate("Users: ", _UStr, _Message)
+THEN
+CharacterStatusText(_Trader, _Message);
+*/
+
+//Region
+/*
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+GetRegion(_Trader, _Region)
+AND
+StringConcatenate("Region: ", _Region, _Message)
+THEN
+CharacterStatusText(_Trader, _Message);
+*/
+
+//Highest Barter
+/*
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+DB_CA_HighestBarter(_HighestBarter)
+AND
+IntegertoString(_HighestBarter, _HighBarStr)
+AND
+StringConcatenate("Highest Barter: ", _HighBarStr, _Message)
+THEN
+CharacterStatusText(_Trader, _Message);
+*/
+
+/*
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+DB_IsPlayer(_Player)
+THEN
+CharacterStatusText(_Trader, "You are a player.");
+
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+AND
+DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+NOT DB_IsPlayer(_Player)
+THEN
+CharacterStatusText(_Trader, "You are not a player.");
+
+
 IF
 DialogStarted((STRING)_Dialog, (INTEGER)_ID)
 AND
@@ -160,10 +308,10 @@ AND
 StringConcatenate(_Msg1, " users", _Msg2)
 THEN
 CharacterStatusText(_Trader, _Msg2);
-
-//END_REGION
 */
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZZ_CivilAuras"

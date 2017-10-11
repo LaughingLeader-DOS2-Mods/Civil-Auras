@@ -191,4 +191,4 @@ CA_ClearLuckBonus(_Player);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZZ_CivilAuras"

@@ -9,7 +9,31 @@ DB_CA_Book_Talent_Sound(1, "Items_Objects_Destroy");
 
 //Settings
 DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+DB_CA_Settings_BarterMessages(1, 25); //On, Random Chance
 KBSECTION
+//REGION HELPER_METHODS
+PROC
+CA_PrintMessage((CHARACTERGUID)_Target, (STRING)_Prefix, (STRING)_Var, (STRING)_Suffix)
+AND
+StringConcatenate(_Prefix, _Var, _Str1)
+AND
+StringConcatenate(_Str1, _Suffix, _Str2)
+THEN
+CharacterStatusText(_Target, _Str2);
+
+PROC
+CA_PrintInt((CHARACTERGUID)_Target, (STRING)_Prefix, (INTEGER)_VarInt, (STRING)_Suffix)
+AND
+IntegertoString(_VarInt, _Var)
+AND
+StringConcatenate(_Prefix, _Var, _Str1)
+AND
+StringConcatenate(_Str1, _Suffix, _Str2)
+THEN
+CharacterStatusText(_Target, _Str2);
+
+//END_REGION
+
 //REGION BONUS_POINT_POTIONS
 IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "CON_Potion_MaxSource_c747accc-bc67-4aa4-af24-5fd4e163aa87", (ITEMGUID)_Item)
@@ -30,7 +54,7 @@ THEN
 CharacterAddTalent(_Player, _Talent);
 
 PROC
-CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item, (INTEGER)_Val)
+CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item)
 AND
 CharacterHasTalent(_Player, _Talent, 0)
 THEN
@@ -47,7 +71,7 @@ AND
 DB_CA_Book_Talent_Sound(_Val, _Sound)
 THEN
 CharacterStatusText(_Player, _Message);
-CA_TALENTBOOK_Unlock(_Player, "AnimalEmpathy", _Item, _Val);
+CA_TALENTBOOK_Unlock(_Player, "AnimalEmpathy", _Item);
 CharacterPlayHUDSound(_Player, _Sound);
 
 //END_REGION
@@ -95,60 +119,7 @@ ObjectClearFlag(_Player, "CA_AUTOSNEAK_ON");
 CharacterStatusText(_Player, "Auto-Party Sneak Off");
 
 //END_REGION
-
-QRY
-CA_AddTreasure_Start((CHARACTERGUID)_Trader)
-THEN
-ItemTemplateAddTo("ITEMGUID_CODE_CA_TreasureHelper_87036f39-952d-4557-a4e7-2a6455ed8abb", _Trader, 1);
-
-/*
-IF
-DialogStarted(_Dialog, _Instance)
-AND
-DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
-AND
-DB_CA_Traders(_Trader)
-AND
-CA_AddTreasure_Start(_Trader)
-AND
-GetItemForItemTemplateInInventory(_Trader, "ITEMGUID_CODE_CA_TreasureHelper_87036f39-952d-4557-a4e7-2a6455ed8abb", _Item)
-THEN
-SetVarFixedString(_Item, "Treasure", "ST_Trader_MageArmor");
-CharacterStatusText(_Trader, "Adding treasure");
-CharacterItemSetEvent(_Trader, _Item, "Event_CA_AddTreasure");
-*/
-
-/*
-IF
-CharacterItemEvent((CHARACTERGUID)_Trader, (ITEMGUID)_Item, "Event_CA_GenerateTreasure")
-AND
-NOT DB_IsPlayer(_Trader)
-AND
-GetClosestAlivePlayer(_Trader, _Player, _Dist)
-THEN
-//CharacterClearTradeGeneratedItems(_Trader);
-DB_CA_TraderTemp(_Trader, _Player, _Item);
-CharacterStatusText(_Trader, "Clearing inventory.");
-GlobalClearFlag("Event_CA_GenerateTreasure_Finish");
-InventoryLaunchIterator(_Trader, "Event_CA_ClearItem", "Event_CA_GenerateTreasure_Finish");
-
-IF
-StoryEvent((ITEMGUID)_Item, "Event_CA_ClearItem")
-THEN
-ItemDestroy(_Item);
-
-IF
-GlobalFlagSet("Event_CA_GenerateTreasure_Finish")
-AND
-DB_CA_TraderTemp(_Trader, _Player, _Item)
-THEN
-ItemDestroy(_Item);
-GenerateItems(_Player, _Trader);
-GenTradeItems(_Player, _Trader);
-CharacterStatusText(_Trader, "Treasure generated.");
-NOT DB_CA_TraderTemp(_Trader, _Player, _Item);
-*/
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZZ_CivilAuras"

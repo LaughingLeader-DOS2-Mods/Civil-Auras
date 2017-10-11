@@ -1,0 +1,79 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+//DB_CA_CatBag((ITEMGUID)_Item, 0);
+DB_CA_CatBag_Sounds_In(0, "Animals_Cat_ABC_Dodge_01");
+DB_CA_CatBag_Sounds_In(1, "Animals_Cat_ABC_Talk_Scared");
+DB_CA_CatBag_Sounds_In(2, "Animals_Cat_ABC_Spawn_02");
+DB_CA_CatBag_Sounds_In(3, "Animals_Cat_ABC_Die_06");
+DB_CA_CatBag_Sounds_In(4, "Animals_Cat_ABC_Die_07");
+
+DB_CA_CatBag_Sounds_Out(0, "Animals_Cat_ABC_Sit_Talk_Normal_01");
+DB_CA_CatBag_Sounds_Out(1, "Animals_Cat_ABC_Use_05");
+KBSECTION
+//REGION CAT_SACK
+PROC
+CA_CatBag_PlaySound_In((CHARACTERGUID)_Player)
+AND
+Random(5, _Ran)
+AND
+DB_CA_CatBag_Sounds_In(_Ran, _Sound)
+THEN
+PlaySound(_Player, _Sound);
+
+PROC
+CA_CatBag_PlaySound_Out((CHARACTERGUID)_Player)
+AND
+Random(2, _Ran)
+AND
+DB_CA_CatBag_Sounds_Out(_Ran, _Sound)
+THEN
+PlaySound(_Player, _Sound);
+
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", (ITEMGUID)_Item)
+AND
+CharacterHasSkill(_Player, "Summon_Cat", 0)
+THEN
+CharacterStatusText(_Player, "I don't have a cat summon.");
+
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", (ITEMGUID)_Item)
+AND
+CharacterHasSkill(_Player, "Summon_Cat", 1)
+THEN
+CharacterRemoveSkill(_Player, "Summon_Cat");
+ItemDestroy(_Item);
+ItemTemplateAddTo("MISC_CA_CatSack_Full_c79ac316-5ae6-4631-b88c-f52052e1d3b8", _Player, 1);
+CA_CatBag_PlaySound_In(_Player);
+
+
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "MISC_CA_CatSack_Full_c79ac316-5ae6-4631-b88c-f52052e1d3b8", (ITEMGUID)_Item)
+AND
+CharacterHasSkill(_Player, "Summon_Cat", 1)
+THEN
+CharacterStatusText(_Player, "I already have a cat summon.");
+
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "MISC_CA_CatSack_Full_c79ac316-5ae6-4631-b88c-f52052e1d3b8", (ITEMGUID)_Item)
+AND
+CharacterHasSkill(_Player, "Summon_Cat", 0)
+THEN
+CharacterAddSkill(_Player, "Summon_Cat");
+ItemDestroy(_Item);
+ItemTemplateAddTo("MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", _Player, 1);
+CA_CatBag_PlaySound_Out(_Player);
+
+//END_REGION
+
+IF
+DialogStarted((STRING)_Dialog, (INTEGER)_ID)
+AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+THEN
+CharacterStatusText(_Player, "Is this running?");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "ZZZ_CivilAuras"

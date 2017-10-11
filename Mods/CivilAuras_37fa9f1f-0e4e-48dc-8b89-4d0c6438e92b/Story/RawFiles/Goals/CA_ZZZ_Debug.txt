@@ -1,0 +1,40 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_CA_TestDummy((CHARACTERGUID)S_Player_TestGareth_000_ff106095-41b6-419e-9663-db1cac2e39bd);
+DB_CA_TestDummy((CHARACTERGUID)S_Player_TestBeast_000_977b5ea9-86ce-48d4-a36e-7cbeaf15a422);
+//DB_CA_TestDummy((CHARACTERGUID)S_Player_TestPlayer_ab423237-5f34-48b9-be48-11fc9e32a9c6);
+KBSECTION
+/*
+
+IF
+RegionStarted("TestLevel")
+AND
+NOT DB_CA_ModTraders(CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401)
+THEN
+DB_CA_ModTraders(CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401);
+
+
+IF
+RegionStarted("TestLevel")
+AND
+DB_CA_TestDummy(_Org)
+THEN
+CharacterMakePlayer(_Org, NULL_00000000-0000-0000-0000-000000000000);
+ProcAddDebugCharToParty(_Org);
+DB_IsPlayer(_Org);
+SetTag(_Org,"AVATAR");
+GoalCompleted;
+
+*/
+
+IF
+GameEventSet("GAMEEVENT_GameStarted")
+THEN
+GoalCompleted;
+EXITSECTION
+NOT DB_CA_TestDummy(S_Player_TestGareth_000_ff106095-41b6-419e-9663-db1cac2e39bd);
+NOT DB_CA_TestDummy(S_Player_TestBeast_000_977b5ea9-86ce-48d4-a36e-7cbeaf15a422);
+//NOT DB_CA_TestDummy(S_Player_TestPlayer_ab423237-5f34-48b9-be48-11fc9e32a9c6);
+ENDEXITSECTION
+ParentTargetEdge "ZZZ_CivilAuras"

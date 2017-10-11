@@ -71,5 +71,25 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
       </fields>
     </stat_object>
+    <stat_object index="5" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatSack_Empty" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
+		<field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="b67a1a66-718f-4136-afc8-81ad5e64b9f9" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="10" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="5" />
+      </fields>
+    </stat_object>
+    <stat_object index="6" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatSack_Full" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="QUEST_CA_CatSack_Empty" />
+		<field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="c79ac316-5ae6-4631-b88c-f52052e1d3b8" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="666" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="50" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>

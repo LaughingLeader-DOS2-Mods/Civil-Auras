@@ -181,4 +181,4 @@ RemoveStatus(_Player, "CA_STEALTHY");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_CivilAuras"
+ParentTargetEdge "ZZZ_CivilAuras"
