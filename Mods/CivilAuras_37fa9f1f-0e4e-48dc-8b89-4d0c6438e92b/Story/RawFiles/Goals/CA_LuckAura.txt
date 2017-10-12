@@ -16,7 +16,7 @@ CharacterStatusApplied(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, "CA_
 AND
 CharacterGetAbility(S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, "Luck", _PlayerLuck)
 AND
-CharacterGetBaseAbility(_AuraHost, "Luck", _TargetLuck)
+CharacterGetAbility(_AuraHost, "Luck", _TargetLuck)
 AND
 IntegerSubtract(_TargetLuck, _PlayerLuck, _Bonus)
 AND
@@ -103,6 +103,24 @@ THEN
 PlayEffectAtPosition("CA_FX_Lucky_Impact_01", _X, _Y, _Z);
 PlaySound(_Player, "Proj_Arrow_Charming_Projectile");
 
+QRY
+CA_SetLuckBonus((CHARACTERGUID)_Player, (INTEGER)_PlayerLuck, (INTEGER)_TargetLuck)
+AND
+_PlayerLuck <= 0
+THEN
+CA_ClearLuckBonus(_Player);
+DB_CA_LuckBonus(_Player, _TargetLuck);
+
+QRY
+CA_SetLuckBonus((CHARACTERGUID)_Player, (INTEGER)_PlayerLuck, (INTEGER)_TargetLuck)
+AND
+_PlayerLuck > 0
+AND
+IntegerSubtract(_TargetLuck, _PlayerLuck, _Bonus)
+THEN
+CA_ClearLuckBonus(_Player);
+DB_CA_LuckBonus(_Player, _Bonus);
+
 //END_REGION
 
 //REGION SKILL_USE
@@ -160,6 +178,7 @@ CA_LuckyAuraEffect(_Player);
 //END_REGION
 
 //REGION PARTY_BONUSES
+
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
 AND
@@ -167,14 +186,14 @@ DB_IsPlayer(_Player)
 AND
 CharacterGetAbility(_Player, "Luck", _PlayerLuck)
 AND
-CharacterGetBaseAbility(_AuraHost, "Luck", _TargetLuck)
+CharacterGetAbility(_AuraHost, "Luck", _TargetLuck)
 AND
 _PlayerLuck < _TargetLuck
 AND
-IntegerSubtract(_TargetLuck, _PlayerLuck, _Bonus)
+CA_SetLuckBonus(_Player, _PlayerLuck, _TargetLuck)
+AND
+DB_CA_LuckBonus(_Player, _Bonus)
 THEN
-CA_ClearLuckBonus(_Player);
-DB_CA_LuckBonus(_Player, _Bonus);
 CharacterAddAbility(_Player, "Luck", _Bonus);
 CA_LuckyEffect(_Player);
 

@@ -13,6 +13,8 @@ KBSECTION
 QRY
 CA_GetHighestBarter()
 AND
+CA_ResetHighestBarterToZero()
+AND
 DB_IsPlayer(_Player)
 AND
 CharacterGetAbility(_Player, "Barter", _BarterVal)
@@ -23,7 +25,7 @@ DB_CA_HighestBarter(_HighestBarter)
 AND
 _BarterVal > _HighestBarter
 THEN
-CA_ResetHighestBarter();
+NOT DB_CA_HighestBarter(_HighestBarter);
 DB_CA_HighestBarter(_BarterVal);
 
 QRY
@@ -50,8 +52,45 @@ AND
 DB_CA_HighestBarter(_Val)
 THEN
 NOT DB_CA_HighestBarter(_Val);
+
+QRY
+CA_QRY_ResetHighestBarter()
+AND
+DB_CA_HighestBarter(_Val)
+THEN
+NOT DB_CA_HighestBarter(_Val);
+
+QRY
+CA_ResetHighestBarterToZero()
+AND
+CA_QRY_ResetHighestBarter()
+AND
+NOT DB_CA_HighestBarter(0)
+THEN
 DB_CA_HighestBarter(0);
 //END_REGION
+
+//REGION HIGHEST_AUTO_RESET
+
+//For fixing existing saves
+IF
+SavegameLoaded(_,_,_,_)
+AND
+NOT DB_CA_HighestBarter(0)
+THEN
+CA_ResetHighestBarter();
+DB_CA_HighestBarter(0);
+
+IF
+RegionStarted(_Region)
+AND
+NOT DB_CA_HighestBarter(0)
+THEN
+CA_ResetHighestBarter();
+DB_CA_HighestBarter(0);
+
+//END_REGION
+
 
 //REGION MULTIPLAYER
 IF
@@ -61,6 +100,8 @@ DB_UserCounter(_Users)
 AND
 _Users > 0
 AND
+CA_GetHighestBarter() // Only needs to be called once
+AND
 CharacterGetReservedUserID(_Player,_ID)
 AND
 DB_IsPlayer(_UserCharacter)
@@ -68,8 +109,6 @@ AND
 CharacterGetReservedUserID(_UserCharacter, _UID)
 AND
 _UID == _ID
-AND
-CA_GetHighestBarter()
 AND
 CharacterGetAbility(_UserCharacter, "Barter", _PlayerVal)
 AND
@@ -136,11 +175,14 @@ NOT DB_CA_BarterBonus(_Player, _BarterBonus);
 //END_REGION
 
 //REGION BARTER_BONUS_TRADER_MESSAGES
+//Only displays if the character isn't solo
 IF
 //RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
 DialogStarted((STRING)_Dialog, (INTEGER)_ID)
 AND
-DB_CA_Settings_BarterMessages(1, _Chance)
+DB_UserCounter(_Users)
+AND
+_Users > 0
 AND
 DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
@@ -149,6 +191,8 @@ AND
 DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Target)
 AND
 DB_IsPlayer(_Target)
+AND
+DB_CA_Settings_BarterMessages(1, _Chance)
 AND
 CA_GetHighestBarter()
 AND
@@ -167,14 +211,16 @@ DisplayText(_Trader, _Message);
 
 //REGION DEBUG
 
-//Bonus Prints
 /*
+//Bonus Prints
 IF
 DialogStarted((STRING)_Dialog, (INTEGER)_ID)
 AND
 DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Target)
 AND
 DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
+AND
+CA_GetHighestBarter()
 AND
 DB_CA_HighestBarter(_HighestBarter)
 AND
@@ -211,16 +257,31 @@ CA_PrintInt(_Trader, "random(2): ", _Ran, "");
 IF
 DialogStarted((STRING)_Dialog, (INTEGER)_ID)
 AND
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Target)
+AND
 DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
-DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+CharacterGetReservedUserID(_Target,_UID)
 AND
-NOT DB_CA_BarterBonus(_Player, _BarterBonus)
+CA_GetHighestBarter()
+AND
+DB_CA_HighestBarter(_HighestBarter)
+AND
+IntegertoString(_HighestBarter, _HighBarStr)
+AND
+IntegertoString(_UID, _IDStr)
+AND
+StringConcatenate("Highest[",_HighBarStr,_Mgs1)
+AND
+StringConcatenate("] User ID: ",_IDStr,_Mgs2)
+AND
+StringConcatenate(_Mgs1,_Mgs2,_Message)
 THEN
-CharacterStatusText(_Trader, "No Barter bonuses.");
+CharacterStatusText(_Trader, _Message);
 */
 
 //Users
+
 /*
 IF
 DialogStarted((STRING)_Dialog, (INTEGER)_ID)
@@ -229,12 +290,25 @@ DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
 DB_UserCounter(_Users)
 AND
+GetUserCount(_Users2)
+AND
 IntegertoString(_Users, _UStr)
 AND
-StringConcatenate("Users: ", _UStr, _Message)
+IntegertoString(_Users2, _UStr2)
+AND
+StringConcatenate("DB_Users[", _UStr, _Msg1)
+AND
+StringConcatenate(_Msg1, "]", _Msg2)
+AND
+StringConcatenate(" Users[", _UStr2, _Msg3)
+AND
+StringConcatenate("]", _Msg3, _Msg4)
+AND
+StringConcatenate(_Msg2, _Msg4, _Message)
 THEN
 CharacterStatusText(_Trader, _Message);
 */
+
 
 //Region
 /*

@@ -1,15 +1,15 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_CA_Book_PetPal_Message(0, "PetPal Learned");
-DB_CA_Book_PetPal_Message(1, "PetPal Already Learned");
+DB_CA_Book_PetPal_Message(0, "Pet Pal Learned");
+DB_CA_Book_PetPal_Message(1, "Pet Pal Already Learned");
 
 DB_CA_Book_Talent_Sound(0, "Items_Inventory_Book_Skillbook_Use");
 DB_CA_Book_Talent_Sound(1, "Items_Objects_Destroy");
 
 //Settings
 DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
-DB_CA_Settings_BarterMessages(1, 25); //On, Random Chance
+DB_CA_Settings_BarterMessages(1, 50); //On, Random Chance
 KBSECTION
 //REGION HELPER_METHODS
 PROC

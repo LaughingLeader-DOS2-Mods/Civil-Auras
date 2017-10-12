@@ -27,7 +27,7 @@ CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",
 AND
 HasActiveStatus(_Target, "CA_MOTIVATED", 0)
 AND
-CharacterGetBaseAbility(_Caster, "Persuasion", (INTEGER)_CasterVal)
+CharacterGetAbility(_Caster, "Persuasion", (INTEGER)_CasterVal)
 AND
 CharacterGetAbility(_Target, "Persuasion", (INTEGER)_TargetVal)
 AND
