@@ -1,12 +1,16 @@
+
+#TestLevel stuff. Nothing special here. Just a basic level.
 Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Levels/*
 Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Levels/TestLevel/*
 Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Globals/*
-meta.lsx
-log.txt
-goals.div
-goals.raw
-story.div
-story.div.osi
-story_ac.dat
-story_definitions.div
-story_header.div
+
+#Story files that can be compiled by the user (only raw files needed).
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/meta.lsx
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/log.txt
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/goals.div
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/goals.raw
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/story.div
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/story.div.osi
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/story_ac.dat
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/RawFiles/story_definitions.div
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/RawFiles/story_header.div
