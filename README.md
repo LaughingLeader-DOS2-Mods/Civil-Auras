@@ -8,7 +8,7 @@ All items are sold at the Blacksmith in Fort Joy, and at Tarquin after that.
 
 ### Releases
 * [Nexus](https://www.nexusmods.com/divinityoriginalsin2/mods/180?)
-* [Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=1163198876) 
+* [Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=1165976026) 
 
 ### Usage
 The complete source for Civil Auras is updated here for learning purposes. I encourage you to study the source and ask questions. Great care was taken to script everything with mod compatibility in mind.
