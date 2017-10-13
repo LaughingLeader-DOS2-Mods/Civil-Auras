@@ -1,6 +1,14 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
+DB_CA_Book_PetPal_Message(0, "Pet Pal Learned");
+DB_CA_Book_PetPal_Message(1, "Pet Pal Already Learned");
+//Sounds
+DB_CA_Book_Talent_Sound(0, "Items_Inventory_Book_Skillbook_Use");
+DB_CA_Book_Talent_Sound(1, "Items_Objects_Destroy");
+//Unlock effects
+DB_CA_Talent_Effect("AnimalEmpathy", "CA_FX_PetPal_Learned_01");
+
 //DB_CA_CatBag((ITEMGUID)_Item, 0);
 DB_CA_CatBag_Sounds_In(0, "Animals_Cat_ABC_Dodge_01");
 DB_CA_CatBag_Sounds_In(1, "Animals_Cat_ABC_Talk_Scared");
@@ -16,10 +24,22 @@ DB_CA_CatCharacter((CHARACTERGUID)Summons_Cat_4f7cdf30-0d44-44d2-bcf2-9185072810
 KBSECTION
 //REGION TALENT_BOOKS
 PROC
+CA_TALENT_PlayEffect((CHARACTERGUID)_Player, (STRING)_Talent)
+AND
+DB_CA_Talent_Effect(_Talent, _Effect)
+AND
+GetPosition(_Player, _X, _PY, _Z)
+AND
+RealSum(_PY, 1.0, _Y)
+THEN
+PlayEffectAtPosition(_Effect, _X, _Y, _Z);
+
+PROC
 CA_TALENT_Unlock((CHARACTERGUID)_Player, (STRING)_Talent)
 AND
 CharacterHasTalent(_Player, _Talent, 0)
 THEN
+CA_TALENT_PlayEffect(_Player, _Talent);
 CharacterAddTalent(_Player, _Talent);
 
 PROC
@@ -27,6 +47,7 @@ CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item)
 AND
 CharacterHasTalent(_Player, _Talent, 0)
 THEN
+CA_TALENT_PlayEffect(_Player, _Talent);
 CharacterAddTalent(_Player, _Talent);
 ItemDestroy(_Item);
 
