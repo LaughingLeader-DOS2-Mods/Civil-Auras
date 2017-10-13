@@ -6,6 +6,7 @@ INIT
 	
 EVENTS
 
+/*
 EVENT AddTreasure
 VARS
 	CHARACTER:_Trader
@@ -40,3 +41,5 @@ ACTIONS
 	StopTimer("CA_TreasureGen")
 	//Set(%TempTrader, null)
 	//Set(%TempItem, null)
+	
+*/
