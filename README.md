@@ -4,11 +4,11 @@ Civil Auras, a Mod for Divinity: Original Sin 2
 =======
 Civil Auras adds abilities for sharing civil skills with party members, as well as some small, quality-of-life item additions.
 
-All items are sold at the Blacksmith in Fort Joy, and at Tarquin after that.
+All items are sold at the various vendors listed on both the Nexus and Workshop pages.
 
 ### Releases
 * [Nexus](https://www.nexusmods.com/divinityoriginalsin2/mods/180?)
-* [Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=1165976026) 
+* [Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=1163198876) 
 
 ### Usage
 The complete source for Civil Auras is updated here for learning purposes. I encourage you to study the source and ask questions. Great care was taken to script everything with mod compatibility in mind.
