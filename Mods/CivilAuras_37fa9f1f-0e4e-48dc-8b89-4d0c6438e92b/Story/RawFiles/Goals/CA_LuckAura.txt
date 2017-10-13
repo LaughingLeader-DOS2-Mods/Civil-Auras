@@ -4,6 +4,9 @@ INITSECTION
 //DB_CA_LuckBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 //DB_CA_LuckAuraActive((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 //DB_CA_Temp_CheckPlayer((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000);
+//DB_CA_AuraHostLuck(_Player, _HostLuck);
+//DB_CA_LuckRefreshTimer(_Player, _TimerName);
+//DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName);
 
 //Proc Cheat Sheet
 //CA_ClearLuckActive
@@ -121,19 +124,61 @@ THEN
 CA_ClearLuckBonus(_Player);
 DB_CA_LuckBonus(_Player, _Bonus);
 
+PROC
+CA_ClearHostLuckRecord((CHARACTERGUID)_Player)
+AND
+DB_CA_AuraHostLuck(_Player, _Luck)
+THEN
+NOT DB_CA_AuraHostLuck(_Player, _Luck);
+
+PROC
+CA_RecordHostLuck((CHARACTERGUID)_Player)
+AND
+CharacterGetAbility(_Player, "Luck", _Luck)
+THEN
+CA_ClearHostLuckRecord(_Player);
+DB_CA_AuraHostLuck(_Player, _Luck);
+
+PROC
+CA_ClearLuckRefreshTimers()
+AND
+DB_CA_LuckRefreshTimer(_Player, _TimerName)
+THEN
+TimerCancel(_TimerName);
+NOT DB_CA_LuckRefreshTimer(_Player, _TimerName);
+
+PROC
+CA_ClearLuckRefreshTimers()
+AND
+DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName)
+THEN
+TimerCancel(_TimerName);
+NOT DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName);
+
+PROC
+CA_ApplyLuckAura((CHARACTERGUID)_Player)
+AND
+CharacterIsInCombat(_Player, 0)
+THEN
+ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0, 1);
+CA_LuckyAuraEffect(_Player);
+CA_ClearLuckActive(_Player);
+DB_CA_LuckAuraActive(_Player, 1);
+CA_RecordHostLuck(_Player);
+
 //END_REGION
 
 //REGION SKILL_USE
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
 AND
+CharacterIsInCombat(_Player, 0)
+AND
 HasAppliedStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
-ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
-CA_ClearLuckActive(_Player);
-DB_CA_LuckAuraActive(_Player, 1);
-CharacterStatusText(_Player, "Aura turned on.");
-CA_LuckyAuraEffect(_Player);
+CA_ClearLuckRefreshTimers();
+CA_ApplyLuckAura(_Player);
+CharacterStatusText(_Player, "Aura Enabled");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
@@ -141,8 +186,92 @@ AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_LUCKY_AURA");
+CharacterStatusText(_Player, "Aura Disabled");
 CA_ClearLuckActive(_Player);
-CharacterStatusText(_Player, "Aura turned off.");
+CA_ClearLuckRefreshTimers();
+CA_ClearHostLuckRecord(_Player);
+
+//END_REGION
+
+//REGION HOST_AURA_REFRESH
+PROC
+CA_LuckAura_RefreshRunning((CHARACTERGUID)_Player)
+AND
+CharacterIsInCombat(_Player, 0)
+AND
+DB_CA_LuckRefreshTimer(_Player, _TimerName)
+AND
+DB_CA_AuraHostLuck(_Player, _HostLuck)
+AND
+CharacterGetAbility(_Player, "Luck", _Luck)
+AND
+_Luck != _HostLuck
+THEN
+NOT DB_CA_AuraHostLuck(_Player, _HostLuck);
+DB_CA_AuraHostLuck(_Player, _Luck);
+TimerCancel(_TimerName);
+TimerLaunch(_TimerName, 5000);
+
+PROC
+CA_LuckAura_PrepareRefresh((CHARACTERGUID)_Player)
+AND
+DB_CA_AuraHostLuck(_Player, _HostLuck)
+AND
+CharacterIsInCombat(_Player, 0)
+AND
+CharacterGetAbility(_Player, "Luck", _Luck)
+AND
+_Luck != _HostLuck
+AND
+CharacterGetDisplayName(_Player,_Handle,_Name)
+AND
+StringConcatenate("CA_Timer_Luck_HostRefresh_", _Name, _TimerName)
+AND
+NOT DB_CA_LuckRefreshTimer(_Player, _TimerName)
+THEN
+NOT DB_CA_AuraHostLuck(_Player, _HostLuck);
+DB_CA_AuraHostLuck(_Player, _Luck);
+TimerLaunch(_TimerName, 5000);
+DB_CA_LuckRefreshTimer(_Player, _TimerName);
+CharacterStatusText(_Player, "Refreshing Lucky Aura...");
+
+IF
+ItemEquipped(_Item, _Player)
+THEN
+CA_LuckAura_RefreshRunning(_Player);
+CA_LuckAura_PrepareRefresh(_Player);
+
+
+IF
+ItemUnEquipped(_Item, _Player)
+THEN
+CA_LuckAura_RefreshRunning(_Player);
+CA_LuckAura_PrepareRefresh(_Player);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_LuckRefreshTimer(_Player, _TimerName)
+AND
+StringConcatenate(_TimerName, "_Complete", _NewTimerName)
+AND
+NOT DB_CA_LuckRefreshCompleteTimer(_Player, _NewTimerName)
+THEN
+RemoveStatus(_Player, "CA_LUCKY_AURA");
+TimerCancel(_TimerName);
+TimerLaunch(_NewTimerName, 500);
+NOT DB_CA_LuckRefreshTimer(_Player, _TimerName);
+DB_CA_LuckRefreshCompleteTimer(_Player, _NewTimerName);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName)
+THEN
+CA_ApplyLuckAura(_Player);
+TimerCancel(_TimerName);
+NOT DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName);
+CharacterStatusText(_Player, "Lucky Aura Refreshed");
 
 //END_REGION
 
@@ -163,8 +292,8 @@ DB_CA_LuckAuraActive(_Player, 1)
 AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
-ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
-CA_LuckyAuraEffect(_Player);
+CA_ApplyLuckAura(_Player);
+CA_ClearLuckRefreshTimers();
 
 IF
 SavegameLoaded(_,_,_,_)
@@ -173,8 +302,7 @@ DB_IsPlayer(_Player)
 AND
 DB_CA_LuckAuraActive(_Player, 1)
 THEN
-ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0);
-CA_LuckyAuraEffect(_Player);
+CA_ApplyLuckAura(_Player);
 //END_REGION
 
 //REGION PARTY_BONUSES

@@ -14,5 +14,59 @@
         <field name="ArmorType" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="ArmorType" />
       </fields>
     </stat_object>
+    <stat_object index="1" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="S_CA_TestLuckAmulet" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="ARM_Amulet" />
+        <field name="ItemGroup" type="StringStatObjectFieldDefinition" value="EMPTY" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="2" />
+      </fields>
+    </stat_object>
+    <stat_object index="2" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="S_CA_TestLuckBody" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_MageUpperBody" />
+        <field name="ItemGroup" type="StringStatObjectFieldDefinition" value="EMPTY" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="4" />
+      </fields>
+    </stat_object>
+    <stat_object index="3" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="S_CA_TestLuckPants" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_MageLowerBody" />
+        <field name="ItemGroup" type="StringStatObjectFieldDefinition" value="EMPTY" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="2" />
+      </fields>
+    </stat_object>
+    <stat_object index="4" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="S_CA_TestLuckGloves" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_MageGloves" />
+        <field name="ItemGroup" type="StringStatObjectFieldDefinition" value="EMPTY" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+    <stat_object index="5" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="S_CA_TestLuckBoots" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_MageBoots" />
+        <field name="ItemGroup" type="StringStatObjectFieldDefinition" value="EMPTY" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+    <stat_object index="6" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="S_CA_TestLuckHelmet" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_MageHelmet" />
+        <field name="ItemGroup" type="StringStatObjectFieldDefinition" value="EMPTY" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="3" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>

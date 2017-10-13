@@ -42,8 +42,8 @@ DB_CA_Trader_SkillBooks("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be530148
 DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy");
 
 //REGION DEBUG
-DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401); //Editor
-DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1); // FJ Lizard Soldier
+//DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401); //Editor
+//DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1);
 //END_REGION
 KBSECTION
 //REGION HELPER_METHODS
@@ -278,8 +278,18 @@ ItemTemplateAddTo(_ItemTemplate, _Trader, _Amount);
 //END_REGION
 
 //REGION GENERATION
+
 IF
 RequestTrade(_Player, _Trader)
+THEN
+CA_AddTalentBooks(_Trader);
+CA_AddSkillBooks(_Trader);
+CA_AddAdditional(_Trader);
+
+IF
+ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
 THEN
 CA_AddTalentBooks(_Trader);
 CA_AddSkillBooks(_Trader);
@@ -295,6 +305,12 @@ CA_AddAdditional(_Trader);
 //END_REGION
 
 //REGION DEBUG
+IF
+GameStarted("TestLevel", 1)
+THEN
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401);
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1);
+
 /*
 IF
 DialogStarted(_Dialog, _Instance)
@@ -346,6 +362,81 @@ THEN
 //CA_PrintIntegerAtTarget(_Prefix," books in inventory",_Amount,_Trader);
 DB_Noop();
 */
+//END_REGION
+
+//REGION DATABASE_REFRESH
+PROC
+CA_TradeTreasure_ResetDatabases()
+AND
+DB_CA_Trader_TempInt(_Val)
+THEN
+NOT DB_CA_Trader_TempInt(_Val);
+
+PROC
+CA_TradeTreasure_ResetDatabases()
+AND
+DB_CA_Trader_TempString(_Val)
+THEN
+NOT DB_CA_Trader_TempString(_Val);
+
+PROC
+CA_TradeTreasure_ResetDatabases()
+AND
+DB_CA_ModTraders(_Val)
+THEN
+NOT DB_CA_ModTraders(_Val);
+
+PROC
+CA_TradeTreasure_ResetDatabases()
+AND
+DB_CA_AdditionalTradeTreasure(_Merchant, _Item, _Amount)
+THEN
+NOT DB_CA_AdditionalTradeTreasure(_Merchant, _Item, _Amount);
+
+PROC
+CA_TradeTreasure_ResetDatabases()
+AND
+DB_CA_ItemLevelRequirement(_Item, _Level)
+THEN
+NOT DB_CA_ItemLevelRequirement(_Item, _Level);
+
+PROC
+CA_TradeTreasure_ResetDatabases()
+AND
+DB_CA_Trader_SkillBooks(_Val1, _Val2)
+THEN
+NOT DB_CA_Trader_SkillBooks(_Val1, _Val2);
+
+PROC
+CA_TradeTreasure_ResetDatabases()
+AND
+DB_CA_Trader_TalentBooks(_Val1, _Val2)
+THEN
+NOT DB_CA_Trader_TalentBooks(_Val1, _Val2);
+
+IF
+StoryEvent(_Object, "CA_Refresh")
+THEN
+CA_TradeTreasure_ResetDatabases();
+DB_CA_Trader_TempInt(0);
+DB_CA_Trader_TempString("");
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c); // Fort Joy Blacksmith (Nebora)
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620); // Tarquin
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_RC_DW_Trader_PotionsIngredientsWaterSummonNecro_88ea209d-d5e6-465d-bebe-2f10b1fd2861); // Trader Bree
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_S_CoS_Temples_Elf_Merchant_001_1f9e87b0-47e4-438d-9930-777cae653edd); //Trayde the Merchant - S_CoS_Temples_Elf_Merchant_001
+DB_CA_ModTraders((CHARACTERGUID)CHARACTERGUID_S_ARX_KemmMansion_ChiefTrader_46ced128-0571-4e0b-ac7b-96279d92072f); //Cat the Appraiser - S_ARX_KemmMansion_ChiefTrader
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); // FJ Blacksmith
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c, "MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", 1); // FJ Blacksmith
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_FTJ_SkepticSoldier_9dc4da24-9cd5-43cc-a01c-6923b59bd066, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1); // FJ Lizard Soldier
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); // Tarquin
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_RC_DW_TraderFish_81f4cd7e-0c93-4fcb-9aa6-23500e3d2c4d, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); // Trader Thun
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_CoS_Temples_Elf_Merchant_001_1f9e87b0-47e4-438d-9930-777cae653edd, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); //Trayde the Merchant
+DB_CA_AdditionalTradeTreasure((CHARACTERGUID)CHARACTERGUID_S_ARX_KemmMansion_ChiefTrader_46ced128-0571-4e0b-ac7b-96279d92072f, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); //Cat the Appraiser
+DB_CA_ItemLevelRequirement("BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 4);
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle");
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle");
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk");
+DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy");
 //END_REGION
 EXITSECTION
 

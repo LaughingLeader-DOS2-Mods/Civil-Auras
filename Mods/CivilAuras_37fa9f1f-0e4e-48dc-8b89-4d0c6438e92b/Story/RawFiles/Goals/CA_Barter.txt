@@ -385,6 +385,30 @@ CharacterStatusText(_Trader, _Msg2);
 */
 //END_REGION
 
+//REGION DATABASE_REFRESH
+PROC
+CA_Barter_ResetDatabases()
+AND
+DB_CA_BarterParty_Message(_Int, _Val)
+THEN
+NOT DB_CA_BarterParty_Message(_Int, _Val);
+
+PROC
+CA_Barter_ResetDatabases()
+AND
+DB_CA_HighestBarter(_Val)
+THEN
+NOT DB_CA_HighestBarter(_Val);
+
+IF
+StoryEvent(_Object, "CA_Refresh")
+THEN
+CA_Barter_ResetDatabases();
+DB_CA_HighestBarter(0);
+DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
+DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
+DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
