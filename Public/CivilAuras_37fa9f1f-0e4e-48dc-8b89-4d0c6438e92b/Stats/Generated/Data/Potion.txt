@@ -16,3 +16,11 @@ type "Potion"
 new entry "Stats_CA_TeleHandPassive"
 type "Potion"
 
+new entry "Stats_CA_Channeling"
+type "Potion"
+data "Act" "1"
+data "Act part" "0"
+data "MovementSpeedBoost" "-100"
+data "DodgeBoost" "-30"
+data "Duration" "2"
+

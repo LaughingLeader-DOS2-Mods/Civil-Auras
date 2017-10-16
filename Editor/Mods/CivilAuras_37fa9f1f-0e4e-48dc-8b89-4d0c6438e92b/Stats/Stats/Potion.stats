@@ -31,5 +31,15 @@
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_TeleHandPassive" />
       </fields>
     </stat_object>
+    <stat_object index="6" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Channeling" />
+        <field name="Act" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="Act" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="ActPart" />
+        <field name="MovementSpeedBoost" type="IntegerStatObjectFieldDefinition" value="-100" />
+        <field name="DodgeBoost" type="IntegerStatObjectFieldDefinition" value="-30" />
+        <field name="Duration" type="IntegerStatObjectFieldDefinition" value="2" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>

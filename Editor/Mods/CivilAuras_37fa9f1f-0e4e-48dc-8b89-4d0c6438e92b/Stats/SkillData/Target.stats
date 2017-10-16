@@ -30,7 +30,7 @@
         <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="skill_prepare_divine_01_loop" />
         <field name="PrepareEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_Skills_Divine_Prepare_Divine_Root_01,KeepRot:Dummy_Root;RS3_FX_Skills_Divine_Prepare_Divine_Hand_01:Dummy_L_HandFX:hand01;RS3_FX_Skills_Divine_Prepare_Divine_Hand_02:Dummy_R_HandFX:hand02" />
         <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_target_voodoo_01_cast" />
-        <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_aoe_divine_01_cast" />
+        <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_loop" />
         <field name="CastTextEvent" type="StringStatObjectFieldDefinition" value="cast" />
         <field name="CastEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_Skills_Cast_Target_Voodoo_DominateMind_Root_01,KeepRot:Dummy_Root:cast;RS3_FX_Skills_Cast_Target_Voodoo_DominateMind_Hand_01:Dummy_L_HandFX:cast" />
         <field name="TargetEffect" type="StringStatObjectFieldDefinition" value="CA_FX_Motivated_Impact_01:Dummy_Root:cast" />
@@ -60,15 +60,15 @@
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Use your telekinesis to access containers and items from up to [1] away." />
         <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="TargetRadius" />
         <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
-        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="skill_prepare_divine_01_start" />
-        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="skill_prepare_divine_01_loop" />
-        <field name="PrepareEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_Skills_Divine_Prepare_Divine_Root_01,KeepRot:Dummy_Root;RS3_FX_Skills_Divine_Prepare_Divine_Hand_01:Dummy_L_HandFX:hand01;RS3_FX_Skills_Divine_Prepare_Divine_Hand_02:Dummy_R_HandFX:hand02" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_target_voodoo_01_cast" />
-        <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_aoe_divine_01_cast" />
+        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_start" />
+        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_loop" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_target_touch_01_cast" />
+        <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="noprepare" />
         <field name="CastTextEvent" type="StringStatObjectFieldDefinition" value="cast" />
-        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_Skills_Cast_Target_Voodoo_DominateMind_Root_01,KeepRot:Dummy_Root:cast;RS3_FX_Skills_Cast_Target_Voodoo_DominateMind_Hand_01:Dummy_L_HandFX:cast" />
+        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_GP_CC_Telekinesis_HandFX_01:Dummy_L_HandFX:cast" />
         <field name="Requirements" type="StringStatObjectFieldDefinition" value="Telekinesis 3" />
         <field name="Stealth" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="TargetEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_GP_Impacts_Telekinesis_Items_01:Dummy_Root:cast" />
       </fields>
     </stat_object>
   </stat_objects>
