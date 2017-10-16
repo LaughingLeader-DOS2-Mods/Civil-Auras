@@ -292,7 +292,7 @@ TimerCancel(_TimerName);
 */
 
 PROC
-CA_TeleHand_RemoveHand(CHARACTERGUID)_Hand)
+CA_TeleHand_RemoveHand((CHARACTERGUID)_Hand)
 AND
 ObjectIsOnStage(_Hand, 1)
 THEN
