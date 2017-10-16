@@ -1,0 +1,11 @@
+INIT
+	CHARACTER:__Me
+	
+EVENTS
+EVENT StartUp
+ON
+	OnInit()
+	OnActivate()
+ACTIONS
+	CharacterApplyStatus(__Me, CA_TELEHAND_PASSIVE, -1.0, 1)
+	CharacterApplyStatus(__Me, SNEAKING, -1.0, 1)

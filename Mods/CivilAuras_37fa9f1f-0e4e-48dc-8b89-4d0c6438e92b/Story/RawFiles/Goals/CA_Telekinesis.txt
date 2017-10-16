@@ -1,0 +1,337 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+//DB_CA_TeleHand_Hands((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, (CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+//DB_CA_TeleHand_Target((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, (GUIDSTRING)NULL_00000000-0000-0000-0000-000000000000, "");
+//DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+//DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+//DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+//DB_CA_TeleHand_Timers(_Hand, _TimerName, 0)
+
+
+//GetPosition(_Player, _x,_y,_z)
+//REGION TK_ANIMATIONS
+DB_CA_TK_Animations((CHARACTERGUID)Dwarves_Hero_Female_c1c58707-b06e-499e-9c43-91a90be602b0, "STUB_Dwarves_Hero_Female_ABC_Custom_Loop_Cast_Beam_01");
+DB_CA_TK_Animations((CHARACTERGUID)Dwarves_Hero_Female_Undead_373a1966-a54d-4a3e-be70-e779a654c914, "STUB_Dwarves_Hero_Female_ABC_Custom_Loop_Cast_Beam_01");
+DB_CA_TK_Animations((CHARACTERGUID)Dwarves_Hero_Male_024d1763-b2aa-46ec-b705-6338059838be, "STUB_Dwarves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Dwarves_Hero_Male_Beast_ca2b78c8-85f3-45f1-b8de-9e8363f1aa51, "STUB_Dwarves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Dwarves_Hero_Male_Undead_726442a5-6856-4b0d-91ed-5d2f003b8a0c, "STUB_Dwarves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Elves_Hero_Female_7ef846f5-34dc-450c-815e-a58dfc190a7b, "STUB_Elves_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Elves_Hero_Female_Undead_7f366172-9fd1-45df-8719-a6d14cb534b3, "STUB_Elves_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Elves_Hero_Male_19913083-924e-45ec-8b5b-119d5913722f, "STUB_Elves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+//DB_CA_TK_Animations((CHARACTERGUID)Elves_Hero_Male_RagdollTest_aacce527-2fec-4e89-bf7e-28238b045b15, "STUB_Elves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Elves_Hero_Male_Undead_9eeaaafd-c47d-4650-9200-b00430d61e83, "STUB_Elves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Humans_Hero_Female_de8ea39b-6989-4b93-b34a-81e549c540f2, "STUB_Humans_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Humans_Hero_Female_Undead_3bd0693d-0b0a-4f6d-93e2-aea9be654bee, "STUB_Humans_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Humans_Hero_Male_25611432-e5e4-482a-8f5d-196c9e90001e, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Humans_Hero_Male_Undead_5ab5d036-4606-4265-962e-c2e4d2d2408b, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Lizards_Hero_Female_e4a6bcfa-ecd6-4e56-8592-cd16b85a1c50, "STUB_Lizards_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Lizards_Hero_Female_Undead_725f9a47-a3d4-41d2-92cf-017d18c2b212, "STUB_Lizards_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Lizards_Hero_Male_fa12e21f-0a10-47dd-af46-ab2c9a53cf6d, "STUB_Lizards_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Lizards_Hero_Male_Red_Prince HorrorVersion_099fe936-b0e9-41c3-9d6b-13e9dddae818, "STUB_Lizards_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)Lizards_Hero_Male_Undead_57b70554-36bf-4b86-b9aa-8f7cc3944153, "STUB_Lizards_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+//Origins
+DB_CA_TK_Animations((CHARACTERGUID)S_Player_Ifan_ad9a3327-4456-42a7-9bf4-7ad60cc9e54f, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)S_Player_Sebille_c8d55eaf-e4eb-466a-8f0d-6a9447b5b24c, "STUB_Elves_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)S_Player_Lohse_bb932b13-8ebf-4ab4-aac0-83e6924e4295, "STUB_Humans_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "STUB_Lizards_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, "STUB_Dwarves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)S_Player_Fane_02a77f1f-872b-49ca-91ab-32098c443beb, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)S_Player_GenericOrigin_7b6c1f26-fe4e-40bd-a5d0-e6ff58cef4fe, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+//Dummies
+DB_CA_TK_Animations((CHARACTERGUID)(CHARACTERGUID)S_GLO_CharacterCreationDummy_001_da072fe7-fdd5-42ae-9139-8bd4b9fca406, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)(CHARACTERGUID)S_GLO_CharacterCreationDummy_002_361dacdc-4135-4d3f-a9a2-3cad46ca246a, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)(CHARACTERGUID)S_GLO_CharacterCreationDummy_003_dded8c22-b28e-45c1-a074-eb0954602c8a, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+DB_CA_TK_Animations((CHARACTERGUID)(CHARACTERGUID)S_GLO_CharacterCreationDummy_004_5f93cae7-6c10-4da1-b9a5-0efafc168c8e, "STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop");
+
+/*
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Dwarves_Hero_Female_ABC_Custom_Loop_Cast_Beam_01, "");
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Dwarves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop, "");
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Elves_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop, "");
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Elves_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop, "");
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Humans_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop, "");
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Humans_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop, "");
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Lizards_Hero_Female_ABC_Custom_Loop_Cast_Beam_01_Loop, "");
+DB_CA_TK_Animations((CHARACTERGUID)"", (CHARACTERGUID)STUB_Lizards_Hero_Male_ABC_Custom_Loop_Cast_Beam_01_Loop, "");
+*/
+//END_REGION
+
+//DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX);
+KBSECTION
+PROC
+CA_TeleHand_Setup((CHARACTERGUID)_Player, (CHARACTERGUID)_Hand)
+AND
+CharacterGetAbility(_Player, "Thievery", _Bonus)
+THEN
+ApplyStatus(_Hand, "CA_TELEHAND_PASSIVE", -1.0, 1);
+ApplyStatus(_Hand, "SNEAKING", -1.0, 1);
+CharacterAddAbility(_Hand, "Thievery", _Bonus);
+//CharacterAddToPlayerCharacter(_Hand, _Player);
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
+//CharacterAddToParty(_Hand, _Player);
+CharacterDetachFromGroup(_Hand);
+CharacterStopFollow(_Player);
+CharacterStopFollow(_Hand);
+MakePlayerActive(_Hand);
+//NOT DB_Following(_Hand,_Player);
+////IsSummonOrPartyFollower
+
+PROC CA_TeleHand_PlayerAnimation((CHARACTERGUID)_Player)
+AND
+DB_CA_TK_Animations(_Player, _Animation)
+THEN
+CharacterSetAnimationOverride(_Player, _Animation);
+
+PROC CA_TeleHand_PlayerAnimation((CHARACTERGUID)_Player)
+AND
+NOT DB_CA_TK_Animations(_Player, _)
+THEN
+CharacterSetAnimationOverride(_Player, "skill_prepare_touch_01_loop");
+
+PROC
+CA_TeleHand_PlayerEffects((CHARACTERGUID)_Player, (CHARACTERGUID)_Hand)
+AND
+PlayLoopEffect(_Player, "RS3_FX_GP_CC_Telekinesis_HandFX_01", "Dummy_CastFX", _HandFX)
+AND
+PlayLoopBeamEffect(_Player, _Hand, "RS3_FX_GP_Beams_Telekinesis_01", "Dummy_CastFX", "Dummy_Root", _BeamFX)
+THEN
+CA_TeleHand_PlayerAnimation(_Player);
+DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX);
+
+CA_TeleHand_RecetEffects((CHARACTERGUID)_Player)
+AND
+DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX)
+THEN
+StopLoopEffect(_HandFX);
+StopLoopEffect(_BeamFX);
+CharacterSetAnimationOverride(_Player, "idle1");
+
+PROC
+CA_TeleHand_ClearTarget((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+THEN
+NOT DB_CA_TeleHand_Target_Steal(_Hand, _Target);
+
+PROC
+CA_TeleHand_ClearHands((CHARACTERGUID)_Player)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+THEN
+NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
+
+PROC
+CA_TeleHand_TransferItems((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+THEN
+TransferItemsToCharacter(_Hand, _Player);
+
+PROC
+CA_TeleHand_PickupItem((CHARACTERGUID)_Hand, (ITEMGUID)_Item)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+ItemIsContainer(_Item, 1)
+THEN
+CharacterUseItem(_Hand, _Item, "");
+
+PROC
+CA_TeleHand_PickupItem((CHARACTERGUID)_Hand, (ITEMGUID)_Item)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+ItemIsContainer(_Item, 0)
+THEN
+ItemToInventory(_Item, _Player);
+
+//REGION STEAL
+IF
+CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Target_CA_TeleHand", _)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+CharacterGetDisplayName(_Player, _Handle, _Ref)
+AND
+StringConcatenate(_Handle, _Ref, _Name)
+AND
+StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+AND
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName)
+AND
+NOT DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+THEN
+Foop(_Hand);
+CharacterRemoveAbility(_Hand, "Thievery", _Bonus);
+NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
+CA_TeleHand_Setup(_Player, _Hand);
+DB_CA_TeleHand_Target_Steal(_Hand, _Target);
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+TimerLaunch(_TimerName, 250);
+
+IF
+CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Target_CA_TeleHand", _)
+AND
+NOT DB_CA_TeleHand_Hands(_Player, _, _)
+AND
+GetPosition(_Player, _x,_y,_z)
+AND
+CharacterCreateAtPosition(_x, _y, _z, "CA_Summon_TeleHand_0547138c-21c0-4dbe-9c2a-97450ec82dd7", 1, _Hand)
+AND
+CharacterGetDisplayName(_Player, _Handle, _Ref)
+AND
+StringConcatenate(_Handle, _Ref, _Name)
+AND
+StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+AND
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName)
+AND
+NOT DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+THEN
+CA_TeleHand_Setup(_Player, _Hand);
+DB_CA_TeleHand_Target_Steal(_Hand, _Target);
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+TimerLaunch(_TimerName, 250);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 1)
+AND
+DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+THEN
+StartPickpocket(_Hand, _Target, 1);
+TimerCancel(_TimerName);
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName, 1);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 0)
+AND
+DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+THEN
+TeleportTo(_Hand, _Target);
+TimerCancel(_TimerName);
+TimerLaunch(_TimerName, 250);
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 1);
+
+IF
+CharacterPickpocketSuccess(_Hand, _Target, _Item, _Amount)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+THEN
+//TransferItemsToCharacter(_Hand, _Player);
+ItemToInventory(_Item, _Player);
+
+IF
+CharacterPickpocketFailed(_Hand, _Target)
+AND
+DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+THEN
+CharacterUseSkill(_Hand, "Shout_CA_TeleHand_Dismiss", _Hand);
+//END_REGION
+
+/*
+//REGION ITEM
+IF
+CharacterUsedSkillOnTarget(_Player, (ITEMGUID)_Target, "Target_CA_TeleHand", _)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+CharacterGetAbility(_Player, "Thievery", _ThieveryVal)
+AND
+CharacterGetAbility(_Hand, "Thievery", _HandVal)
+AND
+CharacterGetDisplayName(_Player, _Handle, _Ref)
+AND
+StringConcatenate(_Handle, _Ref, _Name)
+AND
+StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+AND
+NOT DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+THEN
+CharacterRemoveAbility(_Hand, "Thievery", _Bonus);
+CharacterAddAbility(_Hand, "Thievery", _ThieveryVal);
+NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
+DB_CA_TeleHand_Hands(_Player, _Hand, _ThieveryVal);
+CharacterAddToParty(_Hand, _Player);
+MakePlayerActive(_Hand);
+CharacterAddToPlayerCharacter(_Hand, _Player);
+TeleportTo(_Hand, _Target);
+CA_TeleHand_ClearTarget(_Hand);
+DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName);
+TimerLaunch(_TimerName, 500);
+
+IF
+CharacterUsedSkillOnTarget(_Player, (ITEMGUID)_Target, "Target_CA_TeleHand", _)
+AND
+NOT DB_CA_TeleHand_Hands(_Player, _, _)
+AND
+CharacterGetAbility(_Player, "Thievery", _ThieveryVal)
+AND
+GetPosition(_Player, _x,_y,_z)
+AND
+CharacterCreateAtPosition(_x, _y, _z, "CA_Summon_TeleHand_0547138c-21c0-4dbe-9c2a-97450ec82dd7", 1, _Hand)
+AND
+CharacterGetDisplayName(_Player, _Handle, _Ref)
+AND
+StringConcatenate(_Handle, _Ref, _Name)
+AND
+StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+AND
+NOT DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+THEN
+CharacterAddAbility(_Hand, "Thievery", _ThieveryVal);
+CharacterMakePlayer(_Hand);
+CharacterAddToParty(_Hand, _Player);
+MakePlayerActive(_Hand);
+CharacterAddToPlayerCharacter(_Hand, _Player);
+TeleportTo(_Hand, _Target);
+DB_CA_TeleHand_Hands(_Player, _Hand, _ThieveryVal);
+DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName);
+TimerLaunch(_TimerName, 500);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+AND
+ObjectIsItem(_Target, 1)
+THEN
+CA_TeleHand_PickupItem(_Hand, _Target);
+TimerCancel(_TimerName);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+AND
+ObjectIsCharacter(_Target, 0)
+AND
+ObjectIsItem(_Target, 0)
+THEN
+TimerCancel(_TimerName);
+
+//END_REGION
+*/
+
+IF
+CharacterUsedSkill(_Hand, "Shout_CA_TeleHand_Dismiss", _)
+AND
+GetTemplate(_Hand, _Template)
+AND
+_Template == "CA_Summon_TeleHand_0547138c-21c0-4dbe-9c2a-97450ec82dd7"
+THEN
+CharacterStatusText(_Hand, "Dismissing TeleHand...");
+//RemoveStatus(_Hand, "CA_TELEHAND_PASSIVE");
+CharacterRemoveFromParty(_Hand);
+CA_TeleHand_TransferItems(_Hand);
+CA_TeleHand_ClearTarget(_Hand);
+Poof(_Hand);
+//CharacterDie(_Hand, 0, "None");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "ZZZ_CivilAuras"

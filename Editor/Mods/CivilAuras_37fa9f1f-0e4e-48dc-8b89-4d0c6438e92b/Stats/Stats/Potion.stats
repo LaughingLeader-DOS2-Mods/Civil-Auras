@@ -26,5 +26,10 @@
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Motivated" />
       </fields>
     </stat_object>
+    <stat_object index="5" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_TeleHandPassive" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>

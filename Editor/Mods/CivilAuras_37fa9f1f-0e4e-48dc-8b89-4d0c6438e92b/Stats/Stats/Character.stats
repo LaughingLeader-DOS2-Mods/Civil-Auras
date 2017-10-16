@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="a8098c1a-f86e-11da-bd1a-00112444be1e">
+  <stat_objects>
+    <stat_object index="0" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_TeleHand" />
+        <field name="Act" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="Act" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
+        <field name="Act strength" type="EnumerationStatObjectFieldDefinition" value="11" enumeration_type_name="Penalty Qualifier" />
+        <field name="Strength" type="EnumerationStatObjectFieldDefinition" value="101" enumeration_type_name="PreciseQualifier" />
+        <field name="Finesse" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="PreciseQualifier" />
+        <field name="Intelligence" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="PreciseQualifier" />
+        <field name="Constitution" type="EnumerationStatObjectFieldDefinition" value="21" enumeration_type_name="PreciseQualifier" />
+        <field name="Memory" type="EnumerationStatObjectFieldDefinition" value="11" enumeration_type_name="PreciseQualifier" />
+        <field name="Wits" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="PreciseQualifier" />
+        <field name="Reflexes" type="StringStatObjectFieldDefinition" value="0" />
+        <field name="Vitality" type="IntegerStatObjectFieldDefinition" value="100" />
+        <field name="MagicPoints" type="IntegerStatObjectFieldDefinition" value="3" />
+        <field name="APMaximum" type="IntegerStatObjectFieldDefinition" value="6" />
+        <field name="APStart" type="IntegerStatObjectFieldDefinition" value="4" />
+        <field name="APRecovery" type="IntegerStatObjectFieldDefinition" value="4" />
+        <field name="MPStart" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Movement" type="IntegerStatObjectFieldDefinition" value="1000" />
+        <field name="Gain" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="BigQualifier" />
+        <field name="Sight" type="EnumerationStatObjectFieldDefinition" value="13" enumeration_type_name="Penalty Qualifier" />
+        <field name="Hearing" type="EnumerationStatObjectFieldDefinition" value="9" enumeration_type_name="Penalty Qualifier" />
+        <field name="Initiative" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="FOV" type="IntegerStatObjectFieldDefinition" value="90" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="50000" />
+        <field name="PiercingResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="PhysicalResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="CriticalChance" type="EnumerationStatObjectFieldDefinition" value="11" enumeration_type_name="Penalty Qualifier" />
+        <field name="MaxResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="FireResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="EarthResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="WaterResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="AirResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="PoisonResistance" type="IntegerStatObjectFieldDefinition" value="200" />
+        <field name="SingleHanded" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="TwoHanded" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Ranged" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="DualWielding" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Leadership" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="PainReflection" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Perseverance" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="RogueLore" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="WarriorLore" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="RangerLore" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="FireSpecialist" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="WaterSpecialist" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="AirSpecialist" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="EarthSpecialist" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Sourcery" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Necromancy" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Polymorph" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Summoning" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Telekinesis" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="10" />
+        <field name="Thievery" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Loremaster" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Repair" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Barter" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Persuasion" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Luck" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Accuracy" type="IntegerStatObjectFieldDefinition" value="-100" />
+        <field name="Dodge" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="MaxSummons" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Flags" type="StringStatObjectFieldDefinition" value="Floating;IgnoreClouds" />
+        <field name="Talents" type="StringStatObjectFieldDefinition" value="AvoidDetection" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>

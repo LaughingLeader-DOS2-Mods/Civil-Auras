@@ -46,6 +46,8 @@ PROC
 CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item)
 AND
 CharacterHasTalent(_Player, _Talent, 0)
+AND
+ItemGetAmount(_Item, _Amount)
 THEN
 CA_TALENT_PlayEffect(_Player, _Talent);
 CharacterAddTalent(_Player, _Talent);

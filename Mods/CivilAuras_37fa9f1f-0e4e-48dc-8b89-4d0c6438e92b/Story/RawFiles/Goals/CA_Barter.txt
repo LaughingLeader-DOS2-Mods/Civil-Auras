@@ -120,6 +120,31 @@ CharacterAddAbility(_UserCharacter, "Barter", _BarterBonus);
 //CA_PrintInt(_UserCharacter, "Bonus[", _BarterBonus, "]");
 
 IF
+ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
+AND
+DB_UserCounter(_Users)
+AND
+_Users > 0
+AND
+CA_GetHighestBarter() // Only needs to be called once
+AND
+CharacterGetReservedUserID(_Player,_ID)
+AND
+DB_IsPlayer(_UserCharacter)
+AND
+CharacterGetReservedUserID(_UserCharacter, _UID)
+AND
+_UID == _ID
+AND
+CharacterGetAbility(_UserCharacter, "Barter", _PlayerVal)
+AND
+CA_GetBarterBonus(_UserCharacter, _PlayerVal)
+AND
+DB_CA_BarterBonus(_UserCharacter, _BarterBonus)
+THEN
+CharacterAddAbility(_UserCharacter, "Barter", _BarterBonus);
+
+IF
 TradeEnds((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
 AND
 DB_UserCounter(_Users)
@@ -144,6 +169,25 @@ CA_ClearBonuses(_UserCharacter);
 //REGION SINGLEPLAYER
 IF
 RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
+AND
+DB_UserCounter(_Users)
+AND
+_Users <= 0
+AND
+CA_GetHighestBarter()
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterGetAbility(_Player, "Barter", (INTEGER)_PlayerVal)
+AND
+CA_GetBarterBonus(_Player, _PlayerVal)
+AND
+DB_CA_BarterBonus(_Player, _BarterBonus)
+THEN
+CharacterAddAbility(_Player, "Barter", _BarterBonus);
+
+IF
+ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
 AND
 DB_UserCounter(_Users)
 AND

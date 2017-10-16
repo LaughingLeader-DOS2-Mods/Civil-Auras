@@ -13,3 +13,6 @@ type "Potion"
 new entry "Stats_CA_Motivated"
 type "Potion"
 
+new entry "Stats_CA_TeleHandPassive"
+type "Potion"
+

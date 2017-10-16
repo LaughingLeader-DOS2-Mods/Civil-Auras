@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="47014da6-a81c-40a9-9f3c-4a74b6ddc574">
+  <stat_objects>
+    <stat_object index="0" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_TELEHAND_PASSIVE" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="INVISIBLE" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Telekinetic Hand" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is a telekinetic hand." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_WalkShadow" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="FormatStringColor" />
+        <field name="MaterialType" type="EnumerationStatObjectFieldDefinition" value="3" enumeration_type_name="MaterialType" />
+        <field name="Material" type="StringStatObjectFieldDefinition" value="8c46ff9c-f39b-43fa-a2bf-4a10f47db0d3" />
+        <field name="MaterialApplyBody" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="MaterialApplyArmor" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="MaterialApplyWeapon" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="MaterialApplyNormalMap" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_TeleHandPassive" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_TeleHandPassive" />
+        <field name="IsInvulnerable" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="StatusEffect" type="StringStatObjectFieldDefinition" value="CA_FX_TeleHand_Passive_01" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>

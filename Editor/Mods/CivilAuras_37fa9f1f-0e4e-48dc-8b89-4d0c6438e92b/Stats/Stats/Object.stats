@@ -45,6 +45,20 @@
     </stat_object>
     <stat_object index="3" is_substat="false">
       <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_TeleHand" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
+		 <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="af868428-93aa-41e4-9772-6b6cd852ae4c" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="175" />
+        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Telekinesis 3" />
+        <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+    <stat_object index="4" is_substat="false">
+      <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="TALENTBOOK_CA_PetPal" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
         <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="d64f8314-0700-4d43-b854-9b2f73073945" />
@@ -56,7 +70,7 @@
         <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
-    <stat_object index="4" is_substat="false">
+    <stat_object index="5" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="BOOK_CA_Settings" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
@@ -71,7 +85,7 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
       </fields>
     </stat_object>
-    <stat_object index="5" is_substat="false">
+    <stat_object index="6" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatSack_Empty" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
@@ -81,7 +95,7 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="1000" />
       </fields>
     </stat_object>
-    <stat_object index="6" is_substat="false">
+    <stat_object index="7" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatSack_Full" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="QUEST_CA_CatSack_Empty" />
@@ -91,7 +105,7 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="9000" />
       </fields>
     </stat_object>
-    <stat_object index="7" is_substat="false">
+    <stat_object index="8" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatBait" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
