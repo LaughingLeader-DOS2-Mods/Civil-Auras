@@ -71,6 +71,7 @@ THEN
 CharacterRemoveAbility(_Hand, "Thievery", _Bonus);
 NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
 DB_CA_TeleHand_Hands(_Player, _Hand, 0);
+
 //END_REGION
 
 //REGION ITEM_TRANSFER
@@ -148,7 +149,8 @@ PlayLoopEffect(_Player, "RS3_FX_GP_CC_Telekinesis_HandFX_01", _Bone, _HandFX)
 AND
 PlayLoopBeamEffect(_Player, _Hand, "RS3_FX_GP_Beams_Telekinesis_01", _Bone, "Hand_Bone", _BeamFX)
 THEN
-CharacterAddSkill(_Player, "Shout_CA_TeleHand_Dismiss");
+CA_TK_AddSocks(_Player);
+//CharacterAddSkill(_Player, "Shout_CA_TeleHand_Dismiss");
 //ApplyStatus(_Player, "CA_CHANNELING", 30.0); // Should happen through the skill usage
 CA_TK_PlayerAnimation(_Player);
 DB_CA_TeleHand_ActiveFX(_Player, _HandFX, _BeamFX);
@@ -207,6 +209,13 @@ AND
 CharacterHasSkill(_Player, "Shout_CA_TeleHand_Dismiss", 1)
 THEN
 CharacterRemoveSkill(_Player, "Shout_CA_TeleHand_Dismiss");
+
+PROC
+CA_TK_PlayerHandRemoved((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _)
+THEN
+CA_TK_RemoveSocks(_Player);
 
 //REGION CRIME
 PROC
@@ -500,6 +509,40 @@ HasActiveStatus(_Player, "CA_CHANNELING", 1)
 THEN
 RemoveStatus(_Player, "CA_CHANNELING");
 
+//END_REGION
+
+//Player MUTED dismissal bypass
+//REGION SMELLING_SOCKS
+PROC
+CA_TK_RemoveSocks((CHARACTERGUID)_Player)
+AND
+GetItemForItemTemplateInInventory(_Player, "MISC_CA_Skill_SmellySocks_852840db-cb93-40c1-8690-901805d12a24", _Item)
+THEN
+ItemDestroy(_Item);
+
+PROC
+CA_TK_AddSocks((CHARACTERGUID)_Player)
+AND
+CharacterGetItemTemplateCount(_Player, "MISC_CA_Skill_SmellySocks_852840db-cb93-40c1-8690-901805d12a24", _Amount)
+AND
+_Amount <= 0
+THEN
+ItemTemplateAddTo("MISC_CA_Skill_SmellySocks_852840db-cb93-40c1-8690-901805d12a24", _Player, 1);
+
+IF
+CharacterUsedItemTemplate(_Player, "MISC_CA_Skill_SmellySocks_852840db-cb93-40c1-8690-901805d12a24", _Item)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+THEN
+CA_TK_RemoveHand(_Hand);
+
+IF
+CharacterUsedItemTemplate(_Player, "MISC_CA_Skill_SmellySocks_852840db-cb93-40c1-8690-901805d12a24", _Item)
+THEN
+ItemDestroy(_Item);
+PlayAnimation(_Player, "barf");
+CharacterStatusText(_Player, "The Smelly Socks break your focus!");
+RemoveStatus(_Player, "CA_CHANNELING");
 //END_REGION
 
 //REGION HAND_DISMISSAL

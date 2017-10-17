@@ -108,9 +108,27 @@
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatBait" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
+		<field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="90df95ee-2da2-4896-a6c6-abc8def42bc9" />
         <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="5" enumeration_type_name="ActPart" />
         <field name="Value" type="IntegerStatObjectFieldDefinition" value="10" />
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="200" />
+      </fields>
+    </stat_object>
+    <stat_object index="9" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILL_CA_SmellySocks" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
+        <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="852840db-cb93-40c1-8690-901805d12a24" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="10" />
+        <field name="InventoryTab" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="InventoryTabs" />
+        <field name="ObjectCategory" type="StringStatObjectFieldDefinition" value="Junk" />
+        <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Priority" type="IntegerStatObjectFieldDefinition" value="2" />
+        <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="AddToBottomBar" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
       </fields>
     </stat_object>
   </stat_objects>
