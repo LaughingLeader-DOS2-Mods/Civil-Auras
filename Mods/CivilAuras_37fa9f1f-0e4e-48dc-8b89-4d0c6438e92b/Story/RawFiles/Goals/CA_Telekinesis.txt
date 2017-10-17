@@ -5,34 +5,84 @@ INITSECTION
 //DB_CA_TeleHand_Target((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, (GUIDSTRING)NULL_00000000-0000-0000-0000-000000000000, "");
 //DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 //DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+//DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, 0)
 //DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
 //DB_CA_TeleHand_Timers(_Hand, _TimerName, 0)
 //DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX);
+
+//DB_CA_TK_EffectBones(_Player, _Bone)
+//REGION EFFECT_BONES
+//Origins
+DB_CA_TK_EffectBones((CHARACTERGUID)S_Player_Ifan_ad9a3327-4456-42a7-9bf4-7ad60cc9e54f, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_Player_Sebille_c8d55eaf-e4eb-466a-8f0d-6a9447b5b24c, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_Player_Lohse_bb932b13-8ebf-4ab4-aac0-83e6924e4295, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_Player_Beast_f25ca124-a4d2-427b-af62-df66df41a978, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_Player_Fane_02a77f1f-872b-49ca-91ab-32098c443beb, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_Player_GenericOrigin_7b6c1f26-fe4e-40bd-a5d0-e6ff58cef4fe, "Dummy_R_HandFX");
+//Dummies
+DB_CA_TK_EffectBones((CHARACTERGUID)S_GLO_CharacterCreationDummy_001_da072fe7-fdd5-42ae-9139-8bd4b9fca406, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_GLO_CharacterCreationDummy_002_361dacdc-4135-4d3f-a9a2-3cad46ca246a, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_GLO_CharacterCreationDummy_003_dded8c22-b28e-45c1-a074-eb0954602c8a, "Dummy_R_HandFX");
+DB_CA_TK_EffectBones((CHARACTERGUID)S_GLO_CharacterCreationDummy_004_5f93cae7-6c10-4da1-b9a5-0efafc168c8e, "Dummy_R_HandFX");
+//END_REGION
 KBSECTION
-//REGION HELPERS
+//REGION RESET
 PROC
-CA_TeleHand_ClearTarget((CHARACTERGUID)_Hand)
+CA_TK_ClearTimers((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Timers(_Hand, _TimerName)
+THEN
+TimerCancel(_TimerName);
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName);
+
+PROC
+CA_TK_ClearTarget((CHARACTERGUID)_Hand)
 AND
 DB_CA_TeleHand_Target_Steal(_Hand, _Target)
 THEN
 NOT DB_CA_TeleHand_Target_Steal(_Hand, _Target);
 
 PROC
-CA_TeleHand_ClearHands((CHARACTERGUID)_Player)
+CA_TK_ClearTarget((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Target_Item(_Hand, _Target)
+THEN
+NOT DB_CA_TeleHand_Target_Item(_Hand, _Target);
+
+PROC
+CA_TK_ClearHands((CHARACTERGUID)_Player)
 AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 THEN
 NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
 
 PROC
-CA_TeleHand_TransferItems((CHARACTERGUID)_Hand)
+CA_TeleHand_RemoveBonus((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+_Bonus > 0
+AND
+CharacterGetAbility(_Hand, "Thievery", _HandVal)
+AND
+_HandVal >= _Bonus
+THEN
+CharacterRemoveAbility(_Hand, "Thievery", _Bonus);
+NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
+DB_CA_TeleHand_Hands(_Player, _Hand, 0);
+//END_REGION
+
+//REGION ITEM_TRANSFER
+PROC
+CA_TK_TransferItems((CHARACTERGUID)_Hand)
 AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 THEN
 TransferItemsToCharacter(_Hand, _Player);
 
 PROC
-CA_TeleHand_PickupItem((CHARACTERGUID)_Hand, (ITEMGUID)_Item)
+CA_TK_PickupItem((CHARACTERGUID)_Hand, (ITEMGUID)_Item)
 AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 AND
@@ -41,14 +91,15 @@ THEN
 CharacterUseItem(_Hand, _Item, "");
 
 PROC
-CA_TeleHand_PickupItem((CHARACTERGUID)_Hand, (ITEMGUID)_Item)
+CA_TK_PickupItem((CHARACTERGUID)_Hand, (ITEMGUID)_Item)
 AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 AND
 ItemIsContainer(_Item, 0)
 THEN
 ItemToInventory(_Item, _Player);
-//REGION
+
+//END_REGION
 
 //REGION FX
 PROC
@@ -56,64 +107,151 @@ CA_TeleHand_Setup((CHARACTERGUID)_Player, (CHARACTERGUID)_Hand)
 AND
 CharacterGetAbility(_Player, "Thievery", _Bonus)
 THEN
-ApplyStatus(_Hand, "CA_TELEHAND_PASSIVE", 30.0, 1);
-ApplyStatus(_Hand, "SNEAKING", -1.0, 1);
+CA_TK_HandActivate(_Hand);
+ApplyStatus(_Hand, "CA_TELEHAND_PASSIVE", -1.0, 1);
 CharacterAddAbility(_Hand, "Thievery", _Bonus);
-//CharacterAddToPlayerCharacter(_Hand, _Player);
+CA_TK_ClearTimers(_Hand);
+CA_TK_ClearHands(_Player);
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
-//CharacterAddToParty(_Hand, _Player);
 CharacterDetachFromGroup(_Hand);
 CharacterStopFollow(_Player);
 CharacterStopFollow(_Hand);
 MakePlayerActive(_Hand);
-//NOT DB_Following(_Hand,_Player);
-////IsSummonOrPartyFollower
+CA_TK_ResetStealSuccess(_Hand);
 
-PROC CA_TeleHand_PlayerAnimation((CHARACTERGUID)_Player)
+PROC CA_TK_PlayerAnimation((CHARACTERGUID)_Player)
 THEN
 CharacterSetAnimationOverride(_Player, "skill_prepare_touch_01_loop");
 
-PROC
-CA_TeleHand_PlayerEffects((CHARACTERGUID)_Player, (CHARACTERGUID)_Hand)
+QRY
+CA_QRY_SetCastingBone((CHARACTERGUID)_Player)
 AND
-PlayLoopEffect(_Player, "RS3_FX_GP_CC_Telekinesis_HandFX_01", "Dummy_L_HandFX", _HandFX)
-AND
-PlayLoopBeamEffect(_Player, _Hand, "RS3_FX_GP_Beams_Telekinesis_01", "Dummy_L_HandFX", "Dummy_Pos_001", _BeamFX)
-AND
-GetUUID(_Player, _Pstr)
-AND
-StringConcatenate("CA_AnimTimer_", _Pstr, _TimerName)
+DB_CA_TK_EffectBones(_Player, _Bone)
 THEN
-ApplyStatus(_Player, "CA_CHANNELING", 30.0, 1);
-CA_TeleHand_PlayerAnimation(_Player);
-DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX, _TimerName);
+DB_NOOP(1);
+
+QRY
+CA_QRY_SetCastingBone((CHARACTERGUID)_Player)
+AND
+NOT DB_CA_TK_EffectBones(_Player, _)
+THEN
+DB_CA_TK_EffectBones(_Player, "Dummy_R_HandFX");
+
+PROC
+CA_TK_PlayerEffects((CHARACTERGUID)_Player, (CHARACTERGUID)_Hand)
+AND
+CA_QRY_SetCastingBone(_Player)
+AND
+DB_CA_TK_EffectBones(_Player, _Bone)
+AND
+PlayLoopEffect(_Player, "RS3_FX_GP_CC_Telekinesis_HandFX_01", _Bone, _HandFX)
+AND
+PlayLoopBeamEffect(_Player, _Hand, "RS3_FX_GP_Beams_Telekinesis_01", _Bone, "Hand_Bone", _BeamFX)
+THEN
+CharacterAddSkill(_Player, "Shout_CA_TeleHand_Dismiss");
+//ApplyStatus(_Player, "CA_CHANNELING", 30.0); // Should happen through the skill usage
+CA_TK_PlayerAnimation(_Player);
+DB_CA_TeleHand_ActiveFX(_Player, _HandFX, _BeamFX);
 //TimerLaunch(_TimerName, 500);
 
 PROC
-CA_TeleHand_ResetEffects((CHARACTERGUID)_Hand)
+CA_TK_ResetEffects((CHARACTERGUID)_Hand)
 AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _)
 AND
-DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX, _TimerName)
+DB_CA_TeleHand_ActiveFX(_Player, _HandFX, _BeamFX)
 THEN
 RemoveStatus(_Player, "CA_CHANNELING");
 StopLoopEffect(_HandFX);
 StopLoopEffect(_BeamFX);
-CharacterSetAnimationOverride(_Player, "idle1");
-TimerCancel(_TimerName);
-NOT DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX, _TimerName);
+CharacterSetAnimationOverride(_Player, "");
+NOT DB_CA_TeleHand_ActiveFX(_Player, _HandFX, _BeamFX);
 
-/*
-IF
-TimerFinished(_TimerName)
-AND
-DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX, _TimerName)
-AND
-HasActiveStatus(_Player, "CA_CHANNELING", 1)
+PROC
+CA_TK_HandAppear((CHARACTERGUID)_Hand)
+//AND
+//GetPosition(_Hand, _x, _y, _z)
 THEN
-CA_TeleHand_PlayerAnimation(_Player);
-*/
+//PlayEffectAtPosition("RS3_FX_Char_Ghosts_Teleport_out_01", _x, _y, _z);
+PlayEffect(_Hand, "RS3_FX_Char_Ghosts_Teleport_out_01");
 
+PROC
+CA_TK_HandDisappear((CHARACTERGUID)_Hand)
+THEN
+//PlayEffectAtPosition("RS3_FX_Char_Ghosts_Teleport_out_01", _x, _y, _z);
+PlayEffect(_Hand, "RS3_FX_Char_Ghosts_Teleport_out_01");
+CA_TK_HandDeactivate(_Hand);
+
+
+PROC
+CA_TK_HandActivate((CHARACTERGUID)_Hand)
+AND
+ObjectIsOnStage(_Hand, 0)
+THEN
+SetOnStage(_Hand,1);
+
+PROC
+CA_TK_HandDeactivate((CHARACTERGUID)_Hand)
+AND
+ObjectIsOnStage(_Hand, 1)
+THEN
+SetOnStage(_Hand,0);
+
+//END_REGION
+
+PROC
+CA_TK_PlayerHandRemoved((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _)
+AND
+CharacterHasSkill(_Player, "Shout_CA_TeleHand_Dismiss", 1)
+THEN
+CharacterRemoveSkill(_Player, "Shout_CA_TeleHand_Dismiss");
+
+//REGION CRIME
+PROC
+CA_TK_UpdateCrime((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _Val)
+AND
+_Val > 0
+THEN
+CharacterRegisterCrime(_Player, "EmptyPocketNoticed", NULL_00000000-0000-0000-0000-000000000000, _Target, 0);
+
+PROC
+CA_TK_UpdateCrime((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _Val)
+AND
+_Val < 0
+THEN
+CharacterRegisterCrime(_Player, "PickPocketFailed", NULL_00000000-0000-0000-0000-000000000000, _Target, 0);
+
+PROC
+CA_TK_ResetStealSuccess((CHARACTERGUID)_Hand)
+AND
+DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _Val)
+THEN
+NOT DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _Val);
+
+PROC
+CA_TK_SetStealSuccess((CHARACTERGUID)_Hand, (CHARACTERGUID)_Target, (INTEGER)_NewVal)
+AND
+DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _Val)
+THEN
+NOT DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _Val);
+DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _NewVal);
+
+PROC
+CA_TK_SetStealSuccess((CHARACTERGUID)_Hand, (CHARACTERGUID)_Target, (INTEGER)_NewVal)
+AND
+NOT DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _NewVal)
+THEN
+DB_CA_TeleHand_Target_Steal_Success(_Hand, _Target, _NewVal);
 //END_REGION
 
 
@@ -121,29 +259,34 @@ CA_TeleHand_PlayerAnimation(_Player);
 IF
 CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Target_CA_TeleHand", _)
 AND
+NOT CharacterGetAbility(_Player, "Thievery", 0)
+AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+ObjectIsOnStage(_Hand, 0)
 AND
 CharacterGetDisplayName(_Player, _Handle, _Ref)
 AND
 StringConcatenate(_Handle, _Ref, _Name)
 AND
-StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+StringConcatenate("CA_TK_Timer_", _Name, _TimerName)
 AND
 NOT DB_CA_TeleHand_Timers(_Hand, _TimerName)
 AND
 NOT DB_CA_TeleHand_Target_Steal(_Hand, _Target)
 THEN
-Foop(_Hand);
-CharacterRemoveAbility(_Hand, "Thievery", _Bonus);
-NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
+CharacterAddToParty(_Hand, _Player);
 CA_TeleHand_Setup(_Player, _Hand);
-CA_TeleHand_PlayerEffects(_Player, _Hand);
+CA_TK_PlayerEffects(_Player, _Hand);
 DB_CA_TeleHand_Target_Steal(_Hand, _Target);
 DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+ApplyStatus(_Hand, "SNEAKING", -1.0, 1);
 TimerLaunch(_TimerName, 250);
 
 IF
 CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Target_CA_TeleHand", _)
+AND
+NOT CharacterGetAbility(_Player, "Thievery", 0)
 AND
 NOT DB_CA_TeleHand_Hands(_Player, _, _)
 AND
@@ -155,17 +298,33 @@ CharacterGetDisplayName(_Player, _Handle, _Ref)
 AND
 StringConcatenate(_Handle, _Ref, _Name)
 AND
-StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+StringConcatenate("CA_TK_Timer_", _Name, _TimerName)
 AND
 NOT DB_CA_TeleHand_Timers(_Hand, _TimerName)
 AND
 NOT DB_CA_TeleHand_Target_Steal(_Hand, _Target)
 THEN
 CA_TeleHand_Setup(_Player, _Hand);
-CA_TeleHand_PlayerEffects(_Player, _Hand);
+CA_TK_PlayerEffects(_Player, _Hand);
 DB_CA_TeleHand_Target_Steal(_Hand, _Target);
 DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+ApplyStatus(_Hand, "SNEAKING", -1.0, 1);
 TimerLaunch(_TimerName, 250);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 0)
+AND
+DB_CA_TeleHand_Target_Steal(_Hand, _Target)
+THEN
+TeleportTo(_Hand, _Target);
+CA_TK_HandAppear(_Hand);
+CharacterLookAt(_Hand, _Target);
+TimerCancel(_TimerName);
+TimerLaunch(_TimerName, 500);
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 1);
 
 IF
 TimerFinished(_TimerName)
@@ -179,24 +338,12 @@ TimerCancel(_TimerName);
 NOT DB_CA_TeleHand_Timers(_Hand, _TimerName, 1);
 
 IF
-TimerFinished(_TimerName)
-AND
-DB_CA_TeleHand_Timers(_Hand, _TimerName, 0)
-AND
-DB_CA_TeleHand_Target_Steal(_Hand, _Target)
-THEN
-TeleportTo(_Hand, _Target);
-TimerCancel(_TimerName);
-TimerLaunch(_TimerName, 250);
-NOT DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
-DB_CA_TeleHand_Timers(_Hand, _TimerName, 1);
-
-IF
 CharacterPickpocketSuccess(_Hand, _Target, _Item, _Amount)
 AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 THEN
 //TransferItemsToCharacter(_Hand, _Player);
+CA_TK_SetStealSuccess(_Hand, _Target, 1);
 ItemToInventory(_Item, _Player);
 
 IF
@@ -204,46 +351,42 @@ CharacterPickpocketFailed(_Hand, _Target)
 AND
 DB_CA_TeleHand_Target_Steal(_Hand, _Target)
 THEN
-CharacterUseSkill(_Hand, "Shout_CA_TeleHand_Dismiss", _Hand);
+CA_TK_SetStealSuccess(_Hand, _Target, 0);
+CharacterUseSkill(_Hand, "Shout_CA_TK_Dismiss", _Hand);
 //END_REGION
 
-/*
+
 //REGION ITEM
+//Pre-existing Hand
 IF
 CharacterUsedSkillOnTarget(_Player, (ITEMGUID)_Target, "Target_CA_TeleHand", _)
 AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 AND
-CharacterGetAbility(_Player, "Thievery", _ThieveryVal)
-AND
-CharacterGetAbility(_Hand, "Thievery", _HandVal)
+ObjectIsOnStage(_Hand, 0)
 AND
 CharacterGetDisplayName(_Player, _Handle, _Ref)
 AND
 StringConcatenate(_Handle, _Ref, _Name)
 AND
-StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+StringConcatenate("CA_TK_Timer_", _Name, _TimerName)
 AND
-NOT DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName)
+AND
+NOT DB_CA_TeleHand_Target_Item(_Hand, _Target)
 THEN
-CharacterRemoveAbility(_Hand, "Thievery", _Bonus);
-CharacterAddAbility(_Hand, "Thievery", _ThieveryVal);
-NOT DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus);
-DB_CA_TeleHand_Hands(_Player, _Hand, _ThieveryVal);
 CharacterAddToParty(_Hand, _Player);
-MakePlayerActive(_Hand);
-CharacterAddToPlayerCharacter(_Hand, _Player);
-TeleportTo(_Hand, _Target);
-CA_TeleHand_ClearTarget(_Hand);
-DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName);
-TimerLaunch(_TimerName, 500);
+CA_TeleHand_Setup(_Player, _Hand);
+CA_TK_PlayerEffects(_Player, _Hand);
+DB_CA_TeleHand_Target_Item(_Hand, _Target);
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+TimerLaunch(_TimerName, 250);
 
+//New Hand
 IF
 CharacterUsedSkillOnTarget(_Player, (ITEMGUID)_Target, "Target_CA_TeleHand", _)
 AND
 NOT DB_CA_TeleHand_Hands(_Player, _, _)
-AND
-CharacterGetAbility(_Player, "Thievery", _ThieveryVal)
 AND
 GetPosition(_Player, _x,_y,_z)
 AND
@@ -253,67 +396,140 @@ CharacterGetDisplayName(_Player, _Handle, _Ref)
 AND
 StringConcatenate(_Handle, _Ref, _Name)
 AND
-StringConcatenate("CA_TeleHand_Timer_", _Name, _TimerName)
+StringConcatenate("CA_TK_Timer_", _Name, _TimerName)
 AND
-NOT DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName)
+AND
+NOT DB_CA_TeleHand_Target_Item(_Hand, _Target)
 THEN
-CharacterAddAbility(_Hand, "Thievery", _ThieveryVal);
-CharacterMakePlayer(_Hand);
-CharacterAddToParty(_Hand, _Player);
-MakePlayerActive(_Hand);
-CharacterAddToPlayerCharacter(_Hand, _Player);
+CA_TeleHand_Setup(_Player, _Hand);
+CA_TK_PlayerEffects(_Player, _Hand);
+DB_CA_TeleHand_Target_Item(_Hand, _Target);
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+TimerLaunch(_TimerName, 250);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 0)
+AND
+DB_CA_TeleHand_Target_Item(_Hand, _Target)
+THEN
 TeleportTo(_Hand, _Target);
-DB_CA_TeleHand_Hands(_Player, _Hand, _ThieveryVal);
-DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName);
+CA_TK_HandAppear(_Hand);
+TimerCancel(_TimerName);
 TimerLaunch(_TimerName, 500);
+CharacterLookAt(_Hand, _Target);
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName, 0);
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 1);
 
 IF
 TimerFinished(_TimerName)
 AND
-DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+DB_CA_TeleHand_Timers(_Hand, _TimerName, 1)
 AND
-ObjectIsItem(_Target, 1)
+DB_CA_TeleHand_Target_Item(_Hand, _Target)
 THEN
-CA_TeleHand_PickupItem(_Hand, _Target);
+CA_TK_PickupItem(_Hand, _Target);
 TimerCancel(_TimerName);
+NOT DB_CA_TeleHand_Timers(_Hand, _TimerName, 1);
 
 IF
-TimerFinished(_TimerName)
+ItemAddedToCharacter(_Item, _Hand)
 AND
-DB_CA_TeleHand_Target_Item(_Hand, _Target, _TimerName)
+DB_CA_TeleHand_Hands(_Player, _Hand, _)
 AND
-ObjectIsCharacter(_Target, 0)
+NOT DB_CA_TeleHand_Target_Item(_Hand, _Item)
 AND
-ObjectIsItem(_Target, 0)
+NOT DB_CA_TeleHand_Target_Steal(_Hand, _)
 THEN
-TimerCancel(_TimerName);
+ItemToInventory(_Item, _Player);
 
 //END_REGION
-*/
 
+//REGION TERRAIN
+IF
+CharacterUsedSkillAtPosition(_Player, _X, _Y, _Z, "Target_CA_TeleHand", _)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
+AND
+ObjectIsOnStage(_Hand, 0)
+THEN
+CharacterAddToParty(_Hand, _Player);
+CA_TeleHand_Setup(_Player, _Hand);
+CA_TK_PlayerEffects(_Player, _Hand);
+TeleportToPosition(_Hand, _X, _Y, _Z, "", 0);
+//CharacterAppearAtPosition(_Hand, _X, _Y, _Z, 0, "");
+CA_TK_HandAppear(_Hand);
+
+IF
+CharacterUsedSkillAtPosition(_Player, _X, _Y, _Z, "Target_CA_TeleHand", _)
+AND
+NOT DB_CA_TeleHand_Hands(_Player, _, _)
+AND
+CharacterCreateAtPosition(_X, _Y, _Z, "CA_Summon_TeleHand_0547138c-21c0-4dbe-9c2a-97450ec82dd7", 1, _Hand)
+THEN
+CA_TeleHand_Setup(_Player, _Hand);
+CA_TK_PlayerEffects(_Player, _Hand);
+//CharacterAppearAtPosition(_Hand, _X, _Y, _Z, 0, "");
+CA_TK_HandAppear(_Hand);
+
+//END_REGION
+
+//REGION CHANNELING_REMOVAL
+IF
+SavegameLoaded(_,_,_,_)
+AND
+DB_IsPlayer(_Player)
+AND
+HasActiveStatus(_Player, "CA_CHANNELING", 1)
+THEN
+RemoveStatus(_Player, "CA_CHANNELING");
+
+IF
+ObjectEnteredCombat(_Object, _CombatID)
+AND
+HasActiveStatus(_Object, "CA_CHANNELING", 1)
+THEN
+RemoveStatus(_Object, "CA_CHANNELING");
+
+IF
+CharacterReceivedDamage(_Player)
+AND
+HasActiveStatus(_Player, "CA_CHANNELING", 1)
+THEN
+RemoveStatus(_Player, "CA_CHANNELING");
+
+//END_REGION
+
+//REGION HAND_DISMISSAL
 PROC
-CA_TeleHand_RemoveHand((CHARACTERGUID)_Hand)
+CA_TK_RemoveHand((CHARACTERGUID)_Hand)
 AND
 ObjectIsOnStage(_Hand, 1)
 THEN
-CA_TeleHand_ResetEffects(_Hand);
-CharacterStatusText(_Hand, "Dismissing TeleHand...");
-//RemoveStatus(_Hand, "CA_TELEHAND_PASSIVE");
+CA_TK_ResetEffects(_Hand);
 CharacterRemoveFromParty(_Hand);
-CA_TeleHand_TransferItems(_Hand);
-CA_TeleHand_ClearTarget(_Hand);
-Poof(_Hand);
-//CharacterDie(_Hand, 0, "None");
+CA_TK_TransferItems(_Hand);
+CA_TK_UpdateCrime(_Hand);
+CA_TK_ClearTarget(_Hand);
+CA_TeleHand_RemoveBonus(_Hand);
+CA_TK_HandDisappear(_Hand);
+CA_TK_PlayerHandRemoved(_Hand);
 
 IF
 CharacterStatusRemoved(_Player, "CA_CHANNELING", _)
 AND
+HasActiveStatus(_Player, "CA_CHANNELING", 0)
+AND
 DB_CA_TeleHand_Hands(_Player, _Hand, _Bonus)
 AND
-DB_CA_TK_ActiveFX(_Player, _HandFX, _BeamFX, _TimerName)
+DB_CA_TeleHand_ActiveFX(_Player, _HandFX, _BeamFX)
 THEN
-CA_TeleHand_RemoveHand(_Hand);
+CA_TK_RemoveHand(_Hand);
+CharacterStatusText(_Player, "Telekinetic Focus Interrupted");
 
+/*
 IF
 CharacterStatusRemoved(_Hand, "CA_TELEHAND_PASSIVE", _)
 AND
@@ -321,16 +537,26 @@ GetTemplate(_Hand, _Template)
 AND
 _Template == "CA_Summon_TeleHand_0547138c-21c0-4dbe-9c2a-97450ec82dd7"
 THEN
-CA_TeleHand_RemoveHand(_Hand);
+CA_TK_RemoveHand(_Hand);
+*/
 
 IF
-CharacterUsedSkill(_Hand, "Shout_CA_TeleHand_Dismiss", _)
+SkillCast(_Player, "Shout_CA_TeleHand_Dismiss", _)
+AND
+DB_CA_TeleHand_Hands(_Player, _Hand, _)
+THEN
+CA_TK_RemoveHand(_Hand);
+
+IF
+SkillCast(_Hand, "Shout_CA_TeleHand_Dismiss", _)
 AND
 GetTemplate(_Hand, _Template)
 AND
 _Template == "CA_Summon_TeleHand_0547138c-21c0-4dbe-9c2a-97450ec82dd7"
 THEN
-CA_TeleHand_RemoveHand(_Hand);
+CharacterStatusText(_Hand, "TeleHand Dismissed");
+CA_TK_RemoveHand(_Hand);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

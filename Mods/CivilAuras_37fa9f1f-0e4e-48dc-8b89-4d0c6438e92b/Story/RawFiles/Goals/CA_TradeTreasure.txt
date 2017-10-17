@@ -47,6 +47,7 @@ DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f7307
 //DB_CA_ModTraders((CHARACTERGUID)Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401); //Editor
 //DB_CA_AdditionalTradeTreasure((CHARACTERGUID)Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1);
 //END_REGION
+//DB_CA_Trader_PartyAmount(_Item, _Amount);
 KBSECTION
 //REGION HELPER_METHODS
 PROC
@@ -75,6 +76,20 @@ AND
 DB_CA_Trader_TempInt(_Val)
 THEN
 NOT DB_CA_Trader_TempInt(_Val);
+
+PROC
+CA_ClearPartyItemAmountsForTemplate((STRING)_Item)
+AND
+DB_CA_Trader_PartyAmount(_Item, _Val)
+THEN
+NOT DB_CA_Trader_PartyAmount(_Item, _Val);
+
+PROC
+CA_ClearPartyItemAmountsAll()
+AND
+DB_CA_Trader_PartyAmount(_Item, _Val)
+THEN
+NOT DB_CA_Trader_PartyAmount(_Item, _Val);
 
 PROC
 CA_PROC_ResetTraderTempInt((INTEGER)_ToVal)
@@ -114,6 +129,15 @@ THEN
 NOT DB_CA_Trader_TempInt(_Val);
 DB_CA_Trader_TempInt(_NewVal);
 
+QRY
+CA_QRY_GetTotalItemsInParty((STRING)_Item)
+AND
+DB_IsPlayer(_Player)
+AND
+ItemTemplateIsInPartyInventory(_Player, _Item, 0, _Amount)
+THEN
+CA_ClearPartyItemAmountsForTemplate(_Item);
+DB_CA_Trader_PartyAmount(_Item, _Amount);
 
 QRY
 CA_Item_PartyLevelRequirement_Met((STRING)_Item)
@@ -143,6 +167,12 @@ DB_NOOP(1); // Level requirement met
 PROC
 CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill)
 AND
+CA_QRY_GetTotalItemsInParty(_ItemTemplate)
+AND
+DB_CA_Trader_PartyAmount(_ItemTemplate, _PartyAmount)
+AND
+_PartyAmount <= 0
+AND
 CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
 AND
 CA_QRY_ResetTraderTempInt()
@@ -155,7 +185,9 @@ _Val > 0
 AND
 _Amount < _Val
 AND
-IntegerSubtract(_Val, _Amount, _TotalAmount)
+IntegerSubtract(_Amount, _PartyAmount, _TotalNeeded)
+AND
+IntegerSubtract(_Val, _TotalNeeded, _TotalAmount)
 AND
 _TotalAmount > 0
 THEN
@@ -166,36 +198,17 @@ CA_PrintIntegerAtTarget(_Skill, " book(s) in inventory.", _Amount, _Trader);
 */
 ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
 CA_PROC_ResetTraderTempInt(0);
-
-PROC
-CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill, (INTEGER)_MaxAmount)
-AND
-CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
-AND
-CA_QRY_ResetTraderTempInt()
-AND
-CA_GetTotalSkillsLearned(_Skill)
-AND
-DB_CA_Trader_TempInt(_Val)
-AND
-_Val > 0
-AND
-_Amount < _Val
-AND
-IntegerSubtract(_Val, _Amount, _TotalNeeded)
-AND
-IntegerMax(_MaxAmount, _TotalNeeded, _TotalAmount)
-AND
-_TotalAmount > 0
-THEN
-//CA_PrintIntegerAtTarget(_Skill, " book(s) generated.", _TotalAmount, _Trader);
-ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
-CA_PROC_ResetTraderTempInt(0);
 //END_REGION
 
 //REGION TALENTBOOK_METHODS
 PROC
 CA_Trader_GenerateTalentBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Talent)
+AND
+CA_QRY_GetTotalItemsInParty(_ItemTemplate)
+AND
+DB_CA_Trader_PartyAmount(_ItemTemplate, _PartyAmount)
+AND
+_PartyAmount <= 0
 AND
 CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
 AND
@@ -207,7 +220,9 @@ _Val > 0
 AND
 _Amount < _Val
 AND
-IntegerSubtract(_Val, _Amount, _TotalAmount)
+IntegerSubtract(_Amount, _PartyAmount, _TotalNeeded)
+AND
+IntegerSubtract(_Val, _TotalNeeded, _TotalAmount)
 AND
 _TotalAmount > 0
 AND
@@ -218,33 +233,6 @@ CA_PrintIntegerAtTarget(_Talent, " book(s) generated.", _TotalAmount, _Trader);
 CA_PrintIntegerAtTarget(_Talent, " book(s) needed.", _Val, _Trader);
 CA_PrintIntegerAtTarget(_Talent, " book(s) in inventory.", _Amount, _Trader);
 */
-//ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
-CA_PROC_ResetTraderTempInt(0);
-DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _TotalAmount);
-TimerLaunch(_ItemTemplate, 100);
-
-PROC
-CA_Trader_GenerateTalentBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Talent, (INTEGER)_MaxAmount)
-AND
-CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
-AND
-CA_GetTotalTalentsLearned(_Talent)
-AND
-DB_CA_Trader_TempInt(_Val)
-AND
-_Val > 0
-AND
-_Amount < _Val
-AND
-IntegerSubtract(_Val, _Amount, _TotalNeeded)
-AND
-IntegerMax(_MaxAmount, _TotalNeeded, _TotalAmount)
-AND
-_TotalAmount > 0
-AND
-NOT DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _TotalAmount)
-THEN
-//CA_PrintIntegerAtTarget(_Talent, " book(s) generated.", _TotalAmount, _Trader);
 //ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
 CA_PROC_ResetTraderTempInt(0);
 DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _TotalAmount);
@@ -303,6 +291,12 @@ PROC
 CA_AddAdditional((CHARACTERGUID)_Trader)
 AND
 DB_CA_AdditionalTradeTreasure(_Trader, _ItemTemplate, _Amount)
+AND
+CA_QRY_GetTotalItemsInParty(_ItemTemplate)
+AND
+DB_CA_Trader_PartyAmount(_ItemTemplate, _PartyAmount)
+AND
+_PartyAmount < _Amount
 AND
 CharacterGetItemTemplateCount(_Trader, _ItemTemplate, 0)
 AND
