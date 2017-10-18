@@ -133,5 +133,16 @@
         <field name="Unique" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
+    <stat_object index="10" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="DEBUG_CA_SkillFixer" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="InventoryTab" type="EnumerationStatObjectFieldDefinition" value="5" enumeration_type_name="InventoryTabs" />
+        <field name="AddToBottomBar" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>

@@ -12,6 +12,5 @@ data "FormatColor" "LightBlue"
 data "StatsId" "Stats_CA_TeleHandPassive"
 data "StackId" "Stack_CA_TeleHandPassive"
 data "IsInvulnerable" "Yes"
-data "StatusEffect" "CA_FX_TeleHand_Passive_01:Hand_Bone"
 data "MaterialType" "None"
 

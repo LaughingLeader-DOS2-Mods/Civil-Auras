@@ -110,3 +110,12 @@ data "MinLevel" "1"
 data "AddToBottomBar" "Yes"
 data "Unique" "1"
 
+new entry "DEBUG_CA_SkillFixer"
+type "Object"
+using "_Generics"
+data "Act part" "1"
+data "Value" "0"
+data "Weight" "0"
+data "InventoryTab" "Keys"
+data "AddToBottomBar" "Yes"
+

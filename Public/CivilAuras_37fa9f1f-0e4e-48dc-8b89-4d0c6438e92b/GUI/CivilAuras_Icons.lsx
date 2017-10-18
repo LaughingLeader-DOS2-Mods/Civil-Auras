@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
-    <header version="2" time="1508273533" />
+    <header version="2" time="1508311051" />
     <version major="3" minor="1" revision="3" build="5" />
     <region id="IconUVList">
         <node id="root">
@@ -72,6 +72,27 @@
                     <attribute id="MapKey" value="CA_Status_TeleHand_02" type="22" />
                     <attribute id="U1" value="0.125977" type="6" />
                     <attribute id="U2" value="0.249023" type="6" />
+                    <attribute id="V1" value="0.125977" type="6" />
+                    <attribute id="V2" value="0.249023" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="CA_Status_TeleHand_Connection_01" type="22" />
+                    <attribute id="U1" value="0.250977" type="6" />
+                    <attribute id="U2" value="0.374023" type="6" />
+                    <attribute id="V1" value="0.125977" type="6" />
+                    <attribute id="V2" value="0.249023" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="CA_Status_TeleHand_Connection_02" type="22" />
+                    <attribute id="U1" value="0.375977" type="6" />
+                    <attribute id="U2" value="0.499023" type="6" />
+                    <attribute id="V1" value="0.125977" type="6" />
+                    <attribute id="V2" value="0.249023" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="CA_Status_TeleHand_Connection_03" type="22" />
+                    <attribute id="U1" value="0.500977" type="6" />
+                    <attribute id="U2" value="0.624023" type="6" />
                     <attribute id="V1" value="0.125977" type="6" />
                     <attribute id="V2" value="0.249023" type="6" />
                 </node>

@@ -13,14 +13,17 @@ type "Potion"
 new entry "Stats_CA_Motivated"
 type "Potion"
 
-new entry "Stats_CA_TeleHandPassive"
-type "Potion"
-
-new entry "Stats_CA_Channeling"
+new entry "Stats_CA_Focused"
 type "Potion"
 data "Act" "1"
 data "Act part" "0"
 data "MovementSpeedBoost" "-100"
 data "DodgeBoost" "-30"
 data "Duration" "2"
+
+new entry "Stats_CA_TeleHandPassive"
+type "Potion"
+
+new entry "Stats_CA_TK_Connection"
+type "Potion"
 

@@ -75,5 +75,61 @@
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Motivated" />
       </fields>
     </stat_object>
+    <stat_object index="5" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_FOCUSED" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Focusing" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is under intense focus, and cannot move.&lt;br&gt;Casting spells, certain smells, and losing the focused target breaks the focused state." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_Focused" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="7" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Focused" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Focused" />
+      </fields>
+    </stat_object>
+    <stat_object index="6" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_TK_CONNECTION1" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Stable Connection" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="The telekinetic link is strong." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_TeleHand_Connection_01" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="7" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_TK_Connection" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_TK_Connection" />
+      </fields>
+    </stat_object>
+    <stat_object index="7" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_TK_CONNECTION2" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Fuzzy Connection" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="The telekinetic link is getting weaker." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_TeleHand_Connection_02" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="11" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_TK_Connection" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_TK_Connection" />
+      </fields>
+    </stat_object>
+    <stat_object index="8" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_TK_CONNECTION3" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Weak Connection" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="The telekinetic link is weak, and will break if strained any further." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_TeleHand_Connection_03" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="4" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_TK_Connection" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_TK_Connection" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>
