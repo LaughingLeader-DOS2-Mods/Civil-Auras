@@ -44,6 +44,7 @@ data "MinAmount" "1"
 data "MaxAmount" "1"
 data "Priority" "1"
 data "MinLevel" "1"
+data "Requirements" "Telekinesis 3"
 
 new entry "TALENTBOOK_CA_PetPal"
 type "Object"
@@ -107,4 +108,5 @@ data "MaxAmount" "1"
 data "Priority" "2"
 data "MinLevel" "1"
 data "AddToBottomBar" "Yes"
+data "Unique" "1"
 

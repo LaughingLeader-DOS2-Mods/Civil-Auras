@@ -2,3 +2,13 @@ INIT
 	CHARACTER:__Me
 	
 EVENTS
+
+//TK Hands can't equip things!
+EVENT OnEquip
+VARS
+	ITEM:_Item
+ON
+	OnItemEquipped(__Me, _Item)
+ACTIONS
+	StatusText(__Me, "The equipment falls through the translucent hand...")
+	ItemDrop(_Item)
