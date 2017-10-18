@@ -119,9 +119,17 @@ NOT DB_CA_Settings_Barter_Messages(_Player, _, _, _)
 THEN
 DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
 
-//Add the mod version to fresh saves, to avoid rebuilding.
+//Add the mod version to fresh Origin saves, to avoid rebuilding.
 IF
 RegionStarted("TUT_Tutorial_A")
+AND
+NOT DB_CA_ModVersion("1.6.0")
+THEN
+DB_CA_ModVersion("1.6.0");
+CA_Global_BuildSettings();
+
+IF
+CharacterCreationFinished(_Player)
 AND
 NOT DB_CA_ModVersion("1.6.0")
 THEN
