@@ -2,8 +2,9 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 //Settings
-DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
-DB_CA_Settings_BarterMessages(1, 50); //On, Random Chance
+//DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
+//DB_CA_Settings_Barter_Messages(_Player, _On, _MaxRan, _NumToPass);
+//DB_CA_Settings_Barter_Messages((CHARACTERGUID)_Player, 1, 100, 75);
 //DB_CA_ModVersion("1.4.0");
 KBSECTION
 //REGION HELPER_METHODS
@@ -109,26 +110,37 @@ DB_CA_ModVersion(_Version)
 THEN
 NOT DB_CA_ModVersion(_Version);
 
+PROC
+CA_Global_BuildSettings()
+AND
+DB_IsPlayer(_Player)
+AND
+NOT DB_CA_Settings_Barter_Messages(_Player, _, _, _)
+THEN
+DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
+
 //Add the mod version to fresh saves, to avoid rebuilding.
 IF
 RegionStarted("TUT_Tutorial_A")
 AND
-NOT DB_CA_ModVersion("1.4.0")
+NOT DB_CA_ModVersion("1.6.0")
 THEN
-DB_CA_ModVersion("1.4.0");
+DB_CA_ModVersion("1.6.0");
+CA_Global_BuildSettings();
 
 //For refreshing existing saves
 IF
 SavegameLoaded(_,_,_,_)
 AND
-NOT DB_CA_ModVersion("1.4.0")
+NOT DB_CA_ModVersion("1.6.0")
 AND
 DB_IsPlayer(_Player)
 AND
 NOT DB_CA_Refreshing(1)
 THEN
 CA_Global_ResetDatabases();
-DB_CA_ModVersion("1.4.0");
+CA_Global_BuildSettings();
+DB_CA_ModVersion("1.6.0");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");
 

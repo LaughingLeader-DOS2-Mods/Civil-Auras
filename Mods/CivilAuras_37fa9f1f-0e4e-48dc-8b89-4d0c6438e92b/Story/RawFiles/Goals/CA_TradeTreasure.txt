@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 DB_CA_Trader_TempInt(0); // Used to store the amount of items needed temporarily.
 DB_CA_Trader_TempString("");
+//DB_CA_Trader_DynamicGenerationReady(_Trader, 1); // Used to only generate items via trade when a save loads the mod for the first time
 
 //REGION MAIN_TRADERS
 //Act 1
@@ -35,11 +36,11 @@ DB_CA_AdditionalTradeTreasure((CHARACTERGUID)S_ARX_KemmMansion_ChiefTrader_46ced
 DB_CA_ItemLevelRequirement("BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 4);
 //END_REGION
 
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle");
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle");
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk");
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle", 1);
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle", 1);
+DB_CA_Trader_SkillBooks("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk", 1);
 
-DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy");
+DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy", 4);
 
 //DB_CA_Trader_TalentTimer(_Template, _Trader, Amount)
 
@@ -104,6 +105,8 @@ CA_QRY_ResetTraderTempInt()
 AND
 DB_IsPlayer(_Player)
 AND
+NOT DB_CA_Talent_Blacklist(_Talent, _Player) //Respec Mirror Exploit Workaround
+AND
 CharacterHasTalent(_Player, _Talent, 0)
 AND
 DB_CA_Trader_TempInt(_Val)
@@ -165,7 +168,7 @@ DB_NOOP(1); // Level requirement met
 
 //REGION SKILLBOOK_METHODS
 PROC
-CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill)
+CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill, (INTEGER)_MaxAmount)
 AND
 CA_QRY_GetTotalItemsInParty(_ItemTemplate)
 AND
@@ -190,19 +193,21 @@ AND
 IntegerSubtract(_Val, _TotalNeeded, _TotalAmount)
 AND
 _TotalAmount > 0
+AND
+IntegerMin(_TotalAmount, _MaxAmount, _FinalAmount)
 THEN
 /*
 CA_PrintIntegerAtTarget(_Skill, " book(s) generated.", _TotalAmount, _Trader);
 CA_PrintIntegerAtTarget(_Skill, " book(s) needed.", _Val, _Trader);
 CA_PrintIntegerAtTarget(_Skill, " book(s) in inventory.", _Amount, _Trader);
 */
-ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
+ItemTemplateAddTo(_ItemTemplate, _Trader, _FinalAmount);
 CA_PROC_ResetTraderTempInt(0);
 //END_REGION
 
 //REGION TALENTBOOK_METHODS
 PROC
-CA_Trader_GenerateTalentBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Talent)
+CA_Trader_GenerateTalentBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Talent, (INTEGER)_MaxAmount)
 AND
 CA_QRY_GetTotalItemsInParty(_ItemTemplate)
 AND
@@ -226,7 +231,9 @@ IntegerSubtract(_Val, _TotalNeeded, _TotalAmount)
 AND
 _TotalAmount > 0
 AND
-NOT DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _TotalAmount)
+IntegerMin(_TotalAmount, _MaxAmount, _FinalAmount)
+AND
+NOT DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _FinalAmount)
 THEN
 /*
 CA_PrintIntegerAtTarget(_Talent, " book(s) generated.", _TotalAmount, _Trader);
@@ -270,22 +277,22 @@ CA_AddSkillBooks((CHARACTERGUID)_Trader)
 AND
 DB_CA_ModTraders(_Trader)
 AND
-DB_CA_Trader_SkillBooks(_Item, _Skill)
+DB_CA_Trader_SkillBooks(_Item, _Skill, _MaxAmount)
 AND
 CA_Item_PartyLevelRequirement_Met(_Item)
 THEN
-CA_Trader_GenerateSkillBooks(_Trader, _Item, _Skill);
+CA_Trader_GenerateSkillBooks(_Trader, _Item, _Skill, _MaxAmount);
 
 PROC
 CA_AddTalentBooks((CHARACTERGUID)_Trader)
 AND
 DB_CA_ModTraders(_Trader)
 AND
-DB_CA_Trader_TalentBooks(_Item, _Talent)
+DB_CA_Trader_TalentBooks(_Item, _Talent, _MaxAmount)
 AND
 CA_Item_PartyLevelRequirement_Met(_Item)
 THEN
-CA_Trader_GenerateTalentBooks(_Trader, _Item, _Talent);
+CA_Trader_GenerateTalentBooks(_Trader, _Item, _Talent, _MaxAmount);
 
 PROC
 CA_AddAdditional((CHARACTERGUID)_Trader)
@@ -306,22 +313,27 @@ ItemTemplateAddTo(_ItemTemplate, _Trader, _Amount);
 //END_REGION
 
 //REGION GENERATION
-
 IF
 RequestTrade(_Player, _Trader)
+AND
+NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _)
 THEN
 CA_AddTalentBooks(_Trader);
 CA_AddSkillBooks(_Trader);
 CA_AddAdditional(_Trader);
+DB_CA_Trader_DynamicGenerationReady(_Trader, 1);
 
 IF
 ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
 AND
 DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+AND
+NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _)
 THEN
 CA_AddTalentBooks(_Trader);
 CA_AddSkillBooks(_Trader);
 CA_AddAdditional(_Trader);
+DB_CA_Trader_DynamicGenerationReady(_Trader, 1);
 
 IF
 TradeGenerationEnded(_Trader)
@@ -329,6 +341,12 @@ THEN
 CA_AddTalentBooks(_Trader);
 CA_AddSkillBooks(_Trader);
 CA_AddAdditional(_Trader);
+
+IF
+RegionStarted(_Region)
+THEN
+//Reset dynamic generation
+CA_TradeTreasure_ResetDynamicGeneration();
 
 //END_REGION
 
@@ -442,12 +460,20 @@ DB_CA_Trader_TalentBooks(_Val1, _Val2)
 THEN
 NOT DB_CA_Trader_TalentBooks(_Val1, _Val2);
 
+PROC
+CA_TradeTreasure_ResetDynamicGeneration()
+AND
+DB_CA_Trader_DynamicGenerationReady(_Trader, _Val)
+THEN
+NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _Val);
+
 IF
 StoryEvent(_Object, "CA_Refresh")
 THEN
 CA_TradeTreasure_ResetDatabases();
 DB_CA_Trader_TempInt(0);
 DB_CA_Trader_TempString("");
+CA_TradeTreasure_ResetDynamicGeneration(); // Generate items via trade in new updates
 DB_CA_ModTraders((CHARACTERGUID)S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c); // Fort Joy Blacksmith (Nebora)
 DB_CA_ModTraders((CHARACTERGUID)S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620); // Tarquin
 DB_CA_ModTraders((CHARACTERGUID)RC_DW_Trader_PotionsIngredientsWaterSummonNecro_88ea209d-d5e6-465d-bebe-2f10b1fd2861); // Trader Bree

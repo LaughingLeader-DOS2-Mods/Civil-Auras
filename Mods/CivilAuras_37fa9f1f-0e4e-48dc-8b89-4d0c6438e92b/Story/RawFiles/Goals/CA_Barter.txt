@@ -7,6 +7,9 @@ DB_CA_HighestBarter(0);
 DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
 DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
 DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
+DB_CA_BarterParty_Message(3, "Looking for a discount?");
+DB_CA_BarterParty_Message(4, "I have just the discount for you.");
+DB_CA_BarterParty_Message(5, "Welcome. Haggle away.");
 KBSECTION
 //REGION QUERIES_PROCS
 
@@ -232,21 +235,25 @@ DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
 CharacterCanTrade(_Trader, 1)
 AND
-DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Target)
+DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
 AND
-DB_IsPlayer(_Target)
+DB_IsPlayer(_Player)
 AND
-DB_CA_Settings_BarterMessages(1, _Chance)
+DB_CA_Settings_Barter_Messages(_Player, 1, _MaxRan, _NumToPass)
 AND
 CA_GetHighestBarter()
 AND
 DB_CA_HighestBarter(_Barter)
 AND
-_Barter > 0
+_Barter > 2
 AND
-Random(_Chance, _Ran)
+Random(_MaxRan, _Ran)
 AND
-DB_CA_BarterParty_Message(_Ran, _Message)
+_Ran >= _NumToPass
+AND
+Random(5, _MessageIndex)
+AND
+DB_CA_BarterParty_Message(_MessageIndex, _Message)
 THEN
 DisplayText(_Trader, _Message);
 
@@ -452,6 +459,9 @@ DB_CA_HighestBarter(0);
 DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
 DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
 DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
+DB_CA_BarterParty_Message(3, "Looking for a discount?");
+DB_CA_BarterParty_Message(4, "I have just the discount for you.");
+DB_CA_BarterParty_Message(5, "Welcome. Haggle away.");
 //END_REGION
 EXITSECTION
 
