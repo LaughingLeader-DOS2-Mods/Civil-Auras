@@ -36,38 +36,5 @@
         <field name="TargetEffect" type="StringStatObjectFieldDefinition" value="CA_FX_Motivated_Impact_01:Dummy_Root:cast" />
       </fields>
     </stat_object>
-    <stat_object index="1" is_substat="false">
-      <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_TeleHand" />
-        <field name="SkillType" type="StringStatObjectFieldDefinition" value="Target" />
-        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="SkillAbility" />
-        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" value="2" />
-        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="TargetRadius" type="IntegerStatObjectFieldDefinition" value="15" />
-        <field name="CanTargetCharacters" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="CanTargetItems" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="CanTargetTerrain" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="TargetConditions" type="StringStatObjectFieldDefinition" value="NonSelf;!Player" />
-        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="Ability_Telekinesis" />
-        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="TeleHand" />
-        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Use your telekinesis to gather items, pickpocket, and interact with the world from up to [1] away.&lt;br&gt;Uses your Thievery ability.&lt;br&gt;Requires intense focus to control." />
-        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="TargetRadius" />
-        <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
-        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_start" />
-        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_loop" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="Portret_Still_01" />
-        <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="Portret_Still_01" />
-        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_GP_CC_Telekinesis_HandFX_01:Dummy_L_HandFX:cast" />
-        <field name="Stealth" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="TargetEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_GP_Impacts_Telekinesis_Items_01:Dummy_Root:cast" />
-        <field name="SkillProperties" type="StringStatObjectFieldDefinition" value="Self:CA_FOCUSED,100,30" />
-      </fields>
-    </stat_object>
   </stat_objects>
 </stats>

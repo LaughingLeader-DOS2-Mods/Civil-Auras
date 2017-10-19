@@ -6,7 +6,7 @@ INITSECTION
 //DB_CA_Settings_Barter_Messages(_Player, _On, _MaxRan, _NumToPass);
 //DB_CA_Settings_Barter_Messages((CHARACTERGUID)_Player, 1, 100, 75);
 //DB_CA_Settings_Barter_Blacklist(_User);
-//DB_CA_ModVersion("1.4.0");
+//DB_CA_ModVersion("1.4.0"); // Old
 KBSECTION
 //REGION HELPER_METHODS
 PROC
@@ -124,24 +124,24 @@ DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
 IF
 RegionStarted("TUT_Tutorial_A")
 AND
-NOT DB_CA_ModVersion("1.6.0")
+NOT DB_CA_ModVersion("1.5.0")
 THEN
-DB_CA_ModVersion("1.6.0");
+DB_CA_ModVersion("1.5.0");
 CA_Global_BuildSettings();
 
 IF
 CharacterCreationFinished(_Player)
 AND
-NOT DB_CA_ModVersion("1.6.0")
+NOT DB_CA_ModVersion("1.5.0")
 THEN
-DB_CA_ModVersion("1.6.0");
+DB_CA_ModVersion("1.5.0");
 CA_Global_BuildSettings();
 
 //For refreshing existing saves
 IF
 SavegameLoaded(_,_,_,_)
 AND
-NOT DB_CA_ModVersion("1.6.0")
+NOT DB_CA_ModVersion("1.5.0")
 AND
 DB_IsPlayer(_Player)
 AND
@@ -149,7 +149,7 @@ NOT DB_CA_Refreshing(1)
 THEN
 CA_Global_ResetDatabases();
 CA_Global_BuildSettings();
-DB_CA_ModVersion("1.6.0");
+DB_CA_ModVersion("1.5.0");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");
 
