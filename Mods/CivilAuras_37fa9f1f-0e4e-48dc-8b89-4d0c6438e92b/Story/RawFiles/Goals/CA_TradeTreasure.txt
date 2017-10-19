@@ -287,7 +287,7 @@ CA_Item_PartyLevelRequirement_Met(_Item)
 AND
 CA_Trader_GenerateSkillBooks(_Trader, _Item, _Skill, _MaxAmount)
 THEN
-CharacterStatusText(_Trader, "Skillbook generated.");
+//CharacterStatusText(_Trader, "Skillbook generated.");
 DB_NOOP(1);
 
 PROC
@@ -301,7 +301,7 @@ CA_Item_PartyLevelRequirement_Met(_Item)
 AND
 CA_Trader_GenerateTalentBooks(_Trader, _Item, _Talent, _MaxAmount)
 THEN
-CharacterStatusText(_Trader, "Talentbook generated.");
+//CharacterStatusText(_Trader, "Talentbook generated.");
 DB_NOOP(1);
 
 PROC
@@ -331,7 +331,7 @@ _TotalAmount > 0
 AND
 IntegerMin(_TotalAmount, _MaxAmount, _FinalAmount)
 THEN
-CharacterStatusText(_Trader, "Extra generated.");
+//CharacterStatusText(_Trader, "Extra generated.");
 ItemTemplateAddTo(_ItemTemplate, _Trader, _FinalAmount);
 DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate, "Extra");
 //END_REGION
@@ -348,7 +348,7 @@ AND
 DB_IsPlayer(_Player)
 THEN
 CA_TradeTreasure_ResetDynamicGeneration();
-CharacterStatusText(_Player, "Dynamic Trade Generation Refreshed.");
+//CharacterStatusText(_Player, "Dynamic Trade Generation Refreshed.");
 
 IF
 TradeGenerationEnded(_Trader)
