@@ -19,5 +19,4 @@ THEN
 		CharacterAddSkill(_Player, Target_CA_TeleHand)
 		StatusText(_Player, "Refreshed TeleHand")
 	ENDIF
-	
 ENDIF

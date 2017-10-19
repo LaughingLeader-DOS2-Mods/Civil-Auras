@@ -10,6 +10,10 @@ DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
 DB_CA_BarterParty_Message(3, "Looking for a discount?");
 DB_CA_BarterParty_Message(4, "I have just the discount for you.");
 DB_CA_BarterParty_Message(5, "Welcome. Haggle away.");
+
+//DB_CA_Settings_Barter_Blacklist(_Player)
+//"Event_CA_Bartering_TradeOpened_MP"
+//"Event_CA_Bartering_TradeOpened_SP"
 KBSECTION
 //REGION QUERIES_PROCS
 
@@ -99,6 +103,28 @@ DB_CA_HighestBarter(0);
 IF
 RequestTrade((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
 AND
+NOT DB_CA_Settings_Barter_Blacklist(_Player)
+AND
+DB_UserCounter(_Users)
+AND
+_Users > 0
+THEN
+SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_MP");
+
+IF
+ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player, _Instance)
+AND
+NOT DB_CA_Settings_Barter_Blacklist(_Player)
+AND
+DB_UserCounter(_Users)
+AND
+_Users > 0
+THEN
+SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_MP");
+
+IF
+StoryEvent((CHARACTERGUID)_Player, "Event_CA_Bartering_TradeOpened_MP")
+AND
 DB_UserCounter(_Users)
 AND
 _Users > 0
@@ -121,31 +147,6 @@ DB_CA_BarterBonus(_UserCharacter, _BarterBonus)
 THEN
 CharacterAddAbility(_UserCharacter, "Barter", _BarterBonus);
 //CA_PrintInt(_UserCharacter, "Bonus[", _BarterBonus, "]");
-
-IF
-ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
-AND
-DB_UserCounter(_Users)
-AND
-_Users > 0
-AND
-CA_GetHighestBarter() // Only needs to be called once
-AND
-CharacterGetReservedUserID(_Player,_ID)
-AND
-DB_IsPlayer(_UserCharacter)
-AND
-CharacterGetReservedUserID(_UserCharacter, _UID)
-AND
-_UID == _ID
-AND
-CharacterGetAbility(_UserCharacter, "Barter", _PlayerVal)
-AND
-CA_GetBarterBonus(_UserCharacter, _PlayerVal)
-AND
-DB_CA_BarterBonus(_UserCharacter, _BarterBonus)
-THEN
-CharacterAddAbility(_UserCharacter, "Barter", _BarterBonus);
 
 IF
 TradeEnds((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
@@ -171,34 +172,33 @@ CA_ClearBonuses(_UserCharacter);
 
 //REGION SINGLEPLAYER
 IF
-RequestTrade((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
+RequestTrade((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
+AND
+NOT DB_CA_Settings_Barter_Blacklist(_Player)
 AND
 DB_UserCounter(_Users)
 AND
 _Users <= 0
-AND
-CA_GetHighestBarter()
-AND
-DB_IsPlayer(_Player)
-AND
-CharacterGetAbility(_Player, "Barter", (INTEGER)_PlayerVal)
-AND
-CA_GetBarterBonus(_Player, _PlayerVal)
-AND
-DB_CA_BarterBonus(_Player, _BarterBonus)
 THEN
-CharacterAddAbility(_Player, "Barter", _BarterBonus);
+SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_SP");
 
 IF
-ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
+ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player, _Instance)
+AND
+NOT DB_CA_Settings_Barter_Blacklist(_Player)
 AND
 DB_UserCounter(_Users)
 AND
 _Users <= 0
+THEN
+SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_SP");
+
+IF
+StoryEvent((CHARACTERGUID)_SoloPlayer, "Event_CA_Bartering_TradeOpened_SP")
 AND
 CA_GetHighestBarter()
 AND
-DB_IsPlayer(_Player)
+DB_IsPlayer(_Player) // Apply to all player characters
 AND
 CharacterGetAbility(_Player, "Barter", (INTEGER)_PlayerVal)
 AND
@@ -236,6 +236,8 @@ AND
 CharacterCanTrade(_Trader, 1)
 AND
 DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
+AND
+NOT DB_CA_Settings_Barter_Blacklist(_Player)
 AND
 DB_IsPlayer(_Player)
 AND

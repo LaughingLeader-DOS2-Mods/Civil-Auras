@@ -5,6 +5,7 @@ INITSECTION
 //DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 //DB_CA_Settings_Barter_Messages(_Player, _On, _MaxRan, _NumToPass);
 //DB_CA_Settings_Barter_Messages((CHARACTERGUID)_Player, 1, 100, 75);
+//DB_CA_Settings_Barter_Blacklist(_User);
 //DB_CA_ModVersion("1.4.0");
 KBSECTION
 //REGION HELPER_METHODS

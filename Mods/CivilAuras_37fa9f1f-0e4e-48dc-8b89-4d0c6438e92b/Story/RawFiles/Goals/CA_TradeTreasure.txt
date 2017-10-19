@@ -99,6 +99,14 @@ THEN
 CA_ClearTraderTempInt();
 DB_CA_Trader_TempInt(_ToVal);
 
+PROC
+CA_TradeTreasure_ResetDynamicGeneration()
+AND
+DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal)
+THEN
+//DebugText(_Player, "[CivilAuras] Dynamic trade generation reset for trader.");
+NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal);
+
 QRY
 CA_GetTotalTalentsLearned((STRING)_Talent)
 AND
@@ -405,7 +413,6 @@ CharacterLeveledUp(_Player)
 AND
 DB_IsPlayer(_Player)
 THEN
-//Reset dynamic generation
 CA_TradeTreasure_ResetDynamicGeneration();
 
 //END_REGION
@@ -519,13 +526,6 @@ AND
 DB_CA_Trader_TalentBooks(_Val1, _Val2)
 THEN
 NOT DB_CA_Trader_TalentBooks(_Val1, _Val2);
-
-PROC
-CA_TradeTreasure_ResetDynamicGeneration()
-AND
-DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal)
-THEN
-NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal);
 
 IF
 StoryEvent(_Object, "CA_Refresh")
