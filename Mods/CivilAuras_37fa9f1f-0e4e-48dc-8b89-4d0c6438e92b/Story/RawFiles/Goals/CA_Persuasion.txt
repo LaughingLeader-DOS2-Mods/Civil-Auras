@@ -11,6 +11,7 @@ DB_CA_PersuasionBonus(_Player, _Val)
 THEN
 NOT DB_CA_PersuasionBonus(_Player, _Val);
 
+/*
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
 AND
@@ -21,9 +22,12 @@ AND
 StringConcatenate(_Ref, ", I believe in you!", _Message)
 THEN
 DisplayText(_Caster, _Message);
+*/
 
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
+AND
+CA_SafeToChangeStats(_Player)
 AND
 HasActiveStatus(_Target, "CA_MOTIVATED", 0)
 AND
@@ -57,6 +61,7 @@ THEN
 CharacterRemoveAbility(_Player, "Persuasion", _Bonus);
 CA_ClearPersuasionBonus(_Player);
 
+/*
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED", (GUIDSTRING)_Causee)
 AND
@@ -67,7 +72,18 @@ AND
 IntegerProduct(_Val, -1, _CancelVal)
 THEN
 CharacterAddAbility(_Player, "Persuasion", _CancelVal);
+*/
 
+//END_REGION
+
+//REGION MIRROR_EXPLOIT
+//Mirror Exploit Prevention
+IF
+CharacterUsedItem(_Player,ITEMGUID_S_LV_Mirror_9a0a95b9-1bd0-4a33-b7e6-bd9be41ce3f3)
+AND
+HasActiveStatus(_Player, "CA_MOTIVATED", 1)
+THEN
+RemoveStatus(_Player, "CA_MOTIVATED");
 //END_REGION
 EXITSECTION
 

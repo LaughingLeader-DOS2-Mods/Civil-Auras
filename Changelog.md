@@ -1,5 +1,11 @@
 Civil Auras Changelog
 =======
+# 1.5.1
+* Pep Talk tweaks:
+	* Added two new effects.
+	* Reduced cooldown (5 -> 3)
+	* Fixed Motivated's effect positioning.
+* Fixed more mirror/respec exploits.
 
 # 1.5.0
 * (Hopefully) fixed an unlimited talent exploit - talentbooks now only grant a talent to a specific character once. Respecing won't bypass this.

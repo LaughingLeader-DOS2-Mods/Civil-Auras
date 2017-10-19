@@ -8,7 +8,7 @@
         <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
         <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="SkillAbility" />
         <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="5" />
+        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="3" />
         <field name="TargetRadius" type="IntegerStatObjectFieldDefinition" value="13" />
         <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Persuasion 3" />
         <field name="CanTargetCharacters" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
@@ -28,12 +28,12 @@
         <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
         <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="skill_prepare_divine_01_start" />
         <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="skill_prepare_divine_01_loop" />
-        <field name="PrepareEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_Skills_Divine_Prepare_Divine_Root_01,KeepRot:Dummy_Root;RS3_FX_Skills_Divine_Prepare_Divine_Hand_01:Dummy_L_HandFX:hand01;RS3_FX_Skills_Divine_Prepare_Divine_Hand_02:Dummy_R_HandFX:hand02" />
+        <field name="PrepareEffect" type="StringStatObjectFieldDefinition" value="CA_FX_PepTalk_Root_01,KeepRot:Dummy_Root" />
         <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_target_voodoo_01_cast" />
         <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_loop" />
         <field name="CastTextEvent" type="StringStatObjectFieldDefinition" value="cast" />
-        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="RS3_FX_Skills_Cast_Target_Voodoo_DominateMind_Root_01,KeepRot:Dummy_Root:cast;RS3_FX_Skills_Cast_Target_Voodoo_DominateMind_Hand_01:Dummy_L_HandFX:cast" />
-        <field name="TargetEffect" type="StringStatObjectFieldDefinition" value="CA_FX_Motivated_Impact_01:Dummy_Root:cast" />
+        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="CA_FX_PepTalk_Cast_Target_Hand_01:Dummy_L_HandFX:cast" />
+        <field name="TargetEffect" type="StringStatObjectFieldDefinition" value="CA_FX_Motivated_Impact_01:Dummy_OverheadFX:cast" />
       </fields>
     </stat_object>
   </stat_objects>

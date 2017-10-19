@@ -9,6 +9,22 @@ INITSECTION
 //DB_CA_ModVersion("1.4.0"); // Old
 KBSECTION
 //REGION HELPER_METHODS
+QRY
+CA_PlayerInMirror((CHARACTERGUID)_Player)
+AND
+DB_Illusionist(_Player,_Mirror)
+THEN
+DB_NOOP(1);
+
+//True if the player is not using the mirror
+QRY
+CA_SafeToChangeStats((CHARACTERGUID)_Player)
+AND
+NOT DB_Illusionist(_Player,_)
+THEN
+DB_NOOP(1);
+
+
 PROC
 CA_PrintMessage((CHARACTERGUID)_Target, (STRING)_Prefix, (STRING)_Var, (STRING)_Suffix)
 AND

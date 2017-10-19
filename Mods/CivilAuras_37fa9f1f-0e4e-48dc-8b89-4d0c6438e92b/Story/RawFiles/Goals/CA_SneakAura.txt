@@ -78,8 +78,29 @@ CharacterStatusText(_Player, "Stealth Aura Disabled");
 
 //END_REGION
 
-//REGION AUTO_TOGGLE
+//REGION MIRROR_EXPLOIT
+//Mirror Exploit Prevention
+IF
+CharacterUsedItem(_Player,ITEMGUID_S_LV_Mirror_9a0a95b9-1bd0-4a33-b7e6-bd9be41ce3f3)
+AND
+HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
+THEN
+CA_ClearSneakActive(_Player);
+RemoveStatus(_Player, "CA_STEALTH_AURA");
 
+IF
+CharacterUsedItem(_Player,ITEMGUID_S_LV_Mirror_9a0a95b9-1bd0-4a33-b7e6-bd9be41ce3f3)
+AND
+HasActiveStatus(_Player, "CA_STEALTHY", 1)
+AND
+DB_IsPlayer(_PartyMember)
+AND
+HasActiveStatus(_PartyMember, "CA_STEALTH_AURA", 1)
+THEN
+RemoveStatus(_PartyMember, "CA_STEALTH_AURA");
+//END_REGION
+
+//REGION AUTO_TOGGLE
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "SNEAKING", _)
 AND
@@ -117,6 +138,8 @@ CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
 //REGION SNEAK_ALLY_BONUSES
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
+AND
+CA_SafeToChangeStats(_Player) // No mirror use!
 AND
 DB_IsPlayer(_Player)
 AND

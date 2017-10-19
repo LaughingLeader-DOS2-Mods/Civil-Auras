@@ -135,6 +135,8 @@ CharacterGetReservedUserID(_Player,_ID)
 AND
 DB_IsPlayer(_UserCharacter)
 AND
+CA_SafeToChangeStats(_UserCharacter)
+AND
 CharacterGetReservedUserID(_UserCharacter, _UID)
 AND
 _UID == _ID
@@ -199,6 +201,8 @@ AND
 CA_GetHighestBarter()
 AND
 DB_IsPlayer(_Player) // Apply to all player characters
+AND
+CA_SafeToChangeStats(_Player)
 AND
 CharacterGetAbility(_Player, "Barter", (INTEGER)_PlayerVal)
 AND
