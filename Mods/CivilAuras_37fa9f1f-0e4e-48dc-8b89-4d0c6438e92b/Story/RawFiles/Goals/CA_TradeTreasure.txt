@@ -4,6 +4,7 @@ INITSECTION
 DB_CA_Trader_TempInt(0); // Used to store the amount of items needed temporarily.
 DB_CA_Trader_TempString("");
 //DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal)
+//DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate)
 //DB_CA_Trader_DynamicGenerationReady(_Trader, 1, 1, 1); // Used to only generate items via trade when a save loads the mod for the first time
 
 //REGION MAIN_TRADERS
@@ -65,50 +66,7 @@ THEN
 CharacterStatusText(_Target, _Output);
 
 QRY
-CA_QRY_ResetTraderTempInt()
-AND
-DB_CA_Trader_TempInt(_Val)
-THEN
-NOT DB_CA_Trader_TempInt(_Val);
-DB_CA_Trader_TempInt(0);
-
-PROC
-CA_ClearTraderTempInt()
-AND
-DB_CA_Trader_TempInt(_Val)
-THEN
-NOT DB_CA_Trader_TempInt(_Val);
-
-PROC
-CA_ClearPartyItemAmountsForTemplate((STRING)_Item)
-AND
-DB_CA_Trader_PartyAmount(_Item, _Val)
-THEN
-NOT DB_CA_Trader_PartyAmount(_Item, _Val);
-
-PROC
-CA_ClearPartyItemAmountsAll()
-AND
-DB_CA_Trader_PartyAmount(_Item, _Val)
-THEN
-NOT DB_CA_Trader_PartyAmount(_Item, _Val);
-
-PROC
-CA_PROC_ResetTraderTempInt((INTEGER)_ToVal)
-THEN
-CA_ClearTraderTempInt();
-DB_CA_Trader_TempInt(_ToVal);
-
-PROC
-CA_TradeTreasure_ResetDynamicGeneration()
-AND
-DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal)
-THEN
-//DebugText(_Player, "[CivilAuras] Dynamic trade generation reset for trader.");
-NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal);
-
-QRY
-CA_GetTotalTalentsLearned((STRING)_Talent)
+CA_GetTotalTalentbooksNeeded((STRING)_Talent)
 AND
 CA_QRY_ResetTraderTempInt()
 AND
@@ -126,7 +84,7 @@ NOT DB_CA_Trader_TempInt(_Val);
 DB_CA_Trader_TempInt(_NewVal);
 
 QRY
-CA_GetTotalSkillsLearned((STRING)_Skill)
+CA_GetTotalSkillsbooksNeeded((STRING)_Skill)
 AND
 CA_QRY_ResetTraderTempInt()
 AND
@@ -175,31 +133,71 @@ DB_NOOP(1); // Level requirement met
 
 //END_REGION
 
+//REGION RESET
+QRY
+CA_QRY_ResetTraderTempInt()
+AND
+DB_CA_Trader_TempInt(_Val)
+THEN
+NOT DB_CA_Trader_TempInt(_Val);
+DB_CA_Trader_TempInt(0);
+
+PROC
+CA_ClearTraderTempInt()
+AND
+DB_CA_Trader_TempInt(_Val)
+THEN
+NOT DB_CA_Trader_TempInt(_Val);
+
+PROC
+CA_ClearPartyItemAmountsForTemplate((STRING)_Item)
+AND
+DB_CA_Trader_PartyAmount(_Item, _Val)
+THEN
+NOT DB_CA_Trader_PartyAmount(_Item, _Val);
+
+PROC
+CA_ClearPartyItemAmountsAll()
+AND
+DB_CA_Trader_PartyAmount(_Item, _Val)
+THEN
+NOT DB_CA_Trader_PartyAmount(_Item, _Val);
+
+PROC
+CA_PROC_ResetTraderTempInt((INTEGER)_ToVal)
+THEN
+CA_ClearTraderTempInt();
+DB_CA_Trader_TempInt(_ToVal);
+
+PROC
+CA_TradeTreasure_ResetDynamicGeneration()
+AND
+DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate)
+THEN
+//DebugText(_Player, "[CivilAuras] Dynamic trade generation reset for trader.");
+NOT DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate);
+
+//END_REGION
+
 //REGION SKILLBOOK_METHODS
 QRY
 CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill, (INTEGER)_MaxAmount)
+AND
+NOT DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate)
 AND
 CA_QRY_GetTotalItemsInParty(_ItemTemplate)
 AND
 DB_CA_Trader_PartyAmount(_ItemTemplate, _PartyAmount)
 AND
-_PartyAmount <= 0
+_PartyAmount < _MaxAmount
 AND
-CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+IntegerSubtract(_MaxAmount, _PartyAmount, _AmountNeeded)
 AND
-CA_QRY_ResetTraderTempInt()
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _TraderAmount)
 AND
-CA_GetTotalSkillsLearned(_Skill)
+_TraderAmount < _AmountNeeded
 AND
-DB_CA_Trader_TempInt(_Val)
-AND
-_Val > 0
-AND
-_Amount < _Val
-AND
-IntegerSubtract(_Amount, _PartyAmount, _TotalNeeded)
-AND
-IntegerSubtract(_Val, _TotalNeeded, _TotalAmount)
+IntegerSubtract(_AmountNeeded, _TraderAmount, _TotalAmount)
 AND
 _TotalAmount > 0
 AND
@@ -212,31 +210,36 @@ CA_PrintIntegerAtTarget(_Skill, " book(s) in inventory.", _Amount, _Trader);
 */
 ItemTemplateAddTo(_ItemTemplate, _Trader, _FinalAmount);
 CA_PROC_ResetTraderTempInt(0);
+DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate);
 //END_REGION
 
 //REGION TALENTBOOK_METHODS
 QRY
 CA_Trader_GenerateTalentBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Talent, (INTEGER)_MaxAmount)
 AND
+NOT DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate)
+AND
 CA_QRY_GetTotalItemsInParty(_ItemTemplate)
 AND
 DB_CA_Trader_PartyAmount(_ItemTemplate, _PartyAmount)
 AND
-_PartyAmount <= 0
+_PartyAmount < _MaxAmount
 AND
-CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _Amount)
+CA_GetTotalTalentbooksNeeded(_Talent)
 AND
-CA_GetTotalTalentsLearned(_Talent)
+DB_CA_Trader_TempInt(_BooksNeeded)
 AND
-DB_CA_Trader_TempInt(_Val)
+_BooksNeeded > 0
 AND
-_Val > 0
+_BooksNeeded > _PartyAmount
 AND
-_Amount < _Val
+IntegerSubtract(_BooksNeeded, _PartyAmount, _AmountNeeded)
 AND
-IntegerSubtract(_Amount, _PartyAmount, _TotalNeeded)
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _TraderAmount)
 AND
-IntegerSubtract(_Val, _TotalNeeded, _TotalAmount)
+_TraderAmount < _AmountNeeded
+AND
+IntegerSubtract(_AmountNeeded, _TraderAmount, _TotalAmount)
 AND
 _TotalAmount > 0
 AND
@@ -244,12 +247,6 @@ IntegerMin(_TotalAmount, _MaxAmount, _FinalAmount)
 AND
 NOT DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _FinalAmount)
 THEN
-/*
-CA_PrintIntegerAtTarget(_Talent, " book(s) generated.", _TotalAmount, _Trader);
-CA_PrintIntegerAtTarget(_Talent, " book(s) needed.", _Val, _Trader);
-CA_PrintIntegerAtTarget(_Talent, " book(s) in inventory.", _Amount, _Trader);
-*/
-//ItemTemplateAddTo(_ItemTemplate, _Trader, _TotalAmount);
 CA_PROC_ResetTraderTempInt(0);
 DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _TotalAmount);
 TimerLaunch(_ItemTemplate, 100);
@@ -274,6 +271,7 @@ DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _TotalAmount)
 AND
 _TotalAmount <= 0
 THEN
+DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate);
 NOT DB_CA_Trader_BookGen_Timers(_ItemTemplate, _Trader, _TotalAmount);
 TimerCancel(_ItemTemplate);
 
@@ -281,8 +279,8 @@ TimerCancel(_ItemTemplate);
 
 
 //REGION TREASURE_METHODS
-QRY
-CA_AddSkillBooks((CHARACTERGUID)_Trader)
+PROC
+CA_TraderGen_Skillbooks((CHARACTERGUID)_Trader)
 AND
 DB_CA_ModTraders(_Trader)
 AND
@@ -294,8 +292,8 @@ CA_Trader_GenerateSkillBooks(_Trader, _Item, _Skill, _MaxAmount)
 THEN
 DB_NOOP(1);
 
-QRY
-CA_AddTalentBooks((CHARACTERGUID)_Trader)
+PROC
+CA_TraderGen_TalentBooks((CHARACTERGUID)_Trader)
 AND
 DB_CA_ModTraders(_Trader)
 AND
@@ -307,105 +305,41 @@ CA_Trader_GenerateTalentBooks(_Trader, _Item, _Talent, _MaxAmount)
 THEN
 DB_NOOP(1);
 
-QRY
-CA_AddAdditional((CHARACTERGUID)_Trader)
+PROC
+CA_TraderGen_Extra((CHARACTERGUID)_Trader)
 AND
-DB_CA_AdditionalTradeTreasure(_Trader, _ItemTemplate, _Amount)
+DB_CA_AdditionalTradeTreasure(_Trader, _ItemTemplate, _MaxAmount)
+AND
+NOT DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate)
+AND
+CA_Item_PartyLevelRequirement_Met(_ItemTemplate)
 AND
 CA_QRY_GetTotalItemsInParty(_ItemTemplate)
 AND
 DB_CA_Trader_PartyAmount(_ItemTemplate, _PartyAmount)
 AND
-_PartyAmount < _Amount
+_PartyAmount < _MaxAmount
 AND
-CharacterGetItemTemplateCount(_Trader, _ItemTemplate, 0)
+IntegerSubtract(_MaxAmount, _PartyAmount, _AmountNeeded)
 AND
-CA_Item_PartyLevelRequirement_Met(_ItemTemplate)
+CharacterGetItemTemplateCount(_Trader, _ItemTemplate, _TraderAmount)
+AND
+_TraderAmount < _AmountNeeded
+AND
+IntegerSubtract(_AmountNeeded, _TraderAmount, _TotalAmount)
+AND
+_TotalAmount > 0
+AND
+IntegerMin(_TotalAmount, _MaxAmount, _FinalAmount)
 THEN
-ItemTemplateAddTo(_ItemTemplate, _Trader, _Amount);
+ItemTemplateAddTo(_ItemTemplate, _Trader, _FinalAmount);
+DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate);
 //END_REGION
 
 //REGION GENERATION
 IF
-RequestTrade(_Player, _Trader)
-THEN
-CharacterCharacterSetEvent(_Player, _Trader, "Event_CA_TradeOpened");
-
-IF
-ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
-AND
-DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
-THEN
-CharacterCharacterSetEvent(_Player, _Trader, "Event_CA_TradeOpened");
-
-IF
-CharacterCharacterEvent((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader, "Event_CA_TradeOpened")
-AND
-NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _, _, _)
-THEN
-DB_CA_Trader_DynamicGenerationReady(_Trader, 0, 0, 0);
-
-IF
-CharacterCharacterEvent((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader, "Event_CA_TradeOpened")
-AND
-DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal)
-AND
-_TalentVal <= 0
-AND
-CA_AddTalentBooks(_Trader)
-THEN
-NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal);
-DB_CA_Trader_DynamicGenerationReady(_Trader, 1, _SkillVal, _ExtraVal);
-
-IF
-CharacterCharacterEvent((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader, "Event_CA_TradeOpened")
-AND
-DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal)
-AND
-_SkillVal <= 0
-AND
-CA_AddSkillBooks(_Trader)
-THEN
-NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal);
-DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, 1, _ExtraVal);
-
-IF
-CharacterCharacterEvent((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader, "Event_CA_TradeOpened")
-AND
-DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal)
-AND
-_ExtraVal <= 0
-AND
-CA_AddAdditional(_Trader)
-THEN
-NOT DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, _ExtraVal);
-DB_CA_Trader_DynamicGenerationReady(_Trader, _TalentVal, _SkillVal, 1);
-
-IF
-TradeGenerationEnded(_Trader)
-AND
-CA_AddTalentBooks(_Trader)
-THEN
-DB_NOOP(1);
-
-IF
-TradeGenerationEnded(_Trader)
-AND
-CA_AddSkillBooks(_Trader)
-THEN
-DB_NOOP(1);
-
-IF
-TradeGenerationEnded(_Trader)
-AND
-CA_AddAdditional(_Trader)
-THEN
-DB_NOOP(1);
-
-IF
 RegionStarted(_Region)
 THEN
-//Reset dynamic generation
 CA_TradeTreasure_ResetDynamicGeneration();
 
 IF
@@ -415,6 +349,29 @@ DB_IsPlayer(_Player)
 THEN
 CA_TradeTreasure_ResetDynamicGeneration();
 
+IF
+TradeGenerationEnded(_Trader)
+THEN
+SetStoryEvent(_Trader, "Event_CA_TradeTreasure_Generate");
+
+IF
+RequestTrade(_Player, _Trader)
+THEN
+SetStoryEvent(_Trader, "Event_CA_TradeTreasure_Generate");
+
+IF
+ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player,_Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (CHARACTERGUID)_Trader)
+THEN
+SetStoryEvent(_Trader, "Event_CA_TradeTreasure_Generate");
+
+IF
+StoryEvent((CHARACTERGUID)_Trader, "Event_CA_TradeTreasure_Generate")
+THEN
+CA_TraderGen_TalentBooks(_Trader);
+CA_TraderGen_Skillbooks(_Trader);
+CA_TraderGen_Extra(_Trader);
 //END_REGION
 
 //REGION DEBUG
@@ -447,7 +404,7 @@ DB_CA_ModTraders(_Trader)
 AND
 DB_CA_Trader_SkillBooks(_ItemTemplate, _Skill)
 AND
-CA_GetTotalSkillsLearned(_Skill)
+CA_GetTotalSkillsbooksNeeded(_Skill)
 AND
 DB_CA_Trader_TempInt(_Val)
 AND
