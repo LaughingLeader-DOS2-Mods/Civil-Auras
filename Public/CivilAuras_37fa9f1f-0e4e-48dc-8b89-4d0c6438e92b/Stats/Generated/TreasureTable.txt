@@ -1,0 +1,9 @@
+treasure itemtypes "Common","Uncommon","Rare","Epic","Legendary","Divine","Unique"
+new treasuretable "ST_CA_Skillbooks"
+new subtable "1,1"
+object category "I_SKILLBOOK_CA_LuckyAura",1,0,0,0,0,0,0,0
+new treasuretable "ST_CA_Talentbooks"
+new subtable "1,1"
+object category "I_TALENTBOOK_CA_PetPal",1,0,0,0,0,0,0,0
+object category "I_SKILLBOOK_CA_StealthAura",1,0,0,0,0,0,0,0
+object category "I_SKILLBOOK_CA_PepTalk",1,0,0,0,0,0,0,0

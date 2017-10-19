@@ -54,6 +54,15 @@ CharacterAddTalent(_Player, _Talent);
 PROC
 CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item)
 AND
+CharacterHasTalent(_Player, _Talent, 1)
+AND
+NOT DB_CA_Talent_Blacklist(_Talent, _Player)
+THEN
+DB_CA_Talent_Blacklist(_Talent, _Player);
+
+PROC
+CA_TALENTBOOK_Unlock((CHARACTERGUID)_Player, (STRING)_Talent, (ITEMGUID)_Item)
+AND
 CharacterHasTalent(_Player, _Talent, 0)
 AND
 NOT DB_CA_Talent_Blacklist(_Talent, _Player)
@@ -87,7 +96,8 @@ DB_CA_Talent_Blacklist(_Talent, _Player)
 AND
 CA_Misc_Talentbook_PlayEffects(_Player, _Talent, 1)
 THEN
-DebugText(_Player, "[CivilAuras] Hey, no cheating!");
+//DebugText(_Player, "[CivilAuras] Hey, no cheating!");
+CharacterStatusText(_Player, "Talent was previously known. This book won't help you.");
 
 IF
 CharacterUsedItemTemplate(_Player, _Template, _Item)
@@ -299,6 +309,22 @@ IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "CON_CA_Potion_Attribute_ca660d0e-05b6-4e43-a612-7f22e9fd2205", (ITEMGUID)_Item)
 THEN
 CharacterAddAttributePoint(_Player, 1);
+//END_REGION
+
+//REGION MISC
+//Respec mirror expoit prevention
+IF
+RegionStarted(_Region)
+AND
+DB_CA_TalentBook_Talent(_Book, _Talent)
+AND
+DB_IsPlayer(_Player)
+AND
+NOT DB_CA_Talent_Blacklist(_Talent, _Player)
+AND
+CharacterHasTalent(_Player, _Talent, 1)
+THEN
+DB_CA_Talent_Blacklist(_Talent, _Player);
 //END_REGION
 
 //REGION DATABASE_REFRESH_OLD

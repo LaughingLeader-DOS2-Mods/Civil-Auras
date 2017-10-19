@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="e4012e18-6a6b-4f40-aefa-c83b078c136c">
+  <stat_objects>
+    <stat_object index="0" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="ST_CA_Skillbooks" />
+        <field name="DropCount" type="StringStatObjectFieldDefinition" value="1,1" />
+        <field name="ObjectCategory" type="StringStatObjectFieldDefinition" value="I_SKILLBOOK_CA_LuckyAura" />
+        <field name="Frequency" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+    <stat_object index="1" is_substat="true">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="ST_CA_Skillbooks_substat" />
+        <field name="ObjectCategory" type="StringStatObjectFieldDefinition" value="I_SKILLBOOK_CA_StealthAura" />
+        <field name="Frequency" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="ST_CA_Skillbooks" />
+      </fields>
+    </stat_object>
+    <stat_object index="2" is_substat="true">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="New_Stat_1" />
+        <field name="ObjectCategory" type="StringStatObjectFieldDefinition" value="I_SKILLBOOK_CA_PepTalk" />
+        <field name="Frequency" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="ST_CA_Skillbooks" />
+      </fields>
+    </stat_object>
+    <stat_object index="3" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="ST_CA_Talentbooks" />
+        <field name="DropCount" type="StringStatObjectFieldDefinition" value="1,1" />
+        <field name="ObjectCategory" type="StringStatObjectFieldDefinition" value="I_TALENTBOOK_CA_PetPal" />
+        <field name="Frequency" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>
