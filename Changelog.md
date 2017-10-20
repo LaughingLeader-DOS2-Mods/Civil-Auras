@@ -21,7 +21,7 @@ Civil Auras Changelog
 		* Display/hide flag changes.
 			* This is a way to display flag changes above a character's head. Give it a shot if you're curious how the dialog menu works.
 		* Remove all bonus points from character.
-			* This is a way to reset your bonus civil point values, placing you back at base civil point values. Use this if you messed the game up somehow and your aura bonus points became permanent. This should ignore equipment bonuses, as they are ignored in the CharacterGetAbility function Larian made available.
+			* This is a way to reset your bonus civil point values, placing you back at base civil point values. Use this if you messed the game up somehow and your aura bonus points became permanent. Unequip your stat increasing equipment pieces first, if you don't want to mess something up!
 * Tweaked some scripts to hopefully be correct (singleplayer/multiplayer distinction with the barter sharing).
 * Removed barter sharing messages.
 	* Will possibly be added back in later, with an opt-in setting, and adjustable appearance rates.
