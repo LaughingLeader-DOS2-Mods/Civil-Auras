@@ -4,6 +4,25 @@ INITSECTION
 //DB_CA_TestDummy((CHARACTERGUID)S_Player_TestGareth_000_ff106095-41b6-419e-9663-db1cac2e39bd);
 //DB_CA_TestDummy((CHARACTERGUID)S_Player_TestBeast_000_977b5ea9-86ce-48d4-a36e-7cbeaf15a422);
 //DB_CA_TestDummy((CHARACTERGUID)S_Player_TestPlayer_ab423237-5f34-48b9-be48-11fc9e32a9c6);
+
+//DB_Debug_PreviousEquipment(_Player, _Slot, _Item);
+
+//REGION Equipment Slots
+DB_Debug_Slots("Weapon");
+DB_Debug_Slots("Shield");
+DB_Debug_Slots("Helmet");
+DB_Debug_Slots("Breast");
+DB_Debug_Slots("Leggings");
+DB_Debug_Slots("Ring");
+DB_Debug_Slots("Belt");
+DB_Debug_Slots("Boots");
+DB_Debug_Slots("Gloves");
+DB_Debug_Slots("Amulet");
+DB_Debug_Slots("Ring2");
+//DB_Debug_Slots("Wings");
+//DB_Debug_Slots("Horns");
+//DB_Debug_Slots("Overhead");
+//END_REGION
 KBSECTION
 //REGION FLAGS
 PROC
@@ -76,19 +95,45 @@ CharacterStatusText(_Player, "[DEBUG] Disabling auras before removing bonus poin
 
 //REGION BONUS POINTS
 PROC
-CA_Debug_RemoveBonusPoints((CHARACTERGUID)_Player, (STRING)_StatName)
+CA_Debug_ClearSavedEquipment((CHARACTERGUID)_Player)
 AND
-CharacterGetAbility(_Player, _StatName, _BonusValue)
+DB_Debug_PreviousEquipment(_Player, _Slot, _Item)
+THEN
+NOT DB_Debug_PreviousEquipment(_Player, _Slot, _Item);
+
+PROC
+CA_Debug_UnequipAll((CHARACTERGUID)_Player)
+AND
+DB_Debug_Slots(_Slot)
+AND
+CharacterGetEquippedItem(_Player, _Slot, (ITEMGUID)_Item)
+THEN
+CharacterUnequipItem(_Player, _Item);
+DB_Debug_PreviousEquipment(_Player, _Slot, _Item);
+
+PROC
+CA_Debug_EquipAllPrevious((CHARACTERGUID)_Player)
+AND
+DB_Debug_PreviousEquipment(_Player, _Slot, _Item)
+AND
+ItemIsInCharacterInventory(_Item, _Player, 1)
+THEN
+CharacterEquipItem(_Player, _Item);
+NOT DB_Debug_PreviousEquipment(_Player, _Slot, _Item);
+
+
+PROC
+CA_Debug_RemoveBonusPoints((CHARACTERGUID)_Player, (STRING)_StatName)
 AND
 CharacterGetBaseAbility(_Player, _StatName, _BaseValue)
 AND
-_BonusValue > _BaseValue
+_BaseValue > 0
 AND
-IntegerSubtract(_BonusValue, _BaseValue, _Extra)
+CharacterGetAbility(_Player, _StatName, _BonusValue)
 AND
-_Extra > 0
+IntegerSubtract(_BonusValue, _BonusValue, _Extra)
 AND
-IntegertoString(_Extra, _ExtraStr)
+IntegertoString(_BonusValue, _ExtraStr)
 AND
 StringConcatenate("[DEBUG] Removed ", _ExtraStr, _Str1)
 AND
@@ -107,6 +152,8 @@ AND
 StringConcatenate("CA_Timer_Debug_RemovePoints_", _Name, _TimerName)
 THEN
 CA_Debug_TurnOffAuras();
+CA_Debug_ClearSavedEquipment(_Player);
+CA_Debug_UnequipAll(_Player);
 TimerLaunch(_TimerName, 1000);
 DB_Debug_Timers(_Player, _TimerName);
 
@@ -119,12 +166,32 @@ CA_Debug_RemoveBonusPoints(_Player, "Luck");
 CA_Debug_RemoveBonusPoints(_Player, "Sneaking");
 CA_Debug_RemoveBonusPoints(_Player, "Persuasion");
 CA_Debug_RemoveBonusPoints(_Player, "Barter");
-CharacterStatusText(_Player, "[DEBUG] Bonus points removed for Luck, Sneaking, Persuasion, and Barter.");
+CharacterStatusText(_Player, "[DEBUG] Bonus points removal complete.");
 NOT DB_Debug_Timers(_Player, _TimerName);
 ObjectClearFlag(_Player, "CA_DEBUG_REMOVEBONUSPOINTS");
+CA_Debug_EquipAllPrevious(_Player);
 //END_REGION
 
-
+IF
+CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
+AND
+CharacterGetAbility(_Player, "Luck", _BonusVal)
+AND
+CharacterGetBaseAbility(_Player, "Luck", _BaseVal)
+AND
+IntegertoString(_BonusVal, _BonusStr)
+AND
+IntegertoString(_BaseVal, _BaseStr)
+AND
+StringConcatenate("Base[", _BaseStr, _Str1)
+AND
+StringConcatenate(_Str1, "] Bonus?[", _Str2)
+AND
+StringConcatenate(_Str2, _BonusStr, _Str3)
+AND
+StringConcatenate(_Str3, "]", _Message)
+THEN
+CharacterStatusText(_Player, _Message);
 
 /*
 

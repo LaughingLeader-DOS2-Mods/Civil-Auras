@@ -1,7 +1,7 @@
 {
    "save" : {
       "header" : {
-         "time" : 1508526375,
+         "time" : 1508533430,
          "version" : "2.0.8.2"
       },
       "regions" : {
@@ -683,9 +683,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Removing bonus points. Please wait 2 seconds..."
+                                                   "value" : "Removing equipment before removing bonus points. Please wait 2 seconds..."
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -2265,7 +2265,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Bonus points cleared."
+                                                   "value" : "Bonus points cleared and equipment re-equipped. Have a good day!"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -3183,9 +3183,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Civil Aura Settings"
+                                                   "value" : "Main Menu"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
