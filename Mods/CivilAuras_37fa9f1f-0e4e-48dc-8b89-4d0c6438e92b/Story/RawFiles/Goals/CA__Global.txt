@@ -2,10 +2,6 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 //Settings
-//DB_CA_Settings_AutoSneakParty((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
-//DB_CA_Settings_Barter_Messages(_Player, _On, _MaxRan, _NumToPass);
-//DB_CA_Settings_Barter_Messages((CHARACTERGUID)_Player, 1, 100, 75);
-//DB_CA_Settings_Barter_Blacklist(_User);
 //DB_CA_ModVersion("1.4.0"); // Old
 KBSECTION
 //REGION HELPER_METHODS
@@ -23,7 +19,6 @@ AND
 NOT DB_Illusionist(_Player,_)
 THEN
 DB_NOOP(1);
-
 
 PROC
 CA_PrintMessage((CHARACTERGUID)_Target, (STRING)_Prefix, (STRING)_Var, (STRING)_Suffix)
@@ -44,49 +39,6 @@ AND
 StringConcatenate(_Str1, _Suffix, _Str2)
 THEN
 CharacterStatusText(_Target, _Str2);
-
-//END_REGION
-
-//REGION SETTINGS
-PROC
-CA_ClearSettings_AutoSneak((CHARACTERGUID)_Player)
-AND
-DB_CA_Settings_AutoSneakParty(_Player, _Val)
-THEN
-NOT DB_CA_Settings_AutoSneakParty(_Player, _Val);
-
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_Book_CivilAuraSettings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
-AND
-//ObjectGetDialogFlag(_Player, "CA_Settings_Open", 0)
-CharacterIsInCombat(_Player,0)
-THEN
-//Proc_StartDialog((INTEGER)_Automated,(STRING)_Dialog,(GUIDSTRING)_Speaker1,(GUIDSTRING)_Speaker2)
-Proc_StartDialog(0, "CA_Dialog_Config", _Player);
-//PROC_GLOBAL_DialogStartRequested(_Player, _Item);
-//ObjectSetDialogFlag(_Player, "CA_Settings_Open", 1);
-
-IF
-ObjectFlagSet("CA_AUTOSNEAK_ON", (CHARACTERGUID)_Player, _Instance)
-//ObjectWasTagged((ITEMGUID)_Item, "CA_CONFIG_AUTOSNEAK")
-//AND
-//ItemGetOwner(_Item, _Player)
-AND
-DB_IsPlayer(_Player)
-THEN
-CA_ClearSettings_AutoSneak(_Player);
-DB_CA_Settings_AutoSneakParty(_Player, 1);
-ObjectClearFlag(_Player, "CA_AUTOSNEAK_OFF");
-CharacterStatusText(_Player, "Auto-Party Sneak On");
-
-IF
-ObjectFlagSet("CA_AUTOSNEAK_OFF", (CHARACTERGUID)_Player, _Instance)
-AND
-DB_IsPlayer(_Player)
-THEN
-CA_ClearSettings_AutoSneak(_Player);
-ObjectClearFlag(_Player, "CA_AUTOSNEAK_ON");
-CharacterStatusText(_Player, "Auto-Party Sneak Off");
 
 //END_REGION
 
@@ -140,24 +92,24 @@ DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
 IF
 RegionStarted("TUT_Tutorial_A")
 AND
-NOT DB_CA_ModVersion("1.5.0")
+NOT DB_CA_ModVersion("1.6.0")
 THEN
-DB_CA_ModVersion("1.5.0");
+DB_CA_ModVersion("1.6.0");
 CA_Global_BuildSettings();
 
 IF
 CharacterCreationFinished(_Player)
 AND
-NOT DB_CA_ModVersion("1.5.0")
+NOT DB_CA_ModVersion("1.6.0")
 THEN
-DB_CA_ModVersion("1.5.0");
+DB_CA_ModVersion("1.6.0");
 CA_Global_BuildSettings();
 
 //For refreshing existing saves
 IF
 SavegameLoaded(_,_,_,_)
 AND
-NOT DB_CA_ModVersion("1.5.0")
+NOT DB_CA_ModVersion("1.6.0")
 AND
 DB_IsPlayer(_Player)
 AND
@@ -165,7 +117,7 @@ NOT DB_CA_Refreshing(1)
 THEN
 CA_Global_ResetDatabases();
 CA_Global_BuildSettings();
-DB_CA_ModVersion("1.5.0");
+DB_CA_ModVersion("1.6.0");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");
 

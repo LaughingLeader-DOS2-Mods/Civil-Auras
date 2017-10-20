@@ -1,10 +1,131 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_CA_TestDummy((CHARACTERGUID)S_Player_TestGareth_000_ff106095-41b6-419e-9663-db1cac2e39bd);
-DB_CA_TestDummy((CHARACTERGUID)S_Player_TestBeast_000_977b5ea9-86ce-48d4-a36e-7cbeaf15a422);
+//DB_CA_TestDummy((CHARACTERGUID)S_Player_TestGareth_000_ff106095-41b6-419e-9663-db1cac2e39bd);
+//DB_CA_TestDummy((CHARACTERGUID)S_Player_TestBeast_000_977b5ea9-86ce-48d4-a36e-7cbeaf15a422);
 //DB_CA_TestDummy((CHARACTERGUID)S_Player_TestPlayer_ab423237-5f34-48b9-be48-11fc9e32a9c6);
 KBSECTION
+//REGION FLAGS
+PROC
+CA_Settings_Debug_TraceFlag((CHARACTERGUID)_Player, (STRING)_FlagName, (INTEGER)_FlagValue)
+AND
+IntegertoString(_FlagValue, _FlagVal)
+AND
+StringConcatenate(_FlagName, " = ", _Part1)
+AND
+StringConcatenate(_Part1, _FlagVal, _Message)
+THEN
+CharacterStatusText(_Player, _Message);
+
+IF
+ObjectFlagSet(_Flag, (CHARACTERGUID)_Player, _Instance)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYFLAGS", 1)
+AND
+ObjectGetFlag(_Player, _Flag, _Val)
+THEN
+CA_Settings_Debug_TraceFlag(_Player, _Flag, _Val);
+
+IF
+ObjectFlagCleared(_Flag, (CHARACTERGUID)_Player, _Instance)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYFLAGS", 1)
+AND
+ObjectGetFlag(_Player, _Flag, _Val)
+THEN
+CA_Settings_Debug_TraceFlag(_Player, _Flag, _Val);
+
+IF
+GlobalFlagSet(_Flag)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYFLAGS", 1)
+AND
+GlobalGetFlag(_Flag, _Val)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Settings_Debug_TraceFlag(_Player, _Flag, _Val);
+
+IF
+GlobalFlagCleared(_Flag)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYFLAGS", 1)
+AND
+GlobalGetFlag(_Flag, _Val)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Settings_Debug_TraceFlag(_Player, _Flag, _Val);
+
+
+//END_REGION
+
+//REGION AURA_OFF
+PROC
+CA_Debug_TurnOffAuras()
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Luck_TurnAuraOff(_Player);
+CA_Stealth_TurnAuraOff(_Player);
+CA_RemoveMotivated(_Player);
+SetStoryEvent(_Player, "Event_CA_Bartering_TradeEnded");
+CharacterStatusText(_Player, "[DEBUG] Disabling auras before removing bonus points.");
+
+//END_REGION
+
+//REGION BONUS POINTS
+PROC
+CA_Debug_RemoveBonusPoints((CHARACTERGUID)_Player, (STRING)_StatName)
+AND
+CharacterGetAbility(_Player, _StatName, _BonusValue)
+AND
+CharacterGetBaseAbility(_Player, _StatName, _BaseValue)
+AND
+_BonusValue > _BaseValue
+AND
+IntegerSubtract(_BonusValue, _BaseValue, _Extra)
+AND
+_Extra > 0
+AND
+IntegertoString(_Extra, _ExtraStr)
+AND
+StringConcatenate("[DEBUG] Removed ", _ExtraStr, _Str1)
+AND
+StringConcatenate(_Str1, "points from ", _Str2)
+AND
+StringConcatenate(_Str2, _StatName, _Message)
+THEN
+CharacterRemoveAbility(_Player, _StatName, _Extra);
+CharacterStatusText(_Player, _Message);
+
+IF
+ObjectFlagSet("CA_DEBUG_REMOVEBONUSPOINTS", (CHARACTERGUID)_Player, _Instance)
+AND
+GetUUID(_Player, _Name)
+AND
+StringConcatenate("CA_Timer_Debug_RemovePoints_", _Name, _TimerName)
+THEN
+CA_Debug_TurnOffAuras();
+TimerLaunch(_TimerName, 1000);
+DB_Debug_Timers(_Player, _TimerName);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_Debug_Timers(_Player, _TimerName)
+THEN
+CA_Debug_RemoveBonusPoints(_Player, "Luck");
+CA_Debug_RemoveBonusPoints(_Player, "Sneaking");
+CA_Debug_RemoveBonusPoints(_Player, "Persuasion");
+CA_Debug_RemoveBonusPoints(_Player, "Barter");
+CharacterStatusText(_Player, "[DEBUG] Bonus points removed for Luck, Sneaking, Persuasion, and Barter.");
+NOT DB_Debug_Timers(_Player, _TimerName);
+ObjectClearFlag(_Player, "CA_DEBUG_REMOVEBONUSPOINTS");
+//END_REGION
+
+
+
 /*
 
 IF
@@ -47,8 +168,6 @@ GameEventSet("GAMEEVENT_GameStarted")
 THEN
 GoalCompleted;
 EXITSECTION
-NOT DB_CA_TestDummy(S_Player_TestGareth_000_ff106095-41b6-419e-9663-db1cac2e39bd);
-NOT DB_CA_TestDummy(S_Player_TestBeast_000_977b5ea9-86ce-48d4-a36e-7cbeaf15a422);
-//NOT DB_CA_TestDummy(S_Player_TestPlayer_ab423237-5f34-48b9-be48-11fc9e32a9c6);
+
 ENDEXITSECTION
 ParentTargetEdge "ZZZ_CivilAuras"

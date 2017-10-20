@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
-    <header version="2" time="1508392520" />
+    <header version="2" time="1508522025" />
     <version major="3" minor="1" revision="3" build="5" />
     <region id="IconUVList">
         <node id="root">
@@ -27,30 +27,37 @@
                     <attribute id="V2" value="0.124023" type="6" />
                 </node>
                 <node id="IconUV">
-                    <attribute id="MapKey" value="CA_Book_StealthAura" type="22" />
+                    <attribute id="MapKey" value="CA_Book_Settings" type="22" />
                     <attribute id="U1" value="0.375977" type="6" />
                     <attribute id="U2" value="0.499023" type="6" />
                     <attribute id="V1" value="0.000976563" type="6" />
                     <attribute id="V2" value="0.124023" type="6" />
                 </node>
                 <node id="IconUV">
-                    <attribute id="MapKey" value="CA_CatBag_Full" type="22" />
+                    <attribute id="MapKey" value="CA_Book_StealthAura" type="22" />
                     <attribute id="U1" value="0.500977" type="6" />
                     <attribute id="U2" value="0.624023" type="6" />
                     <attribute id="V1" value="0.000976563" type="6" />
                     <attribute id="V2" value="0.124023" type="6" />
                 </node>
                 <node id="IconUV">
-                    <attribute id="MapKey" value="CA_CatBait" type="22" />
+                    <attribute id="MapKey" value="CA_CatBag_Full" type="22" />
                     <attribute id="U1" value="0.625977" type="6" />
                     <attribute id="U2" value="0.749023" type="6" />
                     <attribute id="V1" value="0.000976563" type="6" />
                     <attribute id="V2" value="0.124023" type="6" />
                 </node>
                 <node id="IconUV">
-                    <attribute id="MapKey" value="CA_Chicken" type="22" />
+                    <attribute id="MapKey" value="CA_CatBait" type="22" />
                     <attribute id="U1" value="0.750977" type="6" />
                     <attribute id="U2" value="0.874023" type="6" />
+                    <attribute id="V1" value="0.000976563" type="6" />
+                    <attribute id="V2" value="0.124023" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="CA_Chicken" type="22" />
+                    <attribute id="U1" value="0.875977" type="6" />
+                    <attribute id="U2" value="0.999023" type="6" />
                     <attribute id="V1" value="0.000976563" type="6" />
                     <attribute id="V2" value="0.124023" type="6" />
                 </node>

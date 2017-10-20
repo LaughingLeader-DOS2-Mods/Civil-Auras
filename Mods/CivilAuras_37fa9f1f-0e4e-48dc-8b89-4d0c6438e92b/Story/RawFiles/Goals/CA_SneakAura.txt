@@ -35,6 +35,15 @@ THEN
 PlayEffect(_Player, "RS3_FX_Skills_Fire_Flamebreath_SubEmit_Smoke_01");
 PlaySound(_Player, "Proj_Gren_Smoke_Projectile");
 
+PROC
+CA_Stealth_TurnAuraOff((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
+THEN
+RemoveStatus(_Player, "CA_STEALTH_AURA");
+CA_ClearSneakActive(_Player);
+CharacterStatusText(_Player, "Stealth Aura Disabled");
+
 //END_REGION
 
 //REGION SKILL_USE
@@ -174,7 +183,7 @@ CA_ClearSneakBonus(_Player);
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
 AND
-NOT DB_CA_Settings_AutoSneakParty(_Player, 0)
+ObjectGetFlag(_Player, "CA_AUTOSNEAK", 1)
 AND
 HasActiveStatus(_AuraHost, "SNEAKING", 1)
 AND
@@ -189,6 +198,19 @@ CharacterStatusText(_Player, "Auto-Sneaking");
 //END_REGION
 
 //REGION DEBUG
+IF
+CharacterStatusApplied((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYFLAGS", 1)
+AND
+ObjectGetFlag(_Player, "CA_AUTOSNEAK", _State)
+AND
+IntegertoString(_State, _FlagVal)
+AND
+StringConcatenate("CA_AUTOSNEAK = ", _FlagVal, _Message)
+THEN
+CharacterStatusText(_Player, _Message);
+
 /*
 IF
 GameEventSet("GAMEEVENT_GameStarted")

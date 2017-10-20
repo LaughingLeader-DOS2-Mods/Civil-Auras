@@ -11,6 +11,13 @@ DB_CA_PersuasionBonus(_Player, _Val)
 THEN
 NOT DB_CA_PersuasionBonus(_Player, _Val);
 
+PROC
+CA_RemoveMotivated((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_MOTIVATED", 1)
+THEN
+RemoveStatus(_Player, "CA_MOTIVATED");
+
 /*
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)

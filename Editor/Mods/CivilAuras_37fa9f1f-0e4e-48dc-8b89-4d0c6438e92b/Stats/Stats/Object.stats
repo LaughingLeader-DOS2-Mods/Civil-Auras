@@ -69,6 +69,10 @@
         <field name="UseAPCost" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="InventoryTab" type="EnumerationStatObjectFieldDefinition" value="5" enumeration_type_name="InventoryTabs" />
+        <field name="AddToBottomBar" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="Unique" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MaxLevel" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
     <stat_object index="5" is_substat="false">
