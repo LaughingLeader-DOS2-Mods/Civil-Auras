@@ -2,14 +2,29 @@ Civil Auras Changelog
 =======
 # 1.6.0
 * New CA Settings Book
-	* Contains the follow menus:
-		* Aura Settings
-			* Currently just used to enable/disable auto-sneak with the Stealth Aura.
-		* Barter Settings
-			* Allows you to blacklist users from sharing bartering bonuses. For instance, turning this on in singleplayer will effectively disable it. Using it in multiplayer will disable it for the individual user and all their assigned characters.
-		* Debug Commands
-			* Contains many useful commands, such as refreshing the vendor item generation system, refreshing your CA skills (if one happens to disappear), spawning the skillbooks, and more.
-			* Also includes a command to reset bonus points back to their base values. These functions ignore equipment bonuses (whether I want them to or not).
+	* Aura Settings
+		* Enable/Disable Auto-Sneak when affected by the Stealth Aura (on the first apply).
+			* When enabled, when the "Stealthy" status first hits a controlled character, they'll auto-sneak. Characters controlled by other users should be ignored.
+	* Barter Settings
+		* Enable/Disable barter sharing.
+			* Allows you to blacklist users from sharing bartering bonuses.
+				* For instance, turning this on in singleplayer will effectively disable it. Using it in multiplayer will disable it for the individual user and all their assigned characters.
+	* Debug Commands
+		* Add all CA skillbooks to inventory.
+			* Obviously you're free to cheat to your heart's content, but consider using this as a last resort if, for some reason, the vendors don't appear to be selling the books.
+		* Refresh CA skills.
+			* This will add/remove CA skills you've learned. This is a workaround for a bug where your learned skills get removed, yet the game still thinks you've memorized them, so the skillbooks won't work.
+		* Force vendor refresh.
+			* This forces a reset in my trader item generation system. Normally this reset occurs on level up, during natural trader generation, or upon entering a new level.
+		* Refresh databases.
+			* This is an internal command I use to force previous saves to update certain databases when upgrading to a newer version. You can manually force a refresh with this command.
+		* Display/hide flag changes.
+			* This is a way to display flag changes above a character's head. Give it a shot if you're curious how the dialog menu works.
+		* Remove all bonus points from character.
+			* This is a way to reset your bonus civil point values, placing you back at base civil point values. Use this if you messed the game up somehow and your aura bonus points became permanent. This should ignore equipment bonuses, as they are ignored in the CharacterGetAbility function Larian made available.
+* Tweaked some scripts to hopefully be correct (singleplayer/multiplayer distinction with the barter sharing).
+* Removed barter sharing messages.
+	* Will possibly be added back in later, with an opt-in setting, and adjustable appearance rates.
 
 # 1.5.1
 * Pep Talk tweaks:
