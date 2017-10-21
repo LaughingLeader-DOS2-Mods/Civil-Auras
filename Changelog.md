@@ -1,5 +1,9 @@
 Civil Auras Changelog
 =======
+# 1.6.1
+* Quick update to fix the "Remove Bonus Points" command.
+	* Made it remove equipment first before checking the bonus points. The equipment is then re-equipped once done.
+
 # 1.6.0
 * New CA Settings Book
 	* Aura Settings
