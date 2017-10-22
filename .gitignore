@@ -19,3 +19,27 @@ Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/RawFiles/story_header
 #Assets
 Editor/Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Assets/Effects/*
 Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Assets/*
+
+#Binary Files
+*.bik
+*.bnk
+*.bshd
+*.bullet
+*.cur
+*.dat
+*.data
+*.dds
+*.fnt
+*.gr2
+*.iggy
+*.iggytex
+*.lsb
+*.lsf
+*.lsfx
+*.osi
+*.patch
+*.png
+*.swf
+*.tga
+*.tmpl
+*.ttf
