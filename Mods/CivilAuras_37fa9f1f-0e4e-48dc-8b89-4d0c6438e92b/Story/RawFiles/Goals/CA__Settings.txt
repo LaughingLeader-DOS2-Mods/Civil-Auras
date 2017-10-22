@@ -100,7 +100,7 @@ SavegameLoaded(_,_,_,_)
 AND
 DB_IsPlayer(_Player)
 AND
-ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
+ItemTemplateIsInUserInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0, 0)
 THEN
 ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
 
@@ -110,9 +110,7 @@ ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Play
 PROC
 CA_Settings_InitSettings((CHARACTERGUID)_Player)
 AND
-CharacterIsPlayer(_Player, 1)
-AND
-ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
+ItemTemplateIsInUserInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0, 0)
 THEN
 ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
 
