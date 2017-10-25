@@ -101,6 +101,8 @@ AND
 DB_IsPlayer(_Player)
 AND
 ItemTemplateIsInUserInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0, 0)
+AND
+ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
 THEN
 ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
 
@@ -111,6 +113,8 @@ PROC
 CA_Settings_InitSettings((CHARACTERGUID)_Player)
 AND
 ItemTemplateIsInUserInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0, 0)
+AND
+ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
 THEN
 ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
 
@@ -126,7 +130,7 @@ AND
 DB_IsPlayer(_Player)
 THEN
 ObjectSetFlag(_Player, "CA_AUTOSNEAK");
-ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
+CA_Settings_InitSettings(_Player);
 
 IF
 StoryEvent(_Object, "CA_Refresh")

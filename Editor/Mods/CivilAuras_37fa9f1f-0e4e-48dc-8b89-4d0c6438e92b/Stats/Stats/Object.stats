@@ -61,7 +61,7 @@
         <field name="Name" type="NameStatObjectFieldDefinition" value="BOOK_CA_Settings" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
         <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="df08089b-1a04-47a5-9294-7103f9e3b7a2" />
-        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="20" enumeration_type_name="ActPart" />
         <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
