@@ -1,5 +1,8 @@
 Civil Auras Changelog
 =======
+#1.6.2
+* Quick fix for a double config book spawning in a new game.
+
 # 1.6.1
 * Quick update to fix the "Remove Bonus Points" command.
 	* Made it remove equipment first before checking the bonus points. The equipment is then re-equipped once done.
