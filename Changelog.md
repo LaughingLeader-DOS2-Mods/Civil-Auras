@@ -1,5 +1,12 @@
 Civil Auras Changelog
 =======
+# 1.6.5
+* CA Settings Book
+	* Made most debug commands host-only commands.
+	* Remove gold value from the skillbooks spawned by the debug command (host only).
+* Mirror Exploit/Bugs
+	* Added an additional check for barter when interacting with the mirror.
+
 # 1.6.4
 * Quick update in response to the latest game patch.
 

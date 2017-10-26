@@ -86,3 +86,21 @@ data "Act part" "5"
 data "Value" "10"
 data "Weight" "200"
 
+new entry "SKILLBOOK_CA_LuckyAura_Debug"
+type "Object"
+using "SKILLBOOK_CA_LuckyAura"
+data "Value" "0"
+data "Weight" "0"
+
+new entry "SKILLBOOK_CA_StealthAura_Debug"
+type "Object"
+using "SKILLBOOK_CA_StealthAura"
+data "Value" "0"
+data "Weight" "0"
+
+new entry "SKILLBOOK_CA_PepTalk_Debug"
+type "Object"
+using "SKILLBOOK_CA_PepTalk"
+data "Value" "0"
+data "Weight" "0"
+

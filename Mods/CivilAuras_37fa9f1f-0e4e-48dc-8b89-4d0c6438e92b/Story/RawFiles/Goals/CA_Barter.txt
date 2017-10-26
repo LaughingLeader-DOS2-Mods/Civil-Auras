@@ -76,6 +76,18 @@ AND
 NOT DB_CA_HighestBarter(0)
 THEN
 DB_CA_HighestBarter(0);
+
+QRY
+CA_Barter_UserMatch((CHARACTERGUID)_Player, (CHARACTERGUID)_Character)
+AND
+CharacterGetReservedUserID(_Player,_PlayerID)
+AND
+CharacterGetReservedUserID(_Character, _CharID)
+AND
+_CharID == _PlayerID
+THEN
+DB_NOOP(1);
+
 //END_REGION
 
 //REGION HIGHEST_AUTO_RESET
@@ -132,15 +144,11 @@ _Users > 1
 AND
 CA_GetHighestBarter() // Only needs to be called once
 AND
-CharacterGetReservedUserID(_Player,_ID)
-AND
 DB_IsPlayer(_UserCharacter)
 AND
 CA_SafeToChangeStats(_UserCharacter)
 AND
-CharacterGetReservedUserID(_UserCharacter, _UID)
-AND
-_UID == _ID
+CA_Barter_UserMatch(_Player, _UserCharacter)
 AND
 CharacterGetAbility(_UserCharacter, "Barter", _PlayerVal)
 AND
@@ -152,19 +160,15 @@ CharacterAddAbility(_UserCharacter, "Barter", _BarterBonus);
 //CA_PrintInt(_UserCharacter, "Bonus[", _BarterBonus, "]");
 
 IF
-TradeEnds((CHARACTERGUID)_Target, (CHARACTERGUID)_Trader)
+TradeEnds((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
 AND
 DB_UserCounter(_Users)
 AND
 _Users > 1
 AND
-CharacterGetReservedUserID(_Target, _ID)
-AND
 DB_IsPlayer(_UserCharacter)
 AND
-CharacterGetReservedUserID(_UserCharacter, _UID)
-AND
-_UID == _ID
+CA_Barter_UserMatch(_Player, _UserCharacter)
 THEN
 SetStoryEvent(_UserCharacter, "Event_CA_Bartering_TradeEnded");
 
@@ -201,6 +205,8 @@ AND
 DB_IsPlayer(_Player) // Apply to all player characters
 AND
 CA_SafeToChangeStats(_Player)
+AND
+CA_Barter_UserMatch(_SoloPlayer, _Player)
 AND
 CharacterGetAbility(_Player, "Barter", (INTEGER)_PlayerVal)
 AND
@@ -272,6 +278,45 @@ NOT DB_CA_Barter_LastMessage(_Message);
 DB_CA_Barter_LastMessage(_Message);
 */
 
+//END_REGION
+
+//REGION MIRROR_EXPLOIT
+//Mirror Exploit Prevention
+IF
+CharacterUsedItem(_Player,ITEMGUID_S_LV_Mirror_9a0a95b9-1bd0-4a33-b7e6-bd9be41ce3f3)
+AND
+DB_CA_BarterBonus(_Player, _BarterBonus)
+THEN
+CharacterRemoveAbility(_Player, "Barter", _BarterBonus);
+NOT DB_CA_BarterBonus(_Player, _BarterBonus);
+//END_REGION
+
+//REGION DATABASE_REFRESH
+PROC
+CA_Barter_ResetDatabases()
+AND
+DB_CA_BarterParty_Message(_Int, _Val)
+THEN
+NOT DB_CA_BarterParty_Message(_Int, _Val);
+
+PROC
+CA_Barter_ResetDatabases()
+AND
+DB_CA_HighestBarter(_Val)
+THEN
+NOT DB_CA_HighestBarter(_Val);
+
+IF
+StoryEvent(_Object, "CA_Refresh")
+THEN
+CA_Barter_ResetDatabases();
+DB_CA_HighestBarter(0);
+DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
+DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
+DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
+DB_CA_BarterParty_Message(3, "Looking for a discount?");
+DB_CA_BarterParty_Message(4, "I have just the discount for you.");
+DB_CA_BarterParty_Message(5, "Welcome. Haggle away.");
 //END_REGION
 
 //REGION DEBUG
@@ -448,34 +493,6 @@ StringConcatenate(_Msg1, " users", _Msg2)
 THEN
 CharacterStatusText(_Trader, _Msg2);
 */
-//END_REGION
-
-//REGION DATABASE_REFRESH
-PROC
-CA_Barter_ResetDatabases()
-AND
-DB_CA_BarterParty_Message(_Int, _Val)
-THEN
-NOT DB_CA_BarterParty_Message(_Int, _Val);
-
-PROC
-CA_Barter_ResetDatabases()
-AND
-DB_CA_HighestBarter(_Val)
-THEN
-NOT DB_CA_HighestBarter(_Val);
-
-IF
-StoryEvent(_Object, "CA_Refresh")
-THEN
-CA_Barter_ResetDatabases();
-DB_CA_HighestBarter(0);
-DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
-DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
-DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
-DB_CA_BarterParty_Message(3, "Looking for a discount?");
-DB_CA_BarterParty_Message(4, "I have just the discount for you.");
-DB_CA_BarterParty_Message(5, "Welcome. Haggle away.");
 //END_REGION
 EXITSECTION
 

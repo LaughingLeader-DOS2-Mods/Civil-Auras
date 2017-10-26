@@ -274,7 +274,6 @@ TimerCancel(_ItemTemplate);
 
 //END_REGION
 
-
 //REGION TREASURE_METHODS
 PROC
 CA_TraderGen_Skillbooks((CHARACTERGUID)_Trader)

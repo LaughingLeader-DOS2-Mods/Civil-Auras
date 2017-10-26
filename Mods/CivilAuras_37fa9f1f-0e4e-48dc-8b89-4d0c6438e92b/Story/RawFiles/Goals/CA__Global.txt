@@ -1,10 +1,9 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-//Settings
-//DB_CA_ModVersion("1.4.0"); // Old
+
 KBSECTION
-//REGION HELPER_METHODS
+//REGION MIRROR_EXPLOIT
 QRY
 CA_PlayerInMirror((CHARACTERGUID)_Player)
 AND
@@ -19,7 +18,9 @@ AND
 NOT DB_Illusionist(_Player,_)
 THEN
 DB_NOOP(1);
+//END_REGION
 
+//REGION HELPER_METHODS
 PROC
 CA_PrintMessage((CHARACTERGUID)_Target, (STRING)_Prefix, (STRING)_Var, (STRING)_Suffix)
 AND
@@ -92,24 +93,24 @@ DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
 IF
 RegionStarted("TUT_Tutorial_A")
 AND
-NOT DB_CA_ModVersion("1.6.0")
+NOT DB_CA_ModVersion("1.6.5")
 THEN
-DB_CA_ModVersion("1.6.0");
+DB_CA_ModVersion("1.6.5");
 CA_Global_BuildSettings();
 
 IF
 CharacterCreationFinished(_Player)
 AND
-NOT DB_CA_ModVersion("1.6.0")
+NOT DB_CA_ModVersion("1.6.5")
 THEN
-DB_CA_ModVersion("1.6.0");
+DB_CA_ModVersion("1.6.5");
 CA_Global_BuildSettings();
 
 //For refreshing existing saves
 IF
 SavegameLoaded(_,_,_,_)
 AND
-NOT DB_CA_ModVersion("1.6.0")
+NOT DB_CA_ModVersion("1.6.5")
 AND
 DB_IsPlayer(_Player)
 AND
@@ -117,7 +118,7 @@ NOT DB_CA_Refreshing(1)
 THEN
 CA_Global_ResetDatabases();
 CA_Global_BuildSettings();
-DB_CA_ModVersion("1.6.0");
+DB_CA_ModVersion("1.6.5");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");
 

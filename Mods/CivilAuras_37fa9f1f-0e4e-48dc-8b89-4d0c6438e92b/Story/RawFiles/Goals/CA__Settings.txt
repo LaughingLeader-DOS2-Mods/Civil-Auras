@@ -73,9 +73,9 @@ IF
 ObjectFlagSet("CA_DEBUG_ADDBOOKS", (CHARACTERGUID)_Player, _Instance)
 THEN
 ObjectClearFlag(_Player, "CA_DEBUG_ADDBOOKS");
-ItemTemplateAddTo("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", _Player, 1);
-ItemTemplateAddTo("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", _Player, 1);
-ItemTemplateAddTo("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", _Player, 1);
+ItemTemplateAddTo("BOOK_CA_Skill_LuckyAura_Debug_ad983c5f-8b04-412d-a31e-b26e0dd8f849", _Player, 1);
+ItemTemplateAddTo("BOOK_CA_Skill_StealthAura_Debug_3127cb67-3f22-4958-b1ab-a88653ea6c6f", _Player, 1);
+ItemTemplateAddTo("BOOK_CA_Skill_PepTalk_Debug_1e0b4efd-0702-474a-be64-6762e26e26ef", _Player, 1);
 //ItemTemplateAddTo("MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", _Player, 1);
 //ItemTemplateAddTo("MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", _Player, 1);
 
@@ -90,7 +90,7 @@ AND
 CharacterIsInCombat(_Player,0)
 THEN
 CA_Settings_InitSettings(_Player);
-Proc_StartDialog(0, "CA_Dialog_Config", _Player, _Item);
+Proc_StartDialog(0, "CA_Dialog_Config", _Item, _Player);
 
 //END_REGION
 
@@ -105,6 +105,32 @@ AND
 ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
 THEN
 ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
+
+//END_REGION
+
+//REGION HOST_FLAGGING
+PROC
+CA_Settings_MarkHost((CHARACTERGUID)_Player)
+AND
+CharacterGetHostCharacter(_Player)
+THEN
+UserSetFlag(_Player, "CA_USER_ISHOST");
+
+PROC
+CA_Settings_MarkHost((CHARACTERGUID)_Player)
+AND
+NOT CharacterGetHostCharacter(_Player)
+AND
+UserGetFlag(_Player, "CA_USER_ISHOST", 1)
+THEN
+UserClearFlag(_Player, "CA_USER_ISHOST", 0);
+
+IF
+GameStarted(_Level, _)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Settings_MarkHost(_Player);
 
 //END_REGION
 

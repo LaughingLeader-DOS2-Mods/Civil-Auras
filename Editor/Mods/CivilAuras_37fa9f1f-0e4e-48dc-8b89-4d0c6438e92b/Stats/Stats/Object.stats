@@ -105,5 +105,29 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="200" />
       </fields>
     </stat_object>
+    <stat_object index="8" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_LuckyAura_Debug" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="SKILLBOOK_CA_LuckyAura" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
+      </fields>
+    </stat_object>
+    <stat_object index="9" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_StealthAura_Debug" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="SKILLBOOK_CA_StealthAura" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
+      </fields>
+    </stat_object>
+    <stat_object index="10" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_PepTalk_Debug" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="SKILLBOOK_CA_PepTalk" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>
