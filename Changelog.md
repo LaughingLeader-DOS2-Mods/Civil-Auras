@@ -1,6 +1,9 @@
 Civil Auras Changelog
 =======
-#1.6.2
+# 1.6.4
+* Quick update in response to the latest game patch.
+
+# 1.6.2
 * Quick fix for a double config book spawning in a new game.
 
 # 1.6.1
