@@ -1,0 +1,294 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+//DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+DB_CA_Aura_AuraStatus("Luck", "CA_LUCKY_AURA", "CA_LUCKY", "CA_LUCKBONUS");
+DB_CA_Aura_AuraStatus("Sneaking", "CA_STEALTH_AURA", "CA_STEALTHY", "CA_SNEAKBONUS");
+DB_CA_Aura_AuraStatus("Persuasion", "", "CA_MOTIVATED", "CA_PERSUASIONBONUS");
+DB_CA_Aura_AuraStatus("Barter", "", "", "CA_BARTERBONUS");
+
+//DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber)
+//DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount)
+//DB_CA_Aura_RefreshTimers(_TimerName, _Player)
+KBSECTION
+//REGION CLEAR
+QRY
+CA_QRY_Aura_ClearBonus((CHARACTERGUID)_Player, (STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 0)
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Aura_ClearBonus((CHARACTERGUID)_Player, (STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status);
+
+PROC
+CA_Aura_ClearBonus((CHARACTERGUID)_Player, (STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status);
+
+PROC
+CA_Aura_ClearPreviouStackAmount((CHARACTERGUID)_Player, (STRING)_Status)
+AND
+DB_CA_Aura_StackAmount(_Player, _Status, _StackAmount)
+THEN
+NOT DB_CA_Aura_StackAmount(_Player, _Status, _StackAmount);
+
+PROC
+CA_Aura_ClearRecordedBonus((CHARACTERGUID)_Player, (STRING)_Stat)
+AND
+DB_CA_Aura_LastBonus(_AuraHost, _Player, _Stat, _TargetBonus, _StackAmount)
+THEN
+NOT DB_CA_Aura_LastBonus(_AuraHost, _Player, _Stat, _TargetBonus, _StackAmount);
+
+//END_REGION
+
+//REGION BONUS
+PROC
+CA_Aura_RecordBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (STRING)_Stat, (INTEGER)_TargetBonus, (INTEGER)_StackAmount)
+THEN
+CA_Aura_ClearRecordedBonus(_TargetPlayer, _Stat);
+DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount);
+
+PROC
+CA_Aura_DetermineBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (STRING)_Stat, (STRING)_Status)
+AND
+CharacterGetAbility(_AuraHost, _Stat, _MaxVal)
+AND
+CharacterGetAbility(_TargetPlayer, _Stat, _CurVal)
+AND
+_CurVal < _MaxVal
+AND
+IntegerSubtract(_MaxVal, _CurVal, _BonusVal)
+AND
+_BonusVal > 0
+THEN
+CA_Aura_ClearPreviouStackAmount(_TargetPlayer, _Status);
+DB_CA_Aura_StackAmount(_TargetPlayer, _Status, _BonusVal);
+CA_Aura_RecordBonus(_AuraHost, _TargetPlayer, _Stat, _MaxVal, _BonusVal);
+
+//END_REGION
+
+//REGION APPLYING
+PROC
+CA_Aura_ApplyBonus((CHARACTERGUID)_Player, (STRING)_Status)
+AND
+NOT DB_CA_Aura_ApplyTimers(_, _Player, _Status, _)
+AND
+GetUUID(_Player, _PlayerID)
+AND
+StringConcatenate("CA_Timers_ApplyAura_", _PlayerID, _TimerName)
+THEN
+DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, 1);
+TimerLaunch(_TimerName, 1);
+
+PROC
+CA_Aura_ProcessTimer((STRING)_TimerName)
+AND
+DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber)
+AND
+DB_CA_Aura_StackAmount(_Player, _Status, _MaxStacks)
+AND
+_StackNumber > _MaxStacks
+THEN
+NOT DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber);
+
+PROC
+CA_Aura_ProcessTimer((STRING)_TimerName)
+AND
+DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber)
+AND
+DB_CA_Aura_StackAmount(_Player, _Status, _MaxStacks)
+AND
+_StackNumber <= _MaxStacks
+AND
+IntegerSum(_StackNumber, 1, _NewStackNum)
+THEN
+NOT DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber);
+DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _NewStackNum);
+ApplyStatus(_Player, _Status, -1.0, 1);
+TimerLaunch(_TimerName, 1);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_Aura_ApplyTimers(_TimerName,_,_,_)
+THEN
+CA_Aura_ProcessTimer(_TimerName);
+
+PROC
+CA_Aura_ApplyAuraBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (STRING)_Stat)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+THEN
+CA_Aura_ClearBonus(_TargetPlayer, _BonusStatus);
+CA_Aura_DetermineBonus(_AuraHost, _TargetPlayer, _Stat, _BonusStatus);
+CA_Aura_ApplyBonus(_TargetPlayer, _BonusStatus);
+
+PROC
+CA_Aura_RemoveAuraBonus((CHARACTERGUID)_Player, (STRING)_Stat)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+THEN
+CA_Aura_ClearBonus(_Player, _BonusStatus);
+CA_Aura_ClearRecordedBonus(_Player, _Stat);
+CA_Aura_ClearPreviouStackAmount(_Player, _BonusStatus);
+
+//END_REGION
+
+//REGION AURA_CHECKING
+QRY
+CA_QRY_Aura_AuraActive((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _HostStatus, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Aura_AuraApplied((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _AuraStatus, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Aura_BonusActive((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _BonusStatus, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Aura_AffectedByAura((CHARACTERGUID)_Player)
+AND
+CA_QRY_Aura_AuraActive(_Player)
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Aura_AffectedByAura((CHARACTERGUID)_Player)
+AND
+CA_QRY_Aura_AuraApplied(_Player)
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Aura_AffectedByAura((CHARACTERGUID)_Player)
+AND
+CA_QRY_Aura_BonusActive(_Player)
+THEN
+DB_NOOP(1);
+//END_REGION
+
+//REGION REFRESHING
+QRY
+CA_QRY_Aura_BonusExceeded((CHARACTERGUID)_Player, (STRING)_Stat, (INTEGER)_Bonus)
+AND
+CharacterGetAbility(_Player, _Stat, _CurrentBonus)
+AND
+_CurrentBonus != _Bonus
+THEN
+DB_NOOP(1);
+
+PROC
+CA_Aura_RefreshBonus((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _BonusStatus, 1)
+AND
+DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount)
+AND
+CA_QRY_Aura_BonusExceeded(_Player, _Stat, _TargetBonus)
+THEN
+CA_Aura_ApplyAuraBonus(_AuraHost, _TargetPlayer, _Stat);
+
+PROC
+CA_Aura_RefreshAura((CHARACTERGUID)_Player)
+AND
+CA_QRY_Aura_BonusActive(_Player)
+THEN
+CA_Aura_RefreshBonus(_Player);
+
+PROC
+CA_Aura_RefreshAura((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _HostStatus, 1)
+THEN
+RemoveStatus(_Player, _HostStatus);
+ApplyStatus(_Player, _HostStatus, -1.0, 1);
+
+PROC
+CA_Aura_RefreshPlayers()
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Aura_RefreshAura(_Player);
+
+IF
+ItemEquipped(_Item, _Player)
+THEN
+CA_Aura_RefreshPlayers();
+
+IF
+ItemUnEquipped(_Item, _Player)
+THEN
+CA_Aura_RefreshPlayers();
+
+IF
+CharacterCreationFinished(_Player)
+THEN
+CA_Aura_RefreshAura(_Player);
+
+IF
+CharacterLeveledUp(_Player)
+AND
+CA_QRY_Aura_AffectedByAura(_Player)
+AND
+NOT DB_CA_Aura_RefreshTimers(_, _Player)
+AND
+GetUUID(_Player, _PlayerID)
+AND
+StringConcatenate("CA_Timers_RefreshAura_", _PlayerID, _TimerName)
+THEN
+DB_CA_Aura_RefreshTimers(_TimerName, _Player);
+TimerLaunch(_TimerName, 10000);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_CA_Aura_RefreshTimers(_TimerName, _Player)
+THEN
+NOT DB_CA_Aura_RefreshTimers(_TimerName, _Player);
+CA_Aura_RefreshAura(_Player);
+
+//END_REGION
+
+//REGION LEGACY_REMOVAL
+PROC
+CA_Legacy_RemoveOldBonus((CHARACTERGUID)_Player, (STRING)_Stat, (INTEGER)_RemoveAmount)
+AND
+CharacterGetAbility(_Player, _Stat, _Val)
+AND
+_Val > 0
+THEN
+CharacterRemoveAbility(_Player, _Stat, _RemoveAmount);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "ZZZ_CivilAuras"

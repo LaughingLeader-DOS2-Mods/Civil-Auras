@@ -3,7 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 //DB_CA_PersuasionBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 KBSECTION
-//REGION PERSUASION
 PROC
 CA_ClearPersuasionBonus((CHARACTERGUID)_Player)
 AND
@@ -18,6 +17,26 @@ HasActiveStatus(_Player, "CA_MOTIVATED", 1)
 THEN
 RemoveStatus(_Player, "CA_MOTIVATED");
 
+PROC
+CA_Persuasion_PlayAuraHostEffect((CHARACTERGUID)_Player)
+AND
+GetPosition(_Player, _X, _PY, _Z)
+AND
+RealSum(_PY, 2.0, _Y)
+THEN
+//CA_FX_Motivated_Impact_01:Dummy_OverheadFX:cast
+PlayEffectAtPosition("CA_FX_Motivated_Impact_01", _X, _Y, _Z);
+PlaySound(_Player, "Items_Inventory_Consumeables_Magic");
+
+PROC
+CA_Persuasion_PlayAuraEffect((CHARACTERGUID)_Player)
+AND
+GetPosition(_Player, _X, _PY, _Z)
+AND
+RealSum(_PY, 2.0, _Y)
+THEN
+PlayEffectAtPosition("CA_FX_Motivated_Impact_01", _X, _Y, _Z);
+
 /*
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
@@ -31,67 +50,70 @@ THEN
 DisplayText(_Caster, _Message);
 */
 
+//REGION SKILL_USE
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
 AND
-CA_SafeToChangeStats(_Player)
-AND
 HasActiveStatus(_Target, "CA_MOTIVATED", 0)
-AND
-CharacterGetAbility(_Caster, "Persuasion", (INTEGER)_CasterVal)
-AND
-CharacterGetAbility(_Target, "Persuasion", (INTEGER)_TargetVal)
-AND
-_CasterVal > _TargetVal
-AND
-IntegerSubtract(_CasterVal, _TargetVal, _Bonus)
 THEN
-ApplyStatus(_Target, "CA_MOTIVATED", 30.0);
-CharacterAddAbility(_Target, "Persuasion", _Bonus);
-CA_ClearPersuasionBonus(_Target);
-DB_CA_PersuasionBonus(_Target, _Bonus);
+PlaySound(_Target, "Items_Inventory_Consumeables_Magic");
+ApplyStatus(_Target, "CA_MOTIVATED", 30.0, 1);
 
+IF
+CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_PersuasionToggle", _)
+AND
+HasAppliedStatus(_Player, "CA_PERSUASION_AURA", 0)
+THEN
+CA_Persuasion_PlayAuraHostEffect(_Player);
+ApplyStatus(_Player, "CA_PERSUASION_AURA", -1.0, 1);
+CharacterStatusText(_Player, "Aura Enabled");
+
+IF
+CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_PersuasionToggle", _)
+AND
+HasActiveStatus(_Player, "CA_PERSUASION_AURA", 1)
+THEN
+RemoveStatus(_Player, "CA_PERSUASION_AURA");
+CharacterStatusText(_Player, "Aura Disabled");
+
+//END_REGION
+
+/*
 IF
 DialogEnded((STRING)_Dialog, (INTEGER)_ID)
 AND
 DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Player)
 AND
-DB_CA_PersuasionBonus(_Player, _Bonus)
-THEN
-RemoveStatus(_Player, "CA_MOTIVATED");
-
-IF
-CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED", (GUIDSTRING)_Causee)
-AND
-DB_CA_PersuasionBonus(_Player, _Bonus)
-THEN
-CharacterRemoveAbility(_Player, "Persuasion", _Bonus);
-CA_ClearPersuasionBonus(_Player);
-
-/*
-IF
-CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED", (GUIDSTRING)_Causee)
-AND
-CharacterGetAbility(_Player, "Persuasion", (INTEGER)_Val)
-AND
-_Val < 0
-AND
-IntegerProduct(_Val, -1, _CancelVal)
-THEN
-CharacterAddAbility(_Player, "Persuasion", _CancelVal);
-*/
-
-//END_REGION
-
-//REGION MIRROR_EXPLOIT
-//Mirror Exploit Prevention
-IF
-CharacterUsedItem(_Player,ITEMGUID_S_LV_Mirror_9a0a95b9-1bd0-4a33-b7e6-bd9be41ce3f3)
-AND
 HasActiveStatus(_Player, "CA_MOTIVATED", 1)
 THEN
 RemoveStatus(_Player, "CA_MOTIVATED");
+*/
+
+//REGION PARTY_BONUSES
+IF
+CharacterStatusApplied((CHARACTERGUID)_Player, "CA_MOTIVATED", (CHARACTERGUID)_AuraHost)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Persuasion_PlayAuraEffect(_Player);
+CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Persuasion");
+
+IF
+CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED",_)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Aura_RemoveAuraBonus(_Player, "Persuasion");
 //END_REGION
+
+//REGION LEGACY_REMOVAL
+PROC
+CA_Legacy_RemoveOldAuras((CHARACTERGUID)_Player)
+AND
+DB_CA_PersuasionBonus(_Player, _Val)
+THEN
+CA_Legacy_RemoveOldBonus(_Player, "Persuasion", _Val);
+NOT DB_CA_PersuasionBonus(_Player, _Val);
 EXITSECTION
 
 ENDEXITSECTION

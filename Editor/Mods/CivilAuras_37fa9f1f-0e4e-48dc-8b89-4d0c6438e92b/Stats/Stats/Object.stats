@@ -36,7 +36,7 @@
         <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="3a57d09c-fbc1-477d-b5df-7be5301487be" />
         <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
         <field name="Value" type="IntegerStatObjectFieldDefinition" value="150" />
-        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Persuasion 3" />
+        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Persuasion 2" />
         <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
@@ -44,6 +44,19 @@
       </fields>
     </stat_object>
     <stat_object index="3" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_PersuasionAura" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
+        <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="300" />
+        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Persuasion 5" />
+        <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+    <stat_object index="4" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="TALENTBOOK_CA_PetPal" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
@@ -56,7 +69,7 @@
         <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
-    <stat_object index="4" is_substat="false">
+    <stat_object index="5" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="BOOK_CA_Settings" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
@@ -75,7 +88,7 @@
         <field name="MaxLevel" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
-    <stat_object index="5" is_substat="false">
+    <stat_object index="6" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatSack_Empty" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
@@ -85,7 +98,7 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="1000" />
       </fields>
     </stat_object>
-    <stat_object index="6" is_substat="false">
+    <stat_object index="7" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatSack_Full" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="QUEST_CA_CatSack_Empty" />
@@ -95,7 +108,7 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="9000" />
       </fields>
     </stat_object>
-    <stat_object index="7" is_substat="false">
+    <stat_object index="8" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="QUEST_CA_CatBait" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Generics" />
@@ -105,7 +118,7 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="200" />
       </fields>
     </stat_object>
-    <stat_object index="8" is_substat="false">
+    <stat_object index="9" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_LuckyAura_Debug" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="SKILLBOOK_CA_LuckyAura" />
@@ -113,7 +126,7 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
       </fields>
     </stat_object>
-    <stat_object index="9" is_substat="false">
+    <stat_object index="10" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_StealthAura_Debug" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="SKILLBOOK_CA_StealthAura" />
@@ -121,10 +134,18 @@
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
       </fields>
     </stat_object>
-    <stat_object index="10" is_substat="false">
+    <stat_object index="11" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_PepTalk_Debug" />
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="SKILLBOOK_CA_PepTalk" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
+      </fields>
+    </stat_object>
+    <stat_object index="12" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="SKILLBOOK_CA_PersuasionAura_Debug" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="SKILLBOOK_CA_PersuasionAura" />
         <field name="Value" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="Weight" type="IntegerStatObjectFieldDefinition" value="0" />
       </fields>

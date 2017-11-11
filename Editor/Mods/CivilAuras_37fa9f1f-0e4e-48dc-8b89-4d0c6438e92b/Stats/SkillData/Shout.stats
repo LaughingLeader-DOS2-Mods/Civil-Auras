@@ -58,5 +58,33 @@
         <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
       </fields>
     </stat_object>
+    <stat_object index="2" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_PersuasionToggle" />
+        <field name="SkillType" type="StringStatObjectFieldDefinition" value="Shout" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="SkillAbility" />
+        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="AreaRadius" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="AddWeaponRange" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="Autocast" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="Ability_Persuasion" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Toggle Persuasion Aura" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Grant your Persuasion ability to allies within [1]m range." />
+        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="StatusData:CA_PERSUASION_AURA:AuraRadius" />
+        <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
+        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="noprepare" />
+        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="noprepare" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="Portret_Still_01" />
+        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
+        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Persuasion 5" />
+        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
+      </fields>
+    </stat_object>
   </stat_objects>
 </stats>

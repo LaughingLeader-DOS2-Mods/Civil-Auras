@@ -32,5 +32,4 @@ data "CastAnimation" "skill_cast_target_voodoo_01_cast"
 data "CastSelfAnimation" "skill_prepare_touch_01_loop"
 data "CastTextEvent" "cast"
 data "CastEffect" "CA_FX_PepTalk_Cast_Target_Hand_01:Dummy_L_HandFX:cast"
-data "TargetEffect" "CA_FX_Motivated_Impact_01:Dummy_OverheadFX:cast"
 

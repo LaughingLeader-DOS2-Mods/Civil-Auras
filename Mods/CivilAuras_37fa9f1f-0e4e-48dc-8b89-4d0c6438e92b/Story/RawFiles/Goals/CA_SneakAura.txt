@@ -87,28 +87,6 @@ CharacterStatusText(_Player, "Stealth Aura Disabled");
 
 //END_REGION
 
-//REGION MIRROR_EXPLOIT
-//Mirror Exploit Prevention
-IF
-CharacterUsedItem(_Player,ITEMGUID_S_LV_Mirror_9a0a95b9-1bd0-4a33-b7e6-bd9be41ce3f3)
-AND
-HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
-THEN
-CA_ClearSneakActive(_Player);
-RemoveStatus(_Player, "CA_STEALTH_AURA");
-
-IF
-CharacterUsedItem(_Player,ITEMGUID_S_LV_Mirror_9a0a95b9-1bd0-4a33-b7e6-bd9be41ce3f3)
-AND
-HasActiveStatus(_Player, "CA_STEALTHY", 1)
-AND
-DB_IsPlayer(_PartyMember)
-AND
-HasActiveStatus(_PartyMember, "CA_STEALTH_AURA", 1)
-THEN
-RemoveStatus(_PartyMember, "CA_STEALTH_AURA");
-//END_REGION
-
 //REGION AUTO_TOGGLE
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "SNEAKING", _)
@@ -148,32 +126,34 @@ CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
 AND
-CA_SafeToChangeStats(_Player) // No mirror use!
-AND
 DB_IsPlayer(_Player)
-AND
-CharacterGetAbility(_Player, "Sneaking", _PlayerSneak)
-AND
-CharacterGetAbility(_AuraHost, "Sneaking", _TargetSneak)
-AND
-_PlayerSneak < _TargetSneak
-AND
-IntegerSubtract(_TargetSneak, _PlayerSneak, _Bonus)
 THEN
-CharacterAddAbility(_Player, "Sneaking", _Bonus);
-CA_ClearSneakBonus(_Player);
-DB_CA_SneakBonus(_Player, _Bonus);
-CA_StealthyEffect(_Player);
+CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Sneaking");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
 AND
-DB_CA_SneakBonus(_Player, _Bonus)
-AND
-_Bonus > 0
+DB_IsPlayer(_Player)
 THEN
-CharacterRemoveAbility(_Player, "Sneaking", _Bonus);
-CA_ClearSneakBonus(_Player);
+CA_Aura_RemoveAuraBonus(_Player, "Sneaking");
+//END_REGION
+
+//REGION LEGACY_REMOVAL
+PROC
+CA_Legacy_RemoveOldAuras((CHARACTERGUID)_Player)
+AND
+DB_CA_SneakBonus(_Player, _Val)
+THEN
+CA_Legacy_RemoveOldBonus(_Player, "Sneaking", _Val);
+NOT DB_CA_SneakBonus(_Player, _Val);
+
+PROC
+CA_Legacy_RemoveOldAuras((CHARACTERGUID)_Player)
+AND
+DB_CA_SneakAuraActive(_Player, _Val)
+THEN
+CA_Stealth_TurnAuraOff(_Player);
+
 //END_REGION
 
 //REGION AUTO_SNEAK_PARTY

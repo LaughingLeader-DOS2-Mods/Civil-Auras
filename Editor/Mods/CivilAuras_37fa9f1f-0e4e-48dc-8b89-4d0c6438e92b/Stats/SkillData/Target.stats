@@ -33,7 +33,6 @@
         <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_loop" />
         <field name="CastTextEvent" type="StringStatObjectFieldDefinition" value="cast" />
         <field name="CastEffect" type="StringStatObjectFieldDefinition" value="CA_FX_PepTalk_Cast_Target_Hand_01:Dummy_L_HandFX:cast" />
-        <field name="TargetEffect" type="StringStatObjectFieldDefinition" value="CA_FX_Motivated_Impact_01:Dummy_OverheadFX:cast" />
       </fields>
     </stat_object>
   </stat_objects>

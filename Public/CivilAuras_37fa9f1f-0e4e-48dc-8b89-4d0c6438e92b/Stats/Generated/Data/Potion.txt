@@ -10,6 +10,25 @@ type "Potion"
 new entry "Stats_CA_Stealthy"
 type "Potion"
 
+new entry "Stats_CA_PersuasionAura"
+type "Potion"
+
 new entry "Stats_CA_Motivated"
 type "Potion"
+
+new entry "Stats_CA_LuckBonus"
+type "Potion"
+data "Luck" "1"
+
+new entry "Stats_CA_SneakBonus"
+type "Potion"
+data "Sneaking" "1"
+
+new entry "Stats_CA_PersuasionBonus"
+type "Potion"
+data "Persuasion" "1"
+
+new entry "Stats_CA_BarterBonus"
+type "Potion"
+data "Barter" "1"
 

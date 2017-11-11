@@ -18,6 +18,111 @@ AND
 NOT DB_Illusionist(_Player,_)
 THEN
 DB_NOOP(1);
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
+THEN
+CA_ClearSneakActive(_Player);
+RemoveStatus(_Player, "CA_STEALTH_AURA");
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+DB_CA_SneakBonus(_Player, _Bonus)
+AND
+_Bonus > 0
+THEN
+CharacterRemoveAbility(_Player, "Sneaking", _Bonus);
+CA_ClearSneakBonus(_Player);
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_STEALTHY", 1)
+THEN
+RemoveStatus(_Player, "CA_STEALTHY");
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
+THEN
+CA_ClearLuckActive(_Player);
+RemoveStatus(_Player, "CA_LUCKY_AURA");
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+DB_CA_LuckBonus(_Player, _Bonus)
+AND
+_Bonus > 0
+THEN
+CharacterRemoveAbility(_Player, "Luck", _Bonus);
+CA_ClearLuckBonus(_Player);
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_LUCKY", 1)
+THEN
+RemoveStatus(_Player, "CA_LUCKY");
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+DB_CA_PersuasionBonus(_Player, _Bonus)
+THEN
+CharacterRemoveAbility(_Player, "Persuasion", _Bonus);
+CA_ClearPersuasionBonus(_Player);
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_MOTIVATED", 1)
+THEN
+RemoveStatus(_Player, "CA_MOTIVATED");
+
+PROC
+CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+DB_CA_BarterBonus(_Player, _BarterBonus)
+THEN
+CharacterRemoveAbility(_Player, "Barter", _BarterBonus);
+NOT DB_CA_BarterBonus(_Player, _BarterBonus);
+
+IF
+DB_Illusionist(_,_)
+AND
+DB_IsPlayer(_Player)
+THEN
+CharacterStatusText(_Player, "Mirror detected (illusionist)");
+CA_Mirror_RemoveBonuses(_Player);
+
+IF
+CharacterUsedItemTemplate(_, "PUZ_AstarteMirror_A_6d281e2b-f605-4e66-a3eb-686bea179d9e", _)
+AND
+DB_IsPlayer(_Player)
+THEN
+CharacterStatusText(_Player, "Mirror detected");
+CA_Mirror_RemoveBonuses(_Player);
+
+IF
+CharacterItemEvent(_,_Mirror,"GEN_Homestead_CharCreationMirror")
+AND
+DB_IsPlayer(_Player)
+THEN
+CharacterStatusText(_Player, "Mirror detected (event)");
+CA_Mirror_RemoveBonuses(_Player);
+
+IF
+CharacterCreationStarted(_Level)
+AND
+DB_Illusionist(_Player,_Mirror)
+THEN
+CA_Mirror_RemoveBonuses(_Player);
+
 //END_REGION
 
 //REGION HELPER_METHODS
@@ -122,12 +227,20 @@ DB_CA_ModVersion("1.6.5");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");
 
+PROC
+CA_Legacy_Start_RemoveOldAuras()
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Legacy_RemoveOldAuras(_Player);
+
 IF
 StoryEvent(_Object, "CA_Refresh")
 AND
 DB_CA_Refreshing(_Val)
 THEN
 NOT DB_CA_Refreshing(_Val);
+CA_Legacy_Start_RemoveOldAuras();
 
 //END_REGION
 EXITSECTION
