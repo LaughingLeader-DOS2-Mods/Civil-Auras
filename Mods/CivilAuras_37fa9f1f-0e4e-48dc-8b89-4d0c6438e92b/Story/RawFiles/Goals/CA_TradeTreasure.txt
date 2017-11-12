@@ -37,10 +37,11 @@ DB_CA_AdditionalTradeTreasure((CHARACTERGUID)S_ARX_KemmMansion_ChiefTrader_46ced
 //REGION VENDOR_ITEM_LEVEL_REQUIREMENTS
 DB_CA_ItemLevelRequirement("BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 4);
 //END_REGION
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle", 1);
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle", 1);
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk", 1);
-DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy", 4);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle", 1);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle", 1);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk", 1);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_PersuasionAura_24064796-3bec-49cf-bc91-aa81484f5219", "Shout_CA_PersuasionToggle", 1);
+DB_CA_Trader_TalentBooks("BOOK_CA_Talent_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy", 4);
 //DB_CA_Trader_TalentTimer(_Template, _Trader, Amount)
 
 //REGION DEBUG
@@ -504,10 +505,11 @@ DB_CA_AdditionalTradeTreasure((CHARACTERGUID)S_RC_DW_TraderFish_81f4cd7e-0c93-4f
 DB_CA_AdditionalTradeTreasure((CHARACTERGUID)S_CoS_Temples_Elf_Merchant_001_1f9e87b0-47e4-438d-9930-777cae653edd, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); //Trayde the Merchant
 DB_CA_AdditionalTradeTreasure((CHARACTERGUID)S_ARX_KemmMansion_ChiefTrader_46ced128-0571-4e0b-ac7b-96279d92072f, "MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", 1); //Cat the Appraiser
 DB_CA_ItemLevelRequirement("BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 4);
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle", 1);
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle", 1);
-DB_CA_Trader_SkillBooks("BOOK_Skill_CA_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk", 1);
-DB_CA_Trader_TalentBooks("BOOK_Talent_CA_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy", 4);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle", 1);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle", 1);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk", 1);
+DB_CA_Trader_SkillBooks("BOOK_CA_Skill_PersuasionAura_24064796-3bec-49cf-bc91-aa81484f5219", "Shout_CA_PersuasionToggle", 1);
+DB_CA_Trader_TalentBooks("BOOK_CA_Talent_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy", 4);
 //END_REGION
 EXITSECTION
 

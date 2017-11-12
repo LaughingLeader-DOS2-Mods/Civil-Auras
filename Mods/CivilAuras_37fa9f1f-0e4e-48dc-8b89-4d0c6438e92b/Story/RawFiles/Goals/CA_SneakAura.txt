@@ -44,10 +44,20 @@ RemoveStatus(_Player, "CA_STEALTH_AURA");
 CA_ClearSneakActive(_Player);
 CharacterStatusText(_Player, "Stealth Aura Disabled");
 
+PROC
+CA_Stealth_ApplyAura((CHARACTERGUID)_Player)
+AND
+HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
+THEN
+ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
+CA_StealthAuraEffect(_Player);
+CA_Aura_StoreCurrentAbilityValue(_Player, "Sneaking");
+CA_ClearSneakActive(_Player);
+DB_CA_SneakAuraActive(_Player, 1);
+
 //END_REGION
 
 //REGION SKILL_USE
-
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_StealthToggle", _)
 AND
@@ -55,12 +65,6 @@ HasActiveStatus(_Player, "SNEAKING", 0)
 AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
-/*ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
-ApplyStatus(_Player, "SNEAKING", -1.0);
-CA_ClearSneakActive(_Player);
-DB_CA_SneakAuraActive(_Player, 1);
-CharacterStatusText(_Player, "Stealth aura enabled.");
-CA_StealthAuraEffect(_Player);*/
 CharacterStatusText(_Player, "Stealth Aura can only be used while Sneaking");
 
 IF
@@ -70,11 +74,8 @@ HasActiveStatus(_Player, "SNEAKING", 1)
 AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
-ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
-CA_ClearSneakActive(_Player);
-DB_CA_SneakAuraActive(_Player, 1);
-//CharacterStatusText(_Player, "Stealth Aura Enabled");
-CA_StealthAuraEffect(_Player);
+CA_Stealth_ApplyAura(_Player);
+CharacterStatusText(_Player, "Stealth Aura Enabled");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_StealthToggle", _)
@@ -95,8 +96,7 @@ DB_CA_SneakAuraActive(_Player, 1)
 AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
-ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
-CA_StealthAuraEffect(_Player);
+CA_Stealth_ApplyAura(_Player);
 CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
 
 IF
@@ -117,8 +117,7 @@ HasActiveStatus(_Player, "SNEAKING", 1)
 AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
-ApplyStatus(_Player, "CA_STEALTH_AURA", -1.0);
-CA_StealthAuraEffect(_Player);
+CA_Stealth_ApplyAura(_Player);
 CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
 //END_REGION
 

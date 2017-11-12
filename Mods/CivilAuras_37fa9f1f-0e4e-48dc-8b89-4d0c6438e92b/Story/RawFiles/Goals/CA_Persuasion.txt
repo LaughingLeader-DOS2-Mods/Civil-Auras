@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 //DB_CA_PersuasionBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 KBSECTION
+//REGION PROCS
 PROC
 CA_ClearPersuasionBonus((CHARACTERGUID)_Player)
 AND
@@ -37,6 +38,8 @@ RealSum(_PY, 2.0, _Y)
 THEN
 PlayEffectAtPosition("CA_FX_Motivated_Impact_01", _X, _Y, _Z);
 
+//END_REGION
+
 /*
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
@@ -67,6 +70,7 @@ THEN
 CA_Persuasion_PlayAuraHostEffect(_Player);
 ApplyStatus(_Player, "CA_PERSUASION_AURA", -1.0, 1);
 CharacterStatusText(_Player, "Aura Enabled");
+CA_Aura_StoreCurrentAbilityValue(_Player, "Persuasion");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_PersuasionToggle", _)

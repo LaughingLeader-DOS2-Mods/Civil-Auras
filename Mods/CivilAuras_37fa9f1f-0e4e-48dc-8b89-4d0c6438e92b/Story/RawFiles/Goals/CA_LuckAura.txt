@@ -124,6 +124,7 @@ THEN
 CA_ClearLuckBonus(_Player);
 DB_CA_LuckBonus(_Player, _Bonus);
 
+/*
 PROC
 CA_ClearHostLuckRecord((CHARACTERGUID)_Player)
 AND
@@ -154,6 +155,7 @@ DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName)
 THEN
 TimerCancel(_TimerName);
 NOT DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName);
+*/
 
 PROC
 CA_ApplyLuckAura((CHARACTERGUID)_Player)
@@ -164,7 +166,7 @@ ApplyStatus(_Player, "CA_LUCKY_AURA", -1.0, 1);
 CA_LuckyAuraEffect(_Player);
 CA_ClearLuckActive(_Player);
 DB_CA_LuckAuraActive(_Player, 1);
-CA_RecordHostLuck(_Player);
+CA_Aura_StoreCurrentAbilityValue(_Player, "Luck");
 
 PROC
 CA_Luck_TurnAuraOff((CHARACTERGUID)_Player)
@@ -174,8 +176,6 @@ THEN
 RemoveStatus(_Player, "CA_LUCKY_AURA");
 CharacterStatusText(_Player, "Aura Disabled");
 CA_ClearLuckActive(_Player);
-CA_ClearLuckRefreshTimers();
-CA_ClearHostLuckRecord(_Player);
 
 //END_REGION
 
@@ -187,7 +187,6 @@ CharacterIsInCombat(_Player, 0)
 AND
 HasAppliedStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
-CA_ClearLuckRefreshTimers();
 CA_ApplyLuckAura(_Player);
 CharacterStatusText(_Player, "Aura Enabled");
 
@@ -199,12 +198,11 @@ THEN
 RemoveStatus(_Player, "CA_LUCKY_AURA");
 CharacterStatusText(_Player, "Aura Disabled");
 CA_ClearLuckActive(_Player);
-CA_ClearLuckRefreshTimers();
-CA_ClearHostLuckRecord(_Player);
 
 //END_REGION
 
 //REGION HOST_AURA_REFRESH
+/*
 PROC
 CA_LuckAura_RefreshRunning((CHARACTERGUID)_Player)
 AND
@@ -248,6 +246,8 @@ CharacterStatusText(_Player, "Refreshing Lucky Aura...");
 
 IF
 ItemEquipped(_Item, _Player)
+AND
+DB_IsPlayer(_Player)
 THEN
 CA_LuckAura_RefreshRunning(_Player);
 CA_LuckAura_PrepareRefresh(_Player);
@@ -255,6 +255,8 @@ CA_LuckAura_PrepareRefresh(_Player);
 
 IF
 ItemUnEquipped(_Item, _Player)
+AND
+DB_IsPlayer(_Player)
 THEN
 CA_LuckAura_RefreshRunning(_Player);
 CA_LuckAura_PrepareRefresh(_Player);
@@ -283,7 +285,7 @@ CA_ApplyLuckAura(_Player);
 TimerCancel(_TimerName);
 NOT DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName);
 CharacterStatusText(_Player, "Lucky Aura Refreshed");
-
+*/
 //END_REGION
 
 //REGION AUTO-TOGGLE
@@ -304,7 +306,6 @@ AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
 CA_ApplyLuckAura(_Player);
-CA_ClearLuckRefreshTimers();
 
 IF
 SavegameLoaded(_,_,_,_)

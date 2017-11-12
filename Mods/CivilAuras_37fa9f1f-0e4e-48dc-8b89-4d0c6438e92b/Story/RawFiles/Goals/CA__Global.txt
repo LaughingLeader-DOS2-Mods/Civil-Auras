@@ -3,128 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-//REGION MIRROR_EXPLOIT
-QRY
-CA_PlayerInMirror((CHARACTERGUID)_Player)
-AND
-DB_Illusionist(_Player,_Mirror)
-THEN
-DB_NOOP(1);
-
-//True if the player is not using the mirror
-QRY
-CA_SafeToChangeStats((CHARACTERGUID)_Player)
-AND
-NOT DB_Illusionist(_Player,_)
-THEN
-DB_NOOP(1);
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
-THEN
-CA_ClearSneakActive(_Player);
-RemoveStatus(_Player, "CA_STEALTH_AURA");
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-DB_CA_SneakBonus(_Player, _Bonus)
-AND
-_Bonus > 0
-THEN
-CharacterRemoveAbility(_Player, "Sneaking", _Bonus);
-CA_ClearSneakBonus(_Player);
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-HasActiveStatus(_Player, "CA_STEALTHY", 1)
-THEN
-RemoveStatus(_Player, "CA_STEALTHY");
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
-THEN
-CA_ClearLuckActive(_Player);
-RemoveStatus(_Player, "CA_LUCKY_AURA");
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-DB_CA_LuckBonus(_Player, _Bonus)
-AND
-_Bonus > 0
-THEN
-CharacterRemoveAbility(_Player, "Luck", _Bonus);
-CA_ClearLuckBonus(_Player);
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-HasActiveStatus(_Player, "CA_LUCKY", 1)
-THEN
-RemoveStatus(_Player, "CA_LUCKY");
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-DB_CA_PersuasionBonus(_Player, _Bonus)
-THEN
-CharacterRemoveAbility(_Player, "Persuasion", _Bonus);
-CA_ClearPersuasionBonus(_Player);
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-HasActiveStatus(_Player, "CA_MOTIVATED", 1)
-THEN
-RemoveStatus(_Player, "CA_MOTIVATED");
-
-PROC
-CA_Mirror_RemoveBonuses((CHARACTERGUID)_Player)
-AND
-DB_CA_BarterBonus(_Player, _BarterBonus)
-THEN
-CharacterRemoveAbility(_Player, "Barter", _BarterBonus);
-NOT DB_CA_BarterBonus(_Player, _BarterBonus);
-
-IF
-DB_Illusionist(_,_)
-AND
-DB_IsPlayer(_Player)
-THEN
-CharacterStatusText(_Player, "Mirror detected (illusionist)");
-CA_Mirror_RemoveBonuses(_Player);
-
-IF
-CharacterUsedItemTemplate(_, "PUZ_AstarteMirror_A_6d281e2b-f605-4e66-a3eb-686bea179d9e", _)
-AND
-DB_IsPlayer(_Player)
-THEN
-CharacterStatusText(_Player, "Mirror detected");
-CA_Mirror_RemoveBonuses(_Player);
-
-IF
-CharacterItemEvent(_,_Mirror,"GEN_Homestead_CharCreationMirror")
-AND
-DB_IsPlayer(_Player)
-THEN
-CharacterStatusText(_Player, "Mirror detected (event)");
-CA_Mirror_RemoveBonuses(_Player);
-
-IF
-CharacterCreationStarted(_Level)
-AND
-DB_Illusionist(_Player,_Mirror)
-THEN
-CA_Mirror_RemoveBonuses(_Player);
-
-//END_REGION
-
 //REGION HELPER_METHODS
 PROC
 CA_PrintMessage((CHARACTERGUID)_Target, (STRING)_Prefix, (STRING)_Var, (STRING)_Suffix)
@@ -190,7 +68,7 @@ CA_Global_BuildSettings()
 AND
 DB_IsPlayer(_Player)
 AND
-NOT DB_CA_Settings_Barter_Messages(_Player, _, _, _)
+NOT DB_CA_Settings_Barter_Messages(_Player,_,_,_)
 THEN
 DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
 
@@ -198,24 +76,24 @@ DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
 IF
 RegionStarted("TUT_Tutorial_A")
 AND
-NOT DB_CA_ModVersion("1.6.5")
+NOT DB_CA_ModVersion("1.7.0")
 THEN
-DB_CA_ModVersion("1.6.5");
+DB_CA_ModVersion("1.7.0");
 CA_Global_BuildSettings();
 
 IF
 CharacterCreationFinished(_Player)
 AND
-NOT DB_CA_ModVersion("1.6.5")
+NOT DB_CA_ModVersion("1.7.0")
 THEN
-DB_CA_ModVersion("1.6.5");
+DB_CA_ModVersion("1.7.0");
 CA_Global_BuildSettings();
 
 //For refreshing existing saves
 IF
 SavegameLoaded(_,_,_,_)
 AND
-NOT DB_CA_ModVersion("1.6.5")
+NOT DB_CA_ModVersion("1.7.0")
 AND
 DB_IsPlayer(_Player)
 AND
@@ -223,7 +101,7 @@ NOT DB_CA_Refreshing(1)
 THEN
 CA_Global_ResetDatabases();
 CA_Global_BuildSettings();
-DB_CA_ModVersion("1.6.5");
+DB_CA_ModVersion("1.7.0");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");
 

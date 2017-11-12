@@ -37,31 +37,41 @@ CA_TradeTreasure_ResetDynamicGeneration();
 PROC
 CA_Settings_FixSkills((CHARACTERGUID)_Player)
 AND
-	CharacterHasSkill(_Player, "Target_CA_PepTalk", 1)
+CharacterHasSkill(_Player, "Target_CA_PepTalk", 1)
 THEN
-	CharacterRemoveSkill(_Player, "Target_CA_PepTalk");
-	CharacterAddSkill(_Player, "Target_CA_PepTalk");
-	CharacterStatusText(_Player, "Pep Talk Refreshed");
+CharacterRemoveSkill(_Player, "Target_CA_PepTalk");
+CharacterAddSkill(_Player, "Target_CA_PepTalk");
+CharacterStatusText(_Player, "Pep Talk Refreshed");
 
 PROC
 CA_Settings_FixSkills((CHARACTERGUID)_Player)
 AND
-	CharacterHasSkill(_Player, "Shout_CA_LuckyToggle", 1)
+CharacterHasSkill(_Player, "Shout_CA_PersuasionToggle", 1)
 THEN
-	CA_Luck_TurnAuraOff(_Player);
-	CharacterRemoveSkill(_Player, "Shout_CA_LuckyToggle");
-	CharacterAddSkill(_Player, "Shout_CA_LuckyToggle");
-	CharacterStatusText(_Player, "Lucky Aura Refreshed");
+CA_Luck_TurnAuraOff(_Player);
+CharacterRemoveSkill(_Player, "Shout_CA_PersuasionToggle");
+CharacterAddSkill(_Player, "Shout_CA_PersuasionToggle");
+CharacterStatusText(_Player, "Persuasion Aura Refreshed");
 
 PROC
 CA_Settings_FixSkills((CHARACTERGUID)_Player)
 AND
-	CharacterHasSkill(_Player, "Shout_CA_StealthToggle", 1)
+CharacterHasSkill(_Player, "Shout_CA_LuckyToggle", 1)
 THEN
-	RemoveStatus(_Player, "CA_STEALTH_AURA");
-	CharacterRemoveSkill(_Player, "Shout_CA_StealthToggle");
-	CharacterAddSkill(_Player, "Shout_CA_StealthToggle");
-	CharacterStatusText(_Player, "Stealth Aura Refreshed");
+CA_Luck_TurnAuraOff(_Player);
+CharacterRemoveSkill(_Player, "Shout_CA_LuckyToggle");
+CharacterAddSkill(_Player, "Shout_CA_LuckyToggle");
+CharacterStatusText(_Player, "Lucky Aura Refreshed");
+
+PROC
+CA_Settings_FixSkills((CHARACTERGUID)_Player)
+AND
+CharacterHasSkill(_Player, "Shout_CA_StealthToggle", 1)
+THEN
+RemoveStatus(_Player, "CA_STEALTH_AURA");
+CharacterRemoveSkill(_Player, "Shout_CA_StealthToggle");
+CharacterAddSkill(_Player, "Shout_CA_StealthToggle");
+CharacterStatusText(_Player, "Stealth Aura Refreshed");
 
 IF
 ObjectFlagSet("CA_DEBUG_FIXSKILLS", (CHARACTERGUID)_Player, _Instance)
@@ -76,8 +86,33 @@ ObjectClearFlag(_Player, "CA_DEBUG_ADDBOOKS");
 ItemTemplateAddTo("BOOK_CA_Skill_LuckyAura_Debug_ad983c5f-8b04-412d-a31e-b26e0dd8f849", _Player, 1);
 ItemTemplateAddTo("BOOK_CA_Skill_StealthAura_Debug_3127cb67-3f22-4958-b1ab-a88653ea6c6f", _Player, 1);
 ItemTemplateAddTo("BOOK_CA_Skill_PepTalk_Debug_1e0b4efd-0702-474a-be64-6762e26e26ef", _Player, 1);
+ItemTemplateAddTo("BOOK_CA_Skill_PersuasionAura_Debug_915d1de7-5379-4472-994b-52b6849a4407", _Player, 1);
 //ItemTemplateAddTo("MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", _Player, 1);
 //ItemTemplateAddTo("MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", _Player, 1);
+
+PROC
+CA_Settings_RemoveAuraStatuses((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _AuraStatus, 1)
+THEN
+RemoveStatus(_Player, _AuraStatus);
+
+PROC
+CA_Settings_RemoveAuraStatuses((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _BonusStatus, 1)
+THEN
+RemoveStatus(_Player, _BonusStatus);
+
+IF
+ObjectFlagSet("CA_DEBUG_REMOVEAURASTATUSES", (CHARACTERGUID)_Player, _Instance)
+THEN
+ObjectClearFlag(_Player, "CA_DEBUG_REMOVEAURASTATUSES");
+CA_Settings_RemoveAuraStatuses(_Player);
 
 //END_REGION
 
