@@ -75,7 +75,6 @@ AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
 CA_Stealth_ApplyAura(_Player);
-CharacterStatusText(_Player, "Stealth Aura Enabled");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_StealthToggle", _)

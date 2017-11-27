@@ -183,12 +183,9 @@ CA_ClearLuckActive(_Player);
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
 AND
-CharacterIsInCombat(_Player, 0)
-AND
 HasAppliedStatus(_Player, "CA_LUCKY_AURA", 0)
 THEN
 CA_ApplyLuckAura(_Player);
-CharacterStatusText(_Player, "Aura Enabled");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_LuckyToggle", _)
@@ -196,7 +193,7 @@ AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_LUCKY_AURA");
-CharacterStatusText(_Player, "Aura Disabled");
+CharacterStatusText(_Player, "Lucky Aura Disabled");
 CA_ClearLuckActive(_Player);
 
 //END_REGION

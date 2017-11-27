@@ -57,7 +57,25 @@ DisplayText(_Caster, _Message);
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
 AND
-HasActiveStatus(_Target, "CA_MOTIVATED", 0)
+HasActiveStatus(_Target, "CA_PERSUASIVE", 1)
+THEN
+CharacterStatusText(_Caster, "Target is already Persuasive");
+
+IF
+CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
+AND
+HasActiveStatus(_Target, "CA_PERSUASIVE", 0)
+AND
+CA_Global_AbilityLowerOrEquals(_Caster, _Target, "Persuasion")
+THEN
+CharacterStatusText(_Caster, "Persuasion not high enough to motivate target");
+
+IF
+CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
+AND
+HasActiveStatus(_Target, "CA_PERSUASIVE", 0)
+AND
+CA_Global_AbilityHigher(_Caster, _Target, "Persuasion")
 THEN
 PlaySound(_Target, "Items_Inventory_Consumeables_Magic");
 ApplyStatus(_Target, "CA_MOTIVATED", 30.0, 1);
@@ -69,7 +87,6 @@ HasAppliedStatus(_Player, "CA_PERSUASION_AURA", 0)
 THEN
 CA_Persuasion_PlayAuraHostEffect(_Player);
 ApplyStatus(_Player, "CA_PERSUASION_AURA", -1.0, 1);
-CharacterStatusText(_Player, "Aura Enabled");
 CA_Aura_StoreCurrentAbilityValue(_Player, "Persuasion");
 
 IF
@@ -78,7 +95,7 @@ AND
 HasActiveStatus(_Player, "CA_PERSUASION_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_PERSUASION_AURA");
-CharacterStatusText(_Player, "Aura Disabled");
+CharacterStatusText(_Player, "Persuasion Aura Disabled");
 
 //END_REGION
 
@@ -104,6 +121,22 @@ CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Persuasion");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED",_)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Aura_RemoveAuraBonus(_Player, "Persuasion");
+
+IF
+CharacterStatusApplied((CHARACTERGUID)_Player, "CA_PERSUASIVE", (CHARACTERGUID)_AuraHost)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_RemoveMotivated(_Player);
+CA_Persuasion_PlayAuraEffect(_Player);
+CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Persuasion");
+
+IF
+CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_PERSUASIVE",_)
 AND
 DB_IsPlayer(_Player)
 THEN

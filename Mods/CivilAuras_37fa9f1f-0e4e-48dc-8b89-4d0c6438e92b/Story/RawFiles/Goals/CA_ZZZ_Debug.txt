@@ -172,6 +172,43 @@ ObjectClearFlag(_Player, "CA_DEBUG_REMOVEBONUSPOINTS");
 CA_Debug_EquipAllPrevious(_Player);
 //END_REGION
 
+//REGION HELPER_METHODS
+PROC
+CA_Debug_RemoveAuras((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _HostStatus, 1)
+THEN
+RemoveStatus(_Player, _HostStatus);
+
+PROC
+CA_Debug_RemoveAuras((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _AuraStatus, 1)
+THEN
+RemoveStatus(_Player, _AuraStatus);
+
+PROC
+CA_Debug_RemoveBonuses((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _BonusStatus, 1)
+THEN
+RemoveStatus(_Player, _BonusStatus);
+//END_REGION
+
+/*
+IF
+GameEventSet("GAMEEVENT_GameStarted")
+THEN
+GoalCompleted;
+*/
+
+/*
 IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
 AND
@@ -192,6 +229,7 @@ AND
 StringConcatenate(_Str3, "]", _Message)
 THEN
 CharacterStatusText(_Player, _Message);
+*/
 
 /*
 
@@ -229,11 +267,6 @@ ItemTemplateAddTo("CON_CA_Potion_Ability_a3a2b79b-286a-4dda-8e6b-68c81b95ea63", 
 ItemTemplateAddTo("CON_CA_Potion_Attribute_ca660d0e-05b6-4e43-a612-7f22e9fd2205", _Player, 5);
 GoalCompleted;
 */
-
-IF
-GameEventSet("GAMEEVENT_GameStarted")
-THEN
-GoalCompleted;
 EXITSECTION
 
 ENDEXITSECTION

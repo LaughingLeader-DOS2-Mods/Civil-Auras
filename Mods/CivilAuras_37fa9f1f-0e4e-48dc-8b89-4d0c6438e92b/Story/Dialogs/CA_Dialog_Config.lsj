@@ -1,7 +1,7 @@
 {
    "save" : {
       "header" : {
-         "time" : 1510515691,
+         "time" : 1511620676,
          "version" : "2.0.8.2"
       },
       "regions" : {
@@ -401,7 +401,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1110"}
+                                    "val" : {"type" : 23, "value" : "2895;1329"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -509,7 +509,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;1986"}
+                                    "val" : {"type" : 23, "value" : "3215;2424"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -638,7 +638,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1767"}
+                                    "val" : {"type" : 23, "value" : "2895;1986"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -746,7 +746,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3535;1767"}
+                                    "val" : {"type" : 23, "value" : "3535;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1419,7 +1419,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1548"}
+                                    "val" : {"type" : 23, "value" : "2895;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1749,7 +1749,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;1767"}
+                                    "val" : {"type" : 23, "value" : "3215;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1916,7 +1916,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Remove Aura Statuses from Character. This will remove the bonus point statuses, if for some reason they aren't remove automatically."
+                                                   "value" : "Remove aura statuses from all user-related characters. This will also remove the hidden bonus point statuses."
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -1958,7 +1958,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2205"}
+                                    "val" : {"type" : 23, "value" : "2895;1110"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2460,7 +2460,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "4175;1767"}
+                                    "val" : {"type" : 23, "value" : "4175;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2935,7 +2935,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3535;1329"}
+                                    "val" : {"type" : 23, "value" : "3855;672"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3026,9 +3026,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Remove all bonus points from character. These are the points that say 'Boost' in the stat tooltip. This should ignore equipment bonuses."
+                                                   "value" : "[LEGACY] Remove all bonus points from character. These are the points that say 'Boost' in the stat tooltip. This should ignore equipment bonuses."
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -3071,7 +3071,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1986"}
+                                    "val" : {"type" : 23, "value" : "2895;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3169,7 +3169,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;1329"}
+                                    "val" : {"type" : 23, "value" : "3215;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3280,7 +3280,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;1110"}
+                                    "val" : {"type" : 23, "value" : "3215;1329"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3652,7 +3652,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3855;1767"}
+                                    "val" : {"type" : 23, "value" : "3855;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3746,6 +3746,9 @@
                                     "UUID" : {"type" : 22, "value" : "6f96892c-bc49-4a95-8be4-f9f1b4e2d4b9"}
                                  },
                                  {
+                                    "UUID" : {"type" : 22, "value" : "73d4a273-0f8a-4699-bb3c-5d67d1da69ef"}
+                                 },
+                                 {
                                     "UUID" : {"type" : 22, "value" : "1fa9bb35-4a58-42df-b090-a8ac9abc1a50"}
                                  },
                                  {
@@ -3759,9 +3762,6 @@
                                  },
                                  {
                                     "UUID" : {"type" : 22, "value" : "a73a4df2-ab58-49a4-8cba-df6caac688ef"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "73d4a273-0f8a-4699-bb3c-5d67d1da69ef"}
                                  },
                                  {
                                     "UUID" : {"type" : 22, "value" : "a0415186-a8f0-470d-9ed6-114de87f455e"}
@@ -4060,7 +4060,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;2424"}
+                                    "val" : {"type" : 23, "value" : "3215;2643"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -4170,7 +4170,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1329"}
+                                    "val" : {"type" : 23, "value" : "2895;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},

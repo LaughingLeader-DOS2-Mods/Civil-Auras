@@ -33,23 +33,28 @@
     </stat_object>
     <stat_object index="6" is_substat="false">
       <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_Persuasive" />
+      </fields>
+    </stat_object>
+    <stat_object index="7" is_substat="false">
+      <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_LuckBonus" />
         <field name="Luck" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
-    <stat_object index="7" is_substat="false">
+    <stat_object index="8" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_SneakBonus" />
         <field name="Sneaking" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
-    <stat_object index="8" is_substat="false">
+    <stat_object index="9" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_PersuasionBonus" />
         <field name="Persuasion" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
-    <stat_object index="9" is_substat="false">
+    <stat_object index="10" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="Stats_CA_BarterBonus" />
         <field name="Barter" type="IntegerStatObjectFieldDefinition" value="1" />

@@ -16,6 +16,9 @@ type "Potion"
 new entry "Stats_CA_Motivated"
 type "Potion"
 
+new entry "Stats_CA_Persuasive"
+type "Potion"
+
 new entry "Stats_CA_LuckBonus"
 type "Potion"
 data "Luck" "1"

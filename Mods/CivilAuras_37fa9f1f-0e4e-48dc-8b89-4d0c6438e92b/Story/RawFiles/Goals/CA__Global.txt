@@ -24,6 +24,39 @@ StringConcatenate(_Str1, _Suffix, _Str2)
 THEN
 CharacterStatusText(_Target, _Str2);
 
+QRY
+CA_Global_UserMatch((CHARACTERGUID)_Player, (CHARACTERGUID)_Character)
+AND
+CharacterGetReservedUserID(_Player,_PlayerID)
+AND
+CharacterGetReservedUserID(_Character, _CharID)
+AND
+_CharID == _PlayerID
+THEN
+DB_NOOP(1);
+
+QRY
+CA_Global_AbilityHigher((CHARACTERGUID)_Player, (CHARACTERGUID)_Target, (STRING)_Ability)
+AND
+CharacterGetAbility(_Player, _Ability, _Val1)
+AND
+CharacterGetAbility(_Target, _Ability, _Val2)
+AND
+_Val1 > _Val2
+THEN
+DB_NOOP(1);
+
+QRY
+CA_Global_AbilityLowerOrEquals((CHARACTERGUID)_Player, (CHARACTERGUID)_Target, (STRING)_Ability)
+AND
+CharacterGetAbility(_Player, _Ability, _Val1)
+AND
+CharacterGetAbility(_Target, _Ability, _Val2)
+AND
+_Val1 <= _Val2
+THEN
+DB_NOOP(1);
+
 //END_REGION
 
 //REGION BONUS_POINTS

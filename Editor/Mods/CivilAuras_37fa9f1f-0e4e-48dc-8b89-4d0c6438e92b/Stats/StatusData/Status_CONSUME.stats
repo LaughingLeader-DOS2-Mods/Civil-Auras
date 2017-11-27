@@ -9,7 +9,7 @@
         <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
         <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Lucky Aura" />
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is raising the party's luck." />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Lucky" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_LuckyAura" />
         <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="8" enumeration_type_name="FormatStringColor" />
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_LuckyAura" />
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_LuckyAura" />
@@ -25,7 +25,7 @@
         <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
         <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Lucky" />
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is lucky in the presence of an ally." />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Lucky" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_Lucky" />
         <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="8" enumeration_type_name="FormatStringColor" />
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Lucky" />
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Lucky" />
@@ -37,9 +37,9 @@
         <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
         <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
         <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Sneak Aura" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Stealth Aura" />
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is raising the party's stealth capabilities." />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_EtherealSoles" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_StealthAura" />
         <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="29" enumeration_type_name="FormatStringColor" />
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_SneakAura" />
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_SneakAura" />
@@ -55,7 +55,7 @@
         <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
         <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Stealthy" />
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is stealthy in the presence of an ally." />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_EtherealSoles" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_Stealthy" />
         <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="29" enumeration_type_name="FormatStringColor" />
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Stealthy" />
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Stealthy" />
@@ -69,12 +69,12 @@
         <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
         <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Persuasion Aura" />
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is raising the party's persuasion." />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Reputation" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_PersuasionAura" />
         <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="15" enumeration_type_name="FormatStringColor" />
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_PersuasionAura" />
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_PersuasionAura" />
         <field name="AuraRadius" type="IntegerStatObjectFieldDefinition" value="25" />
-        <field name="AuraAllies" type="StringStatObjectFieldDefinition" value="CA_MOTIVATED" />
+        <field name="AuraAllies" type="StringStatObjectFieldDefinition" value="CA_PERSUASIVE" />
       </fields>
     </stat_object>
     <stat_object index="5" is_substat="false">
@@ -85,13 +85,27 @@
         <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
         <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Persuasive" />
         <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is persuasive." />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="statIcons_Reputation" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_Persuasive" />
         <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="15" enumeration_type_name="FormatStringColor" />
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Motivated" />
         <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Motivated" />
       </fields>
     </stat_object>
     <stat_object index="6" is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_PERSUASIVE" />
+        <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="InitiateCombat" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Persuasive" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Character is persuasive." />
+        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Status_Persuasive" />
+        <field name="FormatColor" type="EnumerationStatObjectFieldDefinition" value="15" enumeration_type_name="FormatStringColor" />
+        <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_Persuasive" />
+        <field name="StackId" type="StringStatObjectFieldDefinition" value="Stack_CA_Persuasive" />
+      </fields>
+    </stat_object>
+    <stat_object index="7" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LUCKBONUS" />
         <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
@@ -100,7 +114,7 @@
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_LuckBonus" />
       </fields>
     </stat_object>
-    <stat_object index="7" is_substat="false">
+    <stat_object index="8" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="CA_SNEAKBONUS" />
         <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
@@ -109,7 +123,7 @@
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_SneakBonus" />
       </fields>
     </stat_object>
-    <stat_object index="8" is_substat="false">
+    <stat_object index="9" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="CA_PERSUASIONBONUS" />
         <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />
@@ -118,7 +132,7 @@
         <field name="StatsId" type="StringStatObjectFieldDefinition" value="Stats_CA_PersuasionBonus" />
       </fields>
     </stat_object>
-    <stat_object index="9" is_substat="false">
+    <stat_object index="10" is_substat="false">
       <fields>
         <field name="Name" type="NameStatObjectFieldDefinition" value="CA_BARTERBONUS" />
         <field name="Type" type="StringStatObjectFieldDefinition" value="CONSUME" />

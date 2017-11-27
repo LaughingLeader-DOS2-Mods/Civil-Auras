@@ -77,17 +77,6 @@ CA_QRY_ResetHighestBarter()
 THEN
 SysClear("DB_CA_Barter_HighestBarter", 2);
 
-QRY
-CA_Barter_UserMatch((CHARACTERGUID)_Player, (CHARACTERGUID)_Character)
-AND
-CharacterGetReservedUserID(_Player,_PlayerID)
-AND
-CharacterGetReservedUserID(_Character, _CharID)
-AND
-_CharID == _PlayerID
-THEN
-DB_NOOP(1);
-
 //END_REGION
 
 //REGION HIGHEST_AUTO_RESET
@@ -147,7 +136,7 @@ DB_CA_Barter_HighestBarter(_HighestPlayer, _HighestBarter)
 AND
 DB_IsPlayer(_UserCharacter)
 AND
-CA_Barter_UserMatch(_Player, _UserCharacter)
+CA_Global_UserMatch(_Player, _UserCharacter)
 THEN
 CA_Aura_ApplyAuraBonus(_HighestPlayer, _UserCharacter, "Barter");
 
@@ -160,7 +149,7 @@ _Users > 1
 AND
 DB_IsPlayer(_UserCharacter)
 AND
-CA_Barter_UserMatch(_Player, _UserCharacter)
+CA_Global_UserMatch(_Player, _UserCharacter)
 THEN
 SetStoryEvent(_UserCharacter, "Event_CA_Bartering_TradeEnded");
 
@@ -198,7 +187,7 @@ DB_CA_Barter_HighestBarter(_HighestPlayer, _HighestBarter)
 AND
 DB_IsPlayer(_Player) // Apply to all player characters
 AND
-CA_Barter_UserMatch(_SoloPlayer, _Player)
+CA_Global_UserMatch(_SoloPlayer, _Player)
 THEN
 CA_Aura_ApplyAuraBonus(_HighestPlayer, _Player, "Barter");
 

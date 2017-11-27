@@ -91,22 +91,14 @@ ItemTemplateAddTo("BOOK_CA_Skill_PersuasionAura_Debug_915d1de7-5379-4472-994b-52
 //ItemTemplateAddTo("MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", _Player, 1);
 
 PROC
-CA_Settings_RemoveAuraStatuses((CHARACTERGUID)_Player)
+CA_Settings_RemoveAuraStatuses((CHARACTERGUID)_UserPlayer)
 AND
-DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
+DB_IsPlayer(_Player)
 AND
-HasActiveStatus(_Player, _AuraStatus, 1)
+CA_Global_UserMatch(_UserPlayer, _Player)
 THEN
-RemoveStatus(_Player, _AuraStatus);
-
-PROC
-CA_Settings_RemoveAuraStatuses((CHARACTERGUID)_Player)
-AND
-DB_CA_Aura_AuraStatus(_Stat, _HostStatus, _AuraStatus, _BonusStatus)
-AND
-HasActiveStatus(_Player, _BonusStatus, 1)
-THEN
-RemoveStatus(_Player, _BonusStatus);
+CA_Debug_RemoveAuras(_Player);
+CA_Debug_RemoveBonuses(_Player);
 
 IF
 ObjectFlagSet("CA_DEBUG_REMOVEAURASTATUSES", (CHARACTERGUID)_Player, _Instance)
