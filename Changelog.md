@@ -1,5 +1,16 @@
 Civil Auras Changelog
 =======
+# 1.7.0
+* New Persuasion Aura
+	* Works as an eventual upgrade to Pep Talk, for applying your persuasion bonus to allies.
+* New Icons
+	* Added new icons for all the CA abilities and statuses.
+* New Ability Point Bonus System
+	* "Invisible" statuses are now used to apply bonus points - these should be exploit-free and generally safer (bonuses from statuses aren't turned into real points at the respec mirror).
+	* Bonus points from previous CA versions ("Legacy" versions) should automatically be updated to the new system - your auras may be toggled off on loading an existing save. This is intended in order to remove the previous bonus points.
+* CA Settings Book
+	* New debug command for removing CA statuses from user-owned characters, if for some reason they become "stuck" (a common DOS2 bug). Use this if a status suddenly doesn't toggle off.
+
 # 1.6.5
 * CA Settings Book
 	* Made most debug commands host-only commands.

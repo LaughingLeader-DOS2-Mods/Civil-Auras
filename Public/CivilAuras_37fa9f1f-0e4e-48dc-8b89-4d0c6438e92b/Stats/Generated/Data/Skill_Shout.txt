@@ -82,7 +82,7 @@ data "PrepareAnimationLoop" "noprepare"
 data "CastAnimation" "Portret_Still_01"
 data "Memory Cost" "0"
 data "Magic Cost" "0"
-data "MemorizationRequirements" "Persuasion 5"
+data "MemorizationRequirements" "Persuasion 4"
 data "StatsDescription" "Shout_CA_PersuasionToggle_StatsDescription"
 data "StatsDescriptionRef" "Range: [1]"
 

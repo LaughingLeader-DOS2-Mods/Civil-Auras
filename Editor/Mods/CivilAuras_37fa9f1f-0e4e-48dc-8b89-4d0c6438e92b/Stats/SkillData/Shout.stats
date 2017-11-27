@@ -82,7 +82,7 @@
         <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="Portret_Still_01" />
         <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
         <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Persuasion 5" />
+        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Persuasion 4" />
         <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
       </fields>
     </stat_object>

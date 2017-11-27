@@ -49,7 +49,7 @@
         <field name="Using" type="BaseClassStatObjectFieldDefinition" value="_Skillbooks" />
         <field name="Act part" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="ActPart" />
         <field name="Value" type="IntegerStatObjectFieldDefinition" value="300" />
-        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Persuasion 5" />
+        <field name="Requirements" type="StringStatObjectFieldDefinition" value="Persuasion 4" />
         <field name="MinAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="MaxAmount" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
