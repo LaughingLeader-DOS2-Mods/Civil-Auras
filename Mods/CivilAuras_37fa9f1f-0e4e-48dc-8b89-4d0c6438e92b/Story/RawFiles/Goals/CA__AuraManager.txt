@@ -4,7 +4,7 @@ INITSECTION
 //DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
 DB_CA_Aura_AuraStatus(0, "Luck", "CA_LUCKY_AURA", "CA_LUCKY", "CA_LUCKBONUS");
 DB_CA_Aura_AuraStatus(1, "Sneaking", "CA_STEALTH_AURA", "CA_STEALTHY", "CA_SNEAKBONUS");
-DB_CA_Aura_AuraStatus(2, "Persuasion", "CA_PERSUASION_AURA", "CA_PERSUASION", "CA_PERSUASIONBONUS");
+DB_CA_Aura_AuraStatus(2, "Persuasion", "CA_PERSUASION_AURA", "CA_PERSUASIVE", "CA_PERSUASIONBONUS");
 DB_CA_Aura_AuraStatus(3, "Persuasion", "", "CA_MOTIVATED", "CA_PERSUASIONBONUS");
 DB_CA_Aura_AuraStatus(4, "Barter", "", "", "CA_BARTERBONUS");
 
@@ -73,8 +73,7 @@ THEN
 CA_Aura_ClearPreviouStackAmount(_TargetPlayer, _Status);
 DB_CA_Aura_StackAmount(_TargetPlayer, _Status, _MaxVal);
 CA_Aura_RecordBonus(_AuraHost, _TargetPlayer, _Stat, _MaxVal, _MaxVal);
-CA_Debug_Print(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
-CA_Debug_Log(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
+CA_Debug_Record(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
 
 PROC
 CA_Aura_DetermineBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (STRING)_Stat, (STRING)_Status)
@@ -96,8 +95,7 @@ THEN
 CA_Aura_ClearPreviouStackAmount(_TargetPlayer, _Status);
 DB_CA_Aura_StackAmount(_TargetPlayer, _Status, _BonusVal);
 CA_Aura_RecordBonus(_AuraHost, _TargetPlayer, _Stat, _MaxVal, _BonusVal);
-CA_Debug_Print(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
-CA_Debug_Log(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
+CA_Debug_Record(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
 
 //END_REGION
 
@@ -125,8 +123,7 @@ StringConcatenate(_TimerPrefix, _RanStr, _TimerName)
 THEN
 DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, 1);
 TimerLaunch(_TimerName, 1);
-CA_Debug_Print(_Player, "Launched timer for [", _Status,"], apply bonus");
-CA_Debug_Log(_Player, "Launched timer for [", _Status,"], apply bonus");
+CA_Debug_Record(_Player, "Launched timer for [", _Status,"], apply bonus");
 
 PROC
 CA_Aura_ProcessTimer((STRING)_TimerName)
@@ -138,8 +135,7 @@ AND
 _StackNumber > _MaxStacks
 THEN
 NOT DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber);
-CA_Debug_Print(_Player, "Max stack reached for [", _Status,"]. Bonus finished applying.");
-CA_Debug_Log(_Player, "Max stack reached for [", _Status,"]. Bonus finished applying.");
+CA_Debug_Record(_Player, "Max stack reached for [", _Status,"]. Bonus finished applying.");
 
 PROC
 CA_Aura_ProcessTimer((STRING)_TimerName)
@@ -169,12 +165,10 @@ CA_Aura_ApplyAuraBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (
 AND
 DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
 THEN
-CA_Debug_Print(_TargetPlayer, "Clearing current bonus for aura [", _AuraStatus,"]");
-CA_Debug_Log(_TargetPlayer, "Clearing current bonus for aura [", _AuraStatus,"]");
+CA_Debug_Record(_TargetPlayer, "Clearing current bonus for aura [", _AuraStatus,"]");
 CA_Aura_ClearBonus(_TargetPlayer, _BonusStatus);
 CA_Aura_DetermineBonus(_AuraHost, _TargetPlayer, _Stat, _BonusStatus);
-CA_Debug_Print(_TargetPlayer, "Apply bonus for aura [", _AuraStatus,"]");
-CA_Debug_Log(_TargetPlayer, "Apply bonus for aura [", _AuraStatus,"]");
+CA_Debug_Record(_TargetPlayer, "Apply bonus for aura [", _AuraStatus,"]");
 CA_Aura_ApplyBonus(_TargetPlayer, _BonusStatus);
 
 PROC
@@ -185,8 +179,7 @@ THEN
 CA_Aura_ClearBonus(_Player, _BonusStatus);
 CA_Aura_ClearRecordedBonus(_Player, _Stat);
 CA_Aura_ClearPreviouStackAmount(_Player, _BonusStatus);
-CA_Debug_Print(_Player, "Aura bonus for aura [", _AuraStatus,"] removed.");
-CA_Debug_Log(_Player, "Aura bonus for aura [", _AuraStatus,"] removed.");
+CA_Debug_Record(_Player, "Aura bonus for aura [", _AuraStatus,"] removed.");
 
 //END_REGION
 
@@ -315,8 +308,7 @@ DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount
 //AND
 //CA_QRY_Aura_BonusExceeded(_Player, _Stat, _TargetBonus)
 THEN
-CA_Debug_Print(_TargetPlayer, "Refreshing aura for stat [", _Stat,"]");
-CA_Debug_Log(_TargetPlayer, "Refreshing aura for stat [", _Stat,"]");
+CA_Debug_Record(_TargetPlayer, "Refreshing aura for stat [", _Stat,"]");
 CA_Aura_ApplyAuraBonus(_AuraHost, _TargetPlayer, _Stat);
 
 PROC
@@ -326,8 +318,7 @@ DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
 AND
 HasActiveStatus(_Player, _AuraStatus, 1)
 THEN
-CA_Debug_Print(_Player, "Refreshing bonus for stat [", _Stat,"]");
-CA_Debug_Log(_Player, "Refreshing bonus for stat [", _Stat,"]");
+CA_Debug_Record(_Player, "Refreshing bonus for stat [", _Stat,"]");
 CA_Aura_RefreshBonus(_Player, _Stat);
 
 PROC
@@ -355,8 +346,7 @@ HasActiveStatus(_Player, _BonusStatus, 1)
 AND
 DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount)
 THEN
-CA_Debug_Print(_TargetPlayer, "Refreshing specific aura bonus for stat [", _Stat,"]");
-CA_Debug_Log(_TargetPlayer, "Refreshing specific aura bonus for stat [", _Stat,"]");
+CA_Debug_Record(_TargetPlayer, "Refreshing specific aura bonus for stat [", _Stat,"]");
 CA_Aura_ApplyAuraBonus(_AuraHost, _TargetPlayer, _Stat);
 
 PROC
@@ -368,8 +358,7 @@ HasActiveStatus(_Player, _HostStatus, 1)
 THEN
 RemoveStatus(_Player, _HostStatus);
 ApplyStatus(_Player, _HostStatus, -1.0, 1);
-CA_Debug_Print(_Player, "Re-applied host aura status [", _HostStatus,"]");
-CA_Debug_Log(_Player, "Re-applied host aura status [", _HostStatus,"]");
+CA_Debug_Record(_Player, "Re-applied host aura status [", _HostStatus,"]");
 CharacterStatusText(_Player, "Aura Refreshed");
 
 PROC
@@ -452,6 +441,19 @@ AND
 _NextVal >= 0
 THEN
 CharacterRemoveAbility(_Player, _Stat, _RemoveAmount);
+//END_REGION
+
+//REGION DATABASE_REFRESH
+IF
+StoryEvent(_Object, "CA_Refresh")
+THEN
+SysClear("DB_CA_Aura_AuraStatus", 5);
+DB_CA_Aura_AuraStatus(0, "Luck", "CA_LUCKY_AURA", "CA_LUCKY", "CA_LUCKBONUS");
+DB_CA_Aura_AuraStatus(1, "Sneaking", "CA_STEALTH_AURA", "CA_STEALTHY", "CA_SNEAKBONUS");
+DB_CA_Aura_AuraStatus(2, "Persuasion", "CA_PERSUASION_AURA", "CA_PERSUASIVE", "CA_PERSUASIONBONUS");
+DB_CA_Aura_AuraStatus(3, "Persuasion", "", "CA_MOTIVATED", "CA_PERSUASIONBONUS");
+DB_CA_Aura_AuraStatus(4, "Barter", "", "", "CA_BARTERBONUS");
+
 //END_REGION
 EXITSECTION
 

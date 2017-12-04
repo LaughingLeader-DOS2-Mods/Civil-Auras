@@ -181,6 +181,8 @@ AND
 HasActiveStatus(_Player, _HostStatus, 1)
 THEN
 RemoveStatus(_Player, _HostStatus);
+CA_Debug_Print(_Player, "Removed ", _HostStatus, " status");
+CA_Debug_Log(_Player, "Removed ", _HostStatus, " status");
 
 PROC
 CA_Debug_RemoveAuras((CHARACTERGUID)_Player)
@@ -190,6 +192,8 @@ AND
 HasActiveStatus(_Player, _AuraStatus, 1)
 THEN
 RemoveStatus(_Player, _AuraStatus);
+CA_Debug_Print(_Player, "Removed ", _AuraStatus, " status");
+CA_Debug_Log(_Player, "Removed ", _AuraStatus, " status");
 
 PROC
 CA_Debug_RemoveBonuses((CHARACTERGUID)_Player)
@@ -198,8 +202,146 @@ DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
 AND
 HasActiveStatus(_Player, _BonusStatus, 1)
 THEN
-RemoveStatus(_Player, _BonusStatus);
+CA_Aura_RemoveAuraBonus(_Player, _Stat);
+CA_Debug_Print(_Player, "Removed ", _BonusStatus, " status");
+CA_Debug_Log(_Player, "Removed ", _BonusStatus, " status");
 //END_REGION
+
+//REGION RECORD(LOG_AND_PRINT)
+QRY
+CA_Debug_QRY_Record_All((STRING)_Str1)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1);
+
+QRY
+CA_Debug_QRY_Record_All((STRING)_Str1, (STRING)_Str2)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2);
+
+QRY
+CA_Debug_QRY_Record_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3);
+
+QRY
+CA_Debug_QRY_Record_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, _Str4);
+
+QRY
+CA_Debug_QRY_Record_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+PROC
+CA_Debug_RecordAll((STRING)_Record)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Record, "", "", "", "");
+
+PROC
+CA_Debug_RecordAll((STRING)_Str1, (STRING)_Str2)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, "", "", "");
+
+PROC
+CA_Debug_RecordAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, "", "");
+
+PROC
+CA_Debug_RecordAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, _Str4, "");
+
+PROC
+CA_Debug_RecordAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+QRY
+CA_Debug_QRY_Record((CHARACTERGUID)_Player, (STRING)_Str1)
+THEN
+CA_Debug_Record(_Player, _Str1);
+
+QRY
+CA_Debug_QRY_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2);
+
+QRY
+CA_Debug_QRY_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3);
+
+QRY
+CA_Debug_QRY_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, _Str4);
+
+QRY
+CA_Debug_QRY_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+PROC
+CA_Debug_Record((CHARACTERGUID)_Player, (STRING)_Message)
+THEN
+CA_Debug_Record(_Player, _Message, "", "", "", "");
+
+PROC
+CA_Debug_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, "", "", "");
+
+PROC
+CA_Debug_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, "", "");
+
+PROC
+CA_Debug_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+THEN
+CA_Debug_Record(_Player, _Str1, _Str2, _Str3, _Str4, "");
+
+PROC
+CA_Debug_Record((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYMESSAGES", 1)
+AND
+StringConcatenate(_Str1, _Str2, _Msg1)
+AND
+StringConcatenate(_Msg1, _Str3, _Msg2)
+AND
+StringConcatenate(_Msg2, _Str4, _Msg3)
+AND
+StringConcatenate(_Msg3, _Str5, _Msg4)
+AND
+StringConcatenate("CA|", _Msg4, _RecordedMessage)
+THEN
+SetVarFixedString(_Player, "CA_Debug_LogText", _RecordedMessage);
+SetStoryEvent(_Player, "CA_Event_PlayerDebugLog");
+CharacterStatusText(_Player, _Msg4);
+//REGION
 
 //REGION PRINTING
 QRY
@@ -462,13 +604,7 @@ StringConcatenate(_Msg2, _Str4, _Msg3)
 AND
 StringConcatenate(_Msg3, _Str5, _Msg4)
 AND
-CharacterGetDisplayName(_Player, _Handle, _Ref)
-AND
-StringConcatenate("CA|", _Ref, _MessagePrefix1)
-AND
-StringConcatenate(_MessagePrefix1, "|", _MessagePrefix)
-AND
-StringConcatenate(_MessagePrefix, _Msg4, _LoggedMessage)
+StringConcatenate("CA|", _Msg4, _LoggedMessage)
 THEN
 SetVarFixedString(_Player, "CA_Debug_LogText", _LoggedMessage);
 SetStoryEvent(_Player, "CA_Event_PlayerDebugLog");
