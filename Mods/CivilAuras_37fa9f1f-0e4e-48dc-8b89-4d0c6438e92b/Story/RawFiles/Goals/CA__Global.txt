@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
+DB_CA_ModVersion("1.7.1");
 KBSECTION
 //REGION HELPER_METHODS
 PROC
@@ -45,18 +45,6 @@ AND
 _Val1 > _Val2
 THEN
 DB_NOOP(1);
-
-QRY
-CA_Global_AbilityLowerOrEquals((CHARACTERGUID)_Player, (CHARACTERGUID)_Target, (STRING)_Ability)
-AND
-CharacterGetAbility(_Player, _Ability, _Val1)
-AND
-CharacterGetAbility(_Target, _Ability, _Val2)
-AND
-_Val1 <= _Val2
-THEN
-DB_NOOP(1);
-
 //END_REGION
 
 //REGION BONUS_POINTS
@@ -96,6 +84,12 @@ SysClear("DB_CA_ModVersion", 1);
 
 PROC
 CA_Global_BuildSettings()
+THEN
+DB_NOOP(1);
+
+/*
+PROC
+CA_Global_BuildSettings()
 AND
 DB_IsPlayer(_Player)
 AND
@@ -107,16 +101,19 @@ DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
 IF
 GameStarted("TUT_Tutorial_A", _Mode)
 AND
-SysCount("DB_CA_ModVersion",1,0)
+DB_CA_ModVersion("1.7.1")
 THEN
 DB_CA_ModVersion("1.7.1");
 CA_Global_BuildSettings();
+*/
 
 //For refreshing existing saves
 IF
 SavegameLoaded(_,_,_,_)
 AND
-NOT DB_CA_ModVersion("1.7.1")
+DB_CA_ModVersion(_Version)
+AND
+_Version != "1.7.1"
 AND
 DB_IsPlayer(_Player)
 AND
@@ -127,12 +124,14 @@ CA_Global_BuildSettings();
 DB_CA_ModVersion("1.7.1");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");
+CA_Debug_Record(_Player, "Mod version changed. Updating to new version.");
 
 PROC
 CA_Legacy_Start_RemoveOldAuras()
 AND
 DB_IsPlayer(_Player)
 THEN
+CA_Debug_Record(_Player, "[Legacy] Removed old aura data");
 CA_Legacy_RemoveOldAuras(_Player);
 
 IF

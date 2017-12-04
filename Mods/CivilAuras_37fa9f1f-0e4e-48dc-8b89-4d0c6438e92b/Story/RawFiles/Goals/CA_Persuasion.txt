@@ -61,24 +61,46 @@ HasActiveStatus(_Target, "CA_PERSUASIVE", 1)
 THEN
 CharacterStatusText(_Caster, "Target is already Persuasive");
 
+//REGION SKILL_USE
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
 AND
-HasActiveStatus(_Target, "CA_PERSUASIVE", 0)
-AND
-CA_Global_AbilityLowerOrEquals(_Caster, _Target, "Persuasion")
+HasActiveStatus(_Target, "CA_PERSUASION_AURA", 1)
 THEN
-CharacterStatusText(_Caster, "Persuasion not high enough to motivate target");
+CharacterStatusText(_Caster, "Target is too charismatic");
 
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
 AND
 HasActiveStatus(_Target, "CA_PERSUASIVE", 0)
 AND
+HasActiveStatus(_Target, "CA_PERSUASION_AURA", 0)
+AND
+NOT CA_Global_AbilityHigher(_Caster, _Target, "Persuasion")
+AND
+CharacterGetAbility(_Caster, "Persuasion", _CastVal)
+AND
+CharacterGetAbility(_Target, "Persuasion", _TargetVal)
+AND
+IntegertoString(_CastVal, _CastStr)
+AND
+IntegertoString(_TargetVal, _TargetStr)
+THEN
+CharacterStatusText(_Caster, "Persuasion not high enough to motivate target");
+CA_Debug_Record(_Caster, "Persuasion is too low: Caster[", _CastStr, "] Target[", _TargetStr, "]");
+
+IF
+CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
+AND
+HasActiveStatus(_Target, "CA_PERSUASIVE", 0)
+AND
+HasActiveStatus(_Target, "CA_PERSUASION_AURA", 0)
+AND
 CA_Global_AbilityHigher(_Caster, _Target, "Persuasion")
 THEN
 PlaySound(_Target, "Items_Inventory_Consumeables_Magic");
 ApplyStatus(_Target, "CA_MOTIVATED", 30.0, 1);
+CA_Aura_ApplyAuraBonus(_Caster, _Target, "Persuasion", "CA_MOTIVATED");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_PersuasionToggle", _)
@@ -117,14 +139,13 @@ AND
 DB_IsPlayer(_Player)
 THEN
 CA_Persuasion_PlayAuraEffect(_Player);
-CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Persuasion");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_MOTIVATED",_)
 AND
 DB_IsPlayer(_Player)
 THEN
-CA_Aura_RemoveAuraBonus(_Player, "Persuasion");
+CA_Aura_RemoveAuraBonus(_Player, "Persuasion", "CA_MOTIVATED");
 
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_PERSUASIVE", (CHARACTERGUID)_AuraHost)
@@ -133,14 +154,14 @@ DB_IsPlayer(_Player)
 THEN
 CA_RemoveMotivated(_Player);
 CA_Persuasion_PlayAuraEffect(_Player);
-CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Persuasion");
+CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Persuasion", "CA_PERSUASIVE");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_PERSUASIVE",_)
 AND
 DB_IsPlayer(_Player)
 THEN
-CA_Aura_RemoveAuraBonus(_Player, "Persuasion");
+CA_Aura_RemoveAuraBonus(_Player, "Persuasion", "CA_PERSUASIVE");
 //END_REGION
 
 //REGION LEGACY_REMOVAL

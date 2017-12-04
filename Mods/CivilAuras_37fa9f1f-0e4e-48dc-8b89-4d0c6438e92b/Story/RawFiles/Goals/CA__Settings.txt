@@ -33,6 +33,7 @@ GlobalFlagSet("CA_DEBUG_REFRESHVENDORS")
 THEN
 GlobalClearFlag("CA_DEBUG_REFRESHVENDORS");
 CA_TradeTreasure_ResetDynamicGeneration();
+CA_Debug_LogAll("Vendors refreshed.");
 
 PROC
 CA_Settings_FixSkills((CHARACTERGUID)_Player)
@@ -78,6 +79,7 @@ ObjectFlagSet("CA_DEBUG_FIXSKILLS", (CHARACTERGUID)_Player, _Instance)
 THEN
 ObjectClearFlag(_Player, "CA_DEBUG_FIXSKILLS");
 CA_Settings_FixSkills(_Player);
+CA_Debug_Log(_Player, "Fixed CA skills.");
 
 IF
 ObjectFlagSet("CA_DEBUG_ADDBOOKS", (CHARACTERGUID)_Player, _Instance)
@@ -87,6 +89,7 @@ ItemTemplateAddTo("BOOK_CA_Skill_LuckyAura_Debug_ad983c5f-8b04-412d-a31e-b26e0dd
 ItemTemplateAddTo("BOOK_CA_Skill_StealthAura_Debug_3127cb67-3f22-4958-b1ab-a88653ea6c6f", _Player, 1);
 ItemTemplateAddTo("BOOK_CA_Skill_PepTalk_Debug_1e0b4efd-0702-474a-be64-6762e26e26ef", _Player, 1);
 ItemTemplateAddTo("BOOK_CA_Skill_PersuasionAura_Debug_915d1de7-5379-4472-994b-52b6849a4407", _Player, 1);
+CA_Debug_Log(_Player, "Added all CA skillbooks.");
 //ItemTemplateAddTo("MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", _Player, 1);
 //ItemTemplateAddTo("MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", _Player, 1);
 
@@ -105,10 +108,18 @@ ObjectFlagSet("CA_DEBUG_REMOVEAURASTATUSES", (CHARACTERGUID)_Player, _Instance)
 THEN
 ObjectClearFlag(_Player, "CA_DEBUG_REMOVEAURASTATUSES");
 CA_Settings_RemoveAuraStatuses(_Player);
+CA_Aura_ResetAuraDatabases();
 
 //END_REGION
 
 //REGION CONFIG_BOOK
+PROC
+CA_Settings_UpdateVersionText()
+AND
+DB_CA_ModVersion(_Version)
+THEN
+DialogSetVariableString("CA_Dialog_Config", "CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521", _Version);
+
 IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
 AND
@@ -117,6 +128,8 @@ AND
 CharacterIsInCombat(_Player,0)
 THEN
 CA_Settings_InitSettings(_Player);
+CA_Settings_MarkHost(_Player);
+CA_Settings_UpdateVersionText();
 Proc_StartDialog(0, "CA_Dialog_Config", _Item, _Player);
 
 //END_REGION
@@ -142,6 +155,7 @@ AND
 CharacterGetHostCharacter(_Player)
 THEN
 UserSetFlag(_Player, "CA_USER_ISHOST");
+CA_Debug_Record(_Player, "Marked as host character");
 
 PROC
 CA_Settings_MarkHost((CHARACTERGUID)_Player)
@@ -151,6 +165,7 @@ AND
 UserGetFlag(_Player, "CA_USER_ISHOST", 1)
 THEN
 UserClearFlag(_Player, "CA_USER_ISHOST", 0);
+CA_Debug_Record(_Player, "Removed host flag");
 
 IF
 GameStarted(_Level, _)
@@ -174,11 +189,13 @@ ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Play
 IF
 ObjectFlagSet("CA_DEBUG_REFRESHDB", (CHARACTERGUID)_Player, _Instance)
 THEN
+CA_Debug_Record(_Player, "Manually refreshing databases.");
+CA_Global_ResetDatabases();
 SetStoryEvent(_Player, "CA_Refresh");
 //ObjectClearFlag(_Player, "CA_DEBUG_REFRESHDB");
 
-IF
-RegionStarted("TUT_Tutorial_A")
+PROC
+CA_Global_BuildSettings()
 AND
 DB_IsPlayer(_Player)
 THEN

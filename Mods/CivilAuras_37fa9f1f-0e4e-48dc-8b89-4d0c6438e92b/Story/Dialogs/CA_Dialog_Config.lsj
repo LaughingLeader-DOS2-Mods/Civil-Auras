@@ -1,7 +1,7 @@
 {
    "save" : {
       "header" : {
-         "time" : 1512403730,
+         "time" : 1512421487,
          "version" : "2.0.8.2"
       },
       "regions" : {
@@ -211,7 +211,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;3957"}
+                                    "val" : {"type" : 23, "value" : "2895;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -346,7 +346,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Force vendor refresh. This will make all CA vendors generate CA items again."
+                                                   "value" : "[CHEAT] Force Vendor Refresh - This will make all CA vendors generate CA items again."
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -401,7 +401,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2862"}
+                                    "val" : {"type" : 23, "value" : "2895;3300"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -509,7 +509,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;3519"}
+                                    "val" : {"type" : 23, "value" : "3215;3957"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -578,9 +578,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Hide Flag Changes"
+                                                   "value" : "[LOG] Hide Flag Changes"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
@@ -638,7 +638,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1986"}
+                                    "val" : {"type" : 23, "value" : "2895;2862"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -746,7 +746,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3535;3300"}
+                                    "val" : {"type" : 23, "value" : "3535;3738"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -926,9 +926,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Hide Debug Messages"
+                                                   "value" : "[LOG] Hide Debug Messages"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -986,7 +986,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1548"}
+                                    "val" : {"type" : 23, "value" : "2895;2424"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1165,7 +1165,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Add all CA skillbooks to inventory."
+                                                   "value" : "[CHEAT] Add All CA Skillbooks to Inventory"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -1220,7 +1220,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2205"}
+                                    "val" : {"type" : 23, "value" : "2895;3081"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1485,9 +1485,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Display Flag Changes"
+                                                   "value" : "[LOG] Display Flag Changes"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -1545,7 +1545,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1767"}
+                                    "val" : {"type" : 23, "value" : "2895;2643"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1611,9 +1611,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Display Debug Messages"
+                                                   "value" : "[LOG] Display Debug Messages"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
@@ -1671,7 +1671,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1329"}
+                                    "val" : {"type" : 23, "value" : "2895;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1737,7 +1737,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Refresh CA skills. This will remove/add already learned CA skills."
+                                                   "value" : "[FIX] Refresh CA Skills - This will remove/add already learned CA skills."
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -1779,7 +1779,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2424"}
+                                    "val" : {"type" : 23, "value" : "2895;1986"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2001,7 +2001,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;3300"}
+                                    "val" : {"type" : 23, "value" : "3215;3738"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2168,9 +2168,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Remove aura statuses from all user-related characters. This will also remove the hidden bonus point statuses."
+                                                   "value" : "[FIX] Remove Aura Statuses (User Characters) - Run this command to completely remove aura statuses from all user-owned characters. Also resets related databases."
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -2210,7 +2210,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2643"}
+                                    "val" : {"type" : 23, "value" : "2895;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2237,7 +2237,7 @@
                            }
                         ],
                         "speaker" : {"type" : 4, "value" : 1},
-                        "stub" : {"type" : 19, "value" : 1},
+                        "stub" : {"type" : 19, "value" : 0},
                         "transitionmode" : {"type" : 1, "value" : 0},
                         "waittime" : {"type" : 6, "value" : -1.0}
                      },
@@ -2712,7 +2712,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "4175;3300"}
+                                    "val" : {"type" : 23, "value" : "4175;3738"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3006,7 +3006,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;3738"}
+                                    "val" : {"type" : 23, "value" : "2895;1329"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3187,7 +3187,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3855;2205"}
+                                    "val" : {"type" : 23, "value" : "3855;2643"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3278,7 +3278,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "[LEGACY] Remove all bonus points from character. These are the points that say 'Boost' in the stat tooltip. This should ignore equipment bonuses."
+                                                   "value" : "[LEGACY] Remove All Bonus Points From Character - These are the points that say 'Boost' in the stat tooltip. This should ignore equipment bonuses. This is for legacy versions updating to the new system."
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -3323,7 +3323,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;3519"}
+                                    "val" : {"type" : 23, "value" : "2895;3957"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3421,7 +3421,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;3081"}
+                                    "val" : {"type" : 23, "value" : "3215;3519"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3532,7 +3532,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;2862"}
+                                    "val" : {"type" : 23, "value" : "3215;3300"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3585,10 +3585,15 @@
                                        {
                                           "TagText" : [
                                              {
+                                                "DialogVariables" : [
+                                                   {
+                                                      "DialogVariables" : {"type" : 22, "value" : "ac1cbbcc-5732-4d45-b33d-8270f79b4521"}
+                                                   }
+                                                ],
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Civil Aura Settings - Main Menu"
+                                                   "value" : "Civil Aura Settings - Main Menu<br>Version: [CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -3904,7 +3909,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3855;3300"}
+                                    "val" : {"type" : 23, "value" : "3855;3738"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3992,6 +3997,18 @@
                            {
                               "child" : [
                                  {
+                                    "UUID" : {"type" : 22, "value" : "a0415186-a8f0-470d-9ed6-114de87f455e"}
+                                 },
+                                 {
+                                    "UUID" : {"type" : 22, "value" : "0a7ac420-4cad-4309-b894-2d8cf8c12134"}
+                                 },
+                                 {
+                                    "UUID" : {"type" : 22, "value" : "73d4a273-0f8a-4699-bb3c-5d67d1da69ef"}
+                                 },
+                                 {
+                                    "UUID" : {"type" : 22, "value" : "6f96892c-bc49-4a95-8be4-f9f1b4e2d4b9"}
+                                 },
+                                 {
                                     "UUID" : {"type" : 22, "value" : "5b464633-2177-46fb-9c4a-0fb2bf2f384b"}
                                  },
                                  {
@@ -4007,12 +4024,6 @@
                                     "UUID" : {"type" : 22, "value" : "47ccd94d-0143-478b-9485-80b26cdcca04"}
                                  },
                                  {
-                                    "UUID" : {"type" : 22, "value" : "6f96892c-bc49-4a95-8be4-f9f1b4e2d4b9"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "73d4a273-0f8a-4699-bb3c-5d67d1da69ef"}
-                                 },
-                                 {
                                     "UUID" : {"type" : 22, "value" : "1fa9bb35-4a58-42df-b090-a8ac9abc1a50"}
                                  },
                                  {
@@ -4020,12 +4031,6 @@
                                  },
                                  {
                                     "UUID" : {"type" : 22, "value" : "a73a4df2-ab58-49a4-8cba-df6caac688ef"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "a0415186-a8f0-470d-9ed6-114de87f455e"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "0a7ac420-4cad-4309-b894-2d8cf8c12134"}
                                  }
                               ]
                            }
@@ -4318,7 +4323,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;3738"}
+                                    "val" : {"type" : 23, "value" : "3215;1329"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -4373,9 +4378,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Refresh databases. This is an internal command that's used to update existing saves with new information."
+                                                   "value" : "[UNSAFE] Refresh Databases - This is an internal command that's used to update existing saves with new information. Only use if necessary, as this is done automatically."
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
@@ -4428,7 +4433,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;3081"}
+                                    "val" : {"type" : 23, "value" : "2895;3519"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},

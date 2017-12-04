@@ -126,14 +126,14 @@ CharacterStatusApplied((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_Au
 AND
 DB_IsPlayer(_Player)
 THEN
-CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Sneaking");
+CA_Aura_ApplyAuraBonus(_AuraHost, _Player, "Sneaking", "CA_STEALTHY");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
 AND
 DB_IsPlayer(_Player)
 THEN
-CA_Aura_RemoveAuraBonus(_Player, "Sneaking");
+CA_Aura_RemoveAuraBonus(_Player, "Sneaking", "CA_STEALTHY");
 //END_REGION
 
 //REGION LEGACY_REMOVAL
