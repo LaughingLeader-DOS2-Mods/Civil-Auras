@@ -126,7 +126,7 @@ PlaySound(_Player, _Sound);
 PROC
 CA_CatBag_PlaySound_Out((CHARACTERGUID)_Player)
 AND
-Random(1, _Ran)
+Random(2, _Ran)
 AND
 DB_CA_CatBag_Sounds_Out(_Ran, _Sound)
 THEN
@@ -327,57 +327,18 @@ THEN
 DB_CA_Talent_Blacklist(_Talent, _Player);
 //END_REGION
 
-//REGION DATABASE_REFRESH_OLD
-PROC
-CA_Misc_ResetDatabases()
-AND
-DB_CA_Book_PetPal_Message(_Int, _Val)
-THEN
-NOT DB_CA_Book_PetPal_Message(_Int, _Val);
-
-PROC
-CA_Misc_ResetDatabases()
-AND
-DB_CA_Book_Talent_Sound(_Int, _Val)
-THEN
-NOT DB_CA_Book_Talent_Sound(_Int, _Val);
-//END_REGION
-
 //REGION DATABASE_REFRESH
 PROC
 CA_Misc_ResetDatabases()
-AND
-DB_CA_TalentBook_Talent(_Template, _Talent)
 THEN
-NOT DB_CA_TalentBook_Talent(_Template, _Talent);
-
-PROC
-CA_Misc_ResetDatabases()
-AND
-DB_CA_Talentbook_Effects(_Index, _Talent, _Message, _Sound)
-THEN
-NOT DB_CA_Talentbook_Effects(_Index, _Talent, _Message, _Sound);
-
-PROC
-CA_Misc_ResetDatabases()
-AND
-DB_CA_Talent_Effect(_Int, _Val)
-THEN
-NOT DB_CA_Talent_Effect(_Int, _Val);
-
-PROC
-CA_Misc_ResetDatabases()
-AND
-DB_CA_CatBag_Sounds_In(_Int, _Val)
-THEN
-NOT DB_CA_CatBag_Sounds_In(_Int, _Val);
-
-PROC
-CA_Misc_ResetDatabases()
-AND
-DB_CA_CatBag_Sounds_Out(_Int, _Val)
-THEN
-NOT DB_CA_CatBag_Sounds_Out(_Int, _Val);
+SysClear("DB_CA_TalentBook_Talent", 2);
+SysClear("DB_CA_Talentbook_Effects", 4);
+SysClear("DB_CA_Talent_Effect", 2);
+SysClear("DB_CA_CatBag_Sounds_In", 2);
+SysClear("DB_CA_CatBag_Sounds_Out", 2);
+//Clear
+SysClear("DB_CA_Book_PetPal_Message", 2);
+SysClear("DB_CA_Book_Talent_Sound", 2);
 
 IF
 StoryEvent(_Object, "CA_Refresh")
@@ -397,12 +358,6 @@ DB_CA_CatBag_Sounds_Out(0, "Animals_Cat_ABC_Sit_Talk_Normal_01");
 DB_CA_CatBag_Sounds_Out(1, "Animals_Cat_ABC_Use_05");
 //END_REGION
 EXITSECTION
-//REGION PAST_VALUES_DELETE
-NOT DB_CA_Book_PetPal_Message(0, "Pet Pal Learned");
-NOT DB_CA_Book_PetPal_Message(1, "Pet Pal Already Learned");
-NOT DB_CA_Book_Talent_Sound(0, "Items_Inventory_Book_Skillbook_Use");
-NOT DB_CA_Book_Talent_Sound(1, "Items_Objects_Destroy");
 
-//END_REGION
 ENDEXITSECTION
 ParentTargetEdge "ZZZ_CivilAuras"

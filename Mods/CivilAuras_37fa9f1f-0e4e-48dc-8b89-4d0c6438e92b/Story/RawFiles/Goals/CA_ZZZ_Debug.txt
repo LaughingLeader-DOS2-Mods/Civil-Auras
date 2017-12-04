@@ -201,72 +201,307 @@ THEN
 RemoveStatus(_Player, _BonusStatus);
 //END_REGION
 
-/*
-IF
-GameEventSet("GAMEEVENT_GameStarted")
-THEN
-GoalCompleted;
-*/
-
-/*
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
-AND
-CharacterGetAbility(_Player, "Luck", _BonusVal)
-AND
-CharacterGetBaseAbility(_Player, "Luck", _BaseVal)
-AND
-IntegertoString(_BonusVal, _BonusStr)
-AND
-IntegertoString(_BaseVal, _BaseStr)
-AND
-StringConcatenate("Base[", _BaseStr, _Str1)
-AND
-StringConcatenate(_Str1, "] Bonus?[", _Str2)
-AND
-StringConcatenate(_Str2, _BonusStr, _Str3)
-AND
-StringConcatenate(_Str3, "]", _Message)
-THEN
-CharacterStatusText(_Player, _Message);
-*/
-
-/*
-
-IF
-RegionStarted("TestLevel")
-AND
-NOT DB_CA_ModTraders(CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401)
-THEN
-DB_CA_ModTraders(CHARACTERGUID_Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401);
-
-
-IF
-RegionStarted("TestLevel")
-AND
-DB_CA_TestDummy(_Org)
-THEN
-CharacterMakePlayer(_Org, NULL_00000000-0000-0000-0000-000000000000);
-ProcAddDebugCharToParty(_Org);
-DB_IsPlayer(_Org);
-SetTag(_Org,"AVATAR");
-GoalCompleted;
-
-*/
-
-/*
-IF
-SavegameLoaded(_,_,_,_)
+//REGION PRINTING
+QRY
+CA_QRY_Debug_Print_All((STRING)_Str1)
 AND
 DB_IsPlayer(_Player)
 THEN
-ItemTemplateAddTo("MISC_CA_CatSack_Empty_b67a1a66-718f-4136-afc8-81ad5e64b9f9", _Player, 1);
-ItemTemplateAddTo("MISC_CA_CatBait_90df95ee-2da2-4896-a6c6-abc8def42bc9", _Player, 1);
-ItemTemplateAddTo("CON_CA_Potion_Talent_06ebb17f-babe-429c-91f3-11d537dad6ca", _Player, 2);
-ItemTemplateAddTo("CON_CA_Potion_Ability_a3a2b79b-286a-4dda-8e6b-68c81b95ea63", _Player, 5);
-ItemTemplateAddTo("CON_CA_Potion_Attribute_ca660d0e-05b6-4e43-a612-7f22e9fd2205", _Player, 5);
-GoalCompleted;
-*/
+CA_Debug_Print(_Player, _Str1);
+
+QRY
+CA_QRY_Debug_Print_All((STRING)_Str1, (STRING)_Str2)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2);
+
+QRY
+CA_QRY_Debug_Print_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3);
+
+QRY
+CA_QRY_Debug_Print_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, _Str4);
+
+QRY
+CA_QRY_Debug_Print_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+QRY
+CA_QRY_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1)
+THEN
+CA_Debug_Print(_Player, _Str1);
+
+QRY
+CA_QRY_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2);
+
+QRY
+CA_QRY_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3);
+
+QRY
+CA_QRY_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, _Str4);
+
+QRY
+CA_QRY_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+PROC
+CA_Debug_PrintAll((STRING)_Print)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Print, "", "", "", "");
+
+PROC
+CA_Debug_PrintAll((STRING)_Str1, (STRING)_Str2)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, "", "", "");
+
+PROC
+CA_Debug_PrintAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, "", "");
+
+PROC
+CA_Debug_PrintAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, _Str4, "");
+
+PROC
+CA_Debug_PrintAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+PROC
+CA_Debug_Print((CHARACTERGUID)_Player, (STRING)_Message)
+THEN
+CA_Debug_Print(_Player, _Message, "", "", "", "");
+
+PROC
+CA_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, "", "", "");
+
+PROC
+CA_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, "", "");
+
+PROC
+CA_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+THEN
+CA_Debug_Print(_Player, _Str1, _Str2, _Str3, _Str4, "");
+
+PROC
+CA_Debug_Print((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYMESSAGES", 1)
+AND
+StringConcatenate(_Str1, _Str2, _Msg1)
+AND
+StringConcatenate(_Msg1, _Str3, _Msg2)
+AND
+StringConcatenate(_Msg2, _Str4, _Msg3)
+AND
+StringConcatenate(_Msg3, _Str5, _Message)
+THEN
+CharacterStatusText(_Player, _Message);
+//END_REGION
+
+//REGION LOGGING
+QRY
+CA_Debug_QRY_Log_All((STRING)_Str1)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1);
+
+QRY
+CA_Debug_QRY_Log_All((STRING)_Str1, (STRING)_Str2)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2);
+
+QRY
+CA_Debug_QRY_Log_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3);
+
+QRY
+CA_Debug_QRY_Log_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, _Str4);
+
+QRY
+CA_Debug_QRY_Log_All((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+PROC
+CA_Debug_LogAll((STRING)_Log)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Log, "", "", "", "");
+
+PROC
+CA_Debug_LogAll((STRING)_Str1, (STRING)_Str2)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, "", "", "");
+
+PROC
+CA_Debug_LogAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, "", "");
+
+PROC
+CA_Debug_LogAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, _Str4, "");
+
+PROC
+CA_Debug_LogAll((STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+QRY
+CA_Debug_QRY_Log((CHARACTERGUID)_Player, (STRING)_Str1)
+THEN
+CA_Debug_Log(_Player, _Str1);
+
+QRY
+CA_Debug_QRY_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2);
+
+QRY
+CA_Debug_QRY_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3);
+
+QRY
+CA_Debug_QRY_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, _Str4);
+
+QRY
+CA_Debug_QRY_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, _Str4, _Str5);
+
+PROC
+CA_Debug_Log((CHARACTERGUID)_Player, (STRING)_Message)
+THEN
+CA_Debug_Log(_Player, _Message, "", "", "", "");
+
+PROC
+CA_Debug_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, "", "", "");
+
+PROC
+CA_Debug_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, "", "");
+
+PROC
+CA_Debug_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4)
+THEN
+CA_Debug_Log(_Player, _Str1, _Str2, _Str3, _Str4, "");
+
+PROC
+CA_Debug_Log((CHARACTERGUID)_Player, (STRING)_Str1, (STRING)_Str2, (STRING)_Str3, (STRING)_Str4, (STRING)_Str5)
+AND
+GlobalGetFlag("CA_DEBUG_DISPLAYMESSAGES", 1)
+AND
+StringConcatenate(_Str1, _Str2, _Msg1)
+AND
+StringConcatenate(_Msg1, _Str3, _Msg2)
+AND
+StringConcatenate(_Msg2, _Str4, _Msg3)
+AND
+StringConcatenate(_Msg3, _Str5, _Msg4)
+AND
+CharacterGetDisplayName(_Player, _Handle, _Ref)
+AND
+StringConcatenate("CA|", _Ref, _MessagePrefix1)
+AND
+StringConcatenate(_MessagePrefix1, "|", _MessagePrefix)
+AND
+StringConcatenate(_MessagePrefix, _Msg4, _LoggedMessage)
+THEN
+SetVarFixedString(_Player, "CA_Debug_LogText", _LoggedMessage);
+SetStoryEvent(_Player, "CA_Event_PlayerDebugLog");
+//END_REGION
+
+//REGION TESTLEVEL
+IF
+CharacterUsedItem(_Player, (ITEMGUID)ITEMGUID_BOOK_Book_CivilAuraSettings_000_53256d06-1f87-4ae7-98b3-618e560fba86)
+THEN
+UserSetFlag(_Player, "CA_USER_ISHOST");
+
+IF
+RegionStarted("CA_TestLevel")
+THEN
+DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Female_000_f584adda-3587-444f-b0f2-965fd0f94319);
+PROC_GLO_LVHub_Henchmen_Init();
+
+IF
+RegionStarted("CA_TestLevel")
+AND
+DB_IsPlayer(_Player)
+THEN
+UserSetFlag(_Player, "CA_USER_ISHOST");
+
+IF
+RegionStarted(_Region)
+AND
+_Region != "CA_TestLevel"
+AND
+DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Female_000_f584adda-3587-444f-b0f2-965fd0f94319)
+THEN
+NOT DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Female_000_f584adda-3587-444f-b0f2-965fd0f94319);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

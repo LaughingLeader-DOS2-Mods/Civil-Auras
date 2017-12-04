@@ -66,15 +66,38 @@ CharacterGetAbility(_AuraHost, _Stat, _MaxVal)
 AND
 CharacterGetAbility(_TargetPlayer, _Stat, _CurVal)
 AND
+_CurVal == 0
+AND
+IntegertoString(_MaxVal, _BonusStrDebug)
+THEN
+CA_Aura_ClearPreviouStackAmount(_TargetPlayer, _Status);
+DB_CA_Aura_StackAmount(_TargetPlayer, _Status, _MaxVal);
+CA_Aura_RecordBonus(_AuraHost, _TargetPlayer, _Stat, _MaxVal, _MaxVal);
+CA_Debug_Print(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
+CA_Debug_Log(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
+
+PROC
+CA_Aura_DetermineBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (STRING)_Stat, (STRING)_Status)
+AND
+CharacterGetAbility(_AuraHost, _Stat, _MaxVal)
+AND
+CharacterGetAbility(_TargetPlayer, _Stat, _CurVal)
+AND
+_CurVal > 0
+AND
 _CurVal < _MaxVal
 AND
 IntegerSubtract(_MaxVal, _CurVal, _BonusVal)
 AND
 _BonusVal > 0
+AND
+IntegertoString(_BonusVal, _BonusStrDebug)
 THEN
 CA_Aura_ClearPreviouStackAmount(_TargetPlayer, _Status);
 DB_CA_Aura_StackAmount(_TargetPlayer, _Status, _BonusVal);
 CA_Aura_RecordBonus(_AuraHost, _TargetPlayer, _Stat, _MaxVal, _BonusVal);
+CA_Debug_Print(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
+CA_Debug_Log(_TargetPlayer, "Determined aura bonus for [", _Stat,"] = ", _BonusStrDebug);
 
 //END_REGION
 
@@ -92,10 +115,18 @@ StringConcatenate(_Ref, "_", _PName1)
 AND
 StringConcatenate(_PName1, _PlayerID, _PName)
 AND
-StringConcatenate("CA_Timers_ApplyAura_", _PName, _TimerName)
+StringConcatenate("CA_Timers_ApplyAura_", _PName, _TimerPrefix)
+AND
+Random(100, _Ran)
+AND
+IntegertoString(_Ran, _RanStr)
+AND
+StringConcatenate(_TimerPrefix, _RanStr, _TimerName)
 THEN
 DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, 1);
 TimerLaunch(_TimerName, 1);
+CA_Debug_Print(_Player, "Launched timer for [", _Status,"], apply bonus");
+CA_Debug_Log(_Player, "Launched timer for [", _Status,"], apply bonus");
 
 PROC
 CA_Aura_ProcessTimer((STRING)_TimerName)
@@ -107,6 +138,8 @@ AND
 _StackNumber > _MaxStacks
 THEN
 NOT DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber);
+CA_Debug_Print(_Player, "Max stack reached for [", _Status,"]. Bonus finished applying.");
+CA_Debug_Log(_Player, "Max stack reached for [", _Status,"]. Bonus finished applying.");
 
 PROC
 CA_Aura_ProcessTimer((STRING)_TimerName)
@@ -136,8 +169,12 @@ CA_Aura_ApplyAuraBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (
 AND
 DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
 THEN
+CA_Debug_Print(_TargetPlayer, "Clearing current bonus for aura [", _AuraStatus,"]");
+CA_Debug_Log(_TargetPlayer, "Clearing current bonus for aura [", _AuraStatus,"]");
 CA_Aura_ClearBonus(_TargetPlayer, _BonusStatus);
 CA_Aura_DetermineBonus(_AuraHost, _TargetPlayer, _Stat, _BonusStatus);
+CA_Debug_Print(_TargetPlayer, "Apply bonus for aura [", _AuraStatus,"]");
+CA_Debug_Log(_TargetPlayer, "Apply bonus for aura [", _AuraStatus,"]");
 CA_Aura_ApplyBonus(_TargetPlayer, _BonusStatus);
 
 PROC
@@ -148,6 +185,8 @@ THEN
 CA_Aura_ClearBonus(_Player, _BonusStatus);
 CA_Aura_ClearRecordedBonus(_Player, _Stat);
 CA_Aura_ClearPreviouStackAmount(_Player, _BonusStatus);
+CA_Debug_Print(_Player, "Aura bonus for aura [", _AuraStatus,"] removed.");
+CA_Debug_Log(_Player, "Aura bonus for aura [", _AuraStatus,"] removed.");
 
 //END_REGION
 
@@ -276,6 +315,8 @@ DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount
 //AND
 //CA_QRY_Aura_BonusExceeded(_Player, _Stat, _TargetBonus)
 THEN
+CA_Debug_Print(_TargetPlayer, "Refreshing aura for stat [", _Stat,"]");
+CA_Debug_Log(_TargetPlayer, "Refreshing aura for stat [", _Stat,"]");
 CA_Aura_ApplyAuraBonus(_AuraHost, _TargetPlayer, _Stat);
 
 PROC
@@ -285,6 +326,8 @@ DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
 AND
 HasActiveStatus(_Player, _AuraStatus, 1)
 THEN
+CA_Debug_Print(_Player, "Refreshing bonus for stat [", _Stat,"]");
+CA_Debug_Log(_Player, "Refreshing bonus for stat [", _Stat,"]");
 CA_Aura_RefreshBonus(_Player, _Stat);
 
 PROC
@@ -312,6 +355,8 @@ HasActiveStatus(_Player, _BonusStatus, 1)
 AND
 DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount)
 THEN
+CA_Debug_Print(_TargetPlayer, "Refreshing specific aura bonus for stat [", _Stat,"]");
+CA_Debug_Log(_TargetPlayer, "Refreshing specific aura bonus for stat [", _Stat,"]");
 CA_Aura_ApplyAuraBonus(_AuraHost, _TargetPlayer, _Stat);
 
 PROC
@@ -323,6 +368,8 @@ HasActiveStatus(_Player, _HostStatus, 1)
 THEN
 RemoveStatus(_Player, _HostStatus);
 ApplyStatus(_Player, _HostStatus, -1.0, 1);
+CA_Debug_Print(_Player, "Re-applied host aura status [", _HostStatus,"]");
+CA_Debug_Log(_Player, "Re-applied host aura status [", _HostStatus,"]");
 CharacterStatusText(_Player, "Aura Refreshed");
 
 PROC
@@ -399,6 +446,10 @@ AND
 CharacterGetAbility(_Player, _Stat, _Val)
 AND
 _Val > 0
+AND
+IntegerSubtract(_Val, _RemoveAmount, _NextVal)
+AND
+_NextVal >= 0
 THEN
 CharacterRemoveAbility(_Player, _Stat, _RemoveAmount);
 //END_REGION
