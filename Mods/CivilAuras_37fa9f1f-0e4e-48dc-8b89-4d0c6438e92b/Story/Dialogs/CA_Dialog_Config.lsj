@@ -1,7 +1,7 @@
 {
    "save" : {
       "header" : {
-         "time" : 1512393457,
+         "time" : 1512403730,
          "version" : "2.0.8.2"
       },
       "regions" : {
@@ -64,7 +64,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Exit Settings"
+                                                   "value" : "[Exit Settings]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -98,7 +98,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "975;1329"}
+                                    "val" : {"type" : 23, "value" : "975;1986"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -177,7 +177,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Exit Settings"
+                                                   "value" : "[Exit Settings]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -211,7 +211,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;3300"}
+                                    "val" : {"type" : 23, "value" : "2895;3957"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -291,7 +291,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "1295;1110"}
+                                    "val" : {"type" : 23, "value" : "1295;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -401,7 +401,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1329"}
+                                    "val" : {"type" : 23, "value" : "2895;2862"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -509,7 +509,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;2862"}
+                                    "val" : {"type" : 23, "value" : "3215;3519"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -578,9 +578,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Hide flag changes."
+                                                   "value" : "Hide Flag Changes"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -746,7 +746,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3535;2643"}
+                                    "val" : {"type" : 23, "value" : "3535;3300"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -857,7 +857,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "975;672"}
+                                    "val" : {"type" : 23, "value" : "975;1329"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -946,12 +946,9 @@
                                  {
                                     "flag" : [
                                        {
-                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},
-                                          "paramval" : {"type" : 4, "value" : 1},
-                                          "value" : {"type" : 19, "value" : 1}
-                                       }
+                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},"value" : {"type" : 19, "value" : 1}}
                                     ],"type" : {"type" : 22, "value" : "Global"}},
-								{
+                                 {
                                     "flag" : [
                                        {
                                           "name" : {"type" : 22, "value" : "CA_USER_ISHOST"},
@@ -989,7 +986,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2424"}
+                                    "val" : {"type" : 23, "value" : "2895;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1007,10 +1004,7 @@
                                  {
                                     "flag" : [
                                        {
-                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},
-                                          "paramval" : {"type" : 4, "value" : 1},
-                                          "value" : {"type" : 19, "value" : 0}
-                                       }
+                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},"value" : {"type" : 19, "value" : 0}}
                                     ],"type" : {"type" : 22, "value" : "Global"}}
                               ]
                            }
@@ -1058,7 +1052,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Exit Settings"
+                                                   "value" : "[Exit Settings]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -1092,7 +1086,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "1935;1329"}
+                                    "val" : {"type" : 23, "value" : "1935;1986"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1226,7 +1220,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;672"}
+                                    "val" : {"type" : 23, "value" : "2895;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1276,7 +1270,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "335;1110"}
+                                    "val" : {"type" : 23, "value" : "335;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1312,7 +1306,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "1295;891"}
+                                    "val" : {"type" : 23, "value" : "1295;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1367,9 +1361,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Disable Barter sharing. None of your characters will receive any bonuses. This is a user-level setting."
+                                                   "value" : "Disable Barter sharing. None of your characters will receive any barter bonuses. This is a user-level setting."
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
@@ -1422,7 +1416,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "1935;672"}
+                                    "val" : {"type" : 23, "value" : "1935;1329"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1491,9 +1485,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Display flag changes."
+                                                   "value" : "Display Flag Changes"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
@@ -1637,12 +1631,9 @@
                                  {
                                     "flag" : [
                                        {
-                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},
-                                          "paramval" : {"type" : 4, "value" : 1},
-                                          "value" : {"type" : 19, "value" : 0}
-                                       }
+                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},"value" : {"type" : 19, "value" : 0}}
                                     ],"type" : {"type" : 22, "value" : "Global"}},
-									{
+                                 {
                                     "flag" : [
                                        {
                                           "name" : {"type" : 22, "value" : "CA_USER_ISHOST"},
@@ -1680,7 +1671,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2205"}
+                                    "val" : {"type" : 23, "value" : "2895;1329"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1698,10 +1689,7 @@
                                  {
                                     "flag" : [
                                        {
-                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},
-                                          "paramval" : {"type" : 4, "value" : 1},
-                                          "value" : {"type" : 19, "value" : 1}
-                                       }
+                                          "name" : {"type" : 22, "value" : "CA_DEBUG_DISPLAYMESSAGES"},"value" : {"type" : 19, "value" : 1}}
                                     ],"type" : {"type" : 22, "value" : "Global"}}
                               ]
                            }
@@ -1791,7 +1779,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;891"}
+                                    "val" : {"type" : 23, "value" : "2895;2424"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -1860,9 +1848,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Aura Settings"
+                                                   "value" : "[Aura Settings]"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
@@ -1902,7 +1890,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "15;891"}
+                                    "val" : {"type" : 23, "value" : "15;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2013,7 +2001,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;2643"}
+                                    "val" : {"type" : 23, "value" : "3215;3300"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2069,9 +2057,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Debug Commands"
+                                                   "value" : "[Debug Commands]"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -2111,7 +2099,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "15;1329"}
+                                    "val" : {"type" : 23, "value" : "15;1986"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2222,7 +2210,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1110"}
+                                    "val" : {"type" : 23, "value" : "2895;2643"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2272,7 +2260,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "335;891"}
+                                    "val" : {"type" : 23, "value" : "335;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2391,7 +2379,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "1615;1110"}
+                                    "val" : {"type" : 23, "value" : "1615;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2447,7 +2435,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Back"
+                                                   "value" : "[Back]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -2489,7 +2477,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "975;1110"}
+                                    "val" : {"type" : 23, "value" : "975;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2613,7 +2601,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "975;891"}
+                                    "val" : {"type" : 23, "value" : "975;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2724,7 +2712,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "4175;2643"}
+                                    "val" : {"type" : 23, "value" : "4175;3300"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2774,7 +2762,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2255;891"}
+                                    "val" : {"type" : 23, "value" : "2255;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2810,7 +2798,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "335;1329"}
+                                    "val" : {"type" : 23, "value" : "335;1986"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2865,9 +2853,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Barter Settings"
+                                                   "value" : "[Barter Settings]"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -2907,7 +2895,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "15;1110"}
+                                    "val" : {"type" : 23, "value" : "15;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -2976,7 +2964,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Back"
+                                                   "value" : "[Back]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -3018,7 +3006,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;3081"}
+                                    "val" : {"type" : 23, "value" : "2895;3738"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3107,7 +3095,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Back"
+                                                   "value" : "[Back]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -3149,7 +3137,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "1935;1110"}
+                                    "val" : {"type" : 23, "value" : "1935;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3199,7 +3187,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3855;672"}
+                                    "val" : {"type" : 23, "value" : "3855;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3235,7 +3223,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2255;1110"}
+                                    "val" : {"type" : 23, "value" : "2255;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3335,7 +3323,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;2862"}
+                                    "val" : {"type" : 23, "value" : "2895;3519"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3433,7 +3421,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;1548"}
+                                    "val" : {"type" : 23, "value" : "3215;3081"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3544,7 +3532,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;1329"}
+                                    "val" : {"type" : 23, "value" : "3215;2862"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3600,9 +3588,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Main Menu"
+                                                   "value" : "Civil Aura Settings - Main Menu"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 1}
+                                                "stub" : {"type" : 19, "value" : 0}
                                              }
                                           ]
                                        }
@@ -3651,7 +3639,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "-305;1110"}
+                                    "val" : {"type" : 23, "value" : "-305;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3750,7 +3738,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Enable Barter sharing for all your characters. Bonuses will be automatically applied. This is a user-level setting."
+                                                   "value" : "Enable Barter sharing for all your characters. Barter bonuses will be applied automatically. This is a user-level setting."
                                                 },
                                                 "stub" : {"type" : 19, "value" : 0}
                                              }
@@ -3805,7 +3793,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "1935;891"}
+                                    "val" : {"type" : 23, "value" : "1935;1548"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -3916,7 +3904,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3855;2643"}
+                                    "val" : {"type" : 23, "value" : "3855;3300"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -4004,6 +3992,18 @@
                            {
                               "child" : [
                                  {
+                                    "UUID" : {"type" : 22, "value" : "5b464633-2177-46fb-9c4a-0fb2bf2f384b"}
+                                 },
+                                 {
+                                    "UUID" : {"type" : 22, "value" : "45ea91cc-0ca7-4145-a5c7-2b488d6f0170"}
+                                 },
+                                 {
+                                    "UUID" : {"type" : 22, "value" : "5b2f8ec2-0a11-498a-bb92-ddd85bb3ad1e"}
+                                 },
+                                 {
+                                    "UUID" : {"type" : 22, "value" : "2b78af8d-4fde-47aa-92ac-7c6a6c211b7f"}
+                                 },
+                                 {
                                     "UUID" : {"type" : 22, "value" : "47ccd94d-0143-478b-9485-80b26cdcca04"}
                                  },
                                  {
@@ -4017,18 +4017,6 @@
                                  },
                                  {
                                     "UUID" : {"type" : 22, "value" : "fb760b66-f0df-4827-a343-158b6ff37a38"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "5b2f8ec2-0a11-498a-bb92-ddd85bb3ad1e"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "2b78af8d-4fde-47aa-92ac-7c6a6c211b7f"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "5b464633-2177-46fb-9c4a-0fb2bf2f384b"}
-                                 },
-                                 {
-                                    "UUID" : {"type" : 22, "value" : "45ea91cc-0ca7-4145-a5c7-2b488d6f0170"}
                                  },
                                  {
                                     "UUID" : {"type" : 22, "value" : "a73a4df2-ab58-49a4-8cba-df6caac688ef"}
@@ -4060,7 +4048,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2575;1110"}
+                                    "val" : {"type" : 23, "value" : "2575;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -4180,7 +4168,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "655;1110"}
+                                    "val" : {"type" : 23, "value" : "655;1767"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -4236,7 +4224,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Exit Settings"
+                                                   "value" : "[Exit Settings]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -4270,7 +4258,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "15;1548"}
+                                    "val" : {"type" : 23, "value" : "15;2205"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -4330,7 +4318,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "3215;3081"}
+                                    "val" : {"type" : 23, "value" : "3215;3738"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -4440,7 +4428,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "2895;1548"}
+                                    "val" : {"type" : 23, "value" : "2895;3081"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
