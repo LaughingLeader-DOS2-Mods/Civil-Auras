@@ -495,6 +495,7 @@ DB_CA_Aura_PartyTimerActive(1);
 TimerLaunch("CA_AuraManager_PartyRefreshTimer", 5000);
 CA_Debug_RecordAll("Party refresh timer started");
 
+/*
 IF
 ItemEquipped(_Item, _Player)
 AND
@@ -535,6 +536,7 @@ AND
 DB_IsPlayer(_Player)
 THEN
 CA_Aura_RefreshAfterDelay(_Player, 10000);
+*/
 
 IF
 TimerFinished(_TimerName)
