@@ -10,6 +10,9 @@ All items are sold at the various vendors listed on both the Nexus and Workshop 
 * [Nexus](https://www.nexusmods.com/divinityoriginalsin2/mods/180?)
 * [Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=1163198876) 
 
+### [Changelog](CHANGELOG.md)
+Check the changelog for update details.
+
 ### Usage
 The complete source for Civil Auras is updated here for learning purposes. I encourage you to study the source and ask questions. Great care was taken to script everything with mod compatibility in mind.
 
