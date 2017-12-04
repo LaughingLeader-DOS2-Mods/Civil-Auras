@@ -554,12 +554,14 @@ THEN
 GlobalSetFlag("CA_DEBUG_DISPLAYMESSAGES");
 GlobalSetFlag("CA_DEBUG_DISPLAYFLAGS");
 
+/*
 IF
 GameStarted("CA_TestLevel", 1)
 AND
 SysCount("DB_CA_ModVersion",1,0)
 THEN
 DB_CA_ModVersion("1.7.1");
+*/
 
 IF
 GameStarted("CA_TestLevel", _)

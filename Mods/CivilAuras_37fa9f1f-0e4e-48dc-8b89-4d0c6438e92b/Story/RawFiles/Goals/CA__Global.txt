@@ -77,16 +77,6 @@ CharacterAddSourcePoints(_Player, 1);
 //END_REGION
 
 //REGION DATABASE_REFRESH
-PROC
-CA_Global_ResetDatabases()
-THEN
-SysClear("DB_CA_ModVersion", 1);
-
-PROC
-CA_Global_BuildSettings()
-THEN
-DB_NOOP(1);
-
 /*
 PROC
 CA_Global_BuildSettings()
@@ -107,20 +97,33 @@ DB_CA_ModVersion("1.7.1");
 CA_Global_BuildSettings();
 */
 
-//For refreshing existing saves
-IF
-SavegameLoaded(_,_,_,_)
+QRY
+CA_QRY_Global_RefreshNeeded()
+AND
+NOT DB_CA_ModVersion(_)
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Global_RefreshNeeded()
 AND
 DB_CA_ModVersion(_Version)
 AND
 _Version != "1.7.1"
+THEN
+DB_NOOP(1);
+
+//For refreshing existing saves
+IF
+SavegameLoaded(_,_,_,_)
+AND
+CA_QRY_Global_RefreshNeeded()
 AND
 DB_IsPlayer(_Player)
 AND
 NOT DB_CA_Refreshing(1)
 THEN
-CA_Global_ResetDatabases();
-CA_Global_BuildSettings();
+SysClear("DB_CA_ModVersion", 1);
 DB_CA_ModVersion("1.7.1");
 DB_CA_Refreshing(1);
 SetStoryEvent(_Player, "CA_Refresh");

@@ -555,7 +555,7 @@ THEN
 CA_Aura_RefreshPlayers();
 TimerLaunch("CA_AuraManager_PartyRefreshTimer", 5000);
 DB_CA_Aura_PartyTimerActive(1);
-CA_Debug_RecordAll("Party refresh timer reset");
+//CA_Debug_RecordAll("Party refresh timer reset");
 
 IF
 TimerFinished("CA_AuraManager_PartyRefreshTimer")

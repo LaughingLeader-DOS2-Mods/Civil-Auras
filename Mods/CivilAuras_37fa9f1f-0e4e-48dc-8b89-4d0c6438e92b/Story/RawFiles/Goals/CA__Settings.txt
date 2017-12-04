@@ -190,7 +190,6 @@ IF
 ObjectFlagSet("CA_DEBUG_REFRESHDB", (CHARACTERGUID)_Player, _Instance)
 THEN
 CA_Debug_Record(_Player, "Manually refreshing databases.");
-CA_Global_ResetDatabases();
 SetStoryEvent(_Player, "CA_Refresh");
 //ObjectClearFlag(_Player, "CA_DEBUG_REFRESHDB");
 

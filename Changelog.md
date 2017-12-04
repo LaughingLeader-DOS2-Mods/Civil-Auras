@@ -1,5 +1,18 @@
 Civil Auras Changelog
 =======
+# 1.7.1
+* Bug Fixes
+	* Fixed bonuses not applying under some circumstances (apply timers not clearing properly).
+	* Fixed Pep Talk not applying bonuses correctly (dumb typo).
+* Aura System
+	* Auras and aura bonuses now refresh quietly if the relevant stats change. 
+* CA Settings Book
+	* New command to display debug messages.
+		* Will display these messages in the combat log as well (if enabled), on fresh campaigns.
+	* Added a mod version display in the main menu.
+	* Labeled debug commands with handy tags.
+	* Tweaked the "Remove Aura Statuses" command to also clear related databases. Use this command if something seems funky on existing saves.
+
 # 1.7.0
 * New Persuasion Aura
 	* Works as an eventual upgrade to Pep Talk, for applying your persuasion bonus to allies.
