@@ -127,7 +127,6 @@ DB_IsPlayer(_Player)
 AND
 CharacterIsInCombat(_Player,0)
 THEN
-CA_Settings_InitSettings(_Player);
 CA_Settings_MarkHost(_Player);
 CA_Settings_UpdateVersionText();
 Proc_StartDialog(0, "CA_Dialog_Config", _Item, _Player);
@@ -135,16 +134,21 @@ Proc_StartDialog(0, "CA_Dialog_Config", _Item, _Player);
 //END_REGION
 
 //REGION AUTO_ADD
-IF
-SavegameLoaded(_,_,_,_)
-AND
-DB_IsPlayer(_Player)
+PROC
+CA_Settings_AddSettingsBook((CHARACTERGUID)_Player)
 AND
 ItemTemplateIsInUserInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0, 0)
 AND
 ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
 THEN
 ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
+
+IF
+SavegameLoaded(_,_,_,_)
+AND
+DB_IsPlayer(_Player)
+THEN
+CA_Settings_AddSettingsBook(_Player);
 
 //END_REGION
 
@@ -168,45 +172,29 @@ UserClearFlag(_Player, "CA_USER_ISHOST", 0);
 CA_Debug_Record(_Player, "Removed host flag");
 
 IF
-GameStarted(_Level, _)
+GameStarted(_,_)
 AND
 DB_IsPlayer(_Player)
 THEN
 CA_Settings_MarkHost(_Player);
+CA_Settings_AddSettingsBook(_Player);
 
 //END_REGION
 
 //REGION DATABASE_REFRESH
-PROC
-CA_Settings_InitSettings((CHARACTERGUID)_Player)
-AND
-ItemTemplateIsInUserInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0, 0)
-AND
-ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
-THEN
-ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
-
 IF
 ObjectFlagSet("CA_DEBUG_REFRESHDB", (CHARACTERGUID)_Player, _Instance)
 THEN
 CA_Debug_Record(_Player, "Manually refreshing databases.");
 SetStoryEvent(_Player, "CA_Refresh");
-//ObjectClearFlag(_Player, "CA_DEBUG_REFRESHDB");
-
-PROC
-CA_Global_BuildSettings()
-AND
-DB_IsPlayer(_Player)
-THEN
-ObjectSetFlag(_Player, "CA_AUTOSNEAK");
-CA_Settings_InitSettings(_Player);
+ObjectClearFlag(_Player, "CA_DEBUG_REFRESHDB");
 
 IF
 StoryEvent(_Object, "CA_Refresh")
 AND
 DB_IsPlayer(_Player)
 THEN
-CA_Settings_InitSettings(_Player);
+CA_Settings_AddSettingsBook(_Player);
 
 //END_REGION
 
@@ -214,7 +202,7 @@ CA_Settings_InitSettings(_Player);
 QRY
 CA_QRY_DEBUG_ModFlags((STRING)_FlagName)
 AND
-_FlagName == "CA_AUTOSNEAK"
+_FlagName == "CA_AUTOSNEAK_DISABLED"
 THEN
 DB_NOOP(1);
 
@@ -229,9 +217,9 @@ DB_NOOP(1);
 IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
 AND
-ObjectGetFlag(_Player, "CA_AUTOSNEAK", _Val)
+ObjectGetFlag(_Player, "CA_AUTOSNEAK_DISABLED", _Val)
 THEN
-CA_Settings_Debug_TraceFlag(_Player, "CA_AUTOSNEAK", _Val);
+CA_Settings_Debug_TraceFlag(_Player, "CA_AUTOSNEAK_DISABLED", _Val);
 
 IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)

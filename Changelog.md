@@ -1,5 +1,9 @@
 Civil Auras Changelog
 =======
+# 1.7.1 Revision
+* Minor Hotfix
+	* Fixed CA settings books not spawning on a new game - this was removed unintentionally when refactoring things in 1.7.1 (the books still spawned on loading a save).
+
 # 1.7.1
 * Bug Fixes
 	* Fixed bonuses not applying under some circumstances (apply timers not clearing properly).

@@ -161,7 +161,7 @@ CA_Stealth_TurnAuraOff(_Player);
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_AuraHost)
 AND
-ObjectGetFlag(_Player, "CA_AUTOSNEAK", 1)
+ObjectGetFlag(_Player, "CA_AUTOSNEAK_DISABLED", 0)
 AND
 HasActiveStatus(_AuraHost, "SNEAKING", 1)
 AND
@@ -181,11 +181,11 @@ CharacterStatusApplied((CHARACTERGUID)_Player, "CA_STEALTHY", (CHARACTERGUID)_Au
 AND
 GlobalGetFlag("CA_DEBUG_DISPLAYFLAGS", 1)
 AND
-ObjectGetFlag(_Player, "CA_AUTOSNEAK", _State)
+ObjectGetFlag(_Player, "CA_AUTOSNEAK_DISABLED", _State)
 AND
 IntegertoString(_State, _FlagVal)
 AND
-StringConcatenate("CA_AUTOSNEAK = ", _FlagVal, _Message)
+StringConcatenate("CA_AUTOSNEAK_DISABLED = ", _FlagVal, _Message)
 THEN
 CharacterStatusText(_Player, _Message);
 
