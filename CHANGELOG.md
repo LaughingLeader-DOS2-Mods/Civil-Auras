@@ -1,10 +1,13 @@
 Civil Auras Changelog
 =======
+# 1.7.1.2
+* Updated to the latest official patch.
+	
 # 1.7.1.1 (Minor Revision)
 * Minor Hotfix
 	* Fixed CA settings books not spawning on a new game - this was removed unintentionally when refactoring things in 1.7.1 (the books still spawned on loading a save).
 
-# 1.7.1
+# 1.7.1.0
 * Bug Fixes
 	* Fixed bonuses not applying under some circumstances (apply timers not clearing properly).
 	* Fixed Pep Talk not applying bonuses correctly (dumb typo).
@@ -17,7 +20,7 @@ Civil Auras Changelog
 	* Labeled debug commands with handy tags.
 	* Tweaked the "Remove Aura Statuses" command to also clear related databases. Use this command if something seems funky on existing saves.
 
-# 1.7.0
+# 1.7.0.0
 * New Persuasion Aura
 	* Works as an eventual upgrade to Pep Talk, for applying your persuasion bonus to allies.
 * New Icons
@@ -28,24 +31,24 @@ Civil Auras Changelog
 * CA Settings Book
 	* New debug command for removing CA statuses from user-owned characters, if for some reason they become "stuck" (a common DOS2 bug). Use this if a status suddenly doesn't toggle off.
 
-# 1.6.5
+# 1.6.5.0
 * CA Settings Book
 	* Made most debug commands host-only commands.
 	* Remove gold value from the skillbooks spawned by the debug command (host only).
 * Mirror Exploit/Bugs
 	* Added an additional check for barter when interacting with the mirror.
 
-# 1.6.4
+# 1.6.4.0
 * Quick update in response to the latest game patch.
 
-# 1.6.2
+# 1.6.2.0
 * Quick fix for a double config book spawning in a new game.
 
-# 1.6.1
+# 1.6.1.0
 * Quick update to fix the "Remove Bonus Points" command.
 	* Made it remove equipment first before checking the bonus points. The equipment is then re-equipped once done.
 
-# 1.6.0
+# 1.6.0.0
 * New CA Settings Book
 	* Aura Settings
 		* Enable/Disable Auto-Sneak when affected by the Stealth Aura (on the first apply).
@@ -71,14 +74,14 @@ Civil Auras Changelog
 * Removed barter sharing messages.
 	* Will possibly be added back in later, with an opt-in setting, and adjustable appearance rates.
 
-# 1.5.1
+# 1.5.1.0
 * Pep Talk tweaks:
 	* Added two new effects.
 	* Reduced cooldown (5 -> 3)
 	* Fixed Motivated's effect positioning.
 * Fixed more mirror/respec exploits.
 
-# 1.5.0
+# 1.5.0.0
 * (Hopefully) fixed an unlimited talent exploit - talentbooks now only grant a talent to a specific character once. Respecing won't bypass this.
 * Restructured trader item generation to only spawn one book (per skill) at a time - Players usually only need one specific book per character anyway.
 * Bartering bonuses and trade generation are now properly applied when requesting trade through dialog.
