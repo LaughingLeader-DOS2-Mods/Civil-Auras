@@ -19,6 +19,15 @@ Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/RawFiles/story_header
 #Assets
 Editor/Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Assets/Effects/*
 Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Assets/*
+Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/GUI/*
+
+#Log files, etc
+*.log
+StatsEditorConfig.xml
+COMBAT_LLLE_Humans_Trader.ailog
+DockPanel.config
+EditorBrowserMetadata_e19e4cc5-7fa7-45ed-8fbb-e5e02eb1d60e.xml
+EffectEditorConfig.xml
 
 #Binary Files
 *.bik
