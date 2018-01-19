@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_CA_ModVersion("1.7.1");
+
 KBSECTION
 //REGION HELPER_METHODS
 PROC
@@ -76,58 +76,36 @@ THEN
 CharacterAddSourcePoints(_Player, 1);
 //END_REGION
 
-//REGION DATABASE_REFRESH
-/*
+//REGION MOD_UPDATING
 PROC
-CA_Global_BuildSettings()
+CA_System_UpdateAll()
+THEN
+CA_Legacy_Start_RemoveOldAuras();
+CA_Legacy_RemoveOldData();
+//END_REGION
+
+//REGION LEGACY_DATA_REMOVAL
+/*
+Tested - goal name changes seem to sync correctly on previous saves.
+PROC
+CA_Legacy_RemoveOldData()
 AND
 DB_IsPlayer(_Player)
 AND
-NOT DB_CA_Settings_Barter_Messages(_Player,_,_,_)
+SysIsActive("CA__Global.txt")
 THEN
-DB_CA_Settings_Barter_Messages(_Player, 1, 100, 75);
-
-//Add the mod version to fresh Origin saves, to avoid rebuilding.
-IF
-GameStarted("TUT_Tutorial_A", _Mode)
-AND
-DB_CA_ModVersion("1.7.1")
-THEN
-DB_CA_ModVersion("1.7.1");
-CA_Global_BuildSettings();
+SysCompleteGoal("CA__Global.txt");
+ItemTemplateAddTo("LOOT_Bodyparts_A_a32e556f-8c03-48ca-bd29-b78067fd31da",_Player,3);
 */
 
-QRY
-CA_QRY_Global_RefreshNeeded()
+PROC
+CA_Legacy_RemoveOldData()
 AND
-NOT DB_CA_ModVersion(_)
-THEN
-DB_NOOP(1);
-
-QRY
-CA_QRY_Global_RefreshNeeded()
+SysCount("DB_CA_ModVersion", 1, _Count)
 AND
-DB_CA_ModVersion(_Version)
-AND
-_Version != "1.7.1"
-THEN
-DB_NOOP(1);
-
-//For refreshing existing saves
-IF
-SavegameLoaded(_,_,_,_)
-AND
-CA_QRY_Global_RefreshNeeded()
-AND
-DB_IsPlayer(_Player)
-AND
-NOT DB_CA_Refreshing(1)
+_Count > 0
 THEN
 SysClear("DB_CA_ModVersion", 1);
-DB_CA_ModVersion("1.7.1");
-DB_CA_Refreshing(1);
-SetStoryEvent(_Player, "CA_Refresh");
-CA_Debug_Record(_Player, "Mod version changed. Updating to new version.");
 
 PROC
 CA_Legacy_Start_RemoveOldAuras()
@@ -136,15 +114,6 @@ DB_IsPlayer(_Player)
 THEN
 CA_Debug_Record(_Player, "[Legacy] Removed old aura data");
 CA_Legacy_RemoveOldAuras(_Player);
-
-IF
-StoryEvent(_Object, "CA_Refresh")
-AND
-DB_CA_Refreshing(_Val)
-THEN
-SysClear("DB_CA_Refreshing", 1);
-CA_Legacy_Start_RemoveOldAuras();
-
 //END_REGION
 EXITSECTION
 

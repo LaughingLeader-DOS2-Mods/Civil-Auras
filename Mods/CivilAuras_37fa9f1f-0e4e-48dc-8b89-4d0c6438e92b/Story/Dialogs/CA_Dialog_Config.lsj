@@ -1,7 +1,7 @@
 {
    "save" : {
       "header" : {
-         "time" : 1512439973,
+         "time" : 1516366300,
          "version" : "2.0.8.2"
       },
       "regions" : {
@@ -3593,9 +3593,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Civil Aura Settings - Main Menu<br>Version: [CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521]"
+                                                   "value" : "Main Menu<br>Version: [CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521]"
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }

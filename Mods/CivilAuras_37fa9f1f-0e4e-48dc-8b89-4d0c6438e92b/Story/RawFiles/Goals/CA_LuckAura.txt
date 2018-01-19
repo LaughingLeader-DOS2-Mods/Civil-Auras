@@ -351,8 +351,8 @@ CA_Luck_TurnAuraOff(_Player);
 //END_REGION
 
 //REGION DATABASE_REFRESH
-IF
-StoryEvent(_Object, "CA_Refresh")
+PROC
+CA_System_UpdateAll()
 THEN
 DB_NOOP(1);
 //END_REGION

@@ -600,8 +600,8 @@ THEN
 CA_Debug_RemoveAuras(_Player);
 CA_Debug_RemoveBonuses(_Player);
 
-IF
-StoryEvent(_Object, "CA_Refresh")
+PROC
+CA_System_UpdateAll()
 THEN
 SysClear("DB_CA_Aura_AuraStatus", 5);
 CA_Aura_RemoveAuraStatuses();

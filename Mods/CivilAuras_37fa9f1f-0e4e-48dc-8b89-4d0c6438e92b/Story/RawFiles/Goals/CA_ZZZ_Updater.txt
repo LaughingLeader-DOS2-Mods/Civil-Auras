@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_Mods_RegisteredMod("CivilAuras", "1.7.2.0", "LaughingLeader");
+KBSECTION
+QRY
+CA_QRY_Updater_UpdateDetected()
+AND
+NOT DB_Mods_RegisteredMod("CivilAuras", "1.7.2.0", "LaughingLeader")
+THEN
+DB_NOOP(1);
+
+//Legacy versions
+QRY
+CA_QRY_Updater_UpdateDetected()
+AND
+SysCount("DB_CA_ModVersion", 1, _Count)
+AND
+_Count > 0
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Updater_UpdateDetected()
+AND
+SysCount("DB_CA_ModVersion", 1, _Count)
+AND
+_Count > 0
+THEN
+DB_NOOP(1);
+
+QRY
+CA_QRY_Updater_UpdateDetected()
+AND
+NOT DB_CA_Updater_FirstRun(1)
+THEN
+DB_CA_Updater_FirstRun(1);
+
+IF
+CharacterCreationFinished(_Character)
+AND
+NOT DB_CA_Updater_FirstRun(1)
+THEN
+DB_CA_Updater_FirstRun(1);
+
+PROC
+CA_System_RemovePreviousModVersions()
+AND
+DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader")
+THEN
+NOT DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader");
+
+IF
+SavegameLoaded(_,_,_,_)
+AND
+CA_QRY_Updater_UpdateDetected()
+THEN
+CA_System_RemovePreviousModVersions();
+DB_Mods_RegisteredMod("CivilAuras", "1.7.2.0", "LaughingLeader");
+CA_System_UpdateAll();
+
+PROC
+CA_System_UpdateAll()
+THEN
+CA_Debug_LogAll("Mod version changed. Updating to new version.");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "ZZZ_CivilAuras"

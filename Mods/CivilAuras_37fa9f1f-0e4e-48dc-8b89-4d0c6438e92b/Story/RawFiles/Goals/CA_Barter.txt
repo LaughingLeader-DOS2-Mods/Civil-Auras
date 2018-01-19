@@ -271,8 +271,8 @@ DB_CA_HighestBarter(_Val)
 THEN
 NOT DB_CA_HighestBarter(_Val);
 
-IF
-StoryEvent(_Object, "CA_Refresh")
+PROC
+CA_System_UpdateAll()
 THEN
 CA_Barter_ResetDatabases();
 DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");

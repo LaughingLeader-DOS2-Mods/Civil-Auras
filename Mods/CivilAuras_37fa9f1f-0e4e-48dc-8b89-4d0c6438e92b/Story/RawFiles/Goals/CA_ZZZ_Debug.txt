@@ -554,15 +554,6 @@ THEN
 GlobalSetFlag("CA_DEBUG_DISPLAYMESSAGES");
 GlobalSetFlag("CA_DEBUG_DISPLAYFLAGS");
 
-/*
-IF
-GameStarted("CA_TestLevel", 1)
-AND
-SysCount("DB_CA_ModVersion",1,0)
-THEN
-DB_CA_ModVersion("1.7.1");
-*/
-
 IF
 GameStarted("CA_TestLevel", _)
 THEN
@@ -580,8 +571,8 @@ NOT DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Fema
 //END_REGION
 
 //REGION DATABASE_REFRESH
-IF
-StoryEvent(_Object, "CA_Refresh")
+PROC
+CA_System_UpdateAll()
 THEN
 SysClear("DB_Debug_Slots", 1);
 SysClear("DB_CA_Debug_Slots", 1);

@@ -340,8 +340,8 @@ SysClear("DB_CA_CatBag_Sounds_Out", 2);
 SysClear("DB_CA_Book_PetPal_Message", 2);
 SysClear("DB_CA_Book_Talent_Sound", 2);
 
-IF
-StoryEvent(_Object, "CA_Refresh")
+PROC
+CA_System_UpdateAll()
 THEN
 CA_Misc_ResetDatabases();
 

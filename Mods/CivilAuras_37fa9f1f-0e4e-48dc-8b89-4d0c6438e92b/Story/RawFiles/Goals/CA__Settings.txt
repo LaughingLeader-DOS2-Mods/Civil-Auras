@@ -116,7 +116,7 @@ CA_Aura_ResetAuraDatabases();
 PROC
 CA_Settings_UpdateVersionText()
 AND
-DB_CA_ModVersion(_Version)
+DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader")
 THEN
 DialogSetVariableString("CA_Dialog_Config", "CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521", _Version);
 
@@ -186,11 +186,12 @@ IF
 ObjectFlagSet("CA_DEBUG_REFRESHDB", (CHARACTERGUID)_Player, _Instance)
 THEN
 CA_Debug_Record(_Player, "Manually refreshing databases.");
-SetStoryEvent(_Player, "CA_Refresh");
+//SetStoryEvent(_Player, "CA_Refresh");
+CA_System_UpdateAll();
 ObjectClearFlag(_Player, "CA_DEBUG_REFRESHDB");
 
-IF
-StoryEvent(_Object, "CA_Refresh")
+PROC
+CA_System_UpdateAll()
 AND
 DB_IsPlayer(_Player)
 THEN
