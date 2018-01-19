@@ -23,15 +23,6 @@ DB_NOOP(1);
 QRY
 CA_QRY_Updater_UpdateDetected()
 AND
-SysCount("DB_CA_ModVersion", 1, _Count)
-AND
-_Count > 0
-THEN
-DB_NOOP(1);
-
-QRY
-CA_QRY_Updater_UpdateDetected()
-AND
 NOT DB_CA_Updater_FirstRun(1)
 THEN
 DB_CA_Updater_FirstRun(1);
