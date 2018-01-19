@@ -138,7 +138,7 @@ NOT DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate, _GenType);
 
 //REGION SKILLBOOK_METHODS
 QRY
-CA_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill, (INTEGER)_MaxAmount)
+CA_QRY_Trader_GenerateSkillBooks((CHARACTERGUID)_Trader, (STRING)_ItemTemplate, (STRING)_Skill, (INTEGER)_MaxAmount)
 AND
 NOT DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate, "Skillbooks")
 AND
@@ -244,7 +244,7 @@ DB_CA_Trader_SkillBooks(_Item, _Skill, _MaxAmount)
 AND
 CA_Item_PartyLevelRequirement_Met(_Item)
 AND
-CA_Trader_GenerateSkillBooks(_Trader, _Item, _Skill, _MaxAmount)
+CA_QRY_Trader_GenerateSkillBooks(_Trader, _Item, _Skill, _MaxAmount)
 THEN
 //CharacterStatusText(_Trader, "Skillbook generated.");
 DB_NOOP(1);
@@ -408,6 +408,7 @@ SysClear("DB_CA_Trader_SkillBooks", 3);
 PROC
 CA_TradeTreasure_BuildSettings()
 THEN
+DB_CA_Trader_TempInt(0);
 DB_CA_ModTraders((CHARACTERGUID)S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c); // Fort Joy Blacksmith (Nebora)
 DB_CA_ModTraders((CHARACTERGUID)S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620); // Tarquin
 DB_CA_ModTraders((CHARACTERGUID)RC_DW_Trader_PotionsIngredientsWaterSummonNecro_88ea209d-d5e6-465d-bebe-2f10b1fd2861); // Trader Bree
@@ -434,11 +435,10 @@ PROC
 CA_System_UpdateAll()
 THEN
 CA_TradeTreasure_ResetDatabases();
-DB_CA_Trader_TempInt(0);
 CA_TradeTreasure_BuildSettings();
 CA_TradeTreasure_ResetDynamicGeneration(); // Generate items via trade in new updates
 //END_REGION
 EXITSECTION
 CA_TradeTreasure_ResetDatabases();
 ENDEXITSECTION
-ParentTargetEdge "DOS2ModWrapper"
+ParentTargetEdge "ZZZ_CivilAuras"
