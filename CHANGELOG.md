@@ -5,7 +5,6 @@ Civil Auras Changelog
 * Story Script Refactoring
 	* Moved mod updating code to a new script (loaded last).
 		* Uses a slightly different database now for potential cross-mod interaction.
-	* Moved CA_TradeTreasure under DOS2Wrapper, for better compatibility (this is the only script that is dependent on Origins).
 
 # 1.7.1.2
 * Updated to the latest official patch.
