@@ -1,6 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
+CA_System_RemovePreviousModVersions();
 DB_Mods_RegisteredMod("CivilAuras", "1.7.3.0", "LaughingLeader");
 KBSECTION
 //REGION MOD_UPDATING
