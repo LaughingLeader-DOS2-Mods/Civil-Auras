@@ -22,4 +22,4 @@ DB_LLLIB_Traders_StartingGold("LLLIB_LeaderTrader", "CA_TestLevel", 11000, "");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

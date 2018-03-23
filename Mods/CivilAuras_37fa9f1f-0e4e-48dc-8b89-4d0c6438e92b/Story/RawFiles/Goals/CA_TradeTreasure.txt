@@ -441,4 +441,4 @@ CA_TradeTreasure_ResetDynamicGeneration(); // Generate items via trade in new up
 EXITSECTION
 CA_TradeTreasure_ResetDatabases();
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

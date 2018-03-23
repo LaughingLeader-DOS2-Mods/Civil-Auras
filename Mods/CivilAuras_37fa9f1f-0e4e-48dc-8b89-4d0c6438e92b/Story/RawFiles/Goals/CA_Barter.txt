@@ -461,4 +461,4 @@ CharacterStatusText(_Trader, _Msg2);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

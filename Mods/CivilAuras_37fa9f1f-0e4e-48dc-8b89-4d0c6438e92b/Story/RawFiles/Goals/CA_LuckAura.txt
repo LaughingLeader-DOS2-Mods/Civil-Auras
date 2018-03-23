@@ -359,4 +359,4 @@ DB_NOOP(1);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

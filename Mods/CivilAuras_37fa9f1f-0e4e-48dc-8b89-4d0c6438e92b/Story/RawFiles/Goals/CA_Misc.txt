@@ -360,4 +360,4 @@ DB_CA_CatBag_Sounds_Out(1, "Animals_Cat_ABC_Use_05");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

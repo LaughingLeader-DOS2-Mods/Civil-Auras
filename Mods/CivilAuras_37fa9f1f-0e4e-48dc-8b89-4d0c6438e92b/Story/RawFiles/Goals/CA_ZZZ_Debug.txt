@@ -549,15 +549,28 @@ CA_Debug_Log(_Player, "Removed ", _BonusStatus, " status");
 
 //REGION TESTLEVEL
 IF
-CharacterUsedItem(_Player, (ITEMGUID)ITEMGUID_BOOK_Book_CivilAuraSettings_000_53256d06-1f87-4ae7-98b3-618e560fba86)
+CharacterUsedItem(_Player, (ITEMGUID)ITEMGUID_CA_Debug_CivilAuraSettingsBook_53256d06-1f87-4ae7-98b3-618e560fba86)
 THEN
 GlobalSetFlag("CA_DEBUG_DISPLAYMESSAGES");
 GlobalSetFlag("CA_DEBUG_DISPLAYFLAGS");
 
 IF
-GameStarted("CA_TestLevel", _)
+GameStarted("CA_TestLevel", 1)
 THEN
-DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Female_000_f584adda-3587-444f-b0f2-965fd0f94319);
+DebugBreak("[CivilAuras:Debug] Starting CA_Timers_TestLevelInit timer.");
+SysActivateGoal("GLO_LVHub_Henchmen");
+TimerLaunch("CA_Timers_TestLevelInit", 2000);
+
+IF
+GameStarted(_,_)
+THEN
+DebugBreak("[CivilAuras:Debug] is this running?");
+
+IF
+TimerFinished("CA_Timers_TestLevelInit")
+THEN
+DebugBreak("[CivilAuras:Debug] Attempting to turn character into a recruiter.");
+DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_CA_DebugLevel_DebugRecruiter_f584adda-3587-444f-b0f2-965fd0f94319);
 PROC_GLO_LVHub_Henchmen_Init();
 
 PROC
@@ -566,13 +579,26 @@ THEN
 DB_NOOP(1);
 
 IF
-GameStarted(_Region, _)
-AND
-_Region != "CA_TestLevel"
-AND
-DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Female_000_f584adda-3587-444f-b0f2-965fd0f94319)
+RegionEnded("CA_TestLevel")
 THEN
-NOT DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Female_000_f584adda-3587-444f-b0f2-965fd0f94319);
+NOT DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_CA_DebugLevel_DebugRecruiter_f584adda-3587-444f-b0f2-965fd0f94319);
+//END_REGION
+
+//REGION STARTING_DEBUGGING
+IF
+GameStarted(_,_)
+THEN
+DebugBreak("[CivilAuras:Debug(GameStarted)]");
+
+IF
+RegionStarted(_)
+THEN
+DebugBreak("[CivilAuras:Debug(RegionStarted)]");
+
+IF
+RegionEnded(_)
+THEN
+DebugBreak("[CivilAuras:Debug(RegionEnded)]");
 //END_REGION
 
 //REGION DATABASE_REFRESH
@@ -686,4 +712,4 @@ CA_Debug_EquipAllPrevious(_Player);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

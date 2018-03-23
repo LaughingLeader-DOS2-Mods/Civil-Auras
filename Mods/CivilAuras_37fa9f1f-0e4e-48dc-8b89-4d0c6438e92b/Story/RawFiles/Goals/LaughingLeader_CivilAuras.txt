@@ -1,0 +1,13 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+CA_Internal_StartCivilAuras();
+KBSECTION
+PROC
+CA_Internal_StartCivilAuras()
+THEN
+DebugBreak("[CivilAuras] Civil auras starting.");
+GoalCompleted;
+EXITSECTION
+
+ENDEXITSECTION

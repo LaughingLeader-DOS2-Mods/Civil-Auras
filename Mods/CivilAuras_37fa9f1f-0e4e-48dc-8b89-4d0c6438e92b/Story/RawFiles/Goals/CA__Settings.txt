@@ -241,4 +241,4 @@ CA_Settings_Debug_TraceFlag(_Player, "CA_BARTER_BLACKLIST", _Val);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

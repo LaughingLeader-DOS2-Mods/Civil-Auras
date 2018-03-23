@@ -87,4 +87,4 @@ GlobalSetFlag("CA_CIVIL_AURAS_ACTIVE");
 EXITSECTION
 CA_Updater_UnregisterMod();
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

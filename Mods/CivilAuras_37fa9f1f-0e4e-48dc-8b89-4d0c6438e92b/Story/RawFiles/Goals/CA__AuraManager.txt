@@ -613,9 +613,8 @@ DB_CA_Aura_AuraStatus(1, "Sneaking", "CA_STEALTH_AURA", "CA_STEALTHY", "CA_SNEAK
 DB_CA_Aura_AuraStatus(2, "Persuasion", "CA_PERSUASION_AURA", "CA_PERSUASIVE", "CA_PERSUASIONBONUS");
 DB_CA_Aura_AuraStatus(3, "Persuasion", "", "CA_MOTIVATED", "CA_PERSUASIONBONUS");
 DB_CA_Aura_AuraStatus(4, "Barter", "", "", "CA_BARTERBONUS");
-
 //END_REGION
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

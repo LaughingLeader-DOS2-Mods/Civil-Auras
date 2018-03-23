@@ -84,7 +84,7 @@ THEN
 RemoveStatus(_Player, "CA_STEALTH_AURA");
 CA_ClearSneakActive(_Player);
 CharacterStatusText(_Player, "Stealth Aura Disabled");
-
+DB_CA_SneakAura_JustRemoved(_Player);
 //END_REGION
 
 //REGION AUTO_TOGGLE
@@ -167,12 +167,35 @@ HasActiveStatus(_AuraHost, "SNEAKING", 1)
 AND
 HasActiveStatus(_Player, "SNEAKING", 0)
 AND
-CharacterGetReservedUserID(_AuraHost,_ID)
-AND
-CharacterGetReservedUserID(_Player,_ID)
+CA_Global_UserMatch(_Player, _AuraHost)
 THEN
 ApplyStatus(_Player, "SNEAKING", -1.0);
 CharacterStatusText(_Player, "Auto-Sneaking");
+
+IF
+CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_STEALTHY", _)
+AND
+DB_CA_SneakAura_JustRemoved(_AuraHost)
+AND
+_Player != _AuraHost
+AND
+UserGetFlag(_Player, "CA_AUTO_REMOVESTEALTH_DISABLED", 0)
+AND
+HasActiveStatus(_Player, "SNEAKING", 1)
+AND
+ObjectGetFlag(_Player, "CA_AUTOSNEAK_DISABLED", 0)
+AND
+CA_Global_UserMatch(_Player, _AuraHost)
+THEN
+RemoveStatus(_Player, "SNEAKING");
+CharacterStatusText(_Player, "Auto-Unsneaking");
+
+IF
+CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_STEALTH_AURA", _)
+AND
+DB_CA_SneakAura_JustRemoved(_Player)
+THEN
+NOT DB_CA_SneakAura_JustRemoved(_Player);
 //END_REGION
 
 //REGION DEBUG
@@ -211,4 +234,4 @@ RemoveStatus(_Player, "CA_STEALTHY");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

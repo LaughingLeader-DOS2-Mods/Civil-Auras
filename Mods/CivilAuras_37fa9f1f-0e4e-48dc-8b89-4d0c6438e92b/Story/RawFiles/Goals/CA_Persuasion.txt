@@ -175,4 +175,4 @@ NOT DB_CA_PersuasionBonus(_Player, _Val);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"

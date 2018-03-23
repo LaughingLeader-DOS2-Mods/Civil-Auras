@@ -112,4 +112,4 @@ CA_Legacy_RemoveOldAuras(_Player);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "ZZZ_CivilAuras"
+ParentTargetEdge "LaughingLeader_CivilAuras"
