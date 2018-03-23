@@ -117,20 +117,21 @@ PROC
 CA_Settings_UpdateVersionText()
 AND
 DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader")
+AND
+StringConcatenate("Version: ", _Version, _VersionStr)
 THEN
-DialogSetVariableString("CA_Dialog_Config", "CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521", _Version);
+DialogSetVariableString("CA_Dialog_Config", "CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521", _VersionStr);
+//LeaderLog_Log("DEBUG","[CivilAuras:Settings] Set dialog variable to ", _VersionStr);
 
 IF
 CharacterUsedItemTemplate((CHARACTERGUID)_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", (ITEMGUID)_Item)
 AND
-DB_IsPlayer(_Player)
+CharacterIsPlayer(_Player, 1)
 AND
 CharacterIsInCombat(_Player,0)
 THEN
 CA_Settings_MarkHost(_Player);
-CA_Settings_UpdateVersionText();
 Proc_StartDialog(0, "CA_Dialog_Config", _Item, _Player);
-
 //END_REGION
 
 //REGION AUTO_ADD
@@ -145,11 +146,17 @@ ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Play
 
 IF
 SavegameLoaded(_,_,_,_)
+THEN
+TimerLaunch("LLCA_Timers_AddBookTimer", 3000);
+
+IF
+TimerFinished("LLCA_Timers_AddBookTimer")
+AND
+GlobalGetFlag("LEADERLIB_ACTIVE", 0)
 AND
 DB_IsPlayer(_Player)
 THEN
 CA_Settings_AddSettingsBook(_Player);
-
 //END_REGION
 
 //REGION HOST_FLAGGING

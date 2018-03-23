@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
-    <header version="2" time="1512405019" />
-    <version major="3" minor="1" revision="4" build="0" />
+    <header version="2" time="1521736405" />
+    <version major="3" minor="1" revision="7" build="0" />
     <region id="DialogVariables">
         <node id="root">
             <children>
                 <node id="DialogVariable">
-                    <attribute id="DefaultValue" value="0.0.0" type="23" />
-                    <attribute id="Description" value="Civl Aura&apos;s current mod version." type="23" />
+                    <attribute id="DefaultValue" value="" type="23" />
+                    <attribute id="Description" value="Civil Aura&apos;s current mod version." type="23" />
                     <attribute id="UUID" value="ac1cbbcc-5732-4d45-b33d-8270f79b4521" type="31" />
                     <attribute id="name" value="CA_ModVersion" type="22" />
                     <attribute id="type" value="String" type="23" />

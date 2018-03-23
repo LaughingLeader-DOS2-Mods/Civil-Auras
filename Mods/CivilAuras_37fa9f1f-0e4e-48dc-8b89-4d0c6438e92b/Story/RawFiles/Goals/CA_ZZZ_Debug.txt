@@ -560,6 +560,11 @@ THEN
 DB_GLO_LVHub_Henchmen_Captain((CHARACTERGUID)CHARACTERGUID_Lizards_Hero_Female_000_f584adda-3587-444f-b0f2-965fd0f94319);
 PROC_GLO_LVHub_Henchmen_Init();
 
+PROC
+PROC_GLO_LVHub_Henchmen_Init()
+THEN
+DB_NOOP(1);
+
 IF
 GameStarted(_Region, _)
 AND

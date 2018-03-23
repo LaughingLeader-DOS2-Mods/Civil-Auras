@@ -1,7 +1,7 @@
 {
    "save" : {
       "header" : {
-         "time" : 1516366300,
+         "time" : 1521737790,
          "version" : "2.0.8.2"
       },
       "regions" : {
@@ -3593,7 +3593,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "Main Menu<br>Version: [CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521]"
+                                                   "value" : "Civil Auras Settings<br>[CA_ModVersion_ac1cbbcc-5732-4d45-b33d-8270f79b4521]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -4229,7 +4229,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "[Exit Settings]"
+                                                   "value" : "[Exit]"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }

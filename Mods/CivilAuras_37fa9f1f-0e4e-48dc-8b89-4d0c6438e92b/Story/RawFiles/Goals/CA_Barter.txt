@@ -106,7 +106,7 @@ RequestTrade((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
 AND
 UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 _Users > 1
 THEN
@@ -117,7 +117,7 @@ ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player, _Instance)
 AND
 UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 _Users > 1
 THEN
@@ -126,7 +126,7 @@ SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_MP");
 IF
 StoryEvent((CHARACTERGUID)_Player, "Event_CA_Bartering_TradeOpened_MP")
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 _Users > 1
 AND
@@ -143,7 +143,7 @@ CA_Aura_ApplyAuraBonus(_HighestPlayer, _UserCharacter, "Barter");
 IF
 TradeEnds((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 _Users > 1
 AND
@@ -161,7 +161,7 @@ RequestTrade((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
 AND
 UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 _Users <= 1
 THEN
@@ -172,7 +172,7 @@ ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player, _Instance)
 AND
 UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 _Users <= 1
 THEN
@@ -194,7 +194,7 @@ CA_Aura_ApplyAuraBonus(_HighestPlayer, _Player, "Barter");
 IF
 TradeEnds((CHARACTERGUID)_SoloPlayer, (CHARACTERGUID)_Trader)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 _Users <= 1
 AND
@@ -362,7 +362,7 @@ DialogStarted((STRING)_Dialog, (INTEGER)_ID)
 AND
 DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 GetUserCount(_Users2)
 AND
@@ -447,7 +447,7 @@ DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
 DB_IsPlayer(_Player)
 AND
-DB_UserCounter(_Users)
+GetUserCount(_Users)
 AND
 IntegertoString(_Users, _StrUsers)
 AND

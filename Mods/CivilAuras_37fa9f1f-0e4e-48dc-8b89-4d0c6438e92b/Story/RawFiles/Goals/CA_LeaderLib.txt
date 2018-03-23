@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+AND
+NOT DB_LLCA_RegisteredLeaderLibSettings(_)
+THEN
+LLCA_LeaderLib_RegisterSettings();
+DB_LLCA_RegisteredLeaderLibSettings(1);
+
+PROC
+LLCA_LeaderLib_RegisterSettings()
+THEN
+DB_LeaderLib_ModBridge_RegisterMenu("LaughingLeader_CivilAuras", "[Civil Auras] Settings", "CA_Dialog_Config");
+//LLLIB_Treasure_AddTreasureItemTemplate("LLLIB_LeaderTrader_ModBooks", "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 1);
+DB_LLLIB_Traders_RegisteredLevel("LLLIB_LeaderTrader", "CA_TestLevel", "");
+DB_LLLIB_Traders_LevelPosition("LLLIB_LeaderTrader", "CA_TestLevel", 15.70, 0.0, 3.19);
+DB_LLLIB_Traders_StartingGold("LLLIB_LeaderTrader", "CA_TestLevel", 11000, "");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "ZZZ_CivilAuras"

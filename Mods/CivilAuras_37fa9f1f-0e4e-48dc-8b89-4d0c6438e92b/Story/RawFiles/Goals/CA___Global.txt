@@ -85,18 +85,12 @@ CA_Legacy_RemoveOldData();
 //END_REGION
 
 //REGION LEGACY_DATA_REMOVAL
-/*
-Tested - goal name changes seem to sync correctly on previous saves.
 PROC
-CA_Legacy_RemoveOldData()
+CA_Legacy_DisplayMessageBox((STRING)_Str)
 AND
 DB_IsPlayer(_Player)
-AND
-SysIsActive("CA__Global.txt")
 THEN
-SysCompleteGoal("CA__Global.txt");
-ItemTemplateAddTo("LOOT_Bodyparts_A_a32e556f-8c03-48ca-bd29-b78067fd31da",_Player,3);
-*/
+OpenMessageBox(_Player, _Str);
 
 PROC
 CA_Legacy_RemoveOldData()
