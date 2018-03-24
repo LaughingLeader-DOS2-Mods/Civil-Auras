@@ -116,7 +116,7 @@ CA_Aura_ResetAuraDatabases();
 PROC
 CA_Settings_UpdateVersionText()
 AND
-DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader")
+DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader")
 AND
 StringConcatenate("Version: ", _Version, _VersionStr)
 THEN

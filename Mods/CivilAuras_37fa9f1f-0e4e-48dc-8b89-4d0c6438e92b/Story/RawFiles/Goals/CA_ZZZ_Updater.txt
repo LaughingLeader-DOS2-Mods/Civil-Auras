@@ -2,24 +2,24 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 CA_System_RemovePreviousModVersions();
-DB_Mods_RegisteredMod("CivilAuras", "1.7.3.0", "LaughingLeader");
+DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader");
 KBSECTION
 //REGION MOD_UPDATING
 PROC
 CA_System_UpdateAll()
 THEN
-DB_LeaderLib_ModBridge_Log("DEBUG","[CivilAuras:Updater] Mod version changed. Updating to new version.");
+DB_LeaderLib_ModApi_Log("DEBUG","[CivilAuras:Updater] Mod version changed. Updating to new version.");
 
 PROC
 CA_System_UpdateDatabases()
 THEN
 CA_System_UpdateAll();
-DB_LeaderLib_ModBridge_Log("DEBUG","[CivilAuras:Updater] Databases updated.");
+DB_LeaderLib_ModApi_Log("DEBUG","[CivilAuras:Updater] Databases updated.");
 
 PROC
 CA_System_ClearDatabases()
 THEN
-DB_LeaderLib_ModBridge_Log("DEBUG","[CivilAuras:Updater] Databases cleared.");
+DB_LeaderLib_ModApi_Log("DEBUG","[CivilAuras:Updater] Databases cleared.");
 
 PROC
 CA_Updater_ResetDatabases()
@@ -27,34 +27,32 @@ THEN
 CA_System_ClearDatabases();
 //CA_Updater_RegisterMod("0.9.0.0");
 CA_System_UpdateDatabases();
-DB_LeaderLib_ModBridge_Log("DEBUG","[CivilAuras:Updater] Databases cleared and re-initialized.");
+DB_LeaderLib_ModApi_Log("DEBUG","[CivilAuras:Updater] Databases cleared and re-initialized.");
 
 PROC
 CA_System_RemovePreviousModVersions()
 AND
-DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader")
+DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader")
 THEN
-NOT DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader");
+NOT DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader");
 //END_REGION
 
 //REGION UPDATE_EVENT
 IF
 GameStarted(_,_)
 AND
-NOT SysStatus("LaughingLader__LeaderLib", _)
-AND
-NOT DB_Mods_RegisteredMod("CivilAuras", "1.7.3.0", "LaughingLeader")
+NOT DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader")
 THEN
 CA_System_RemovePreviousModVersions();
-DB_Mods_RegisteredMod("CivilAuras", "1.7.3.0", "LaughingLeader");
+DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader");
 CA_System_UpdateAll();
 
 IF
 StoryEvent(_,"LeaderLib_Initialized")
 AND
-NOT DB_Mods_RegisteredMod("CivilAuras", "1.7.3.0", "LaughingLeader")
+NOT DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader")
 THEN
-DB_LeaderLib_ModBridge_RegisterMod("CivilAuras", "1.7.3.0", "LaughingLeader");
+DB_LeaderLib_ModApi_RegisterMod("CivilAuras", "1.7.3.0", "LaughingLeader");
 CA_System_UpdateAll();
 
 IF
@@ -67,9 +65,9 @@ CA_Settings_UpdateVersionText();
 PROC
 CA_Updater_UnregisterMod()
 AND
-DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader")
+DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader")
 THEN
-NOT DB_Mods_RegisteredMod("CivilAuras", _Version, "LaughingLeader");
+NOT DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader");
 
 PROC
 CA_Updater_UnregisterMod()
