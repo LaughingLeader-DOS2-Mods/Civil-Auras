@@ -1,5 +1,11 @@
 Civil Auras Changelog
 =======
+# 1.7.3.0
+* Added LeaderLib support (dependency-free, a.k.a. optional).
+	* If LeaderLib is installed, Civil Auras will register its settings to the LeaderLib "Mod Menu". Otherwise, the settings book will spawn as normal.
+* Auto-Sneaking update. 
+	* Stealth Aura can now toggle off sneaking for controlled characters. This is configurable in the settings menu.
+
 # 1.7.2.0
 * Updated to the latest hotfix.
 * Story Script Refactoring

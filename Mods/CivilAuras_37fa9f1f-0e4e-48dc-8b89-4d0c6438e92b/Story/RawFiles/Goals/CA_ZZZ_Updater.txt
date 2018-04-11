@@ -2,7 +2,7 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 CA_System_RemovePreviousModVersions();
-DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader");
+DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.3.0");
 KBSECTION
 //REGION MOD_UPDATING
 PROC
@@ -29,30 +29,30 @@ CA_System_ClearDatabases();
 CA_System_UpdateDatabases();
 DB_LeaderLib_ModApi_Log("DEBUG","[CivilAuras:Updater] Databases cleared and re-initialized.");
 
+//Remove old versions with the wrong column order
 PROC
 CA_System_RemovePreviousModVersions()
 AND
 DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader")
 THEN
 NOT DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader");
+
+PROC
+CA_System_RemovePreviousModVersions()
+AND
+DB_Mods_Registered("CivilAuras", "LaughingLeader", _Version)
+THEN
+NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", _Version);
 //END_REGION
 
 //REGION UPDATE_EVENT
 IF
 GameStarted(_,_)
 AND
-NOT DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader")
+NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.3.0")
 THEN
 CA_System_RemovePreviousModVersions();
-DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader");
-CA_System_UpdateAll();
-
-IF
-StoryEvent(_,"LeaderLib_Initialized")
-AND
-NOT DB_Mods_Registered("CivilAuras", "1.7.3.0", "LaughingLeader")
-THEN
-DB_LeaderLib_ModApi_RegisterMod("CivilAuras", "1.7.3.0", "LaughingLeader");
+DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.3.0");
 CA_System_UpdateAll();
 
 IF
@@ -65,25 +65,25 @@ CA_Settings_UpdateVersionText();
 PROC
 CA_Updater_UnregisterMod()
 AND
-DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader")
+DB_Mods_Registered("CivilAuras", "LaughingLeader", _Version)
 THEN
-NOT DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader");
+NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", _Version);
 
 PROC
 CA_Updater_UnregisterMod()
 THEN
-GlobalClearFlag("CA_CIVIL_AURAS_ACTIVE");
+GlobalClearFlag("CivilAuras_Active");
 //END_REGION
 
 //REGION ACTIVE_FLAG
 IF
 GameStarted(_,_)
 AND
-GlobalGetFlag("CA_CIVIL_AURAS_ACTIVE", 0)
+GlobalGetFlag("CivilAuras_Active", 0)
 THEN
-GlobalSetFlag("CA_CIVIL_AURAS_ACTIVE");
+GlobalSetFlag("CivilAuras_Active");
 //END_REGION
 EXITSECTION
-CA_Updater_UnregisterMod();
+
 ENDEXITSECTION
 ParentTargetEdge "LaughingLeader_CivilAuras"

@@ -116,7 +116,7 @@ CA_Aura_ResetAuraDatabases();
 PROC
 CA_Settings_UpdateVersionText()
 AND
-DB_Mods_Registered("CivilAuras", _Version, "LaughingLeader")
+DB_Mods_Registered("CivilAuras", "LaughingLeader", _Version)
 AND
 StringConcatenate("Version: ", _Version, _VersionStr)
 THEN
@@ -139,20 +139,23 @@ PROC
 CA_Settings_AddSettingsBook((CHARACTERGUID)_Player)
 AND
 ItemTemplateIsInUserInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0, 0)
-AND
-ItemTemplateIsInCharacterInventory(_Player, "BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", 0)
 THEN
 ItemTemplateAddTo("BOOK_CA_Settings_df08089b-1a04-47a5-9294-7103f9e3b7a2", _Player, 1);
 
 IF
-SavegameLoaded(_,_,_,_)
+GameStarted(_,_)
 THEN
-TimerLaunch("LLCA_Timers_AddBookTimer", 3000);
+TimerLaunch("LLCA_Timers_AddBookTimer", 2000);
+
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+THEN
+TimerCancel("LLCA_Timers_AddBookTimer");
 
 IF
 TimerFinished("LLCA_Timers_AddBookTimer")
 AND
-GlobalGetFlag("LEADERLIB_ACTIVE", 0)
+NOT GlobalGetFlag("LeaderLib_Active", 1)
 AND
 DB_IsPlayer(_Player)
 THEN
@@ -184,8 +187,6 @@ AND
 DB_IsPlayer(_Player)
 THEN
 CA_Settings_MarkHost(_Player);
-CA_Settings_AddSettingsBook(_Player);
-
 //END_REGION
 
 //REGION DATABASE_REFRESH
