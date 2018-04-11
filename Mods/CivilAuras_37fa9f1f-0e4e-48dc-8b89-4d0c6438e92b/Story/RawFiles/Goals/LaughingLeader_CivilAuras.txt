@@ -21,6 +21,15 @@ DB_StoryStarted(_)
 THEN
 DebugBreak("[CivilAuras] Existing save detected.");
 CA_Internal_StartCivilAuras();
+
+// For saves where this goal is active, but wasn't completed
+IF
+SavegameLoaded(_,_,_,_)
+AND
+DB_StoryStarted(_)
+THEN
+DebugBreak("[CivilAuras] Existing save detected.");
+CA_Internal_StartCivilAuras();
 EXITSECTION
 
 ENDEXITSECTION
