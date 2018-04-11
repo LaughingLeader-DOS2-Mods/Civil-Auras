@@ -17,7 +17,7 @@ CA_Internal_StartCivilAuras();
 PROC
 CA_Start_Internal_CompleteIfStarted()
 AND
-SysIsCompleted("__Start")
+DB_StoryStarted(_)
 THEN
 DebugBreak("[CivilAuras] Existing save detected.");
 CA_Internal_StartCivilAuras();
