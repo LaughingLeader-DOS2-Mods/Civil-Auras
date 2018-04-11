@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
+CA_Start_Internal_CompleteIfStarted(); // Existing saves
 KBSECTION
 PROC
 CA_Internal_StartCivilAuras()
@@ -12,6 +12,14 @@ GoalCompleted;
 IF
 GameEventSet("GAMEEVENT_GameStarted")
 THEN
+CA_Internal_StartCivilAuras();
+
+PROC
+CA_Start_Internal_CompleteIfStarted()
+AND
+SysIsCompleted("__Start")
+THEN
+DebugBreak("[CivilAuras] Existing save detected.");
 CA_Internal_StartCivilAuras();
 EXITSECTION
 
