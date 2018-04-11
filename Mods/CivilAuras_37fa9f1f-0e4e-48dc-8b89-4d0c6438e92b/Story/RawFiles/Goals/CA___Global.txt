@@ -47,6 +47,15 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
+//REGION STATUS_MESSAGE
+PROC
+CA_StatusMessage((CHARACTERGUID)_Player, (STRING)_Message)
+AND
+NOT UserGetFlag(_Player, "CA_STATUS_MESSAGES_DISABLED", 1)
+THEN
+CharacterStatusText(_Player, _Message);
+//END_REGION
+
 //REGION BONUS_POINTS
 IF
 StoryEvent((CHARACTERGUID)_Player, "Event_CA_AddTalentPoint")

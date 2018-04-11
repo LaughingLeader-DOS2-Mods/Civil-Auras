@@ -1,20 +1,60 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
+/*SETTINGS*/
 //DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
-DB_CA_Aura_AuraStatus(0, "Luck", "CA_LUCKY_AURA", "CA_LUCKY", "CA_LUCKBONUS");
-DB_CA_Aura_AuraStatus(1, "Sneaking", "CA_STEALTH_AURA", "CA_STEALTHY", "CA_SNEAKBONUS");
-DB_CA_Aura_AuraStatus(2, "Persuasion", "CA_PERSUASION_AURA", "CA_PERSUASIVE", "CA_PERSUASIONBONUS");
-DB_CA_Aura_AuraStatus(3, "Persuasion", "", "CA_MOTIVATED", "CA_PERSUASIONBONUS");
-DB_CA_Aura_AuraStatus(4, "Barter", "", "", "CA_BARTERBONUS");
-
+//DB_CA_Aura_AuraRequirements(_Stat, _MinStatVal)
+//DB_CA_Aura_AuraSkillbooks(_Stat, _Template, _Skill)
+/*VARS*/
 //DB_CA_Aura_ApplyTimers(_TimerName, _Player, _Status, _StackNumber)
 //DB_CA_Aura_LastBonus(_AuraHost, _TargetPlayer, _Stat, _TargetBonus, _StackAmount, _InitialVal)
 //DB_CA_Aura_RefreshTimers(_TimerName, _Player)
 //DB_CA_Aura_RefreshAuraTimers(_TimerName, _Player, _Stat)
 //DB_CA_Aura_LastHostAbility(_Player, _Stat, _LastAmount)
 //DB_CA_Aura_PartyTimerActive(_Val)
+/*DYNAMIC*/
+//DB_CA_Aura_Temp_AuraSkillLost(_Player, _Stat)
+//DB_CA_Aura_Temp_PlayerRespec(_Player)
+CA_AuraManager_InitSettings();
 KBSECTION
+//REGION SETTINGS
+IF
+GameStarted(_,_)
+AND
+NOT DB_CA_Aura_SettingsInitialized(_)
+THEN
+CA_AuraManager_InitSettings();
+
+PROC
+CA_AuraManager_InitSettings()
+AND
+NOT DB_CA_Aura_SettingsInitialized(_)
+THEN
+DB_CA_Aura_SettingsInitialized(1);
+SysClear("DB_CA_Aura_AuraStatus", 5);
+DB_CA_Aura_AuraStatus(0, "Luck", "CA_LUCKY_AURA", "CA_LUCKY", "CA_LUCKBONUS");
+DB_CA_Aura_AuraStatus(1, "Sneaking", "CA_STEALTH_AURA", "CA_STEALTHY", "CA_SNEAKBONUS");
+DB_CA_Aura_AuraStatus(2, "Persuasion", "CA_PERSUASION_AURA", "CA_PERSUASIVE", "CA_PERSUASIONBONUS");
+DB_CA_Aura_AuraStatus(3, "Persuasion", "", "CA_MOTIVATED", "CA_PERSUASIONBONUS");
+DB_CA_Aura_AuraStatus(4, "Barter", "", "", "CA_BARTERBONUS");
+
+SysClear("DB_CA_Aura_AuraRequirements", 2);
+DB_CA_Aura_AuraRequirements("Luck", 2);
+DB_CA_Aura_AuraRequirements("Sneaking", 2);
+DB_CA_Aura_AuraRequirements("Persuasion", 4);
+
+SysClear("DB_CA_Aura_AuraSkillBooks", 3);
+DB_CA_Aura_AuraSkillbooks("Luck", "BOOK_CA_Skill_LuckyAura_3413ffc6-ca7a-4e52-917b-b22910db8198", "Shout_CA_LuckyToggle");
+DB_CA_Aura_AuraSkillbooks("Luck", "BOOK_CA_Skill_LuckyAura_Debug_ad983c5f-8b04-412d-a31e-b26e0dd8f849", "Shout_CA_LuckyToggle");
+DB_CA_Aura_AuraSkillbooks("Persuasion", "BOOK_CA_Skill_PersuasionAura_24064796-3bec-49cf-bc91-aa81484f5219", "Shout_CA_PersuasionToggle");
+DB_CA_Aura_AuraSkillbooks("Persuasion", "BOOK_CA_Skill_PersuasionAura_Debug_915d1de7-5379-4472-994b-52b6849a4407", "Shout_CA_PersuasionToggle");
+DB_CA_Aura_AuraSkillbooks("Sneaking", "BOOK_CA_Skill_StealthAura_a1cc5702-b8e9-4b5e-9eeb-68776bd359ff", "Shout_CA_StealthToggle");
+DB_CA_Aura_AuraSkillbooks("Sneaking", "BOOK_CA_Skill_StealthAura_Debug_3127cb67-3f22-4958-b1ab-a88653ea6c6f", "Shout_CA_StealthToggle");
+
+//DB_CA_Aura_AuraSkillbooks("Persuasion", "BOOK_CA_Skill_PepTalk_3a57d09c-fbc1-477d-b5df-7be5301487be", "Target_CA_PepTalk");
+//DB_CA_Aura_AuraSkillbooks("Persuasion", "BOOK_CA_Skill_PepTalk_Debug_1e0b4efd-0702-474a-be64-6762e26e26ef", "Target_CA_PepTalk");
+//END_REGION
+
 //REGION CLEAR
 QRY
 CA_QRY_Aura_ClearBonus((CHARACTERGUID)_Player, (STRING)_Status)
@@ -423,7 +463,7 @@ _CurVal != _LastAmount
 THEN
 //RemoveStatus(_Player, _HostStatus);
 //ApplyStatus(_Player, _HostStatus, -1.0, 1);
-//CharacterStatusText(_Player, "Aura Refreshed");
+//CA_StatusMessage(_Player, "Aura Refreshed");
 CA_Aura_StoreCurrentAbilityValue(_Player, _Stat);
 CA_Aura_RefreshAllies(_Player, _Stat, _AuraStatus);
 CA_Debug_Record(_Player, "Refreshing bonuses from host aura [", _HostStatus,"]");
@@ -450,7 +490,7 @@ THEN
 RemoveStatus(_Player, _HostStatus);
 ApplyStatus(_Player, _HostStatus, -1.0, 1);
 CA_Debug_Record(_Player, "Re-applied host aura status [", _HostStatus,"]");
-CharacterStatusText(_Player, "Aura Refreshed");
+CA_StatusMessage(_Player, "Aura Refreshed");
 
 PROC
 CA_Aura_RefreshPlayers()
@@ -566,6 +606,128 @@ SysClear("DB_CA_Aura_PartyTimerActive", 1);
 CA_Debug_RecordAll("No auras active in party. Canceling timer.");
 //END_REGION
 
+//REGION AURA_REQUIREMENT_CHECK
+IF
+ItemUnEquipped(_, _Player)
+AND
+CharacterIsPlayer(_Player, 1)
+THEN
+CA_AuraManager_CheckAuraRequirement_OnLoss(_Player);
+
+IF
+ItemEquipped(_, _Player)
+AND
+CharacterIsPlayer(_Player, 1)
+THEN
+CA_AuraManager_CheckAuraRequirement_OnGain(_Player);
+
+IF
+CharacterStatusRemoved(_Player, _, _)
+AND
+CharacterIsPlayer(_Player, 1)
+THEN
+CA_AuraManager_CheckAuraRequirement_OnLoss(_Player);
+
+IF
+CharacterStatusApplied(_Player, _, _)
+AND
+CharacterIsPlayer(_Player, 1)
+THEN
+CA_AuraManager_CheckAuraRequirement_OnGain(_Player);
+
+IF
+DB_Illusionist(_Player, _Mirror)
+AND
+NOT DB_CA_Aura_Temp_PlayerRespec(_Player)
+THEN
+DB_CA_Aura_Temp_PlayerRespec(_Player);
+
+IF
+CharacterCreationFinished(_Player)
+AND
+DB_CA_Aura_Temp_PlayerRespec(_Player)
+THEN
+NOT DB_CA_Aura_Temp_PlayerRespec(_Player);
+CA_AuraManager_CheckAuraRequirement_OnGain(_Player);
+CA_AuraManager_CheckAuraRequirement_OnLoss(_Player); // Check for missing stats
+
+PROC
+CA_AuraManager_CheckAuraRequirement_OnLoss((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraStatus(_Index, _Stat, _HostStatus, _AuraStatus, _BonusStatus)
+AND
+HasActiveStatus(_Player, _HostStatus, 1)
+AND
+NOT DB_CA_Aura_Temp_AuraSkillLost(_Player, _Stat)
+AND
+DB_CA_Aura_AuraRequirements(_Stat, _MinStatVal)
+AND
+CharacterGetAbility(_Player, _Stat, _Value)
+AND
+_Value < _MinStatVal
+THEN
+DB_CA_Aura_Temp_AuraSkillLost(_Player, _Stat);
+CA_Auras_DisableAura(_Player, _HostStatus);
+CA_StatusMessage(_Player, "<font color='#FF0000'>Aura Requirements Lost!</font>");
+
+PROC
+CA_AuraManager_CheckAuraRequirement_OnLoss((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_AuraSkillbooks(_Stat, _Template, _Skill)
+AND
+CharacterHasSkill(_Player, _Skill, 1)
+AND
+NOT DB_CA_Aura_Temp_AuraSkillLost(_Player, _Stat)
+AND
+DB_CA_Aura_AuraRequirements(_Stat, _MinStatVal)
+AND
+CharacterGetAbility(_Player, _Stat, _Value)
+AND
+_Value < _MinStatVal
+THEN
+DB_CA_Aura_Temp_AuraSkillLost(_Player, _Stat);
+CA_StatusMessage(_Player, "<font color='#FF0000'>Aura Requirements Lost!</font>");
+
+PROC
+CA_AuraManager_CheckAuraRequirement_OnGain((CHARACTERGUID)_Player)
+AND
+DB_CA_Aura_Temp_AuraSkillLost(_Player, _Stat)
+AND
+DB_CA_Aura_AuraRequirements(_Stat, _MinStatVal)
+AND
+CharacterGetAbility(_Player, _Stat, _Value)
+AND
+_Value >= _MinStatVal
+THEN
+NOT DB_CA_Aura_Temp_AuraSkillLost(_Player, _Stat);
+CA_AuraManager_RefreshSkill(_Player, _Stat);
+CA_StatusMessage(_Player, "<font color='#00FA9A'>Aura Requirements Regained</font>");
+
+PROC
+CA_AuraManager_RefreshSkill((CHARACTERGUID)_Player, (STRING)_Stat)
+AND
+DB_CA_Aura_AuraSkillbooks(_Stat, _Template, _Skill)
+AND
+IsSkillActive(_Player, _Skill, 0)
+THEN
+CharacterRemoveSkill(_Player, _Skill);
+CharacterAddSkill(_Player, _Skill, 0);
+//END_REGION
+
+//REGION SKILLBOOK_FIX
+IF
+CharacterUsedItemTemplate(_Player, _Template, _)
+AND
+DB_CA_Aura_AuraSkillbooks(_Stat, _Template, _Skill)
+AND
+CharacterHasSkill(_Player, _Skill, 1)
+AND
+IsSkillActive(_Player, _Skill, 0)
+THEN
+CharacterRemoveSkill(_Player, _Skill);
+CharacterAddSkill(_Player, _Skill, 0);
+//END_REGION
+
 //REGION LEGACY_REMOVAL
 PROC
 CA_Legacy_RemoveOldBonus((CHARACTERGUID)_Player, (STRING)_Stat, (INTEGER)_RemoveAmount)
@@ -601,18 +763,16 @@ CA_Debug_RemoveAuras(_Player);
 CA_Debug_RemoveBonuses(_Player);
 
 PROC
-CA_System_UpdateAll()
+CA_System_ClearDatabases()
 THEN
-SysClear("DB_CA_Aura_AuraStatus", 5);
 CA_Aura_RemoveAuraStatuses();
 CA_Aura_ResetAuraDatabases();
 TimerCancel("CA_AuraManager_PartyRefreshTimer");
 
-DB_CA_Aura_AuraStatus(0, "Luck", "CA_LUCKY_AURA", "CA_LUCKY", "CA_LUCKBONUS");
-DB_CA_Aura_AuraStatus(1, "Sneaking", "CA_STEALTH_AURA", "CA_STEALTHY", "CA_SNEAKBONUS");
-DB_CA_Aura_AuraStatus(2, "Persuasion", "CA_PERSUASION_AURA", "CA_PERSUASIVE", "CA_PERSUASIONBONUS");
-DB_CA_Aura_AuraStatus(3, "Persuasion", "", "CA_MOTIVATED", "CA_PERSUASIONBONUS");
-DB_CA_Aura_AuraStatus(4, "Barter", "", "", "CA_BARTERBONUS");
+PROC
+CA_System_UpdateAll()
+THEN
+CA_AuraManager_InitSettings();
 //END_REGION
 EXITSECTION
 

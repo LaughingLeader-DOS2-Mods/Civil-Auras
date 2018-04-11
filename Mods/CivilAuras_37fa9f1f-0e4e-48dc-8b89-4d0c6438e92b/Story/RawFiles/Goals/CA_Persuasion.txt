@@ -38,6 +38,13 @@ RealSum(_PY, 2.0, _Y)
 THEN
 PlayEffectAtPosition("CA_FX_Motivated_Impact_01", _X, _Y, _Z);
 
+PROC
+CA_Auras_DisableAura((CHARACTERGUID)_Player, "CA_PERSUASION_AURA")
+AND
+HasActiveStatus(_Player, "CA_PERSUASION_AURA", 1)
+THEN
+RemoveStatus(_Player, "CA_PERSUASION_AURA");
+CA_StatusMessage(_Player, "<font color='#DDA0DD'>Persuasion Aura Disabled</font>");
 //END_REGION
 
 /*
@@ -59,7 +66,7 @@ CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",
 AND
 HasActiveStatus(_Target, "CA_PERSUASIVE", 1)
 THEN
-CharacterStatusText(_Caster, "Target is already Persuasive");
+CA_StatusMessage(_Caster, "<font color='#DC143C'>Target is Already Persuasive!</font>");
 
 //REGION SKILL_USE
 IF
@@ -67,7 +74,7 @@ CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",
 AND
 HasActiveStatus(_Target, "CA_PERSUASION_AURA", 1)
 THEN
-CharacterStatusText(_Caster, "Target is too charismatic");
+CA_StatusMessage(_Caster, "<font color='#DC143C'>Target is Too Charismatic!</font>");
 
 IF
 CharacterUsedSkillOnTarget(_Caster, (CHARACTERGUID)_Target, "Target_CA_PepTalk",_)
@@ -86,7 +93,7 @@ IntegertoString(_CastVal, _CastStr)
 AND
 IntegertoString(_TargetVal, _TargetStr)
 THEN
-CharacterStatusText(_Caster, "Persuasion not high enough to motivate target");
+CA_StatusMessage(_Caster, "<font color='#DC143C'>Persuasion not high enough to motivate target!</font>");
 CA_Debug_Record(_Caster, "Persuasion is too low: Caster[", _CastStr, "] Target[", _TargetStr, "]");
 
 IF
@@ -117,8 +124,7 @@ AND
 HasActiveStatus(_Player, "CA_PERSUASION_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_PERSUASION_AURA");
-CharacterStatusText(_Player, "Persuasion Aura Disabled");
-
+CA_StatusMessage(_Player, "<font color='#DDA0DD'>Persuasion Aura Disabled</font>");
 //END_REGION
 
 /*

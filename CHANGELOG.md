@@ -1,5 +1,12 @@
 Civil Auras Changelog
 =======
+# 1.7.4.0
+* Added some checks/fixes for when your stats change and you lose the civil ability level required to cast an aura.
+	* By default, you'll get a status message that aura requirements were lost, and your aura will be removed (and all related databases reset).
+	* When you regain the required stats, your aura skill will "refresh" (normally skills are unmemorized when you lose the requirements), and you'll get a status message that your aura requirements were regained.
+* Added a passive "fix" when attempting to learn an aura skill after it was unmemorized. The skill should refresh, but you may need to open up your memorization window and drag it back down to your hotbar to get the skill to work.
+* Added the ability to disable status messages in the CA Settings Menu (under Aura Settings).
+
 # 1.7.3.0
 * Added LeaderLib support (dependency-free, a.k.a. optional).
 	* If LeaderLib is installed, Civil Auras will register its settings to the LeaderLib "Mod Menu". Otherwise, the settings book will spawn as normal.

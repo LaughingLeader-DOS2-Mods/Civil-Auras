@@ -2,7 +2,7 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 CA_System_RemovePreviousModVersions();
-DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.3.0");
+DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.0");
 KBSECTION
 //REGION MOD_UPDATING
 PROC
@@ -49,10 +49,10 @@ NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", _Version);
 IF
 GameStarted(_,_)
 AND
-NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.3.0")
+NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.0")
 THEN
 CA_System_RemovePreviousModVersions();
-DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.3.0");
+DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.0");
 CA_System_UpdateAll();
 
 IF

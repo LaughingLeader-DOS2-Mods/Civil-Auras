@@ -5,6 +5,7 @@ CA_TradeTreasure_BuildSettings();
 //DB_CA_Trader_ItemGenerated(_Trader, _ItemTemplate, _GenType)
 //DB_CA_Trader_PartyAmount(_Item, _Amount)
 //DB_CA_Trader_TempInt(_Val)
+//DB_CA_Trader_SettingsInitialized(_Val)
 //REGION DEBUG
 //DB_CA_ModTraders((CHARACTERGUID)Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401); //Editor
 //DB_CA_AdditionalTradeTreasure((CHARACTERGUID)Trailer_Humans_Female_Lohse_000_96482956-8428-401a-ab3f-4f5c76963401, "BOOK_Skill_Warrior_PhoenixDive_5513cf32-5f89-415a-8a02-13c52c579a59", 1);
@@ -407,7 +408,10 @@ SysClear("DB_CA_Trader_SkillBooks", 3);
 
 PROC
 CA_TradeTreasure_BuildSettings()
+AND
+NOT DB_CA_Trader_SettingsInitialized(_)
 THEN
+DB_CA_Trader_SettingsInitialized(1);
 DB_CA_Trader_TempInt(0);
 DB_CA_ModTraders((CHARACTERGUID)S_FTJ_GhettoBlacksmith_175b32ec-f6a1-4aa1-9028-d02d593f092c); // Fort Joy Blacksmith (Nebora)
 DB_CA_ModTraders((CHARACTERGUID)S_GLO_Tarquin_a3d0cdcc-d0b0-464d-9ad7-43b38baed620); // Tarquin
@@ -433,9 +437,22 @@ DB_CA_Trader_TalentBooks("BOOK_CA_Talent_PetPal_d64f8314-0700-4d43-b854-9b2f7307
 
 PROC
 CA_System_UpdateAll()
+AND
+NOT DB_CA_Trader_SettingsInitialized(_)
 THEN
-CA_TradeTreasure_ResetDatabases();
+DB_CA_Trader_Temp_ResetGeneration(1);
+
+PROC
+CA_System_UpdateAll()
+THEN
 CA_TradeTreasure_BuildSettings();
+
+PROC
+CA_System_UpdateAll()
+AND
+DB_CA_Trader_Temp_ResetGeneration(_Val)
+THEN
+NOT DB_CA_Trader_Temp_ResetGeneration(_Val);
 CA_TradeTreasure_ResetDynamicGeneration(); // Generate items via trade in new updates
 //END_REGION
 EXITSECTION

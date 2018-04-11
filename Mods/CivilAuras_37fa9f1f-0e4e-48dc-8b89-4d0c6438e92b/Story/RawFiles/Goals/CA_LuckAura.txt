@@ -50,14 +50,14 @@ CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraH
 AND
 DB_IsPlayer(_Player)
 THEN
-CharacterStatusText(_Player, "Player");
+CA_StatusMessage(_Player, "Player");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
 AND
 NOT DB_IsPlayer(_Player)
 THEN
-CharacterStatusText(_Player, "Not Player");
+CA_StatusMessage(_Player, "Not Player");
 
 IF
 CharacterStatusApplied((CHARACTERGUID)_Player, "CA_LUCKY", (CHARACTERGUID)_AuraHost)
@@ -174,9 +174,13 @@ AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_LUCKY_AURA");
-CharacterStatusText(_Player, "Aura Disabled");
+CA_StatusMessage(_Player, "<font color='#2E8B57'>Luck Aura Disabled</font>");
 CA_ClearLuckActive(_Player);
 
+PROC
+CA_Auras_DisableAura((CHARACTERGUID)_Player, "CA_LUCKY_AURA")
+THEN
+CA_Luck_TurnAuraOff(_Player);
 //END_REGION
 
 //REGION SKILL_USE
@@ -193,7 +197,7 @@ AND
 HasActiveStatus(_Player, "CA_LUCKY_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_LUCKY_AURA");
-CharacterStatusText(_Player, "Lucky Aura Disabled");
+CA_StatusMessage(_Player, "<font color='#2E8B57'>Luck Aura Disabled</font>");
 CA_ClearLuckActive(_Player);
 
 //END_REGION
@@ -239,7 +243,7 @@ NOT DB_CA_AuraHostLuck(_Player, _HostLuck);
 DB_CA_AuraHostLuck(_Player, _Luck);
 TimerLaunch(_TimerName, 5000);
 DB_CA_LuckRefreshTimer(_Player, _TimerName);
-CharacterStatusText(_Player, "Refreshing Lucky Aura...");
+CA_StatusMessage(_Player, "Refreshing Lucky Aura...");
 
 IF
 ItemEquipped(_Item, _Player)
@@ -281,7 +285,7 @@ THEN
 CA_ApplyLuckAura(_Player);
 TimerCancel(_TimerName);
 NOT DB_CA_LuckRefreshCompleteTimer(_Player, _TimerName);
-CharacterStatusText(_Player, "Lucky Aura Refreshed");
+CA_StatusMessage(_Player, "Lucky Aura Refreshed");
 */
 //END_REGION
 
@@ -348,13 +352,6 @@ DB_CA_LuckAuraActive(_Player, _Val)
 THEN
 CA_Luck_TurnAuraOff(_Player);
 
-//END_REGION
-
-//REGION DATABASE_REFRESH
-PROC
-CA_System_UpdateAll()
-THEN
-DB_NOOP(1);
 //END_REGION
 EXITSECTION
 

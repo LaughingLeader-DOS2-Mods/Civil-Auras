@@ -42,7 +42,7 @@ HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_STEALTH_AURA");
 CA_ClearSneakActive(_Player);
-CharacterStatusText(_Player, "Stealth Aura Disabled");
+CA_StatusMessage(_Player, "<font color='#4B0082'>Stealth Aura Disabled</font>");
 
 PROC
 CA_Stealth_ApplyAura((CHARACTERGUID)_Player)
@@ -55,6 +55,10 @@ CA_Aura_StoreCurrentAbilityValue(_Player, "Sneaking");
 CA_ClearSneakActive(_Player);
 DB_CA_SneakAuraActive(_Player, 1);
 
+PROC
+CA_Auras_DisableAura((CHARACTERGUID)_Player, "CA_STEALTH_AURA")
+THEN
+CA_Stealth_TurnAuraOff(_Player);
 //END_REGION
 
 //REGION SKILL_USE
@@ -65,7 +69,7 @@ HasActiveStatus(_Player, "SNEAKING", 0)
 AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
-CharacterStatusText(_Player, "Stealth Aura can only be used while Sneaking");
+CA_StatusMessage(_Player, "<font color='#DC143C'>Stealth Aura can only be used while sneaking!</font>");
 
 IF
 CharacterUsedSkill((CHARACTERGUID)_Player, "Shout_CA_StealthToggle", _)
@@ -83,7 +87,7 @@ HasActiveStatus(_Player, "CA_STEALTH_AURA", 1)
 THEN
 RemoveStatus(_Player, "CA_STEALTH_AURA");
 CA_ClearSneakActive(_Player);
-CharacterStatusText(_Player, "Stealth Aura Disabled");
+CA_StatusMessage(_Player, "<font color='#4B0082'>Stealth Aura Disabled</font>");
 DB_CA_SneakAura_JustRemoved(_Player);
 //END_REGION
 
@@ -96,7 +100,7 @@ AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
 CA_Stealth_ApplyAura(_Player);
-CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
+CA_StatusMessage(_Player, "<font color='#7B68EE'>Stealth Aura Auto-Enabled</font>");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "SNEAKING", _)
@@ -106,7 +110,7 @@ THEN
 RemoveStatus(_Player, "CA_STEALTH_AURA");
 
 IF
-SavegameLoaded(_,_,_,_)
+GameStarted(_,_)
 AND
 DB_IsPlayer(_Player)
 AND
@@ -117,7 +121,7 @@ AND
 HasActiveStatus(_Player, "CA_STEALTH_AURA", 0)
 THEN
 CA_Stealth_ApplyAura(_Player);
-CharacterStatusText(_Player, "Stealth Aura Auto-Enabled");
+CA_StatusMessage(_Player, "<font color='#7B68EE'>Stealth Aura Auto-Enabled</font>");
 //END_REGION
 
 //REGION SNEAK_ALLY_BONUSES
@@ -170,7 +174,7 @@ AND
 CA_Global_UserMatch(_Player, _AuraHost)
 THEN
 ApplyStatus(_Player, "SNEAKING", -1.0);
-CharacterStatusText(_Player, "Auto-Sneaking");
+CA_StatusMessage(_Player, "<font color='#F4A460'>Auto-Sneaking</font>");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_STEALTHY", _)
@@ -188,7 +192,7 @@ AND
 CA_Global_UserMatch(_Player, _AuraHost)
 THEN
 RemoveStatus(_Player, "SNEAKING");
-CharacterStatusText(_Player, "Auto-Unsneaking");
+CA_StatusMessage(_Player, "<font color='#DEB887'>Auto-Unsneaking</font>");
 
 IF
 CharacterStatusRemoved((CHARACTERGUID)_Player, "CA_STEALTH_AURA", _)
@@ -210,7 +214,7 @@ IntegertoString(_State, _FlagVal)
 AND
 StringConcatenate("CA_AUTOSNEAK_DISABLED = ", _FlagVal, _Message)
 THEN
-CharacterStatusText(_Player, _Message);
+CA_StatusMessage(_Player, _Message);
 
 /*
 IF

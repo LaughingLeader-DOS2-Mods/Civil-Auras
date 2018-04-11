@@ -4,32 +4,12 @@ INITSECTION
 //Respec mirror talent fix
 //DB_CA_Talent_Blacklist(_Talent, _Player);
 
-//REGION SETTINGS
-//Item Template, Talent
-DB_CA_TalentBook_Talent("BOOK_CA_Talent_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy");
-
-//PlayerHasValue, Talent, Message, Sound
-DB_CA_Talentbook_Effects(0, "AnimalEmpathy", "Pet Pal Learned", "Items_Inventory_Book_Skillbook_Use");
-DB_CA_Talentbook_Effects(1, "AnimalEmpathy", "Pet Pal Already Learned", "Items_Objects_Destroy");
-//Unlock effects
-DB_CA_Talent_Effect("AnimalEmpathy", "CA_FX_PetPal_Learned_01");
-
-//DB_CA_CatBag((ITEMGUID)_Item, 0);
-DB_CA_CatBag_Sounds_In(0, "Animals_Cat_ABC_Dodge_01");
-DB_CA_CatBag_Sounds_In(1, "Animals_Cat_ABC_Talk_Scared");
-DB_CA_CatBag_Sounds_In(2, "Animals_Cat_ABC_Spawn_02");
-DB_CA_CatBag_Sounds_In(3, "Animals_Cat_ABC_Die_06");
-DB_CA_CatBag_Sounds_In(4, "Animals_Cat_ABC_Die_07");
-
-DB_CA_CatBag_Sounds_Out(0, "Animals_Cat_ABC_Sit_Talk_Normal_01");
-DB_CA_CatBag_Sounds_Out(1, "Animals_Cat_ABC_Use_05");
-
 //DB_CA_CatCharacter((CHARACTERGUID)S_FTJ_BlackCat_4bff6ccc-5889-4c90-bcb1-572f1c29d830);
 
 //DB_CA_SummonedCats((CHARACTERGUID)_Player, (CHARACTERGUID)_Cat)
 //DB_CA_SummonedCats(_Player, _Cat)
 
-//END_REGION
+CA_Misc_InitSettings();
 KBSECTION
 //REGION TALENT_BOOKS
 PROC
@@ -327,6 +307,31 @@ THEN
 DB_CA_Talent_Blacklist(_Talent, _Player);
 //END_REGION
 
+//REGION SETTINGS
+PROC
+CA_Misc_InitSettings()
+THEN
+SysClear("DB_CA_TalentBook_Talent", 2);
+DB_CA_TalentBook_Talent("BOOK_CA_Talent_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy");
+
+SysClear("DB_CA_Talent_Effect", 2);
+DB_CA_Talentbook_Effects(0, "AnimalEmpathy", "Pet Pal Learned", "Items_Inventory_Book_Skillbook_Use");
+DB_CA_Talentbook_Effects(1, "AnimalEmpathy", "Pet Pal Already Learned", "Items_Objects_Destroy");
+
+DB_CA_Talent_Effect("AnimalEmpathy", "CA_FX_PetPal_Learned_01");
+
+SysClear("DB_CA_CatBag_Sounds_In", 2);
+DB_CA_CatBag_Sounds_In(0, "Animals_Cat_ABC_Dodge_01");
+DB_CA_CatBag_Sounds_In(1, "Animals_Cat_ABC_Talk_Scared");
+DB_CA_CatBag_Sounds_In(2, "Animals_Cat_ABC_Spawn_02");
+DB_CA_CatBag_Sounds_In(3, "Animals_Cat_ABC_Die_06");
+DB_CA_CatBag_Sounds_In(4, "Animals_Cat_ABC_Die_07");
+
+SysClear("DB_CA_CatBag_Sounds_Out", 2);
+DB_CA_CatBag_Sounds_Out(0, "Animals_Cat_ABC_Sit_Talk_Normal_01");
+DB_CA_CatBag_Sounds_Out(1, "Animals_Cat_ABC_Use_05");
+//END_REGION
+
 //REGION DATABASE_REFRESH
 PROC
 CA_Misc_ResetDatabases()
@@ -336,26 +341,16 @@ SysClear("DB_CA_Talentbook_Effects", 4);
 SysClear("DB_CA_Talent_Effect", 2);
 SysClear("DB_CA_CatBag_Sounds_In", 2);
 SysClear("DB_CA_CatBag_Sounds_Out", 2);
-//Clear
-SysClear("DB_CA_Book_PetPal_Message", 2);
-SysClear("DB_CA_Book_Talent_Sound", 2);
+
+PROC
+CA_System_ClearDatabases()
+THEN
+CA_Misc_ResetDatabases();
 
 PROC
 CA_System_UpdateAll()
 THEN
-CA_Misc_ResetDatabases();
-
-DB_CA_TalentBook_Talent("BOOK_CA_Talent_PetPal_d64f8314-0700-4d43-b854-9b2f73073945", "AnimalEmpathy");
-DB_CA_Talentbook_Effects(0, "AnimalEmpathy", "Pet Pal Learned", "Items_Inventory_Book_Skillbook_Use");
-DB_CA_Talentbook_Effects(1, "AnimalEmpathy", "Pet Pal Already Learned", "Items_Objects_Destroy");
-DB_CA_Talent_Effect("AnimalEmpathy", "CA_FX_PetPal_Learned_01");
-DB_CA_CatBag_Sounds_In(0, "Animals_Cat_ABC_Dodge_01");
-DB_CA_CatBag_Sounds_In(1, "Animals_Cat_ABC_Talk_Scared");
-DB_CA_CatBag_Sounds_In(2, "Animals_Cat_ABC_Spawn_02");
-DB_CA_CatBag_Sounds_In(3, "Animals_Cat_ABC_Die_06");
-DB_CA_CatBag_Sounds_In(4, "Animals_Cat_ABC_Die_07");
-DB_CA_CatBag_Sounds_Out(0, "Animals_Cat_ABC_Sit_Talk_Normal_01");
-DB_CA_CatBag_Sounds_Out(1, "Animals_Cat_ABC_Use_05");
+CA_Misc_InitSettings();
 //END_REGION
 EXITSECTION
 

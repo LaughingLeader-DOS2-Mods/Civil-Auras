@@ -4,13 +4,17 @@ INITSECTION
 //DB_CA_BarterBonus((CHARACTERGUID)NULL_00000000-0000-0000-0000-000000000000, 0);
 //DB_CA_Barter_HighestBarter(_HighestPlayer, _HighestBarter)
 
+//REGION DISABLED
+/*
 DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
 DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
 DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
 DB_CA_BarterParty_Message(3, "Looking for a discount?");
 DB_CA_BarterParty_Message(4, "I have just the discount for you.");
 DB_CA_BarterParty_Message(5, "Welcome. Haggle away.");
+*/
 //DB_CA_Barter_LastMessage(_Message)
+//END_REGION
 
 //DB_CA_Settings_Barter_Blacklist(_Player)
 //"Event_CA_Bartering_TradeOpened_MP"
@@ -260,13 +264,6 @@ NOT DB_CA_BarterBonus(_Player, _Val);
 PROC
 CA_Barter_ResetDatabases()
 AND
-DB_CA_BarterParty_Message(_Int, _Val)
-THEN
-NOT DB_CA_BarterParty_Message(_Int, _Val);
-
-PROC
-CA_Barter_ResetDatabases()
-AND
 DB_CA_HighestBarter(_Val)
 THEN
 NOT DB_CA_HighestBarter(_Val);
@@ -275,12 +272,6 @@ PROC
 CA_System_UpdateAll()
 THEN
 CA_Barter_ResetDatabases();
-DB_CA_BarterParty_Message(0, "Your party's reputation proceeds you. Enjoy a discount.");
-DB_CA_BarterParty_Message(1, "Hello. I know of your party. Discounts for all.");
-DB_CA_BarterParty_Message(2, "Welcome. Discounts for all.");
-DB_CA_BarterParty_Message(3, "Looking for a discount?");
-DB_CA_BarterParty_Message(4, "I have just the discount for you.");
-DB_CA_BarterParty_Message(5, "Welcome. Haggle away.");
 //END_REGION
 
 //REGION DEBUG
@@ -310,7 +301,7 @@ StringConcatenate("] Bonus[",_BonStr,_Mgs2)
 AND
 StringConcatenate(_Mgs1,_Mgs2,_Message)
 THEN
-CharacterStatusText(_Trader, _Message);
+CA_StatusMessage(_Trader, _Message);
 */
 
 //Random
@@ -351,7 +342,7 @@ StringConcatenate("] User ID: ",_IDStr,_Mgs2)
 AND
 StringConcatenate(_Mgs1,_Mgs2,_Message)
 THEN
-CharacterStatusText(_Trader, _Message);
+CA_StatusMessage(_Trader, _Message);
 */
 
 //Users
@@ -380,7 +371,7 @@ StringConcatenate("]", _Msg3, _Msg4)
 AND
 StringConcatenate(_Msg2, _Msg4, _Message)
 THEN
-CharacterStatusText(_Trader, _Message);
+CA_StatusMessage(_Trader, _Message);
 */
 
 
@@ -395,7 +386,7 @@ GetRegion(_Trader, _Region)
 AND
 StringConcatenate("Region: ", _Region, _Message)
 THEN
-CharacterStatusText(_Trader, _Message);
+CA_StatusMessage(_Trader, _Message);
 */
 
 //Highest Barter
@@ -411,7 +402,7 @@ IntegertoString(_HighestBarter, _HighBarStr)
 AND
 StringConcatenate("Highest Barter: ", _HighBarStr, _Message)
 THEN
-CharacterStatusText(_Trader, _Message);
+CA_StatusMessage(_Trader, _Message);
 */
 
 /*
@@ -424,7 +415,7 @@ DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
 DB_IsPlayer(_Player)
 THEN
-CharacterStatusText(_Trader, "You are a player.");
+CA_StatusMessage(_Trader, "You are a player.");
 
 IF
 DialogStarted((STRING)_Dialog, (INTEGER)_ID)
@@ -435,7 +426,7 @@ DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
 NOT DB_IsPlayer(_Player)
 THEN
-CharacterStatusText(_Trader, "You are not a player.");
+CA_StatusMessage(_Trader, "You are not a player.");
 
 
 IF
@@ -455,7 +446,7 @@ StringConcatenate("You're playing with ", _StrUsers, _Msg1)
 AND
 StringConcatenate(_Msg1, " users", _Msg2)
 THEN
-CharacterStatusText(_Trader, _Msg2);
+CA_StatusMessage(_Trader, _Msg2);
 */
 //END_REGION
 EXITSECTION
