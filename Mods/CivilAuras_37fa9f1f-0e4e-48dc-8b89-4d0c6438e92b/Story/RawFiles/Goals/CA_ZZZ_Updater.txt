@@ -2,7 +2,7 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 CA_System_RemovePreviousModVersions();
-DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.0");
+DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.1");
 KBSECTION
 //REGION MOD_UPDATING
 PROC
@@ -12,9 +12,12 @@ DB_LeaderLib_ModApi_Log("DEBUG","[CivilAuras:Updater] Mod version changed. Updat
 
 PROC
 CA_System_UpdateDatabases()
+AND
+GlobalGetFlag("CA_INTERNAL_UPDATEDATABASES", 1)
 THEN
 CA_System_UpdateAll();
 DB_LeaderLib_ModApi_Log("DEBUG","[CivilAuras:Updater] Databases updated.");
+GlobalClearFlag("CA_INTERNAL_UPDATEDATABASES");
 
 PROC
 CA_System_ClearDatabases()
@@ -49,11 +52,12 @@ NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", _Version);
 IF
 GameStarted(_,_)
 AND
-NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.0")
+NOT DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.1")
 THEN
 CA_System_RemovePreviousModVersions();
-DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.0");
-CA_System_UpdateAll();
+DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.1");
+//GlobalSetFlag("CA_INTERNAL_UPDATEDATABASES");
+CA_System_UpdateDatabases();
 
 IF
 GameStarted(_,_)

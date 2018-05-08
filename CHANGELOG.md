@@ -1,5 +1,11 @@
 Civil Auras Changelog
 =======
+# 1.7.4.1
+* Minor Script Updates
+	* Refactored Barter sharing script. Should work better across the board.
+	* Modified "Remove Aura Statuses" debug command to apply to the whole party. This is now a host-only command.
+	* Rewrote host-checking script.
+
 # 1.7.4.0
 * Added some checks/fixes for when your stats change and you lose the civil ability level required to cast an aura.
 	* By default, you'll get a status message that aura requirements were lost, and your aura will be removed (and all related databases reset).
