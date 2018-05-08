@@ -56,7 +56,7 @@ DB_Mods_Registered("CivilAuras", "LaughingLeader", "1.7.4.0");
 CA_System_UpdateAll();
 
 IF
-StoryEvent(_,"LeaderLib_Initialized")
+GameStarted(_,_)
 THEN
 CA_Settings_UpdateVersionText();
 //END_REGION

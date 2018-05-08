@@ -103,13 +103,25 @@ THEN
 CA_Debug_RemoveAuras(_Player);
 CA_Debug_RemoveBonuses(_Player);
 
+PROC
+CA_Settings_RemoveAllAuraStatuses()
+THEN
+IterateParties("CA_Events_RemoveAuraStatuses");
+
+IF
+StoryEvent((CHARACTERGUID)_Character, "CA_Events_RemoveAuraStatuses")
+THEN
+CA_Debug_RemoveAuras(_Character);
+CA_Debug_RemoveBonuses(_Character);
+CharacterStatusText(_Character, "<font color='#DC143C'>All Auras Removed</font>");
+
 IF
 ObjectFlagSet("CA_DEBUG_REMOVEAURASTATUSES", (CHARACTERGUID)_Player, _Instance)
 THEN
 ObjectClearFlag(_Player, "CA_DEBUG_REMOVEAURASTATUSES");
-CA_Settings_RemoveAuraStatuses(_Player);
+//CA_Settings_RemoveAuraStatuses(_Player);
+CA_Settings_RemoveAllAuraStatuses();
 CA_Aura_ResetAuraDatabases();
-
 //END_REGION
 
 //REGION CONFIG_BOOK
@@ -163,6 +175,25 @@ CA_Settings_AddSettingsBook(_Player);
 //END_REGION
 
 //REGION HOST_FLAGGING
+IF
+GameStarted(_,_)
+AND
+GlobalGetFlag("CA_HOST_TIMER_ACTIVE", 0)
+THEN
+GlobalSetFlag("CA_HOST_TIMER_ACTIVE");
+TimerLaunch("CA_Timers_MarkPlayerHost", 25);
+
+IF
+TimerFinished("CA_Timers_MarkPlayerHost")
+THEN
+GlobalClearFlag("CA_HOST_TIMER_ACTIVE");
+IterateParties("CA_Events_CheckHost");
+
+IF
+StoryEvent((CHARACTERGUID)_Player, "CA_Events_CheckHost")
+THEN
+CA_Settings_MarkHost(_Player);
+
 PROC
 CA_Settings_MarkHost((CHARACTERGUID)_Player)
 AND
@@ -180,13 +211,6 @@ UserGetFlag(_Player, "CA_USER_ISHOST", 1)
 THEN
 UserClearFlag(_Player, "CA_USER_ISHOST", 0);
 CA_Debug_Record(_Player, "Removed host flag");
-
-IF
-GameStarted(_,_)
-AND
-DB_IsPlayer(_Player)
-THEN
-CA_Settings_MarkHost(_Player);
 //END_REGION
 
 //REGION DATABASE_REFRESH

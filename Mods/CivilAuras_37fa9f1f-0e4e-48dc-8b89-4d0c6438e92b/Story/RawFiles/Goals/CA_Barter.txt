@@ -47,29 +47,21 @@ SysClear("DB_CA_Barter_HighestBarter", 2);
 DB_CA_Barter_HighestBarter(_Player, _BarterVal);
 
 QRY
+CA_Barter_QRY_SetHighestBarter()
+THEN
+CA_Barter_SetHighestBarter();
+
+PROC
+CA_Barter_SetHighestBarter()
+THEN
+CA_ResetHighestBarter();
+
+PROC
 CA_Barter_SetHighestBarter()
 AND
 DB_IsPlayer(_Player)
 THEN
 CA_Barter_CheckHighestBarter(_Player);
-
-QRY
-CA_GetBarterBonus((CHARACTERGUID)_Target, (INTEGER)_TargetVal)
-AND
-DB_CA_HighestBarter(_HighestBarter)
-AND
-_HighestBarter > _TargetVal
-AND 
-IntegerSubtract(_HighestBarter, _TargetVal, _FinalVal)
-THEN
-DB_CA_BarterBonus(_Target, _FinalVal);
-
-PROC
-CA_ClearBonuses((CHARACTERGUID)_Target)
-AND
-DB_CA_BarterBonus(_Target, _Val)
-THEN
-NOT DB_CA_BarterBonus(_Target, _Val);
 
 PROC
 CA_ResetHighestBarter()
@@ -79,7 +71,7 @@ SysClear("DB_CA_Barter_HighestBarter", 2);
 QRY
 CA_QRY_ResetHighestBarter()
 THEN
-SysClear("DB_CA_Barter_HighestBarter", 2);
+CA_ResetHighestBarter();
 
 //END_REGION
 
@@ -104,17 +96,16 @@ DB_CA_HighestBarter(0);
 
 //END_REGION
 
-//REGION MULTIPLAYER
+//REGION TRADE_EVENTS
 IF
 RequestTrade((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
 AND
 UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
 AND
 GetUserCount(_Users)
-AND
-_Users > 1
 THEN
-SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_MP");
+CA_Barter_SetHighestBarter();
+CA_Barter_OnTradeStarted(_Player, _Users);
 
 IF
 ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player, _Instance)
@@ -122,97 +113,72 @@ AND
 UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
 AND
 GetUserCount(_Users)
+THEN
+CA_Barter_SetHighestBarter();
+CA_Barter_OnTradeStarted(_Player, _Users);
+//END_REGION
+
+//REGION MULTIPLAYER
+PROC
+CA_Barter_OnTradeStarted((CHARACTERGUID)_Player, (INTEGER)_Users)
 AND
 _Users > 1
 THEN
-SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_MP");
+CA_Barter_ApplyBonusInMultiplayer(_Player);
 
-IF
-StoryEvent((CHARACTERGUID)_Player, "Event_CA_Bartering_TradeOpened_MP")
-AND
-GetUserCount(_Users)
-AND
-_Users > 1
-AND
-CA_Barter_SetHighestBarter()
+PROC
+CA_Barter_ApplyBonusInMultiplayer((CHARACTERGUID)_Player)
 AND
 DB_CA_Barter_HighestBarter(_HighestPlayer, _HighestBarter)
 AND
 DB_IsPlayer(_UserCharacter)
+AND
+_UserCharacter != _HighestPlayer
 AND
 CA_Global_UserMatch(_Player, _UserCharacter)
 THEN
 CA_Aura_ApplyAuraBonus(_HighestPlayer, _UserCharacter, "Barter");
-
-IF
-TradeEnds((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
-AND
-GetUserCount(_Users)
-AND
-_Users > 1
-AND
-DB_IsPlayer(_UserCharacter)
-AND
-CA_Global_UserMatch(_Player, _UserCharacter)
-THEN
-SetStoryEvent(_UserCharacter, "Event_CA_Bartering_TradeEnded");
-
 //END_REGION
 
 //REGION SINGLEPLAYER
-IF
-RequestTrade((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
-AND
-UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
-AND
-GetUserCount(_Users)
+PROC
+CA_Barter_OnTradeStarted((CHARACTERGUID)_Player, (INTEGER)_Users)
 AND
 _Users <= 1
 THEN
-SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_SP");
+IterateParties("Event_CA_Bartering_TradeOpened_SP");
 
 IF
-ObjectFlagSet("StartTrade",(CHARACTERGUID)_Player, _Instance)
-AND
-UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
-AND
-GetUserCount(_Users)
-AND
-_Users <= 1
-THEN
-SetStoryEvent(_Player, "Event_CA_Bartering_TradeOpened_SP");
-
-IF
-StoryEvent((CHARACTERGUID)_SoloPlayer, "Event_CA_Bartering_TradeOpened_SP")
-AND
-CA_Barter_SetHighestBarter()
+StoryEvent((CHARACTERGUID)_Player, "Event_CA_Bartering_TradeOpened_SP")
 AND
 DB_CA_Barter_HighestBarter(_HighestPlayer, _HighestBarter)
 AND
-DB_IsPlayer(_Player) // Apply to all player characters
-AND
-CA_Global_UserMatch(_SoloPlayer, _Player)
+_Player != _HighestPlayer
 THEN
 CA_Aura_ApplyAuraBonus(_HighestPlayer, _Player, "Barter");
-
-IF
-TradeEnds((CHARACTERGUID)_SoloPlayer, (CHARACTERGUID)_Trader)
-AND
-GetUserCount(_Users)
-AND
-_Users <= 1
-AND
-DB_IsPlayer(_Player)
-THEN
-SetStoryEvent(_Player, "Event_CA_Bartering_TradeEnded");
 //END_REGION
 
 //REGION RESET
 IF
-StoryEvent((CHARACTERGUID)_Player, "Event_CA_Bartering_TradeEnded")
+TradeEnds((CHARACTERGUID)_Player, (CHARACTERGUID)_Trader)
+AND
+HasActiveStatus(_Player, "CA_BARTERBONUS", 1)
 THEN
 CA_Aura_RemoveAuraBonus(_Player, "Barter");
+CA_Barter_RemoveBonusForControlledCharacter(_Player);
 
+PROC
+CA_Barter_RemoveBonusForControlledCharacter((CHARACTERGUID)_Player)
+AND
+DB_IsPlayer(_Character)
+AND
+_Player != _Character
+AND
+HasActiveStatus(_Character, "CA_BARTERBONUS", 1)
+AND
+CA_Global_UserMatch(_Player, _Character)
+THEN
+CA_Aura_RemoveAuraBonus(_Character, "Barter");
 //END_REGION
 
 //REGION BARTER_BONUS_TRADER_MESSAGES
@@ -227,7 +193,7 @@ UserGetFlag(_Player, "CA_BARTER_BLACKLIST", 0)
 AND
 DB_CA_Settings_Barter_Messages(_Player, 1, _MaxRan, _NumToPass)
 AND
-CA_Barter_SetHighestBarter()
+CA_Barter_QRY_SetHighestBarter()
 AND
 DB_CA_HighestBarter(_Barter)
 AND
@@ -254,7 +220,7 @@ DB_CA_Barter_LastMessage(_Message);
 PROC
 CA_Legacy_RemoveOldAuras((CHARACTERGUID)_Player)
 AND
-DB_CA_BarterBonus(_Player, _Val)
+DB_CA_BarterBonus(_Player, (INTEGER)_Val)
 THEN
 CA_Legacy_RemoveOldBonus(_Player, "Barter", _Val);
 NOT DB_CA_BarterBonus(_Player, _Val);
@@ -285,7 +251,7 @@ DialogGetInvolvedPlayer(_ID, 1, (CHARACTERGUID)_Target)
 AND
 DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
-CA_Barter_SetHighestBarter()
+CA_Barter_QRY_SetHighestBarter()
 AND
 DB_CA_HighestBarter(_HighestBarter)
 AND
@@ -328,7 +294,7 @@ DialogGetInvolvedNPC(_ID, 1, (CHARACTERGUID)_Trader)
 AND
 CharacterGetReservedUserID(_Target,_UID)
 AND
-CA_Barter_SetHighestBarter()
+CA_Barter_QRY_SetHighestBarter()
 AND
 DB_CA_HighestBarter(_HighestBarter)
 AND

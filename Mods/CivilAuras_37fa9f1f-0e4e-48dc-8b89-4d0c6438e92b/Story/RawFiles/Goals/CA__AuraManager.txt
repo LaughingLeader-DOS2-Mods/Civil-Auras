@@ -193,8 +193,6 @@ _MaxVal > _CurVal
 AND
 _CurVal > 0
 AND
-_CurVal < _MaxVal
-AND
 IntegerSubtract(_MaxVal, _CurVal, _BonusVal)
 AND
 _BonusVal > 0
@@ -307,8 +305,17 @@ AND
 HasActiveStatus(_TargetPlayer, _BonusStatus, 0)
 AND
 NOT CA_Global_AbilityHigher(_AuraHost, _TargetPlayer, _Stat)
+AND
+CharacterGetAbility(_TargetPlayer, _Stat, _Val1)
+AND
+CharacterGetAbility(_AuraHost, _Stat, _Val2)
+AND
+IntegertoString(_Val1, _TargetValStr)
+AND
+IntegertoString(_Val2, _HostValStr)
 THEN
-CA_Debug_Record(_TargetPlayer, "Character not eligable for aura bonus for stat [", _Stat,"]");
+CA_Debug_Record(_TargetPlayer, "Character not eligable for aura bonus [",_BonusStatus,"] for stat [", _Stat,"]");
+CA_Debug_Record(_TargetPlayer, "Stat comparison: | Host: [",_HostValStr,"] Target: [",_TargetValStr,"]");
 
 PROC
 CA_Aura_ApplyAuraBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (STRING)_Stat, (STRING)_AuraStatus)
@@ -318,8 +325,17 @@ AND
 HasActiveStatus(_TargetPlayer, _BonusStatus, 0)
 AND
 NOT CA_Global_AbilityHigher(_AuraHost, _TargetPlayer, _Stat)
+AND
+CharacterGetAbility(_TargetPlayer, _Stat, _Val1)
+AND
+CharacterGetAbility(_AuraHost, _Stat, _Val2)
+AND
+IntegertoString(_Val1, _TargetValStr)
+AND
+IntegertoString(_Val2, _HostValStr)
 THEN
-CA_Debug_Record(_TargetPlayer, "Character not eligable for aura bonus for stat [", _Stat,"]");
+CA_Debug_Record(_TargetPlayer, "Character not eligable for aura bonus [",_BonusStatus,"] for stat [", _Stat,"]");
+CA_Debug_Record(_TargetPlayer, "Stat comparison: | Host: [",_HostValStr,"] Target: [",_TargetValStr,"]");
 
 PROC
 CA_Aura_ApplyAuraBonus((CHARACTERGUID)_AuraHost, (CHARACTERGUID)_TargetPlayer, (STRING)_Stat)
@@ -753,6 +769,7 @@ SysClear("DB_CA_Aura_RefreshAuraTimers", 3);
 SysClear("DB_CA_Aura_LastHostAbility", 3);
 SysClear("DB_CA_Aura_LastBonus", 6);
 SysClear("DB_CA_Aura_PartyTimerActive", 1);
+CA_ResetHighestBarter();
 
 PROC
 CA_Aura_RemoveAuraStatuses()

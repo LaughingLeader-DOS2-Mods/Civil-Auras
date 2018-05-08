@@ -1,54 +1,107 @@
+# SourceControlGenerator #
+##########################
+SourceControlGenerator.json
 
-#TestLevel stuff. Nothing special here. Just a basic level.
+# Level Data         #
+######################
 Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Levels/*
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Levels/TestLevel/*
 Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Globals/*
 Editor/Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Levels/*
 
-#Story files that can be compiled by the user (only raw files needed).
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/meta.lsx
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/log.txt
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/goals.div
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/goals.raw
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/story.div
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/story.div.osi
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/story_ac.dat
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/RawFiles/story_definitions.div
-Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/RawFiles/story_header.div
+# Story files        #
+######################
+*.div
+*.raw
+*.osi
+story_ac.dat
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/Dialogs/Autosave/*
+Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Story/Dialogs/Recovered/*
 
-#Assets
-Editor/Mods/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Assets/Effects/*
+# Editor files       #
+######################
+*.config
+StatsEditorConfig.*
+EditorBrowserMetadata.*
+EditorMetadata.*
+EffectEditorConfig.*
+ResourceSelectorConfig.*
+RootTemplateSelectorConfig.*
+meta.lsx
+
+# Asset Folders      #
+######################
 Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Assets/*
-Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/GUI/*
+Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Content/*
+Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/RootTemplates/*
+Public/CivilAuras_37fa9f1f-0e4e-48dc-8b89-4d0c6438e92b/Voice/*
 
-#Log files, etc
+# Assets             #
+######################
+*.gr2
+*.dae
+*.swf
+*.bullet
+*.dds
+*.tga
+*.png
+*.ttf
+
+# Logs               #
+######################
 *.log
-StatsEditorConfig.xml
-COMBAT_LLLE_Humans_Trader.ailog
-DockPanel.config
-EditorBrowserMetadata_e19e4cc5-7fa7-45ed-8fbb-e5e02eb1d60e.xml
-EffectEditorConfig.xml
+*.ailog
+log.txt
 
-#Binary Files
+# Binary Files       #
+######################
+*.dat
+*.data
 *.bik
 *.bnk
 *.bshd
-*.bullet
 *.cur
-*.dat
-*.data
-*.dds
 *.fnt
-*.gr2
 *.iggy
 *.iggytex
 *.lsb
 *.lsf
 *.lsfx
+*.lsefx
 *.osi
 *.patch
-*.png
-*.swf
-*.tga
 *.tmpl
-*.ttf
+
+# Dump files         #
+######################
+*.stackdump
+*.dmp
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

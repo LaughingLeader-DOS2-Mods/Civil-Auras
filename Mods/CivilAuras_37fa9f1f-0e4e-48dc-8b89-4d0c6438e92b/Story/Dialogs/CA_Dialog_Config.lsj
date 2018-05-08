@@ -1,7 +1,7 @@
 {
    "save" : {
       "header" : {
-         "time" : 1523455291,
+         "time" : 1525740666,
          "version" : "2.0.8.2"
       },
       "regions" : {
@@ -2354,9 +2354,9 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "[FIX] Remove Aura Statuses (User Characters) - Run this command to completely remove aura statuses from all user-owned characters. Also resets related databases."
+                                                   "value" : "[FIX] Remove Aura Statuses - Run this command to completely remove aura statuses from all player characters. Also resets related databases."
                                                 },
-                                                "stub" : {"type" : 19, "value" : 0}
+                                                "stub" : {"type" : 19, "value" : 1}
                                              }
                                           ]
                                        }
@@ -2368,7 +2368,20 @@
                         "Tags" : [ {} ],
                         "UUID" : {"type" : 22, "value" : "73d4a273-0f8a-4699-bb3c-5d67d1da69ef"},
                         "addressedspeaker" : {"type" : 4, "value" : -1},
-                        "checkflags" : [ {} ],
+                        "checkflags" : [
+                           {
+                              "flaggroup" : [
+                                 {
+                                    "flag" : [
+                                       {
+                                          "name" : {"type" : 22, "value" : "CA_USER_ISHOST"},
+                                          "paramval" : {"type" : 4, "value" : 1},
+                                          "value" : {"type" : 19, "value" : 1}
+                                       }
+                                    ],"type" : {"type" : 22, "value" : "User"}}
+                              ]
+                           }
+                        ],
                         "children" : [
                            {
                               "child" : [
