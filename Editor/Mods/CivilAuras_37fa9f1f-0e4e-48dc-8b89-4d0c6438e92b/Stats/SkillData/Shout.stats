@@ -1,89 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <stats stat_object_definition_id="9fd4ac7a-fad7-424f-83df-0893eae93c38">
   <stat_objects>
     <stat_object index="0" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_LuckyToggle" />
-        <field name="SkillType" type="StringStatObjectFieldDefinition" value="Shout" />
-        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="SkillAbility" />
-        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="AreaRadius" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="AddWeaponRange" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="Autocast" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Ability_LuckyAura" />
-        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Toggle Lucky Aura" />
-        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Grant your Lucky Charm ability to allies within [1]m range.&lt;br&gt;&lt;font style=&quot;color:red&quot;&gt;Disabled in combat.&lt;/font&gt;" />
-        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="StatusData:CA_LUCKY_AURA:AuraRadius" />
-        <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
-        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="Portret_Still_01" />
-        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Luck 2" />
-        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
+        <field name="Name" type="NameStatObjectFieldDefinition" clear_inherited_value="false" value="CA_LuckyToggle" />
+        <field name="SkillType" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Shout" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="Ability" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="SkillAbility" />
+        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="AreaRadius" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="AddWeaponRange" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="Autocast" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="CA_Ability_LuckyAura" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Toggle Lucky Aura" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Grant your Lucky Charm ability to allies within [1]m range.&lt;br&gt;&lt;font style=&quot;color:red&quot;&gt;Disabled in combat.&lt;/font&gt;" />
+        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="StatusData:CA_LUCKY_AURA:AuraRadius" />
+        <field name="FXScale" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="100" />
+        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="noprepare" />
+        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="noprepare" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Portret_Still_01" />
+        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Luck 2" />
+        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Range: [1]" />
+        <field name="AIFlags" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="AIFlags" />
       </fields>
     </stat_object>
     <stat_object index="1" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_StealthToggle" />
-        <field name="SkillType" type="StringStatObjectFieldDefinition" value="Shout" />
-        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="3" enumeration_type_name="SkillAbility" />
-        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="AreaRadius" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="AddWeaponRange" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="Autocast" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Ability_StealthAura" />
-        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Toggle Sneak Aura" />
-        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Grant your Sneak ability to allies within [1]m range.&lt;br&gt; Only useable while sneaking." />
-        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="StatusData:CA_STEALTH_AURA:AuraRadius" />
-        <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
-        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="Portret_Still_01" />
-        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Sneaking 2" />
-        <field name="Stealth" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
+        <field name="Name" type="NameStatObjectFieldDefinition" clear_inherited_value="false" value="CA_StealthToggle" />
+        <field name="SkillType" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Shout" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="Ability" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="3" enumeration_type_name="SkillAbility" />
+        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="AreaRadius" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="AddWeaponRange" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="Autocast" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="CA_Ability_StealthAura" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Toggle Sneak Aura" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Grant your Sneak ability to allies within [1]m range.&lt;br&gt; Only useable while sneaking." />
+        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="StatusData:CA_STEALTH_AURA:AuraRadius" />
+        <field name="FXScale" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="100" />
+        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="noprepare" />
+        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="noprepare" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Portret_Still_01" />
+        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Sneaking 2" />
+        <field name="Stealth" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Range: [1]" />
+        <field name="AIFlags" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="AIFlags" />
       </fields>
     </stat_object>
     <stat_object index="2" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_PersuasionToggle" />
-        <field name="SkillType" type="StringStatObjectFieldDefinition" value="Shout" />
-        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="SkillAbility" />
-        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="AreaRadius" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="AddWeaponRange" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="Autocast" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Ability_PersuasionAura" />
-        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Toggle Persuasion Aura" />
-        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Grant your Persuasion ability to allies within [1]m range." />
-        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="StatusData:CA_PERSUASION_AURA:AuraRadius" />
-        <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
-        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="noprepare" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="Portret_Still_01" />
-        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Persuasion 4" />
-        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]" />
+        <field name="Name" type="NameStatObjectFieldDefinition" clear_inherited_value="false" value="CA_PersuasionToggle" />
+        <field name="SkillType" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Shout" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="Ability" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="SkillAbility" />
+        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="AreaRadius" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="AddWeaponRange" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="Autocast" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="CA_Ability_PersuasionAura" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Toggle Persuasion Aura" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Grant your Persuasion ability to allies within [1]m range." />
+        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="StatusData:CA_PERSUASION_AURA:AuraRadius" />
+        <field name="FXScale" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="100" />
+        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="noprepare" />
+        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="noprepare" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Portret_Still_01" />
+        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Persuasion 4" />
+        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Range: [1]" />
+        <field name="AIFlags" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="AIFlags" />
       </fields>
     </stat_object>
   </stat_objects>

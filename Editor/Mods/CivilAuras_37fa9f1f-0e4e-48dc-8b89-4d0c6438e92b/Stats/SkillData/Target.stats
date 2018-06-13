@@ -1,38 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <stats stat_object_definition_id="e988a674-28fe-49d2-a6ce-c5c1e0141f4c">
   <stat_objects>
     <stat_object index="0" is_substat="false">
       <fields>
-        <field name="Name" type="NameStatObjectFieldDefinition" value="CA_PepTalk" />
-        <field name="SkillType" type="StringStatObjectFieldDefinition" value="Target" />
-        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="Ability" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="SkillAbility" />
-        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" value="3" />
-        <field name="TargetRadius" type="IntegerStatObjectFieldDefinition" value="13" />
-        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" value="Persuasion 2" />
-        <field name="CanTargetCharacters" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="YesNo" />
-        <field name="CanTargetItems" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="CanTargetTerrain" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" value="0" />
-        <field name="TargetConditions" type="StringStatObjectFieldDefinition" value="NonSelf;Player" />
-        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" value="0" enumeration_type_name="YesNo" />
-        <field name="Icon" type="StringStatObjectFieldDefinition" value="CA_Ability_PepTalk" />
-        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" value="Pep Talk" />
-        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" value="Enlighten an ally on the topic of socializing.&lt;br&gt;Grants the caster's Persuasion bonus to the target. Wears off after dialog ends." />
-        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" value="Range: [1]&lt;br&gt;Persuasion bonus will not exceed the caster's Persuasion level." />
-        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" value="TargetRadius" />
-        <field name="FXScale" type="IntegerStatObjectFieldDefinition" value="100" />
-        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" value="skill_prepare_divine_01_start" />
-        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" value="skill_prepare_divine_01_loop" />
-        <field name="PrepareEffect" type="StringStatObjectFieldDefinition" value="CA_FX_PepTalk_Root_01,KeepRot:Dummy_Root" />
-        <field name="CastAnimation" type="StringStatObjectFieldDefinition" value="skill_cast_target_voodoo_01_cast" />
-        <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" value="skill_prepare_touch_01_loop" />
-        <field name="CastTextEvent" type="StringStatObjectFieldDefinition" value="cast" />
-        <field name="CastEffect" type="StringStatObjectFieldDefinition" value="CA_FX_PepTalk_Cast_Target_Hand_01:Dummy_L_HandFX:cast" />
+        <field name="Name" type="NameStatObjectFieldDefinition" clear_inherited_value="false" value="CA_PepTalk" />
+        <field name="SkillType" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Target" />
+        <field name="ForGameMaster" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="Ability" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="SkillAbility" />
+        <field name="ActionPoints" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="1" />
+        <field name="Cooldown" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="3" />
+        <field name="TargetRadius" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="13" />
+        <field name="MemorizationRequirements" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="Persuasion 2" />
+        <field name="CanTargetCharacters" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="1" enumeration_type_name="YesNo" />
+        <field name="CanTargetItems" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="CanTargetTerrain" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="Memory Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="Magic Cost" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="0" />
+        <field name="TargetConditions" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="NonSelf;Player" />
+        <field name="UseCharacterStats" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponDamage" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="UseWeaponProperties" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="YesNo" />
+        <field name="Icon" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="CA_Ability_PepTalk" />
+        <field name="DisplayName" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Pep Talk" />
+        <field name="Description" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Enlighten an ally on the topic of socializing.&lt;br&gt;Grants the caster's Persuasion bonus to the target. Wears off after dialog ends." />
+        <field name="StatsDescription" type="TranslatedStringStatObjectFieldDefinition" clear_inherited_value="false" value="Range: [1]&lt;br&gt;Persuasion bonus will not exceed the caster's Persuasion level." />
+        <field name="StatsDescriptionParams" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="TargetRadius" />
+        <field name="FXScale" type="IntegerStatObjectFieldDefinition" clear_inherited_value="false" value="100" />
+        <field name="PrepareAnimationInit" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="skill_prepare_divine_01_start" />
+        <field name="PrepareAnimationLoop" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="skill_prepare_divine_01_loop" />
+        <field name="PrepareEffect" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="CA_FX_PepTalk_Root_01,KeepRot:Dummy_Root" />
+        <field name="CastAnimation" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="skill_cast_target_voodoo_01_cast" />
+        <field name="CastSelfAnimation" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="skill_prepare_touch_01_loop" />
+        <field name="CastTextEvent" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="cast" />
+        <field name="CastEffect" type="StringStatObjectFieldDefinition" clear_inherited_value="false" value="CA_FX_PepTalk_Cast_Target_Hand_01:Dummy_L_HandFX:cast" />
+        <field name="AIFlags" type="EnumerationStatObjectFieldDefinition" clear_inherited_value="false" value="0" enumeration_type_name="AIFlags" />
       </fields>
     </stat_object>
   </stat_objects>
