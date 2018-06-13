@@ -1,5 +1,8 @@
 Civil Auras Changelog
 =======
+# 1.7.4.1b (Hotfix)
+* Added the "CanNotUse" AIFlag to all CA skills. The AI should now ignore these skills if your character has lost control (polymorphed, charmed, etc).
+
 # 1.7.4.1
 * Minor Script Updates
 	* Refactored Barter sharing script. Should work better across the board.
